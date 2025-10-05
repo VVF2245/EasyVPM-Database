@@ -12,6 +12,9 @@
 
 - Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
 
+La empresa "..." (falta por escoger nombre) ha contactado con nosotros con el objetivo de desarrollar una base de datos que les permita solucionar diversos problemas relacionados con la gestión logística.
+Con vistas a una futura expansión y apertura de nuevas sucursales, prevén que documentar toda la gestión manualmente no es lo que más les conviene. Por esto mismo considera necesario implantar un sistema centralizado que les facilite un acceso ágil y seguro a grandes volúmenes de información, optimizando así sus procesos logísticos y administrativos.
+
 ## 2. Glosario de términos
 
 - Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
