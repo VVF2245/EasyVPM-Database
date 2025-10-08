@@ -5,7 +5,7 @@
 
 1. Flores Cañabate, Julián
 1. Hernández Cuadrado, Luis
-1. Noguera Talabera, Sergio
+1. Noguera Talavera, Sergio
 1. Bader Abuhar, Morad
 
 ## 1. Introducción al problema
