@@ -12,8 +12,11 @@
 
 - Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
 
-La empresa "..." (falta por escoger nombre) ha contactado con nosotros con el objetivo de desarrollar una base de datos que les permita solucionar diversos problemas relacionados con la gestión logística.
-Con vistas a una futura expansión y apertura de nuevas sucursales, prevén que documentar toda la gestión manualmente no es lo que más les conviene. Por esto mismo consideran necesario implantar un sistema centralizado que les facilite un acceso ágil y seguro a grandes volúmenes de información, optimizando así sus procesos logísticos y administrativos.
+La empresa EasyVPM, dedicada al alquiler y gestión de vehículos de movilidad personal como patinetes eléctricos, bicicletas y monociclos, ha contactado con nuestro equipo para desarrollar una plataforma centralizada que optimice su gestión logística y administrativa.
+
+Ante la futura expansión y apertura de nuevas sucursales, la empresa ha detectado que la documentación manual ya no resulta eficiente, pues dificulta el control del inventario, el seguimiento de los vehículos, la trazabilidad de los alquileres y la supervisión del mantenimiento.
+
+En consecuencia, EasyVPM considera imprescindible implantar un sistema de informacion que permita un acceso ágil y seguro a grandes volúmenes de información, mejorando sus procesos internos. Con esta plataforma, la empresa busca modernizar su infraestructura, optimizar la toma de decisiones y ofrecer una experiencia de usuario más completa y satisfactoria.
 
 ## 2. Glosario de términos
 
