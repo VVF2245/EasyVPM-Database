@@ -22,6 +22,12 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 
 - Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
 
+Cliente: Persona que realiza el alquiler de un VMP a través de la plataforma.
+Estación: Punto físico donde se pueden recoger o devolver los vehículos.
+Inventario: Conjunto de VMP disponibles para alquiler.
+Mantenimiento: Conjunto de acciones para reparar o revisar los vehículos.
+VMP (Vehículo de Movilidad Personal): Medio de transporte ligero, destinado a una sola persona (patinetes, monociclos, etc.).
+
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
