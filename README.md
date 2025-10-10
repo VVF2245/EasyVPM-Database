@@ -38,11 +38,11 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
-El sistema debe ser capaz de almacenar los datos de los usuarios, de los vehiculos alquilados y de las estaciones, para gestionar los préstamos y el servicio ofrecido.
+El sistema debe ser capaz de almacenar y gestionar la información relacionada con los usuarios, los vehículos alquilados y las estaciones, permitiendo así una correcta gestión de los préstamos y del servicio ofrecido.
 
-También deberá informar al usuario sobre que estaciones se encuentran en su ubicación, y la cantidad y tipo disponible de vehiculos en cada una de ellas.
+También deberá informar al usuario sobre las estaciones más cercanas a su ubicación y mostrar la cantidad y tipo de vehículos disponibles en cada una de ellas.
 
-Además, deberá guardar la ubicación del vehiculo alquilado para evitar posibles extraviaciones.
+Finalmente, el sistema deberá registrar la ubicación del vehículo alquilado en tiempo real, con el fin de garantizar su trazabilidad y evitar pérdidas o extravíos.
 ### 3.2. Usuarios del sistema
 
 ## 4. Catálogo de requisitos
