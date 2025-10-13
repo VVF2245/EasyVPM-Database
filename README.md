@@ -22,7 +22,8 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 
 - Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
 
-**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma.  
+**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. 
+**Reseña** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario. 
 **Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler.  
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  
@@ -43,8 +44,17 @@ El sistema debe ser capaz de almacenar y gestionar la información relacionada c
 Para ello deberá informar al usuario sobre las estaciones más cercanas a su ubicación y mostrar la cantidad y tipo de vehículos disponibles en cada una de ellas, además de tener que gestionar automáticamente los procesos de alquiler y cobro, controlar el acceso según roles de usuario, permitir el registro de incidencias y mantenimiento, y generar informes y estadísticas para la toma de decisiones empresariales.
 
 Finalmente, el sistema deberá registrar la ubicación del vehículo alquilado en tiempo real, con el fin de garantizar su trazabilidad y evitar pérdidas o extravíos. 
+
 ### 3.2. Usuarios del sistema
 
+El sistema de EasyVPM contará con los siguientes tipos de usuarios:
+**Usuarios(Clientes)**
+   * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones.
+**Administradores**
+   * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento, y generan informes para la empresa.
+**Técnicos de mantenimiento**
+   * Reciben notificaciones de incidencias y actualizan el estado de los vehículos.
+   
 ## 4. Catálogo de requisitos
 
 ### 4.1. Requisitos funcionales
