@@ -22,9 +22,9 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 
 - Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
 
-**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. 
-**Reseña** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario. 
-**Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler.  
+**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. <br>
+**Reseña** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario. <br>
+**Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  
 **Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  
@@ -48,10 +48,13 @@ Finalmente, el sistema deberá registrar la ubicación del vehículo alquilado e
 ### 3.2. Usuarios del sistema
 
 El sistema de EasyVPM contará con los siguientes tipos de usuarios: 
+
 **Usuarios(Clientes)**
    * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones. 
+
 **Administradores**
    * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento, y generan informes para la empresa. 
+
 **Técnicos de mantenimiento**
    * Reciben notificaciones de incidencias y actualizan el estado de los vehículos. 
    
