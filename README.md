@@ -47,13 +47,13 @@ Finalmente, el sistema deberá registrar la ubicación del vehículo alquilado e
 
 ### 3.2. Usuarios del sistema
 
-El sistema de EasyVPM contará con los siguientes tipos de usuarios:
+El sistema de EasyVPM contará con los siguientes tipos de usuarios: 
 **Usuarios(Clientes)**
-   * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones.
+   * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones. 
 **Administradores**
-   * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento, y generan informes para la empresa.
+   * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento, y generan informes para la empresa. 
 **Técnicos de mantenimiento**
-   * Reciben notificaciones de incidencias y actualizan el estado de los vehículos.
+   * Reciben notificaciones de incidencias y actualizan el estado de los vehículos. 
    
 ## 4. Catálogo de requisitos
 
