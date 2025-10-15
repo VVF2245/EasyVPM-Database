@@ -25,8 +25,8 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 
 - Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
 
-**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. <br>
-**Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
+**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. 
+**Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. 
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  
 **Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  
