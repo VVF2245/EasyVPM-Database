@@ -72,6 +72,8 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
+Como dueño de EasyVPM, quiero recibir información sobre el uso de los vehículos, las estaciones, los ingresos y las incidencias, para poder gestionar la empresa de manera eficiente y tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
+
 **Prueba de aceptación**
 - Descripción de la primera comprobación a realizar
 - Descripción de la segunda comprobación a realizar
