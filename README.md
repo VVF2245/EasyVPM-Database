@@ -85,7 +85,7 @@ Como tecnico de mantenimiento de EasyVPM quiero recibir informacion sobre inicid
 - ...
 
 - PA-01
-Gestión de información de usuarios, vehículos y estaciones
+Gestión de información de usuarios, vehículos y estaciones(administrador)
 - Se puede registrar, editar y eliminar usuarios, vehículos y estaciones.
 - Los datos modificados se reflejan inmediatamente en el sistema.
 - No se permite duplicar registros con el mismo identificador.
@@ -133,10 +133,36 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
+Como cliente, quiero registrarme en el sistema para poder acceder al servicio de alquiler.
+Como cliente, quiero ver las estaciones más cercanas a mi ubicación para saber dónde puedo alquilar un vehículo.
+Como cliente, quiero iniciar un alquiler para usar un vehículo disponible.
+Como administrador, quiero gestionar los usuarios, estaciones y vehículos para mantener actualizado el sistema.
+Como administrador, quiero generar informes de uso y mantenimiento para tomar decisiones basadas en datos.
+Como técnico de mantenimiento, quiero recibir notificaciones de incidencias para poder revisar y reparar los vehículos afectados.
+
 **Prueba de aceptación**
-- Descripción de la primera comprobación a realizar
-- Descripción de la segunda comprobación a realizar
-- ...
+- PA-01
+- El registro solicita nombre, correo y contraseña.
+- El sistema verifica que el correo no esté duplicado.
+- Se envía un correo de confirmación al completar el registro.
+- PA-02
+- El sistema muestra estaciones ordenadas por cercanía.
+- Cada estación muestra cuántos vehículos hay disponibles
+- PA-03
+- Solo se permite iniciar alquiler si hay vehículos disponibles.
+- El sistema registra fecha y hora de inicio.
+- Se asocia el vehículo y la estación al alquiler
+- PA-04
+- Administrador puede crear, modificar o eliminar registros.
+- Los cambios se reflejan de inmediato.
+- El sistema impide eliminar registros vinculados a alquileres activos.
+- PA-05
+- El sistema muestra una lista de incidencias nuevas.
+- El técnico puede actualizar el estado
+- PA-06
+- El sistema genera informes de manera automática.
+- Los informes son descargables en formato PDF.
+- Los datos reflejan correctamente las operaciones registradas.
 
 #### 4.1.2. Reglas de negocio
 
