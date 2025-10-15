@@ -133,12 +133,35 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
-Como cliente, quiero registrarme en el sistema para poder acceder al servicio de alquiler.
-Como cliente, quiero ver las estaciones más cercanas a mi ubicación para saber dónde puedo alquilar un vehículo.
-Como cliente, quiero iniciar un alquiler para usar un vehículo disponible.
-Como administrador, quiero gestionar los usuarios, estaciones y vehículos para mantener actualizado el sistema.
-Como administrador, quiero generar informes de uso y mantenimiento para tomar decisiones basadas en datos.
-Como técnico de mantenimiento, quiero recibir notificaciones de incidencias para poder revisar y reparar los vehículos afectados.
+*RF-01* <br>
+Como cliente, <br>
+quiero registrarme en el sistema <br>
+para poder acceder al servicio de alquiler.
+
+*RF-02* <br>
+Como cliente, <br>
+quiero ver las estaciones más cercanas a mi ubicación <br>
+para saber dónde puedo alquilar un vehículo.
+
+*RF-03* <br>
+Como cliente, <br>
+quiero iniciar un alquiler <br>
+para usar un vehículo disponible.
+
+*RF-04* <br>
+Como administrador, <br>
+quiero gestionar los usuarios, estaciones y vehículos <br>
+para mantener actualizado el sistema.
+
+*RF-05* <br>
+Como administrador, <br>
+quiero generar informes de uso y mantenimiento <br>
+para tomar decisiones basadas en datos.
+
+*RF-06* <br>
+Como técnico de mantenimiento, <br>
+quiero recibir notificaciones de incidencias <br>
+para poder revisar y reparar los vehículos afectados.
 
 **Prueba de aceptación**
 
