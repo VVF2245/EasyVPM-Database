@@ -72,13 +72,63 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
-Como dueño de EasyVPM, quiero recibir información sobre el uso de los vehículos, las estaciones, los ingresos y las incidencias, para poder gestionar la empresa de manera eficiente y tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
+Como administrador de EasyVPM, quiero recibir información sobre el uso de los vehículos, las estaciones, los ingresos y las incidencias, para poder gestionar la empresa de manera eficiente y tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
+
+Como usuario de EasyVPM quiero recibir informacion sobre las estaciones cercanas y la disponibilidad de los vehiculos, iniciar y finalizar alquileres y publicar valoraciones.
+
+Como tecnico de mantenimiento de EasyVPM quiero recibir informacion sobre inicidencias y poder actualizar el estado de los vehiculos.
 
 **Prueba de aceptación**
 - Descripción de la primera comprobación a realizar
 - Descripción de la segunda comprobación a realizar
 - Se debe aplicar la regla de negocio R.N.XX.
 - ...
+
+- PA-01
+Gestión de información de usuarios, vehículos y estaciones
+- Se puede registrar, editar y eliminar usuarios, vehículos y estaciones.
+- Los datos modificados se reflejan inmediatamente en el sistema.
+- No se permite duplicar registros con el mismo identificador.
+
+- PA-02
+Consulta de estaciones cercanas
+- El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
+- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
+
+- PA-03
+Visualización de disponibilidad de vehículos
+- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
+- Los datos de disponibilidad se actualizan en tiempo real.
+
+- PA-04
+Proceso automático de alquiler y cobro
+- Al iniciar un alquiler, el sistema descuenta un vehículo de la estación correspondiente y registra el préstamo.
+- Al finalizar, calcula el monto y genera el cobro automáticamente.
+- Si el pago falla, el sistema notifica al usuario.
+
+-PA-05	
+Control de acceso por roles
+- Los clientes solo pueden acceder a funciones de consulta y alquiler.
+- Los administradores pueden gestionar todo el sistema.
+- Los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
+- Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
+  
+-PA-06	
+Registro y gestión de incidencias/mantenimiento	
+- Los usuarios pueden reportar una incidencia durante o después del alquiler.
+- Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En revisión”, “Reparado”).
+
+-PA-07
+Generación de informes y estadísticas
+- Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
+- Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
+- Los datos mostrados son consistentes con las operaciones realizadas.
+  
+-PA-08	
+Trazabilidad del vehículo en tiempo real	
+- El sistema registra y muestra la ubicación actual de cada vehículo alquilado en un mapa.
+- Si el vehículo pierde conexión, el sistema muestra la última ubicación conocida y una alerta.
+- El seguimiento se actualiza en intervalos definidos (por ejemplo, cada 10 segundos).
 
 #### 4.1.1. Requisitos de información
 
