@@ -123,12 +123,7 @@ Generación de informes y estadísticas
 - Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
 - Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
 - Los datos mostrados son consistentes con las operaciones realizadas.
-  
-- PA-08	
-Trazabilidad del vehículo en tiempo real	
-- El sistema registra y muestra la ubicación actual de cada vehículo alquilado en un mapa.
-- Si el vehículo pierde conexión, el sistema muestra la última ubicación conocida y una alerta.
-- El seguimiento se actualiza en intervalos definidos (por ejemplo, cada 10 segundos).
+
 
 #### 4.1.1. Requisitos de información
 
