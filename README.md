@@ -106,25 +106,25 @@ Proceso automático de alquiler y cobro
 - Al finalizar, calcula el monto y genera el cobro automáticamente.
 - Si el pago falla, el sistema notifica al usuario.
 
--PA-05	
+- PA-05	
 Control de acceso por roles
 - Los clientes solo pueden acceder a funciones de consulta y alquiler.
 - Los administradores pueden gestionar todo el sistema.
 - Los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
   
--PA-06	
+- PA-06	
 Registro y gestión de incidencias/mantenimiento	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
 - Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En revisión”, “Reparado”).
 
--PA-07
+- PA-07
 Generación de informes y estadísticas
 - Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
 - Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
 - Los datos mostrados son consistentes con las operaciones realizadas.
   
--PA-08	
+- PA-08	
 Trazabilidad del vehículo en tiempo real	
 - El sistema registra y muestra la ubicación actual de cada vehículo alquilado en un mapa.
 - Si el vehículo pierde conexión, el sistema muestra la última ubicación conocida y una alerta.
