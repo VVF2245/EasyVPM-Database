@@ -31,7 +31,7 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
 **Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  <br>
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
-**Incidencia**Añadimos esta? <br>
+**Incidencia** Reporte generado por los administradores cuando se produce un fallo en el servicio.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
 **Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad. #(lo de entre estaciones se puede omitir si queremos usar esta palabra para sacar los vehiculos del taller)  <br>
 **Reparado:** Estado en el que se encuentra un vehículo cuando su mantenimiento ha terminado y se tiene que redistribuir. <br>
@@ -84,41 +84,41 @@ Como tecnico de mantenimiento de EasyVPM quiero recibir informacion sobre inicid
 - Se debe aplicar la regla de negocio R.N.XX.
 - ...
 
-- PA-01
+*PA-01*
 Gestión de información de usuarios, vehículos y estaciones(administrador)
 - Se puede registrar, editar y eliminar usuarios, vehículos y estaciones.
 - Los datos modificados se reflejan inmediatamente en el sistema.
 - No se permite duplicar registros con el mismo identificador.
 
-- PA-02
+*PA-02*
 Consulta de estaciones cercanas
 - El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
 - Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
 
-- PA-03
+*PA-03*
 Visualización de disponibilidad de vehículos
 - El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
 - Los datos de disponibilidad se actualizan en tiempo real.
 
-- PA-04
+*PA-04*
 Proceso automático de alquiler y cobro
 - Al iniciar un alquiler, el sistema descuenta un vehículo de la estación correspondiente y registra el préstamo.
 - Al finalizar, calcula el monto y genera el cobro automáticamente.
 - Si el pago falla, el sistema notifica al usuario.
 
-- PA-05	
+*PA-05*	
 Control de acceso por roles
 - Los clientes solo pueden acceder a funciones de consulta y alquiler.
 - Los administradores pueden gestionar todo el sistema.
 - Los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
   
-- PA-06	
+*PA-06*	
 Registro y gestión de incidencias/mantenimiento	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
 - Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En revisión”, “Reparado”).
 
-- PA-07
+*PA-07*
 Generación de informes y estadísticas
 - Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
 - Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
@@ -141,25 +141,31 @@ Como administrador, quiero generar informes de uso y mantenimiento para tomar de
 Como técnico de mantenimiento, quiero recibir notificaciones de incidencias para poder revisar y reparar los vehículos afectados.
 
 **Prueba de aceptación**
-- PA-01
+
+*PA-01*
 - El registro solicita nombre, correo y contraseña.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
-- PA-02
+
+*PA-02*
 - El sistema muestra estaciones ordenadas por cercanía.
-- Cada estación muestra cuántos vehículos hay disponibles
-- PA-03
+- Cada estación muestra cuántos vehículos hay disponibles.
+
+*PA-03*
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
-- Se asocia el vehículo y la estación al alquiler
-- PA-04
+- Se asocia el vehículo y la estación al alquiler.
+
+*PA-04*
 - Administrador puede crear, modificar o eliminar registros.
 - Los cambios se reflejan de inmediato.
 - El sistema impide eliminar registros vinculados a alquileres activos.
-- PA-05
+
+*PA-05*
 - El sistema muestra una lista de incidencias nuevas.
-- El técnico puede actualizar el estado
-- PA-06
+- El técnico puede actualizar el estado.
+
+*PA-06*
 - El sistema genera informes de manera automática.
 - Los informes son descargables en formato PDF.
 - Los datos reflejan correctamente las operaciones registradas.
