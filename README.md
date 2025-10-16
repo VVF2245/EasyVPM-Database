@@ -138,9 +138,9 @@ para poder revisar y reparar los vehículos afectados.
 - Los datos reflejan correctamente las operaciones registradas.
 
 
-#### 4.1.1. Requisitos de información
+### 4.1.1. Requisitos de información
 
-##### R.I.01. Título requisito de información
+#### R.I.01. Título requisito de información
 
 Como [tipo de usuario]
 quiero [servicio]
@@ -203,11 +203,22 @@ Generación de informes y estadísticas
 - Los datos mostrados son consistentes con las operaciones realizadas.
 
 
-#### 4.1.2. Reglas de negocio
+### 4.1.2. Reglas de negocio
 
-##### R.N.01. Título regla negocio
+#### R.N.01. Título regla negocio
 
 Descripción de la regla de negocio.
+
+#### *R.N.01. No eliminar usuarios que tengan alquiler activo.* <br>
+Como administrador de EasyVPM, 
+quiero que el cliente no pueda eliminar su cuenta de la aplicación
+mientras esté alquilando un vehículo,
+para asegurar la devolución del vehículo y el registro del pago.
+
+#### *R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente.* <br>
+Como administardor de EasyVPM, 
+quiero que el cliente no pudea alquilar más de un vehículo a la vez,
+para evitar la falta de disponibilidad de vehículos.
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
