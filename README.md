@@ -215,35 +215,54 @@ para asegurar la seguridad y calidad del servicio.
 
 #### R.N.04. Edad mínima obligatoria. <br>
 Como administrador de EasyBPM,<br>
-quiero que solo los clientes mayores de 12 años<br>
-puedan alquilar un vehículo<br>
+quiero que solo los usuarios mayores de 12 años<br>
+puedan utilizar EasyVPM y alquilar un vehiculo<br>
 para garantizar la seguridad de los menores.
+
+**Prueba de aceptación**
+
+**P.A.01.**
+- Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
+- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VPM no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
+
+**P.A.02.**
+- Un cliente puede alquilar un VPM si no tiene activo ninguno y no se recibe mensaje de error.
+- Un cliente al intentar alquilar un VPM teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
+
+**P.A.03**
+- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VPM, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
+-Cuando se supere los 50 usos o 500 km, se avisará a los técnicos de mantenimiento para que revisen el estado del VPM. Despues, se reiniciará el número de usos y kilometros.
+
+**P.A.04**
+- Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
+- Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
+- Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
 ### 4.3. Requisitos no funcionales (opcional)
 
-#### R.N.F.01. Disponibilidad 24/7 <br>
+#### R.N.F.01. Disponibilidad 24/7. <br>
 Como cliente de EasyVMP, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
-#### R.N.F.02. Escalabilidad del sistema
+#### R.N.F.02. Escalabilidad del sistema.
 Como administrador de EasyVMP, <br>
 quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
 para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
-#### R.N.F.03. Seguridad de la información
+#### R.N.F.03. Seguridad de la información.
 Como administrador de EasyVMP, <br>
 quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
 para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
 
-#### R.N.F.04. Fiabilidad del servicio**
+#### R.N.F.04. Fiabilidad del servicio.
 Como cliente de EasyVMP, <br>
 quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
-#### R.N.F.05. Compatibilidad técnica del sistema
+#### R.N.F.05. Compatibilidad técnica del sistema.
 Como responsable TIC de EasyVMP, <br>
 quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
 para asegurar la accesibilidad del servicio a todos los usuarios.
