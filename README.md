@@ -31,7 +31,7 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
 **Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  <br>
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
-**Incidencia** Reporte generado por los administradores cuando se produce un fallo en el servicio.  <br>
+**Incidencia** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
 **Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad. #(lo de entre estaciones se puede omitir si queremos usar esta palabra para sacar los vehiculos del taller)  <br>
 **Reparado:** Estado en el que se encuentra un vehículo cuando su mantenimiento ha terminado y se tiene que redistribuir. <br>
@@ -72,32 +72,32 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
-#### R.F.01. Registro de usuario<br>
+#### *R.F.01 Registro de usuario*<br>
 Como cliente, <br>
 quiero registrarme en el sistema <br>
 para poder acceder al servicio de alquiler.
 
-#### R.F.02. Consulta de estaciones cercanas<br>
+#### *R.F.02 Consulta de estaciones cercanas*<br>
 Como cliente, <br>
 quiero ver las estaciones más cercanas a mi ubicación <br>
 para saber dónde puedo alquilar un vehículo.
 
-#### R.F.03. Inicio de alquiler<br>
+#### *R.F.03 Inicio de alquiler*<br>
 Como cliente, <br>
 quiero iniciar un alquiler <br>
 para usar un vehículo disponible.
 
-#### R.F.04. Gestión administrativa del sistema<br>
+#### *R.F.04 Gestión administrativa del sistema*<br>
 Como administrador, <br>
 quiero gestionar los usuarios, estaciones y vehículos <br>
 para mantener actualizado el sistema.
 
-#### R.F.05. Generación de informes<br>
+#### *R.F.05 Generación de informes*<br>
 Como administrador, <br>
 quiero generar informes de uso y mantenimiento <br>
 para tomar decisiones basadas en datos.
 
-#### R.F.06. Notificación de incidencias <br>
+#### *R.F.06 Notificación de incidencias*<br>
 Como técnico de mantenimiento, <br>
 quiero recibir notificaciones de incidencias <br>
 para poder revisar y reparar los vehículos afectados.
@@ -146,18 +146,18 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
-#### R.I.01. Información para la gestión administrativa
+#### *R.I.01 Información para la gestión administrativa*
 Como administrador de EasyVPM, <br>
 quiero recibir información sobre el uso de los vehículos, las estaciones, los ingresos y las incidencias, <br>
 para poder gestionar la empresa de manera eficiente y tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
-#### R.I.02. Información para el usuario
+#### *R.I.02 Información para el usuario*
 Como usuario de EasyVPM, <br>
 quiero recibir informacion sobre las estaciones cercanas y la disponibilidad de los vehiculos, iniciar y finalizar alquileres y publicar valoraciones.
 
-#### R.I.03. Información para el mantenimiento
-Como tecnico de mantenimiento de EasyVPM, <br>
-quiero recibir informacion sobre inicidencias y el estado de los vehiculos <br>
+#### *R.I.03 Información para el mantenimiento*
+Como tecnico de mantenimiento de EasyVPM,
+quiero recibir informacion sobre inicidencias y el estado de los vehiculos
 para saber de que vehículos/ estaciones me tengo que encargar.
 
 **Prueba de aceptación**
