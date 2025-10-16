@@ -29,10 +29,11 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  <br>
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
-**Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  <br>
+**Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, mantenimiento pendiente, en mantenimiento, reparado).  <br>
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
 **Incidencia** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
+**Mantenimiento pendiente:** Estado en el que se encuentra un VMP cuando ha alcanzado el nº de kilómetros o viajes definidos entre mantenimientos, indicando que requieren una revisión antes de continuar en servicio. <br>
 **Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad. #(lo de entre estaciones se puede omitir si queremos usar esta palabra para sacar los vehiculos del taller)  <br>
 **Reparado:** Estado en el que se encuentra un vehículo cuando su mantenimiento ha terminado y se tiene que redistribuir. <br>
 **Reseña** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario.  <br>
@@ -223,15 +224,15 @@ para garantizar la seguridad de los menores.
 
 **P.A.01.**
 - Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
-- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VPM no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
+- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
 
 **P.A.02.**
-- Un cliente puede alquilar un VPM si no tiene activo ninguno y no se recibe mensaje de error.
-- Un cliente al intentar alquilar un VPM teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
+- Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
+- Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
 **P.A.03**
-- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VPM, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
--Cuando se supere los 50 usos o 500 km se bloqueará el VMP para que no lo use nadie (mismo estado que si estuviera averiado) y se avisará a los técnicos de mantenimiento para que revisen el estado del VPM. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
+- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
+-Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
 
 **P.A.04**
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
@@ -243,27 +244,27 @@ para garantizar la seguridad de los menores.
 ### 4.3. Requisitos no funcionales (opcional)
 
 #### R.N.F.01. Disponibilidad 24/7. <br>
-Como cliente de EasyVMP, <br>
+Como cliente de EasyVPM, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
 #### R.N.F.02. Escalabilidad del sistema.
-Como administrador de EasyVMP, <br>
+Como administrador de EasyVPM, <br>
 quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
 para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
 #### R.N.F.03. Seguridad de la información.
-Como administrador de EasyVMP, <br>
+Como administrador de EasyVPM, <br>
 quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
 para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
 
 #### R.N.F.04. Fiabilidad del servicio.
-Como cliente de EasyVMP, <br>
+Como cliente de EasyVPM, <br>
 quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
 #### R.N.F.05. Compatibilidad técnica del sistema.
-Como responsable TIC de EasyVMP, <br>
+Como responsable TIC de EasyVPM, <br>
 quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
 para asegurar la accesibilidad del servicio a todos los usuarios.
 
