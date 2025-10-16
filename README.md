@@ -231,7 +231,7 @@ para garantizar la seguridad de los menores.
 
 **P.A.03**
 - Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VPM, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
--Cuando se supere los 50 usos o 500 km, se avisará a los técnicos de mantenimiento para que revisen el estado del VPM. Despues, se reiniciará el número de usos y kilometros.
+-Cuando se supere los 50 usos o 500 km se bloqueará el VMP para que no lo use nadie (mismo estado que si estuviera averiado) y se avisará a los técnicos de mantenimiento para que revisen el estado del VPM. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
 
 **P.A.04**
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
