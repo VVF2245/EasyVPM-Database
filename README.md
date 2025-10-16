@@ -270,6 +270,20 @@ Seguridad de la información
 - Verificar que los datos de usuario y pago están cifrados y no se puede leer desde la base de datos sin autorización.
 - Comprobar que todos los intentos de acceso queden registrados y diferenciar los legítimos de los fraudulentos.
 
+**P.A.04.**
+Fiabilidad del servicio
+- Realizar un pago de alquiler y comprobar que se registra correctamente en la base de datos y se refleja en el historial del usuario.
+- Simular un fallo durante el proceso de pago y comprobar que se genera un mensaje de error adecuado y no se pierden datos.
+- Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
+
+**P.A.05.**
+Compatibilidad técnica del sistema
+- Acceder a la aplicación desde un dispositivo Android y comprobar que todas las funciones principales funcionan correctamente.
+- Acceder a la aplicación desde un dispositivo iOS y comprobar que todas las funciones principales funcionan correctamente.
+- Acceder a la aplicación desde navegadores web modernos (Safari, Chrome, Firefox) y comprobar que todas las funciones principales funcionan correctamente.
+- Verificar que los usuarios pueden iniciar sesión, alquilar vehículos y consultar estaciones sin ningún problema desde cualquier plataforma.
+
+
 -- fin entregable 1 --
 
 ## 5. Modelo conceptual
