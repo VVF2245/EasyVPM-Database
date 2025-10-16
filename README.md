@@ -18,7 +18,7 @@ Ante la futura expansión y apertura de nuevas sucursales, la empresa ha detecta
 
 En consecuencia, EasyVPM considera imprescindible implantar un sistema de informacion que permita un acceso ágil y seguro a grandes volúmenes de información, mejorando sus procesos internos. Con esta plataforma, la empresa busca modernizar su infraestructura, optimizar la toma de decisiones y ofrecer una experiencia de usuario más completa y satisfactoria.
 
-<img src="imagenes/imagen_transicion.png" alt="Objetivo de EasyVPM" width="50%"><br>
+<img src="imagenes/imagen_transicion.png" alt="Objetivo de EasyVPM" width="40%"><br>
 <em>Objetivo de EasyVPM</em>
 
 ## 2. Glosario de términos
@@ -115,34 +115,40 @@ Registro de usuario
 - El registro solicita nombre, correo y contraseña.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
+- Se debe aplicar la regla de negocio R.N.04.
 
 **P.A.02.**
 Consulta de estaciones cercanas
 - El sistema muestra estaciones ordenadas por cercanía.
 - Cada estación muestra cuántos vehículos hay disponibles.
+Se debe aplicar la regla de negocio R.N.02.
 
 **P.A.03.**
 Inicio de alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
+- Se debe aplicar la regla de negocio R.N.01.
 
 **P.A.04.**
 Gestión administrativa del sistema
 - Administrador puede crear, modificar o eliminar registros.
 - Los cambios se reflejan de inmediato.
 - El sistema impide eliminar registros vinculados a alquileres activos.
+Se debe aplicar la regla de negocio R.N.01.
 
 **P.A.05.**
 Generación de informes
 - El sistema genera informes de manera automática.
 - Los informes son descargables en formato PDF.
 - Los datos reflejan correctamente las operaciones registradas.
+- Se debe aplicar la regla de negocio R.N.03.
 
 **P.A.06.**
 Notificación de incidencias
 - El sistema muestra una lista de incidencias nuevas.
 - El técnico puede actualizar el estado.
+- Se debe aplicar la regla de negocio R.N.03.
 
 
 ### 4.1.1. Requisitos de información
@@ -227,7 +233,7 @@ quiero que todos los vehículos que hayan superado<br>
 para asegurar la seguridad y calidad del servicio.
 
 #### R.N.04. Edad mínima obligatoria. <br>
-Como administrador de EasyBPM,<br>
+Como administrador de EasyVPM,<br>
 quiero que solo los usuarios mayores de 12 años<br>
 puedan utilizar EasyVPM y alquilar un vehiculo<br>
 para garantizar la seguridad de los menores.
@@ -245,10 +251,12 @@ Evitar que los usuarios alquilen 2 vehículos simultáneamente.
 - Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
 **P.A.03**
+Mantenimiento obligatiorio.
 - Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
--Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
+- Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
 
 **P.A.04**
+Edad mínima obligatoria.
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
 - Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
 - Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
