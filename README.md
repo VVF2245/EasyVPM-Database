@@ -39,7 +39,7 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Reseña** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario.  <br>
 **Tiempo de espera:** Tiempo mínimo que tiene que pasar entre cada viaje.  <br>
 **Tipo de tarifa:** Clasificación del modo de pago, que puede ser por suscripción (mensual, anual) o por pago individual de cada trayecto.  <br>
-**VMP (Vehículo de Movilidad Personal):** Medio de transporte ligero, destinado a una sola persona (patinetes, monociclos, etc.).  <br>
+**VPM (Vehículo de Movilidad Personal):** Medio de transporte ligero, destinado a una sola persona (patinetes, monociclos, etc.).  <br>
 
 ## 3. Visión general del sistema
 
