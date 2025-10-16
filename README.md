@@ -18,8 +18,8 @@ Ante la futura expansión y apertura de nuevas sucursales, la empresa ha detecta
 
 En consecuencia, EasyVPM considera imprescindible implantar un sistema de informacion que permita un acceso ágil y seguro a grandes volúmenes de información, mejorando sus procesos internos. Con esta plataforma, la empresa busca modernizar su infraestructura, optimizar la toma de decisiones y ofrecer una experiencia de usuario más completa y satisfactoria.
 
-<img src="imagenes/estacion_vpm.png" alt="Estación de VMP" width="50%"><br>
-<em>Estación de EasyVPM</em>
+<img src="imagenes/imagen_transicion.png" alt="Objetivo de EasyVPM" width="50%"><br>
+<em>Objetivo de EasyVPM</em>
 
 ## 2. Glosario de términos
 
@@ -41,7 +41,10 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Tipo de tarifa:** Clasificación del modo de pago, que puede ser por suscripción (mensual, anual) o por pago individual de cada trayecto.  <br>
 **VMP (Vehículo de Movilidad Personal):** Medio de transporte ligero, destinado a una sola persona (patinetes, monociclos, etc.).  <br>
 
-<img src="imagenes/reseña_vpm.png" alt="Reseña de VMP" width="40%"><br>
+<img src="imagenes/estacion_vpm.png" alt="Estación de VMP" width="50%"><br>
+<em>Estación de EasyVPM</em>
+
+<img src="imagenes/reseña_vpm.png" alt="Reseña de VMP" width="50%"><br>
 <em>Reseña de EasyVPM</em>
 
 ## 3. Visión general del sistema
