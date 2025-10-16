@@ -146,16 +146,19 @@ Como [tipo de usuario]
 quiero [servicio]
 para [razón]
 
-#### R.I.01 Información para la gestión administrativa
+#### R.I.01. Información para la gestión administrativa
 Como administrador de EasyVPM, <br>
-quiero recibir información sobre el uso de los vehículos, las estaciones, los ingresos y las incidencias, <br>
-para poder gestionar la empresa de manera eficiente y tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
+quiero recibir información sobre el uso de los vehículos, <br>
+las estaciones, los ingresos y las incidencias, <br>
+para poder gestionar la empresa de manera eficiente y <br>
+tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
-#### R.I.02 Información para el usuario
+#### R.I.02. Información para el usuario
 Como usuario de EasyVPM, <br>
-quiero recibir informacion sobre las estaciones cercanas y la disponibilidad de los vehiculos, iniciar y finalizar alquileres y publicar valoraciones.
+quiero recibir informacion sobre las estaciones cercanas y <br>
+la disponibilidad de los vehiculos, iniciar y finalizar alquileres y publicar valoraciones. ###### esto del final no es de información ######
 
-#### R.I.03 Información para el mantenimiento
+#### R.I.03. Información para el mantenimiento
 Como tecnico de mantenimiento de EasyVPM,
 quiero recibir informacion sobre inicidencias y el estado de los vehiculos
 para saber de que vehículos/ estaciones me tengo que encargar.
@@ -209,13 +212,13 @@ Generación de informes y estadísticas
 
 Descripción de la regla de negocio.
 
-#### *R.N.01. No eliminar usuarios que tengan alquiler activo.* <br>
+#### R.N.01. No eliminar usuarios que tengan alquiler activo. <br>
 Como administrador de EasyVPM, 
 quiero que el cliente no pueda eliminar su cuenta de la aplicación
 mientras esté alquilando un vehículo,
 para asegurar la devolución del vehículo y el registro del pago.
 
-#### *R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente.* <br>
+#### R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente. <br>
 Como administardor de EasyVPM, 
 quiero que el cliente no pudea alquilar más de un vehículo a la vez,
 para evitar la falta de disponibilidad de vehículos.
