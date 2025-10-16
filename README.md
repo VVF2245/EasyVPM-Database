@@ -66,12 +66,6 @@ El sistema de EasyVPM contará con los siguientes tipos de usuarios:
 
 ### 4.1. Requisitos funcionales
 
-#### R.F.01. Título requisito funcional
-
-Como [tipo de usuario]
-quiero [servicio]
-para [razón]
-
 #### R.F.01 Registro de usuario
 Como cliente, <br>
 quiero registrarme en el sistema <br>
@@ -140,12 +134,6 @@ para poder revisar y reparar los vehículos afectados.
 
 ### 4.1.1. Requisitos de información
 
-#### R.I.01. Título requisito de información
-
-Como [tipo de usuario]
-quiero [servicio]
-para [razón]
-
 #### R.I.01. Información para la gestión administrativa
 Como administrador de EasyVPM, <br>
 quiero recibir información sobre el uso de los vehículos, <br>
@@ -208,10 +196,6 @@ Generación de informes y estadísticas
 
 ### 4.1.2. Reglas de negocio
 
-#### R.N.01. Título regla negocio
-
-Descripción de la regla de negocio.
-
 #### R.N.01. No eliminar usuarios que tengan alquiler activo.
 Como administrador de EasyVPM, <br>
 quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
@@ -223,36 +207,43 @@ Como administardor de EasyVPM, <br>
 quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
 
+#### R.N.03. Mantenimiento obligatiorio. <br>
+Como administrador de EasyVPM,<br>
+quiero que todos los vehículos que hayan superado<br>
+50 alquileres o 500 km recorridos deben pasar por revisión,<br>
+para asegurar la seguridad y calidad del servicio.
+
+#### R.N.04. Edad mínima obligatoria. <br>
+Como administrador de EasyBPM,<br>
+quiero que solo los clientes mayores de 12 años<br>
+puedan alquilar un vehículo<br>
+para garantizar la seguridad de los menores.
+
 ### 4.2. Mapa de historias de usuario (opcional)
 
 ### 4.3. Requisitos no funcionales (opcional)
 
-**R.N.F. 01. Título requisito no funcional**
-Como [tipo de usuario]
-quiero [servicio]
-para [razón]
-
-**R.N.F.01. Disponibilidad 24/7** 
+#### R.N.F.01. Disponibilidad 24/7 <br>
 Como cliente de EasyVMP, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
-**R.N.F.02. Escalabilidad del sistema**
+#### R.N.F.02. Escalabilidad del sistema
 Como administrador de EasyVMP, <br>
 quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
 para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
-**R.N.F.03. Seguridad de la información**
+#### R.N.F.03. Seguridad de la información
 Como administrador de EasyVMP, <br>
 quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
 para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
 
-**R.N.F.04. Fiabilidad del servicio**
+#### R.N.F.04. Fiabilidad del servicio**
 Como cliente de EasyVMP, <br>
 quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
-**R.N.F.05. Compatibilidad técnica del sistema**
+#### R.N.F.05. Compatibilidad técnica del sistema
 Como responsable TIC de EasyVMP, <br>
 quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
 para asegurar la accesibilidad del servicio a todos los usuarios.
