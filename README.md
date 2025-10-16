@@ -223,6 +223,18 @@ Como administardor de EasyVPM, <br>
 quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
 
+#### R.N.03. Mantenimiento obligatiorio. <br>
+Como administrador de EasyVPM,<br>
+quiero que todos los vehículos que hayan superado<br>
+50 alquileres o 500 km recorridos deben pasar por revisión,<br>
+para asegurar la seguridad y calidad del servicio.
+
+#### R.N.04. Edad mínima obligatoria. <br>
+Como administrador de EasyBPM,<br>
+quiero que solo los clientes mayores de 12 años<br>
+puedan alquilar un vehículo<br>
+para garantizar la seguridad de los menores.
+
 ### 4.2. Mapa de historias de usuario (opcional)
 
 ### 4.3. Requisitos no funcionales (opcional)
