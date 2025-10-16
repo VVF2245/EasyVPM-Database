@@ -73,42 +73,36 @@ El sistema de EasyVPM contará con los siguientes tipos de usuarios:
 
 ### 4.1. Requisitos funcionales
 
-#### R.F.01 Registro de usuario
+#### R.F.01. Registro de usuario
 Como cliente, <br>
 quiero registrarme en el sistema <br>
 para poder acceder al servicio de alquiler.
 
-#### R.F.02 Consulta de estaciones cercanas
+#### R.F.02. Consulta de estaciones cercanas
 Como cliente, <br>
-quiero ver las estaciones más cercanas a mi ubicación <br>
+quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
 para saber dónde puedo alquilar un vehículo.
 
-#### R.F.03 Inicio de alquiler
+#### R.F.03. Inicio de alquiler
 Como cliente, <br>
-quiero iniciar un alquiler <br>
-para usar un vehículo disponible.
+quiero iniciar un alquiler seleccionando un vehículo disponible en una estación<br>
+para poder utilizarlo durante un tiempo determinado.
 
-#### R.F.04 Gestión administrativa del sistema
+#### R.F.04. Gestión administrativa del sistema
 Como administrador, <br>
 quiero poder gestionar los usuarios, estaciones y vehículos <br>
 para mantener actualizado el sistema.
 
-#### R.F.05 Generación de informes
+#### R.F.05. Generación de informes
 Como administrador, <br>
 quiero generar informes de uso y mantenimiento <br>
 para tomar decisiones basadas en datos.
 
-#### R.F.06 Notificación de incidencias
+#### R.F.06. Notificación de incidencias
 Como técnico de mantenimiento, <br>
 quiero recibir notificaciones de incidencias <br>
 para poder revisar y reparar los vehículos afectados.
 
-
-**Prueba de aceptación**
-- Descripción de la primera comprobación a realizar
-- Descripción de la segunda comprobación a realizar
-- Se debe aplicar la regla de negocio R.N.XX.
-- ...
 
 **P.A.01.**
 Registro de usuario
@@ -131,20 +125,26 @@ Inicio de alquiler
 - Se debe aplicar la regla de negocio R.N.01.
 
 **P.A.04.**
+Finalización de alquiler y cobro automático
+- Al finalizar el alquiler, el sistema calcula el monto correspondiente según el tiempo de uso.
+- El sistema genera el cobro automáticamente al método de pago registrado.
+- Si el pago falla, el sistema notifica al usuario.
+
+**P.A.05.**
 Gestión administrativa del sistema
 - Administrador puede crear, modificar o eliminar registros.
 - Los cambios se reflejan de inmediato.
 - El sistema impide eliminar registros vinculados a alquileres activos.
 Se debe aplicar la regla de negocio R.N.01.
 
-**P.A.05.**
+**P.A.06.**
 Generación de informes
 - El sistema genera informes de manera automática.
 - Los informes son descargables en formato PDF.
 - Los datos reflejan correctamente las operaciones registradas.
 - Se debe aplicar la regla de negocio R.N.03.
 
-**P.A.06.**
+**P.A.07.**
 Notificación de incidencias
 - El sistema muestra una lista de incidencias nuevas.
 - El técnico puede actualizar el estado.
@@ -155,20 +155,21 @@ Notificación de incidencias
 
 #### R.I.01. Información para la gestión administrativa
 Como administrador de EasyVPM, <br>
-quiero recibir información sobre el uso de los vehículos, <br>
+quiero acceder a información sobre el uso de los vehículos, <br>
 las estaciones, los ingresos y las incidencias, <br>
 para poder gestionar la empresa de manera eficiente y <br>
 tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
 #### R.I.02. Información para el usuario
 Como usuario de EasyVPM, <br>
-quiero recibir informacion sobre las estaciones cercanas y <br>
-la disponibilidad de los vehiculos, iniciar y finalizar alquileres y publicar valoraciones. ###### esto del final no es de información ######
+quiero recibir informacion sobre las estaciones cercanas, <br>
+la disponibilidad de los vehiculos y mi historial de alquileres,
+para planificar mis desplazamientos y tomar decisiones informadas. 
 
 #### R.I.03. Información para el mantenimiento
 Como tecnico de mantenimiento de EasyVPM,
-quiero recibir informacion sobre inicidencias y el estado de los vehiculos
-para saber de que vehículos/ estaciones me tengo que encargar.
+quiero recibir informacion sobre inicidencias reportadas y el estado de los vehiculos,
+para saber de que vehículos o estaciones me tengo que encargar.
 
 **Prueba de aceptación**
 
@@ -179,38 +180,25 @@ Gestión de información de usuarios, vehículos y estaciones(administrador)
 - No se permite duplicar registros con el mismo identificador.
 
 **P.A.02.**
-Consulta de estaciones cercanas
-- El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
-- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
-
-**P.A.03.**
-Visualización de disponibilidad de vehículos
-- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
-- Los datos de disponibilidad se actualizan en tiempo real.
-
-**P.A.04.**
-Proceso automático de alquiler y cobro
-- Al iniciar un alquiler, el sistema descuenta un vehículo de la estación correspondiente y registra el préstamo.
-- Al finalizar, calcula el monto y genera el cobro automáticamente.
-- Si el pago falla, el sistema notifica al usuario.
-
-**P.A.05.**	
-Control de acceso por roles
-- Los clientes solo pueden acceder a funciones de consulta y alquiler.
-- Los administradores pueden gestionar todo el sistema.
-- Los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
-- Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
-  
-**P.A.06.**	
-Registro y gestión de incidencias/mantenimiento	
-- Los usuarios pueden reportar una incidencia durante o después del alquiler.
-- Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En revisión”, “Reparado”).
-
-**P.A.07.**
 Generación de informes y estadísticas
 - Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
 - Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
 - Los datos mostrados son consistentes con las operaciones realizadas.
+
+**P.A.03.**
+Consulta de estaciones cercanas
+- El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
+- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
+
+**P.A.04.**
+Visualización de disponibilidad de vehículos
+- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
+- Los datos de disponibilidad se actualizan en tiempo real.
+  
+**P.A.05.**	
+Registro y gestión de incidencias/mantenimiento	
+- Los usuarios pueden reportar una incidencia durante o después del alquiler.
+- Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En mantenimiento", “Reparado”).
 
 
 ### 4.1.2. Reglas de negocio
@@ -309,8 +297,12 @@ Escalabilidad del sistema
 Seguridad de la información
 - Intentar acceder al sistema con un usuario no registrado y comprobar que el acceso es denegado.
 - Intentar acceder al sistema con un usuario registrado, pero sin permisos suficientes y comprobar que no puede realizar acciones restringidas.
-- Verificar que los datos de usuario y pago están cifrados y no se puede leer desde la base de datos sin autorización.
-- Comprobar que todos los intentos de acceso queden registrados y diferenciar los legítimos de los fraudulentos.
+- Verificar que los datos sensibles (como credenciales y métodos de pago) están cifrados y no pueden leerse directamente desde la base de datos.
+- Comprobar que todos los intentos de acceso (exitosos y fallidos) queden registrados, diferenciando los legítimos de los fraudulentos.
+- Verificar que los clientes solo pueden acceder a funciones de consulta y alquiler.
+- Verificar que los administradores pueden gestionar todo el sistema.
+- Verificar que los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
+- Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
 
 **P.A.04.**
 Fiabilidad del servicio
