@@ -87,7 +87,7 @@ para usar un vehículo disponible.
 
 #### R.F.04 Gestión administrativa del sistema
 Como administrador, <br>
-quiero gestionar los usuarios, estaciones y vehículos <br>
+quiero poder gestionar los usuarios, estaciones y vehículos <br>
 para mantener actualizado el sistema.
 
 #### R.F.05 Generación de informes
@@ -108,32 +108,38 @@ para poder revisar y reparar los vehículos afectados.
 - ...
 
 **P.A.01.**
+Registro de usuario
 - El registro solicita nombre, correo y contraseña.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
 
 **P.A.02.**
+Consulta de estaciones cercanas
 - El sistema muestra estaciones ordenadas por cercanía.
 - Cada estación muestra cuántos vehículos hay disponibles.
 
 **P.A.03.**
+Inicio de alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
 
 **P.A.04.**
+Gestión administrativa del sistema
 - Administrador puede crear, modificar o eliminar registros.
 - Los cambios se reflejan de inmediato.
 - El sistema impide eliminar registros vinculados a alquileres activos.
 
 **P.A.05.**
-- El sistema muestra una lista de incidencias nuevas.
-- El técnico puede actualizar el estado.
-
-**P.A.06.**
+Generación de informes
 - El sistema genera informes de manera automática.
 - Los informes son descargables en formato PDF.
 - Los datos reflejan correctamente las operaciones registradas.
+
+**P.A.06.**
+Notificación de incidencias
+- El sistema muestra una lista de incidencias nuevas.
+- El técnico puede actualizar el estado.
 
 
 ### 4.1.1. Requisitos de información
@@ -226,10 +232,12 @@ para garantizar la seguridad de los menores.
 **Prueba de aceptación**
 
 **P.A.01.**
+No eliminar usuarios que tengan alquiler activo.
 - Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
 - A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
 
 **P.A.02.**
+Evitar que los usuarios alquilen 2 vehículos simultáneamente.
 - Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
 - Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
