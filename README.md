@@ -210,14 +210,14 @@ Generación de informes y estadísticas
 Descripción de la regla de negocio.
 
 #### *R.N.01. No eliminar usuarios que tengan alquiler activo.* <br>
-Como administrador de EasyVPM, 
-quiero que el cliente no pueda eliminar su cuenta de la aplicación
-mientras esté alquilando un vehículo,
+Como administrador de EasyVPM, <br>
+quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
+mientras esté alquilando un vehículo,<br>
 para asegurar la devolución del vehículo y el registro del pago.
 
 #### *R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente.* <br>
-Como administardor de EasyVPM, 
-quiero que el cliente no pudea alquilar más de un vehículo a la vez,
+Como administardor de EasyVPM, <br>
+quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
 
 ### 4.2. Mapa de historias de usuario (opcional)
