@@ -31,7 +31,7 @@ En consecuencia, EasyVPM considera imprescindible implantar un sistema de inform
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
 **Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, en mantenimiento, reparado).  <br>
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
-**Incidencia** Reporte generado por los administradores cuando se produce un fallo en el servicio.  <br>
+**Incidencia** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
 **Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad. #(lo de entre estaciones se puede omitir si queremos usar esta palabra para sacar los vehiculos del taller)  <br>
 **Reparado:** Estado en el que se encuentra un vehículo cuando su mantenimiento ha terminado y se tiene que redistribuir. <br>
