@@ -257,6 +257,28 @@ Como responsable TIC de EasyVMP, <br>
 quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
 para asegurar la accesibilidad del servicio a todos los usuarios.
 
+**Prueba de aceptación**
+
+**P.A.01.**
+Disponibilidad 24/7
+- Comprobar que la aplicación se puede acceder en distintos momentos del día.
+- Simular simultaneidad de accesos de distintos usuarios para verificar que el sistema permanece operativo.
+- Intentar acceder al sistema durante un mantenimiento programado y comprobar que se muestra el correspondiente aviso.
+
+**P.A.02.**
+Escalabilidad del sistema
+- Añadir nuevas estaciones al sistema y comprobar que se visualizan correctamente en la app y base de datos.
+- Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
+- Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
+- Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
+
+**P.A.03.**
+Seguridad de la información
+- Intentar acceder al sistema con un usuario no registrado y comprobar que el acceso es denegado.
+- Intentar acceder al sistema con un usuario registrado, pero sin permisos suficientes y comprobar que no puede realizar acciones restringidas.
+- Verificar que los datos de usuario y pago están cifrados y no se puede leer desde la base de datos sin autorización.
+- Comprobar que todos los intentos de acceso queden registrados y diferenciar los legítimos de los fraudulentos.
+
 -- fin entregable 1 --
 
 ## 5. Modelo conceptual
