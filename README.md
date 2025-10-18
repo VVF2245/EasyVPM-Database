@@ -78,32 +78,6 @@ Como cliente, <br>
 quiero registrarme en el sistema <br>
 para poder acceder al servicio de alquiler.
 
-#### R.F.02. Consulta de estaciones cercanas
-Como cliente, <br>
-quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
-para saber dónde puedo alquilar un vehículo.
-
-#### R.F.03. Inicio de alquiler
-Como cliente, <br>
-quiero iniciar un alquiler seleccionando un vehículo disponible en una estación<br>
-para poder utilizarlo durante un tiempo determinado.
-
-#### R.F.04. Gestión administrativa del sistema
-Como administrador, <br>
-quiero poder gestionar los usuarios, estaciones y vehículos <br>
-para mantener actualizado el sistema.
-
-#### R.F.05. Generación de informes
-Como administrador, <br>
-quiero generar informes de uso y mantenimiento <br>
-para tomar decisiones basadas en datos.
-
-#### R.F.06. Notificación de incidencias
-Como técnico de mantenimiento, <br>
-quiero recibir notificaciones de incidencias <br>
-para poder revisar y reparar los vehículos afectados.
-
-
 **P.A.01.**
 Registro de usuario
 - El registro solicita nombre, correo y contraseña.
@@ -111,11 +85,21 @@ Registro de usuario
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.04.
 
+#### R.F.02. Consulta de estaciones cercanas
+Como cliente, <br>
+quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
+para saber dónde puedo alquilar un vehículo.
+
 **P.A.02.**
 Consulta de estaciones cercanas
 - El sistema muestra estaciones ordenadas por cercanía.
 - Cada estación muestra cuántos vehículos hay disponibles.
 Se debe aplicar la regla de negocio R.N.02.
+
+#### R.F.03. Inicio de alquiler
+Como cliente, <br>
+quiero iniciar un alquiler seleccionando un vehículo disponible en una estación<br>
+para poder utilizarlo durante un tiempo determinado.
 
 **P.A.03.**
 Inicio de alquiler
@@ -130,6 +114,11 @@ Finalización de alquiler y cobro automático
 - El sistema genera el cobro automáticamente al método de pago registrado.
 - Si el pago falla, el sistema notifica al usuario.
 
+#### R.F.04. Gestión administrativa del sistema
+Como administrador, <br>
+quiero poder gestionar los usuarios, estaciones y vehículos <br>
+para mantener actualizado el sistema.
+
 **P.A.05.**
 Gestión administrativa del sistema
 - Administrador puede crear, modificar o eliminar registros.
@@ -137,12 +126,22 @@ Gestión administrativa del sistema
 - El sistema impide eliminar registros vinculados a alquileres activos.
 Se debe aplicar la regla de negocio R.N.01.
 
+#### R.F.05. Generación de informes
+Como administrador, <br>
+quiero generar informes de uso y mantenimiento <br>
+para tomar decisiones basadas en datos.
+
 **P.A.06.**
 Generación de informes
 - El sistema genera informes de manera automática.
 - Los informes son descargables en formato PDF.
 - Los datos reflejan correctamente las operaciones registradas.
 - Se debe aplicar la regla de negocio R.N.03.
+
+#### R.F.06. Notificación de incidencias
+Como técnico de mantenimiento, <br>
+quiero recibir notificaciones de incidencias <br>
+para poder revisar y reparar los vehículos afectados.
 
 **P.A.07.**
 Notificación de incidencias
@@ -160,19 +159,6 @@ las estaciones, los ingresos y las incidencias, <br>
 para poder gestionar la empresa de manera eficiente y <br>
 tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
-#### R.I.02. Información para el usuario
-Como usuario de EasyVPM, <br>
-quiero recibir informacion sobre las estaciones cercanas, <br>
-la disponibilidad de los vehiculos y mi historial de alquileres,
-para planificar mis desplazamientos y tomar decisiones informadas. 
-
-#### R.I.03. Información para el mantenimiento
-Como tecnico de mantenimiento de EasyVPM,
-quiero recibir informacion sobre inicidencias reportadas y el estado de los vehiculos,
-para saber de que vehículos o estaciones me tengo que encargar.
-
-**Prueba de aceptación**
-
 **P.A.01.**
 Gestión de información de usuarios, vehículos y estaciones(administrador)
 - Se puede registrar, editar y eliminar usuarios, vehículos y estaciones.
@@ -185,16 +171,27 @@ Generación de informes y estadísticas
 - Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
 - Los datos mostrados son consistentes con las operaciones realizadas.
 
+#### R.I.02. Información para el usuario
+Como usuario de EasyVPM, <br>
+quiero recibir informacion sobre las estaciones cercanas, <br>
+la disponibilidad de los vehiculos y mi historial de alquileres,
+para planificar mis desplazamientos y tomar decisiones informadas.
+
 **P.A.03.**
 Consulta de estaciones cercanas
 - El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
 - Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
 
+#### R.I.03. Información para el mantenimiento
+Como tecnico de mantenimiento de EasyVPM,
+quiero recibir informacion sobre inicidencias reportadas y el estado de los vehiculos,
+para saber de que vehículos o estaciones me tengo que encargar.
+
 **P.A.04.**
 Visualización de disponibilidad de vehículos
 - El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
 - Los datos de disponibilidad se actualizan en tiempo real.
-  
+
 **P.A.05.**	
 Registro y gestión de incidencias/mantenimiento	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
@@ -209,10 +206,20 @@ quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
 mientras esté alquilando un vehículo,<br>
 para asegurar la devolución del vehículo y el registro del pago.
 
+**P.A.01.**
+No eliminar usuarios que tengan alquiler activo.
+- Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
+- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
+
 #### R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente.
 Como administardor de EasyVPM, <br>
 quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
+
+**P.A.02.**
+Evitar que los usuarios alquilen 2 vehículos simultáneamente.
+- Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
+- Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
 #### R.N.03. Mantenimiento obligatiorio. <br>
 Como administrador de EasyVPM,<br>
@@ -220,28 +227,16 @@ quiero que todos los vehículos que hayan superado<br>
 50 alquileres o 500 km recorridos deben pasar por revisión,<br>
 para asegurar la seguridad y calidad del servicio.
 
+**P.A.03**
+Mantenimiento obligatiorio.
+- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
+- Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
+
 #### R.N.04. Edad mínima obligatoria. <br>
 Como administrador de EasyVPM,<br>
 quiero que solo los usuarios mayores de 12 años<br>
 puedan utilizar EasyVPM y alquilar un vehiculo<br>
 para garantizar la seguridad de los menores.
-
-**Prueba de aceptación**
-
-**P.A.01.**
-No eliminar usuarios que tengan alquiler activo.
-- Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
-- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
-
-**P.A.02.**
-Evitar que los usuarios alquilen 2 vehículos simultáneamente.
-- Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
-- Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
-
-**P.A.03**
-Mantenimiento obligatiorio.
-- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
-- Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
 
 **P.A.04**
 Edad mínima obligatoria.
@@ -258,33 +253,16 @@ Como cliente de EasyVPM, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
-#### R.N.F.02. Escalabilidad del sistema.
-Como administrador de EasyVPM, <br>
-quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
-para poder ampliar el servicio sin afectar el rendimiento del sistema.
-
-#### R.N.F.03. Seguridad de la información.
-Como administrador de EasyVPM, <br>
-quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
-para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
-
-#### R.N.F.04. Fiabilidad del servicio.
-Como cliente de EasyVPM, <br>
-quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
-para confiar en el sistema y evitar errores o pérdidas de datos.
-
-#### R.N.F.05. Compatibilidad técnica del sistema.
-Como responsable TIC de EasyVPM, <br>
-quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
-para asegurar la accesibilidad del servicio a todos los usuarios.
-
-**Prueba de aceptación**
-
 **P.A.01.**
 Disponibilidad 24/7
 - Comprobar que la aplicación se puede acceder en distintos momentos del día.
 - Simular simultaneidad de accesos de distintos usuarios para verificar que el sistema permanece operativo.
 - Intentar acceder al sistema durante un mantenimiento programado y comprobar que se muestra el correspondiente aviso.
+
+#### R.N.F.02. Escalabilidad del sistema.
+Como administrador de EasyVPM, <br>
+quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
+para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
 **P.A.02.**
 Escalabilidad del sistema
@@ -292,6 +270,11 @@ Escalabilidad del sistema
 - Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
 - Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
 - Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
+
+#### R.N.F.03. Seguridad de la información.
+Como administrador de EasyVPM, <br>
+quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
+para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
 
 **P.A.03.**
 Seguridad de la información
@@ -304,11 +287,21 @@ Seguridad de la información
 - Verificar que los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
 
+#### R.N.F.04. Fiabilidad del servicio.
+Como cliente de EasyVPM, <br>
+quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
+para confiar en el sistema y evitar errores o pérdidas de datos.
+
 **P.A.04.**
 Fiabilidad del servicio
 - Realizar un pago de alquiler y comprobar que se registra correctamente en la base de datos y se refleja en el historial del usuario.
 - Simular un fallo durante el proceso de pago y comprobar que se genera un mensaje de error adecuado y no se pierden datos.
 - Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
+
+#### R.N.F.05. Compatibilidad técnica del sistema.
+Como responsable TIC de EasyVPM, <br>
+quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
+para asegurar la accesibilidad del servicio a todos los usuarios.
 
 **P.A.05.**
 Compatibilidad técnica del sistema
