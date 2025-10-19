@@ -86,7 +86,7 @@ Registro de usuario
 #### R.F.02. Consulta de estaciones cercanas
 Como cliente, <br>
 quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
-para saber dónde puedo alquilar un vehículo.
+para recoger o devolver un vehículo fácilmente.
 
 **P.A.02.**
 Consulta de estaciones cercanas
@@ -94,58 +94,31 @@ Consulta de estaciones cercanas
 - Cada estación muestra cuántos vehículos hay disponibles.
 Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.03. Inicio de alquiler
+#### R.F.03. Proceso de Alquiler
 Como cliente, <br>
-quiero iniciar un alquiler seleccionando un vehículo disponible en una estación<br>
-para poder utilizarlo durante un tiempo determinado.
+quiero alquilar un vehículo desde la aplicación<br>
+para inciar mi viaje sin necesidad de gestiones manuales.
 
 **P.A.03.**
-Inicio de alquiler
+Proceso del alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
 - Se debe aplicar la regla de negocio R.N.01.
 
+#### R.F.04. Cobro automático
+Como administrador, <br>
+quiero que el sistema calcule y cobre automáticamente el importe<br>
+del alquiler según el tiempo de uso, <br>
+para evitar pagos manuales o errores y así mejorar la experiencia<br>
+de usuario. <br>
+
 **P.A.04.**
-Finalización de alquiler y cobro automático
-- Al finalizar el alquiler, el sistema calcula el monto correspondiente según el tiempo de uso.
-- El sistema genera el cobro automáticamente al método de pago registrado.
-- Si el pago falla, el sistema notifica al usuario.
-
-#### R.F.04. Gestión administrativa del sistema
-Como administrador, <br>
-quiero poder gestionar los usuarios, estaciones y vehículos <br>
-para mantener actualizado el sistema.
-
-**P.A.05.**
-Gestión administrativa del sistema
-- Administrador puede crear, modificar o eliminar registros.
-- Los cambios se reflejan de inmediato.
-- El sistema impide eliminar registros vinculados a alquileres activos.
+Cobro automático
+- La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
+- El sistema calcula a partir de los tiempos registrados el precio a pagar. 
+- El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
 Se debe aplicar la regla de negocio R.N.01.
-
-#### R.F.05. Generación de informes
-Como administrador, <br>
-quiero generar informes de uso y mantenimiento <br>
-para tomar decisiones basadas en datos.
-
-**P.A.06.**
-Generación de informes
-- El sistema genera informes de manera automática.
-- Los informes son descargables en formato PDF.
-- Los datos reflejan correctamente las operaciones registradas.
-- Se debe aplicar la regla de negocio R.N.03.
-
-#### R.F.06. Notificación de incidencias
-Como técnico de mantenimiento, <br>
-quiero recibir notificaciones de incidencias <br>
-para poder revisar y reparar los vehículos afectados.
-
-**P.A.07.**
-Notificación de incidencias
-- El sistema muestra una lista de incidencias nuevas.
-- El técnico puede actualizar el estado.
-- Se debe aplicar la regla de negocio R.N.03.
 
 
 ### 4.1.1. Requisitos de información
