@@ -27,7 +27,7 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 **Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  <br>
 **Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
-**Estado del vehículo:** Condición actual del VMP (disponible, en uso, averiado, mantenimiento pendiente, en mantenimiento, reparado).  <br>
+
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
 **Incidencia:** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
@@ -214,6 +214,21 @@ Edad mínima obligatoria.
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
 - Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
 - Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
+
+#### R.N.05. Cambio de estado vehículo. <br>
+Como administrador de EasyVPM,<br>
+quiero que se pueda cambiar el estado de los vehículos,
+para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
+
+**P.A.04**
+Cambio de estado vehículo.
+- Si un vehículo se encuentra en buen estado aparacerá como "disponible" desde que su último usuario lo coloque en una estación.
+- Si un vehículo está en mal estado aparecerá como "averiado" desde que lo informe un trabajador o cliente.
+- Si un vehículo está en uso aparecerá como "en uso" desde que alguien lo alquile.
+- Si un vehículo alcanza los 50 alquileres o 500 km aparecerá como "mantenimiento pendiente".
+- Si un técnico de mantenimiento se lleva un vehículo aparece como "en mantenimiento".
+- Si un vehículo está en el almacen tras haberse reparado y está esperando que sea redistribuido aparece como "reparado".
+
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
