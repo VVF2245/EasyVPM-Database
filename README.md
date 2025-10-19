@@ -12,11 +12,9 @@
 
 - Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
 
-La empresa EasyVPM, dedicada al alquiler y gestión de vehículos de movilidad personal como patinetes eléctricos, bicicletas y monociclos, quiere desarrollar una plataforma centralizada que optimice su gestión logística y administrativa.
-
-Ante la futura expansión y apertura de nuevas sucursales, la empresa ha detectado que la documentación manual ya no resulta eficiente, pues dificulta el control del inventario, el seguimiento de los vehículos, la trazabilidad de los alquileres y la supervisión del mantenimiento.
-
-En consecuencia, EasyVPM considera imprescindible implantar un sistema de informacion que permita un acceso ágil y seguro a grandes volúmenes de información, mejorando sus procesos internos. Con esta plataforma, la empresa busca modernizar su infraestructura, optimizar la toma de decisiones y ofrecer una experiencia de usuario más completa y satisfactoria.
+EasyVPM es una empresa dedicada al alquiler de vehículos de movilidad personal que actualmente gestiona los alquileres de forma manual, mediante papeleo y procesos poco eficientes.
+Ante su crecimiento, la empresa busca modernizarse implantando una plataforma centralizada que facilite la gestión de usuarios, vehículos y estaciones.
+Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una aplicación sencilla, moderna y fácil de usar, que ofrezca una experiencia ágil tanto para la empresa como para los usuarios.
 
 <img src="imagenes/imagen_transicion.png" alt="Objetivo de EasyVPM" width="40%"><br>
 <em>Objetivo de EasyVPM</em>
