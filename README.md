@@ -26,8 +26,6 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 **Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. <br>
 **Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
 **Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  <br>
-**Estado de la estación:** Condición actual de la estación (libre, ocupada, fuera de servicio).  <br>
-
 **Inventario:** Conjunto de VMP disponibles para alquiler. <br>
 **Incidencia:** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
 **Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
@@ -217,10 +215,10 @@ Edad mínima obligatoria.
 
 #### R.N.05. Cambio de estado vehículo. <br>
 Como administrador de EasyVPM,<br>
-quiero que se pueda cambiar el estado de los vehículos,
+quiero que se pueda cambiar el estado de los vehículos,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
 
-**P.A.04**
+**P.A.05**
 Cambio de estado vehículo.
 - Si un vehículo se encuentra en buen estado aparacerá como "disponible" desde que su último usuario lo coloque en una estación.
 - Si un vehículo está en mal estado aparecerá como "averiado" desde que lo informe un trabajador o cliente.
@@ -228,6 +226,17 @@ Cambio de estado vehículo.
 - Si un vehículo alcanza los 50 alquileres o 500 km aparecerá como "mantenimiento pendiente".
 - Si un técnico de mantenimiento se lleva un vehículo aparece como "en mantenimiento".
 - Si un vehículo está en el almacen tras haberse reparado y está esperando que sea redistribuido aparece como "reparado".
+
+#### R.N.06. Cambio de estado estación. <br>
+Como administrador de EasyVPM,<br>
+quiero que se pueda cambiar el estado de la estación,<br>
+para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran las estaciones.
+
+**P.A.06**
+Cambio de estado estación.
+- Si una estación se encuentra libre aparece como "libre" desde que alguien desengancha un vehículo de dicha estación.
+- Si una estación se encuentra ocupada aparece como "ocupada" desde que alguien enganche un vehículo en ella.
+- Si una estación se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) la estación aparece como "fuera de servicio".
 
 
 ### 4.2. Mapa de historias de usuario (opcional)
