@@ -104,7 +104,7 @@ Proceso del alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
-- Se debe aplicar la regla de negocio R.N.01.
+- Se debe aplicar la regla de negocio R.N.02.
 
 #### R.F.04. Cobro automático
 Como administrador, <br>
