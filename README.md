@@ -28,7 +28,7 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 **Tiempo de espera:** Tiempo mínimo que tiene que pasar entre cada viaje.  <br>
 **Tipo de tarifa:** Clasificación del modo de pago, que puede ser por suscripción (mensual, anual) o por pago individual de cada trayecto.  <br>
 **VMP (Vehículo de Movilidad Personal):** Medio de transporte ligero, destinado a una sola persona (patinetes, monociclos, etc.).  <br>
-**Zona de cobertura:** Área geógrafica dentro de la cual el servicio está disponible y se pueden realizar alquileres.
+**Zona de cobertura:** Área geógrafica dentro de la cual el servicio está disponible y se pueden realizar alquileres.<br>
 
 <img src="imagenes/estacion_vpm.png" alt="Estación de VMP" width="50%"><br>
 <em>Estación de EasyVPM</em>
