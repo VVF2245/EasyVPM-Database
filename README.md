@@ -21,17 +21,9 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 
 ## 2. Glosario de términos
 
-- Términos específicos del dominio del problema, ordenados alfabéticamente. Se valorará la presencia de información multimedia.
-
-**Cliente:** Persona que realiza el alquiler de un VMP a través de la plataforma. <br>
-**Duración del viaje:** Tiempo que pasa entre el inicio y el fin del alquiler. <br>
-**Estación:** Punto físico donde se pueden recoger o devolver los vehículos.  <br>
-**Inventario:** Conjunto de VMP disponibles para alquiler. <br>
 **Incidencia:** Registro de un fallo o anomalía detectada en un vehículo o estación, que requiere revisión o intervención por parte del equipo técnico.  <br>
-**Mantenimiento:** Conjunto de acciones para reparar o revisar los vehículos o las estaciones.  <br>
 **Mantenimiento pendiente:** Estado en el que se encuentra un VMP cuando ha alcanzado el nº de kilómetros o viajes definidos entre mantenimientos, indicando que requieren una revisión antes de continuar en servicio. <br>
-**Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad. #(lo de entre estaciones se puede omitir si queremos usar esta palabra para sacar los vehiculos del taller)  <br>
-**Reparado:** Estado en el que se encuentra un vehículo cuando su mantenimiento ha terminado y se tiene que redistribuir. <br>
+**Redistribución:** Movimiento de VMPs entre estaciones para equilibrar la disponibilidad.  <br>
 **Reseña:** Evaluación proporcionada por un usuario sobre su experiencia con un vehículo mediante calificación y comentario.  <br>
 **Tiempo de espera:** Tiempo mínimo que tiene que pasar entre cada viaje.  <br>
 **Tipo de tarifa:** Clasificación del modo de pago, que puede ser por suscripción (mensual, anual) o por pago individual de cada trayecto.  <br>
