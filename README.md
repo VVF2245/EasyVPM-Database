@@ -39,7 +39,13 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
-El sistema debe ser capaz de almacenar y gestionar la información relacionada con los usuarios, los vehículos alquilados y las estaciones, permitiendo así una correcta administración de los préstamos y del servicio ofrecido.
+
+#### R.G.01. Gestión global del servicio de movilidad
+Como administrador de EasyVPM,<br>
+quiero que el sistema sea capaz de almacenar y gestionar la información relacionada con los usuarios, los vehículos alquilados y las estaciones,<br>
+para asegurar una correcta administración del servicio y garantizar su funcionamiento continuo.
+
+
 
 Para ello deberá informar al usuario sobre las estaciones más cercanas a su ubicación y mostrar la cantidad y tipo de vehículos disponibles en cada una de ellas, además de tener que gestionar automáticamente los procesos de alquiler y cobro, controlar el acceso según roles de usuario, permitir el registro de incidencias y mantenimiento, y generar informes y estadísticas para la toma de decisiones empresariales.
 
