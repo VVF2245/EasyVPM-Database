@@ -219,7 +219,7 @@ Edad mínima obligatoria
 
 #### R.N.05. Cambio de estado vehículo <br>
 Como administrador de EasyVPM,<br>
-quiero que se pueda cambiar el estado de los vehículos,<br>
+quiero que el sistema cambie automáticamente el estado de los vehículos,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
 
 **P.A.05**
@@ -233,7 +233,7 @@ Cambio de estado vehículo
 
 #### R.N.06. Cambio de estado estación <br>
 Como administrador de EasyVPM,<br>
-quiero que se pueda cambiar el estado de la estación,<br>
+quiero que el sistema cambie automáticamente el estado de las estaciones,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran las estaciones.
 
 **P.A.06**
