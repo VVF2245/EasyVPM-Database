@@ -52,8 +52,8 @@ para garantizar la continuidad del servicio, proteger la información y mantener
 
 #### R.G.03. Interacción y satisfacción del usuario
 Como cliente de EasyVPM,
-quiero que el sistema ofrezca una interfaz clara y que disfrute de los servicios de movilidad,
-para disfrutar de la app sin complicaciones y aprovechar al máximo las opciones disponibles.
+quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización
+para utilizar la app sin complicaciones y de manera sencilla.
 
 
 ### 3.2. Usuarios del sistema
@@ -88,34 +88,48 @@ Registro de usuario
 #### R.F.02. Consulta de estaciones cercanas
 Como cliente, <br>
 quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
+mediante un servicio de mapas <br>
 para recoger o devolver un vehículo fácilmente.
 
 **P.A.02.**
 Consulta de estaciones cercanas
-- El sistema muestra estaciones ordenadas por cercanía.
+- El sistema muestra estaciones por geolocalización.
 - Cada estación muestra cuántos vehículos hay disponibles.
+- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
 Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.03. Proceso de Alquiler
+#### R.F.03. Disponibilidad de los vehículos
+Como cliente, <br>
+quiero ver la cantidad y el tipo de vehículos <br>
+que hay en cada estación, <br>
+para poder seleccionar el mejor vehículo disponible <br>
+para mis necesidades.
+
+**P.A.03.**
+Disponibilidad de los vehículos
+- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
+- Los datos de disponibilidad se actualizan en tiempo real.
+
+#### R.F.04. Proceso de Alquiler
 Como cliente, <br>
 quiero alquilar un vehículo desde la aplicación<br>
 para inciar mi viaje sin necesidad de gestiones manuales.
 
-**P.A.03.**
+**P.A.04.**
 Proceso del alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
 - Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.04. Cobro automático
+#### R.F.05. Cobro automático
 Como administrador, <br>
 quiero que el sistema calcule y cobre automáticamente el importe<br>
 del alquiler según el tiempo de uso, <br>
 para evitar pagos manuales o errores y así mejorar la experiencia<br>
 de usuario. <br>
 
-**P.A.04.**
+**P.A.05.**
 Cobro automático
 - La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
 - El sistema calcula a partir de los tiempos registrados el precio a pagar. 
@@ -134,42 +148,33 @@ tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
 **P.A.01.**
 Gestión de información de usuarios, vehículos y estaciones(administrador)
-- Se puede registrar, editar y eliminar usuarios, vehículos y estaciones.
+- Se puede registrar, editar y penalizar usuarios, vehículos y estaciones.
 - Los datos modificados se reflejan inmediatamente en el sistema.
 - No se permite duplicar registros con el mismo identificador.
 
-**P.A.02.**
-Generación de informes y estadísticas
-- Los administradores pueden generar informes de uso, mantenimiento, ingresos y disponibilidad.
-- Los informes pueden descargarse en formato PDF o visualizarse en pantalla.
-- Los datos mostrados son consistentes con las operaciones realizadas.
-
 #### R.I.02. Información para el usuario
 Como usuario de EasyVPM, <br>
-quiero recibir informacion sobre las estaciones cercanas, <br>
-la disponibilidad de los vehiculos y mi historial de alquileres,
+quiero recibir informacion sobre las características <br>
+de los vehiculos y sus respectivas reseñas, <br>
+y mi historial de alquileres, <br>
 para planificar mis desplazamientos y tomar decisiones informadas.
 
-**P.A.03.**
-Consulta de estaciones cercanas
-- El sistema muestra un listado de estaciones ordenadas por proximidad a la ubicación actual del usuario.
-- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
+**P.A.02.**
+Consulta de vehículos
+- El sistema muestra una descripción técnica del vehículo seleccionado.
+- El sistema muestra diversas reseñas así como un porcentaje de satisfacción general del vehículo.
+- El sistema muestra en el perfil el historial de alquileres.
+
 
 #### R.I.03. Información para el mantenimiento
 Como tecnico de mantenimiento de EasyVPM,
 quiero recibir informacion sobre inicidencias reportadas y el estado de los vehiculos,
 para saber de que vehículos o estaciones me tengo que encargar.
 
-**P.A.04.**
-Visualización de disponibilidad de vehículos
-- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
-- Los datos de disponibilidad se actualizan en tiempo real.
-
-**P.A.05.**	
+**P.A.03.**	
 Registro y gestión de incidencias/mantenimiento	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
 - Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En mantenimiento", “Reparado”).
-
 
 ### 4.1.2. Reglas de negocio
 
