@@ -104,6 +104,7 @@ quiero ver la cantidad y el tipo de vehículos <br>
 que hay en cada estación, <br>
 para poder seleccionar el mejor vehículo disponible <br>
 para mis necesidades.
+- Se debe aplicar la regla de negocio R.N.06.
 
 **P.A.03.**
 Disponibilidad de los vehículos
