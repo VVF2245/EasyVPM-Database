@@ -266,12 +266,11 @@ Disponibilidad 24/7
 
 #### R.N.F.02. Escalabilidad del sistema
 Como administrador de EasyVPM, <br>
-quiero que el sistema permita incorporar más estaciones, usuarios y vehículos en el futuro, <br>
+quiero que el sistema permita incorporar hasta 1000 usuarios y vehículos simúltaneos <br>
 para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
 **P.A.02.**
 Escalabilidad del sistema
-- Añadir nuevas estaciones al sistema y comprobar que se visualizan correctamente en la app y base de datos.
 - Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
 - Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
 - Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
