@@ -51,8 +51,8 @@ quiero que el sistema sea fiable y seguro incluso ante errores o interrupciones,
 para garantizar la continuidad del servicio, proteger la información y mantener la integridad de las operaciones críticas como los pagos o alquileres.
 
 #### R.G.03. Interacción y satisfacción del usuario
-Como cliente de EasyVPM,
-quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización
+Como cliente de EasyVPM,<br>
+quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización,<br>
 para utilizar la app sin complicaciones y de manera sencilla.
 
 
@@ -96,7 +96,7 @@ Consulta de estaciones cercanas
 - El sistema muestra estaciones por geolocalización.
 - Cada estación muestra cuántos vehículos hay disponibles.
 - Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
-Se debe aplicar la regla de negocio R.N.02.
+- Se debe aplicar la regla de negocio R.N.02.
 
 #### R.F.03. Disponibilidad de los vehículos
 Como cliente, <br>
@@ -104,12 +104,12 @@ quiero ver la cantidad y el tipo de vehículos <br>
 que hay en cada estación, <br>
 para poder seleccionar el mejor vehículo disponible <br>
 para mis necesidades.
-- Se debe aplicar la regla de negocio R.N.06.
 
 **P.A.03.**
 Disponibilidad de los vehículos
 - El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
 - Los datos de disponibilidad se actualizan en tiempo real.
+- Se debe aplicar la regla de negocio R.N.06.
 
 #### R.F.04. Proceso de Alquiler
 Como cliente, <br>
@@ -253,13 +253,14 @@ Cambio de estado estación.
 
 ### 4.3. Requisitos no funcionales (opcional)
 
-#### R.N.F.01. Disponibilidad 24/7 <br>
+#### R.N.F.01. Disponibilidad razonable <br>
 Como cliente de EasyVPM, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
 **P.A.01.**
-Disponibilidad 24/7
+Disponibilidad razonable
+- La aplicación debe estar disponible al menos el 90% del tiempo (exceptuando mantenimientos).
 - Comprobar que la aplicación se puede acceder en distintos momentos del día.
 - Simular simultaneidad de accesos de distintos usuarios para verificar que el sistema permanece operativo.
 - Intentar acceder al sistema durante un mantenimiento programado y comprobar que se muestra el correspondiente aviso.
@@ -291,13 +292,13 @@ Seguridad de la información
 - Verificar que los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
 
-#### R.N.F.04. Fiabilidad del servicio
+#### R.N.F.04. Fiabilidad operaciones críticas
 Como cliente de EasyVPM, <br>
 quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
 **P.A.04.**
-Fiabilidad del servicio
+Fiabilidad operaciones críticas
 - Realizar un pago de alquiler y comprobar que se registra correctamente en la base de datos y se refleja en el historial del usuario.
 - Simular un fallo durante el proceso de pago y comprobar que se genera un mensaje de error adecuado y no se pierden datos.
 - Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
