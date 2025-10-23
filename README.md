@@ -206,7 +206,7 @@ quiero que todos los vehículos que hayan superado<br>
 50 alquileres o 500 km recorridos deben pasar por revisión,<br>
 para asegurar la seguridad y calidad del servicio.
 
-**P.A.03**
+**P.A.03.**
 Mantenimiento obligatiorio
 - Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
 - Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
@@ -217,7 +217,7 @@ quiero que solo los usuarios mayores de 12 años<br>
 puedan utilizar EasyVPM y alquilar un vehiculo<br>
 para garantizar la seguridad de los menores.
 
-**P.A.04**
+**P.A.04.**
 Edad mínima obligatoria
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
 - Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
@@ -228,7 +228,7 @@ Como administrador de EasyVPM,<br>
 quiero que el sistema cambie automáticamente el estado de los vehículos,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
 
-**P.A.05**
+**P.A.05.**
 Cambio de estado vehículo
 - Si un vehículo se encuentra en buen estado aparacerá como "disponible" desde que su último usuario lo coloque en una estación.
 - Si un vehículo está en mal estado aparecerá como "averiado" desde que lo informe un trabajador o cliente.
@@ -242,11 +242,23 @@ Como administrador de EasyVPM,<br>
 quiero que el sistema cambie automáticamente el estado de las estaciones,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran las estaciones.
 
-**P.A.06**
+**P.A.06.**
 Cambio de estado estación.
 - Si una estación se encuentra libre aparece como "libre" desde que alguien desengancha un vehículo de dicha estación.
 - Si una estación se encuentra ocupada aparece como "ocupada" desde que alguien enganche un vehículo en ella.
 - Si una estación se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) la estación aparece como "fuera de servicio".
+
+#### R.N.07. Control de roles y permisos <br>
+Como administrador de EasyVPM,<br>
+quiero que el sistema tenga definido de forma clara los permisos de acceso según el tipo de usuario,
+para evitar que haya accesos indebidos a funciones críticas.
+
+**P.A.07.**
+Control de roles y permisos
+- Los clientes solo pueden acceder a funciones de consulta (estaciones, disponibilidad, historial) y alquiler.
+- Los administradores pueden gestionar todo el sistema.
+- Los técnicos solo pueden visualizar y actualizar el estado de incidencias o mantenimiento de vehículos.
+- Cualquier intento de acceder a una función no permitida debe mostrar un mensaje de "Acceso no autorizado".
 
 
 ### 4.2. Mapa de historias de usuario (opcional)
@@ -278,8 +290,8 @@ Escalabilidad del sistema
 
 #### R.N.F.03. Seguridad de la información
 Como administrador de EasyVPM, <br>
-quiero que solo usuarios registrados y autorizados puedan acceder al sistema, <br>
-para garantizar la seguridad de la información y cumplir con la ley de protección de datos.
+quiero que los datos de usuarios, pagos y vegículos estén protegidos,<br>
+para cumplir con la normativa de protección de datos y evitar accesos no autorizados.
 
 **P.A.03.**
 Seguridad de la información
@@ -287,9 +299,7 @@ Seguridad de la información
 - Intentar acceder al sistema con un usuario registrado, pero sin permisos suficientes y comprobar que no puede realizar acciones restringidas.
 - Verificar que los datos sensibles (como credenciales y métodos de pago) están cifrados y no pueden leerse directamente desde la base de datos.
 - Comprobar que todos los intentos de acceso (exitosos y fallidos) queden registrados, diferenciando los legítimos de los fraudulentos.
-- Verificar que los clientes solo pueden acceder a funciones de consulta y alquiler.
-- Verificar que los administradores pueden gestionar todo el sistema.
-- Verificar que los técnicos solo pueden ver incidencias y actualizar estados de mantenimiento.
+- Los datos sensibles (pagos, correos, etc.) se transmiten por HTTPS.
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
 
 #### R.N.F.04. Fiabilidad operaciones críticas
@@ -299,21 +309,21 @@ para confiar en el sistema y evitar errores o pérdidas de datos.
 
 **P.A.04.**
 Fiabilidad operaciones críticas
-- Realizar un pago de alquiler y comprobar que se registra correctamente en la base de datos y se refleja en el historial del usuario.
-- Simular un fallo durante el proceso de pago y comprobar que se genera un mensaje de error adecuado y no se pierden datos.
+- En caso de error durante el pago o el alquiler, el sistema debe mostrar un mensaje claro.
 - Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
+- Las operaciones completadas deben quedar registradas en el sistema sin duplicados.
 
 #### R.N.F.05. Compatibilidad técnica del sistema
 Como responsable TIC de EasyVPM, <br>
 quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
-para asegurar la accesibilidad del servicio a todos los usuarios.
+para asegurar la accesibilidad del servicio a la mayoría de usuarios.
 
 **P.A.05.**
 Compatibilidad técnica del sistema
-- Acceder a la aplicación desde un dispositivo Android y comprobar que todas las funciones principales funcionan correctamente.
-- Acceder a la aplicación desde un dispositivo iOS y comprobar que todas las funciones principales funcionan correctamente.
-- Acceder a la aplicación desde navegadores web modernos (Safari, Chrome, Firefox) y comprobar que todas las funciones principales funcionan correctamente.
-- Verificar que los usuarios pueden iniciar sesión, alquilar vehículos y consultar estaciones sin ningún problema desde cualquier plataforma.
+- La app debe ser usable desde Android (versión 11 o superior) e iOS (versión 14 o superior).
+- Debe tener accesi funcional básico desde navegadores web modernos (Chrome, Edge, Safari, Firefox).
+- Verificar que los usuarios pueden iniciar sesión, alquilar vehículos y consultar estaciones sin ningún problema desde estas plataformas.
+- Las pantallas deben adaptarse a distintos tamaños de dispositivos.
 
 
 -- fin entregable 1 --
