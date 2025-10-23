@@ -137,6 +137,30 @@ Cobro automático
 - El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
 Se debe aplicar la regla de negocio R.N.01.
 
+#### R.F.06. Valoración del vehículo o estación
+Como administrador de EasyVPM,<br>
+quiero que los clientes puedan poner valoración al vehículo o estación,<br>
+para poder conocer el estado real del servicio, detectar posibles incidencias y ayudar a mejorar el funcionamiento del servicio.
+
+**P.A.06.**
+Valoración del vehículo o estación
+- Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo o poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
+- El sistema registra la valoración junto al identificador del usuario, vehículo o estación y la fecha.
+- Las valoraciones bajas (por ejemplo 1 o 2 estrellas) y con comentario, explicando la incidencia o el porqué de la baja puntuación, se marcan automáticamente para revisión. <br>
+(*El comentario es necesario porque no vas a movilizar a un trabajador solo porque a algún gracioso le apetezca poner mala valoración*)
+- Si un vehículo o estación recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
+
+#### R.F.07. Recuperación de contraseña
+Como cliente de EasyVPM,<br>
+quiero poder recuperar mi contraseña si la olvido,<br>
+para no perder el acceso a mi cuenta.
+
+**P.A.07.**
+Recuperación de contraseña
+- El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
+- El enlace dura solo 24 horas o hasta utilizarlo.
+- El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
+
 
 ### 4.1.1. Requisitos de información
 
