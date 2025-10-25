@@ -85,81 +85,81 @@ Registro de usuario
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.04.
 
-#### R.F.02. Consulta de estaciones cercanas
-Como cliente, <br>
-quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
-mediante un servicio de mapas <br>
-para recoger o devolver un vehículo fácilmente.
-
-**P.A.02.**
-Consulta de estaciones cercanas
-- El sistema muestra estaciones por geolocalización.
-- Cada estación muestra cuántos vehículos hay disponibles.
-- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
-- Se debe aplicar la regla de negocio R.N.02.
-
-#### R.F.03. Disponibilidad de los vehículos
-Como cliente, <br>
-quiero ver la cantidad y el tipo de vehículos <br>
-que hay en cada estación, <br>
-para poder seleccionar el mejor vehículo disponible <br>
-para mis necesidades.
-
-**P.A.03.**
-Disponibilidad de los vehículos
-- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
-- Los datos de disponibilidad se actualizan en tiempo real.
-- Se debe aplicar la regla de negocio R.N.06.
-
-#### R.F.04. Proceso de Alquiler
+#### R.F.02. Proceso de Alquiler
 Como cliente, <br>
 quiero alquilar un vehículo desde la aplicación<br>
 para inciar mi viaje sin necesidad de gestiones manuales.
 
-**P.A.04.**
+**P.A.02.**
 Proceso del alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
 - Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.05. Cobro automático
+#### R.F.03. Cobro automático
 Como administrador, <br>
 quiero que el sistema calcule y cobre automáticamente el importe<br>
 del alquiler según el tiempo de uso, <br>
 para evitar pagos manuales o errores y así mejorar la experiencia<br>
 de usuario. <br>
 
-**P.A.05.**
+**P.A.03.**
 Cobro automático
 - La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
 - El sistema calcula a partir de los tiempos registrados el precio a pagar. 
 - El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
 Se debe aplicar la regla de negocio R.N.01.
 
-#### R.F.06. Valoración del vehículo o estación
+#### R.F.04. Recuperación de contraseña
+Como cliente de EasyVPM,<br>
+quiero poder recuperar mi contraseña si la olvido,<br>
+para no perder el acceso a mi cuenta.
+
+**P.A.04.**
+Recuperación de contraseña
+- El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
+- El enlace dura solo 24 horas o hasta utilizarlo.
+- El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
+
+#### R.F.05. Consulta de estaciones cercanas
+Como cliente, <br>
+quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
+mediante un servicio de mapas <br>
+para recoger o devolver un vehículo fácilmente.
+
+**P.A.05.**
+Consulta de estaciones cercanas
+- El sistema muestra estaciones por geolocalización.
+- Cada estación muestra cuántos vehículos hay disponibles.
+- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
+- Se debe aplicar la regla de negocio R.N.02.
+
+#### R.F.06. Disponibilidad de los vehículos
+Como cliente, <br>
+quiero ver la cantidad y el tipo de vehículos <br>
+que hay en cada estación, <br>
+para poder seleccionar el mejor vehículo disponible <br>
+para mis necesidades.
+
+**P.A.06.**
+Disponibilidad de los vehículos
+- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
+- Los datos de disponibilidad se actualizan en tiempo real.
+- Se debe aplicar la regla de negocio R.N.06.
+
+#### R.F.07. Valoración del vehículo o estación
 Como administrador de EasyVPM,<br>
 quiero que los clientes puedan poner valoración al vehículo o estación,<br>
 para poder conocer el estado real del servicio, detectar posibles incidencias y ayudar a mejorar el funcionamiento del servicio.
 
-**P.A.06.**
+**P.A.07.**
 Valoración del vehículo o estación
 - Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo o poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
 - El sistema registra la valoración junto al identificador del usuario, vehículo o estación y la fecha.
 - Las valoraciones bajas (por ejemplo 1 o 2 estrellas) y con comentario, explicando la incidencia o el porqué de la baja puntuación, se marcan automáticamente para revisión. <br>
 (*El comentario es necesario porque no vas a movilizar a un trabajador solo porque a algún gracioso le apetezca poner mala valoración*)
 - Si un vehículo o estación recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
-
-#### R.F.07. Recuperación de contraseña
-Como cliente de EasyVPM,<br>
-quiero poder recuperar mi contraseña si la olvido,<br>
-para no perder el acceso a mi cuenta.
-
-**P.A.07.**
-Recuperación de contraseña
-- El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
-- El enlace dura solo 24 horas o hasta utilizarlo.
-- El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
 
 
 ### 4.1.1. Requisitos de información
@@ -291,28 +291,28 @@ Control de roles y permisos
 
 ### 4.3. Requisitos no funcionales (opcional)
 
-#### R.N.F.01. Disponibilidad razonable <br>
+#### R.N.F.01. Escalabilidad del sistema
+Como administrador de EasyVPM, <br>
+quiero que el sistema permita incorporar hasta 1000 usuarios y vehículos simúltaneos <br>
+para poder ampliar el servicio sin afectar el rendimiento del sistema.
+
+**P.A.01.**
+Escalabilidad del sistema
+- Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
+- Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
+- Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
+
+#### R.N.F.02. Disponibilidad razonable <br>
 Como cliente de EasyVPM, <br>
 quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
-**P.A.01.**
+**P.A.02.**
 Disponibilidad razonable
 - La aplicación debe estar disponible al menos el 90% del tiempo (exceptuando mantenimientos).
 - Comprobar que la aplicación se puede acceder en distintos momentos del día.
 - Simular simultaneidad de accesos de distintos usuarios para verificar que el sistema permanece operativo.
 - Intentar acceder al sistema durante un mantenimiento programado y comprobar que se muestra el correspondiente aviso.
-
-#### R.N.F.02. Escalabilidad del sistema
-Como administrador de EasyVPM, <br>
-quiero que el sistema permita incorporar hasta 1000 usuarios y vehículos simúltaneos <br>
-para poder ampliar el servicio sin afectar el rendimiento del sistema.
-
-**P.A.02.**
-Escalabilidad del sistema
-- Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
-- Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
-- Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
 
 #### R.N.F.03. Seguridad de la información
 Como administrador de EasyVPM, <br>
