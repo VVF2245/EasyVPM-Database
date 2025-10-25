@@ -1,0 +1,24 @@
+# user_activities: REQUISITOS GENERALES
+# user_tasks: REQUISITOS FUNCIONALES
+# user_stories: REQUISITOS NO FUNCIONALES
+# release1:
+# release2: RELEASE 2
+# release3: RELEASE 3
+
+GESTIÓN GLOBAL DEL SERVICIO |{"bg":"#266B9A"}
+    R.F.01. Registro de Usuario |{"bg":"#FF0000"}
+        R.N.F.01 Escalabilidad del Sistema |{"bg":"#00FF00","release":"release1"}    
+    R.F.02. Proceso Alquiler |{"bg":"#FF0000"}
+
+SEGURIDAD Y FIABILIDAD DE LA APP |{"bg":"#266B9A"}
+    R.F.03. Cobro Automático |{"bg":"#CC3333"}
+        R.N.F.02 Disponibilidad Razonable |{"bg":"#33CC33","release":"release1"}
+        R.N.F.04 Fiabilidad Operaciones Críticas |{"bg":"#33CC33","release":"release1"}
+    R.F.04. Recuperación de Contraseña |{"bg":"#CC3333"}
+        R.N.F.03 Seguridad de la Información |{"bg":"#33CC33","release":"release1"}
+
+INTERACCIÓN Y EXPERIENCIA USUARIO |{"bg":"#266B9A"}
+    R.F.05. Consulta de estaciones |{"bg":"#FF6666"}
+        R.N.F.05 Compatibilidad Técnica del Sistema |{"bg":"#66FF66","release":"release1"}
+    R.F.06. Disponibilidad vehículos |{"bg":"#FF6666"}
+    R.F.07. Valoración del vehículo o estación |{"bg":"#FF6666"}

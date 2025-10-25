@@ -287,6 +287,8 @@ Control de roles y permisos
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
+<img src="mapa_historias/mapa_historias.png"  width="100%"><br>
+
 ### 4.3. Requisitos no funcionales (opcional)
 
 #### R.N.F.01. Disponibilidad razonable <br>
