@@ -1,0 +1,72 @@
+@startuml DiagramaClases
+
+class Usuario {
+    +nombre
+    +correo
+    +contraseña
+}
+
+class Cliente {
+    +tarifaActual
+}
+
+class TécnicoMantenimiento {
+    +fechaÚltimoServicio
+}
+
+class Valoración {
+    +puntuacion
+    +comentario [0..1]
+}
+
+class Alquiler {
+    +inicio
+    +duracion
+    +costo
+}
+
+class Vehículo {
+    +estado
+    +kilometraje
+    +numeroUsos
+    +ubicación
+    +valoraciones
+}
+
+class Estación {
+    +estado
+    +zona
+    +número
+    +valoraciones
+}
+
+class Bicicleta {
+    +tipoBici: str
+}
+
+class PatineteEléctrico {
+    +autonomíaBatería
+}
+
+Usuario <|-- Cliente
+Usuario <|-- TécnicoMantenimiento
+
+'Relación directa valoraciones'
+Cliente -- Valoración : pone
+Valoración -- Vehículo : recibe
+Valoración -- Estación : recibe
+
+Estación -- Vehículo : está en
+
+'Relacion de Alquileres'
+Cliente "1"--"*"  Alquiler
+Alquiler "*"--"1" Vehículo
+
+TécnicoMantenimiento "*"--"*" Estación : repara
+TécnicoMantenimiento "*"--"*" Vehículo : repara
+
+
+Vehículo <|-- Bicicleta
+Vehículo <|-- PatineteEléctrico
+
+@enduml
