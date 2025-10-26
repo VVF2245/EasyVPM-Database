@@ -287,7 +287,7 @@ Control de roles y permisos
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
-<img src="mapa_historias/mapa_historias.png"  width="100%"><br>
+<img src="mapa_historias/mapa_historias.png"  width="150%"><br>
 
 ### 4.3. Requisitos no funcionales (opcional)
 
@@ -360,7 +360,7 @@ Compatibilidad técnica del sistema
 
 - con restricciones.
 
-<img src="modelos_conceptuales/DiagramaClases.png" width="60%"><br>
+<img src="modelos_conceptuales/DiagramaClases.png" width="50%"><br>
 
 
 ### 5.2. Escenarios de prueba
