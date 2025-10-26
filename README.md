@@ -360,6 +360,9 @@ Compatibilidad técnica del sistema
 
 - con restricciones.
 
+<img src="modelos_conceptuales/DiagramaClases.png" width="60%"><br>
+
+
 ### 5.2. Escenarios de prueba
 
 - con descripción textual y diagrama de objetos UML.
