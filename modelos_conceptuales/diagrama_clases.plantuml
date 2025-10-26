@@ -52,9 +52,9 @@ Usuario <|-- Cliente
 Usuario <|-- TécnicoMantenimiento
 
 'Relación directa valoraciones'
-Cliente -- Valoración : pone
-Valoración -- Vehículo : recibe
-Valoración -- Estación : recibe
+Cliente "1"--"*" Valoración : pone
+Valoración "*"--"1" Vehículo : recibe
+Valoración "*"--"1" Estación : recibe
 
 Estación -- Vehículo : está en
 
