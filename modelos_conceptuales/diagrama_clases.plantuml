@@ -1,5 +1,11 @@
 @startuml DiagramaClases
 
+skinparam note {
+  BackgroundColor #cce5ff
+  BorderColor #336699
+  FontStyle italic
+}
+
 class Usuario {
     +nombre
     +correo
@@ -36,7 +42,7 @@ class Vehículo {
 class Estación {
     +estado
     +zona
-    +número
+    +númeroVehículos
     +valoraciones
 }
 
@@ -56,15 +62,16 @@ Cliente "1"--"*" Valoración : pone
 Valoración "*"--"1" Vehículo : recibe
 Valoración "*"--"1" Estación : recibe
 
-Estación -- Vehículo : está en
+Estación"1..*" -- "*"Vehículo : tiene
 
 'Relacion de Alquileres'
-Cliente "1"--"*"  Alquiler
-Alquiler "*"--"1" Vehículo
-
-TécnicoMantenimiento "*"--"*" Estación : repara
-TécnicoMantenimiento "*"--"*" Vehículo : repara
-
+Cliente "1"--"*"  Alquiler: tiene
+'Requisitos seguidos de relacion a linkear'
+note on link
+  **RN-001:** No eliminar usuarios que tengan alquiler activo
+end note
+ 
+Alquiler "*"--"1" Vehículo: de
 
 Vehículo <|-- Bicicleta
 Vehículo <|-- PatineteEléctrico
