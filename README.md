@@ -386,7 +386,6 @@ Compatibilidad técnica del sistema
 
 
 |       | Usuario   | Cliente  | TécnicoMantenimiento  | Administrador| Valoración   | Alquiler   | Estación  | Vehículo| Bicicleta | PatineteEléctrico | 
-
 |:------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 | RI-1  | X          | X          | X          | X          | X          | X          | X          | X          | X          | X          |
 | RI-2  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
