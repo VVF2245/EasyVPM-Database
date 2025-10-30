@@ -1,0 +1,78 @@
+@startuml DiagramaObjetos
+
+object Usuario1 {
+  +nombre="Ana López"
+  +correo=analop@gmail.com
+  +contraseña=11111111
+}
+object Usuario2 {
+  +nombre="Carlos Ruiz"
+  +correo=carlosrui@gmail.com
+  +contraseña=11112222
+}
+
+
+object Cliente1 {
+  +mensual
+}
+
+
+object TécnicoMantenimiento {
+  +28/10/2025
+}
+
+object Valoración1 {
+  +5/5
+  +null
+}
+
+object Valoración2 {
+  +3/5
+  +Me cuesta enganchar la bici
+}
+
+object Enganche1 {
+  +ocupado
+  +01
+}
+
+object Vehículo1 {
+  +estado="Disponible"
+  +kilometraje=120 km
+  +numeroUsos=23
+  +localización="Reina Mercedes"
+}
+object Bicicleta1 {
+  +tipoBici="individual"
+}
+
+object Estacion1 {
+  nombre = "Reina Mercedes"
+  vehiculosDisponibles = 2
+}
+
+object Alquiler1 {
+  inicio= 12/11/2025
+  duracion = "25 min"
+  coste = "0.0€"
+}
+
+Cliente1 --> Alquiler1 : realiza
+
+Alquiler1 --> Vehículo1 : usa
+
+Vehículo1 --|> Bicicleta1
+
+Bicicleta1 --> Enganche1: está en
+
+Enganche1 --* Estacion1
+
+Cliente1 -- Valoración1 : pone
+Cliente1 -- Valoración2 : pone
+Valoración1 -- Vehículo1 : recibe
+Valoración2 -- Enganche1 : recibe
+
+Usuario1 <|-- Cliente1
+Usuario2 <|-- TécnicoMantenimiento
+
+@enduml

@@ -37,6 +37,7 @@ class Vehículo {
     +estado
     +kilometraje
     +numeroUsos
+    +localización
 }
 
 'Una estación se refiere a un enganche específico,'
