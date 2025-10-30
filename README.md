@@ -369,6 +369,9 @@ Compatibilidad técnica del sistema
 
 - con descripción textual y diagrama de objetos UML.
 
+<img src="modelos_conceptuales/EscenarioPruebas.png" width="50%"><br>
+
+
 ## 6. Matrices de trazabilidad
 
 - Matriz de trazabilidad entre los elementos del modelo conceptual y los requisitos.
@@ -382,6 +385,17 @@ Compatibilidad técnica del sistema
 | RN-1  |            | X          |            |            |
 | RN-2  | X          | X          | X          |            |
 | ...   |            |            |            |            |
+
+
+|       | Usuario   | Cliente  | TécnicoMantenimiento  | Administrador| Valoración   | Alquiler   | Estación  | Vehículo| Bicicleta | PatineteEléctrico | 
+|:------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+| RI-1  | X          | X          | X          | X          | X          | X          | X          | X          | X          | X          |
+| RI-2  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
+| RF-1  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
+| RF-2  | X          |            | X          | X          | X          | X          | X          | X          | X          | X          |
+| RN-1  |            | X          |            |            | X          | X          | X          | X          | X          | X          |
+| RN-2  | X          | X          | X          |            | X          | X          | X          | X          | X          | X          |
+| ...   |            |            |            |            |            |            |            |            |            |            |
 
 -- fin entregable 2 --
 

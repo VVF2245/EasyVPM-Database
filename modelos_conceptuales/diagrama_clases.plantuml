@@ -28,9 +28,9 @@ class Valoración {
 }
 
 class Alquiler {
-    +inicio
-    +duracion
-    +costo
+    +inicio: DateTime (YYYY-MM-DD HH:mm:ss)
+    +duracion: Double
+    +costo: Double
 }
 
 class Vehículo {
@@ -39,10 +39,20 @@ class Vehículo {
     +numeroUsos
 }
 
+'Una estación se refiere a un enganche específico,'
+'para decir a qué grupo de bicis pertenece se utiliza el atributo zona'
+'Se ha puesto así para poder poner en qué enganche (estación) se encuentra'
+'una bici específica, si no no se podría identificar la bici averiada por ejemplo.'
+
 class Estación {
     +estado
     +zona
+<<<<<<< HEAD
     +númeroVehículos
+=======
+    +número
+    +valoraciones
+>>>>>>> e24fa14f54121f5dab09931a9ba35d684e22a355
 }
 
 class Bicicleta {
