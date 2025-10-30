@@ -81,7 +81,10 @@ note on link
 end note
  
 Alquiler -- Vehículo: de
-
+note on link
+    **R.N.02**. Evitar que los usuarios
+    alquilen 2 vehículos simultáneamente
+end note
 Vehículo <|-- Bicicleta
 
 @enduml
