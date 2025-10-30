@@ -80,7 +80,7 @@ para poder acceder al servicio de alquiler.
 
 **P.A.01.**
 Registro de usuario
-- El registro solicita nombre, correo y contraseña.
+- El registro solicita nombre, correo, contraseña y fecha de nacimiento.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.04.

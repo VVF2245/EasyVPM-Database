@@ -14,6 +14,7 @@ class Usuario {
 
 class Cliente {
     +tarifaActual
+    +fechaNacimiento
 }
 
 class TécnicoMantenimiento {
@@ -62,16 +63,21 @@ Cliente "1"--"*" Valoración : pone
 Valoración "*"--"1" Vehículo : recibe
 Valoración "*"--"1" Estación : recibe
 
-Estación"1..*" -- "*"Vehículo : tiene
+Estación"1" -- "*"Vehículo : tiene
 
 'Relacion de Alquileres'
 Cliente "1"--"*"  Alquiler: tiene
 'Requisitos seguidos de relacion a linkear'
 note on link
-  **RN-001:** No eliminar usuarios que tengan alquiler activo
+  **R.N.01:** No eliminar usuarios 
+  que tengan alquiler activo
 end note
  
 Alquiler "*"--"1" Vehículo: de
+note on link
+    **R.N.02**. Evitar que los usuarios
+    alquilen 2 vehículos simultáneamente
+end note
 
 Vehículo <|-- Bicicleta
 Vehículo <|-- PatineteEléctrico
