@@ -28,7 +28,7 @@ class Valoración {
 }
 
 class Alquiler {
-    +inicio: DateTime (YYYY-MM-DD HH:mm:ss)
+    +inicio
     +duracion: Double
     +costo: Double
 }
