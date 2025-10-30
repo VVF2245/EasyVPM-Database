@@ -387,15 +387,33 @@ Compatibilidad técnica del sistema
 | ...   |            |            |            |            |
 
 
-|       | Usuario   | Cliente  | TécnicoMantenimiento  | Administrador| Valoración   | Alquiler   | Estación  | Vehículo| Bicicleta | PatineteEléctrico | 
-|:------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
-| RI-1  | X          | X          | X          | X          | X          | X          | X          | X          | X          | X          |
-| RI-2  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
-| RF-1  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
-| RF-2  | X          |            | X          | X          | X          | X          | X          | X          | X          | X          |
-| RN-1  |            | X          |            |            | X          | X          | X          | X          | X          | X          |
-| RN-2  | X          | X          | X          |            | X          | X          | X          | X          | X          | X          |
-| ...   |            |            |            |            |            |            |            |            |            |            |
+| ID Requisito                                          | Usuario | Cliente | TécnicoMantenimiento | Vehículo | Bicicleta | PatineteEléctrico | Estación | Alquiler | Valoración | Restricciones / Asociaciones                               |
+| :---------------------------------------------------- | :------ | :------ | :------------------- | :------- | :-------- | :---------------- | :------- | :------- | :--------- | :--------------------------------------------------------- |
+| **R.F.01 Registro de usuario**                        | X       | X       |                      |          |           |                   |          |          |            | Verifica correo único, edad mínima (R.N.04)                |
+| **R.F.02 Proceso de alquiler**                        | X       | X       |                      | X        | X         | X                 | X        | X        |            | Solo un alquiler activo (R.N.02)                           |
+| **R.F.03 Cobro automático**                           | X       | X       |                      | X        |           |                   | X        | X        |            | No eliminar usuario con alquiler activo (R.N.01)           |
+| **R.F.04 Recuperar contraseña**                       | X       | X       |                      |          |           |                   |          |          |            | Enlace temporal 24h                                        |
+| **R.F.05 Consulta de estaciones cercanas**            | X       | X       |                      |          |           |                   | X        |          |            | Muestra vehículos disponibles (relación Estación–Vehículo) |
+| **R.F.06 Disponibilidad de vehículos**                | X       | X       |                      | X        | X         | X                 | X        |          |            | Estado en tiempo real (R.N.05, R.N.06)                     |
+| **R.F.07 Valoración de vehículo o estación**          | X       | X       |                      | X        | X         | X                 | X        |          | X          | Asociación Cliente–Valoración–Vehículo/Estación            |
+| **R.I.01 Información administrativa**                 | X       |         |                      | X        | X         | X                 | X        | X        | X          | Permite CRUD de usuarios, vehículos, estaciones            |
+| **R.I.02 Información usuario**                        | X       | X       |                      | X        | X         | X                 | X        | X        | X          | Muestra historial de alquileres y reseñas                  |
+| **R.I.03 Información mantenimiento**                  |         |         | X                    | X        | X         | X                 | X        |          |            | Asociación TécnicoMantenimiento–Vehículo                   |
+| **R.N.01 No eliminar usuario con alquiler activo**    | X       | X       |                      | X        |           |                   |          | X        |            | Restricción sobre asociación Usuario–Alquiler              |
+| **R.N.02 Evitar 2 alquileres simultáneos**            | X       | X       |                      | X        |           |                   |          | X        |            | Restricción 1..1 Cliente–Alquiler                          |
+| **R.N.03 Mantenimiento obligatorio 50 usos / 500 km** |         |         | X                    | X        | X         | X                 |          |          |            | Restricción sobre atributo kilometraje y númeroUsos        |
+| **R.N.04 Edad mínima obligatoria**                    | X       | X       |                      |          |           |                   |          |          |            | Restricción sobre atributo edad del Usuario                |
+| **R.N.05 Cambio automático estado vehículo**          |         |         | X                    | X        | X         | X                 | X        |          |            | Asociación TécnicoMantenimiento–Vehículo                   |
+| **R.N.06 Cambio automático estado estación**          |         |         |                      |          |           |                   | X        | X        |            | Asociación Estación–Vehículo                               |
+| **R.N.07 Control de roles y permisos**                | X       | X       | X                    |          |           |                   |          |          |            | Diferencia Cliente / Técnico / Admin                       |
+| **R.N.F.01 Escalabilidad**                            | X       | X       | X                    | X        | X         | X                 | X        | X        | X          | General, afecta a todas las entidades                      |
+| **R.N.F.02 Disponibilidad razonable**                 | X       | X       | X                    | X        | X         | X                 | X        | X        | X          | General, servicio activo ≥90%                              |
+| **R.N.F.03 Seguridad información**                    | X       | X       | X                    |          |           |                   |          |          |            | Cifrado de datos, HTTPS                                    |
+| **R.N.F.04 Fiabilidad operaciones críticas**          | X       | X       | X                    | X        |           |                   | X        | X        |            | Registro íntegro ante fallos                               |
+| **R.N.F.05 Compatibilidad técnica**                   | X       | X       | X                    |          |           |                   |          |          |            | Interfaz multiplataforma Android/iOS/Web                   |
+
+
+
 
 -- fin entregable 2 --
 
