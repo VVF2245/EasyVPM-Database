@@ -28,9 +28,11 @@ class Valoración {
 }
 
 class Alquiler {
-    +inicio
+    +tiempoInicio: DateTime
     +duracion: Double
     +costo: Double
+    +lugarInicio
+    +lugarFin
 }
 
 class Vehículo {
