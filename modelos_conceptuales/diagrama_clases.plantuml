@@ -47,7 +47,6 @@ class Vehículo {
 class Estación {
     +estado
     +zona
-    +númeroVehículos
     +número
 }
 
