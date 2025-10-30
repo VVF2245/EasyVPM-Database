@@ -381,6 +381,18 @@ Compatibilidad técnica del sistema
 | RN-2  | X          | X          | X          |            |
 | ...   |            |            |            |            |
 
+
+|       | Usuario   | Cliente  | TécnicoMantenimiento  | Administrador| Valoración   | Alquiler   | Estación  | Vehículo| Bicicleta | PatineteEléctrico | 
+
+|:------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+| RI-1  | X          | X          | X          | X          | X          | X          | X          | X          | X          | X          |
+| RI-2  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
+| RF-1  |            | X          |            | X          | X          | X          | X          | X          | X          | X          |
+| RF-2  | X          |            | X          | X          | X          | X          | X          | X          | X          | X          |
+| RN-1  |            | X          |            |            | X          | X          | X          | X          | X          | X          |
+| RN-2  | X          | X          | X          |            | X          | X          | X          | X          | X          | X          |
+| ...   |            |            |            |            |            |            |            |            |            |            |
+
 -- fin entregable 2 --
 
 ## 7. Modelo relacional en 3FN
