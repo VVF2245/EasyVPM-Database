@@ -45,8 +45,12 @@ class Vehículo {
 'una bici específica, si no no se podría identificar la bici averiada por ejemplo.'
 
 class Estación {
+    +nombre
+    +númeroVehículos
+}
+
+class Enganche {
     +estado
-    +zona
     +número
 }
 
@@ -61,13 +65,15 @@ class PatineteEléctrico {
 Usuario <|-- Cliente
 Usuario <|-- TécnicoMantenimiento
 
+Enganche "*"--* Estación
+
 'Relación directa valoraciones'
 Cliente "1"--"*" Valoración : pone
 Valoración "*"--"1" Vehículo : recibe
-Valoración "*"--"1" Estación : recibe
+Valoración "*"--"1" Enganche : recibe
 
-Estación"1" -- "*"Vehículo : se coge
-Vehículo"*" -- "1"Estación :se deja en 
+Enganche"1" -- "*"Vehículo : se coge/ se deja en
+
 
 'Relacion de Alquileres'
 Cliente "1"--"*"  Alquiler: tiene
