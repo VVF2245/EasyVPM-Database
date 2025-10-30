@@ -75,12 +75,14 @@ El sistema de EasyVPM contará con los siguientes tipos de usuarios:
 
 #### R.F.01. Registro de usuario
 Como cliente, <br>
-quiero registrarme en el sistema <br>
+quiero registrarme en el sistema de <br>
+manera sencilla y segura,<br>
 para poder acceder al servicio de alquiler.
 
 **P.A.01.**
 Registro de usuario
 - El registro solicita nombre, correo, contraseña y fecha de nacimiento.
+- Se comprueba que la contraseña tiene 8 dígitos exactos.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.04.

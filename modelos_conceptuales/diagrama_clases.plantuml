@@ -8,14 +8,15 @@ skinparam note {
 
 class Usuario {
     +nombre
-    +correo
-    +contraseña
 }
 
 class Cliente {
     +tarifaActual
     +fechaNacimiento
+    +correo
+    +contraseña
 }
+note left:**R.F.01**. Registro de usuario. \n La contraseña tendrá 8 dígitos.
 
 class TécnicoMantenimiento {
     +fechaÚltimoServicio
@@ -36,15 +37,12 @@ class Vehículo {
     +estado
     +kilometraje
     +numeroUsos
-    +ubicación
-    +valoraciones
 }
 
 class Estación {
     +estado
     +zona
     +númeroVehículos
-    +valoraciones
 }
 
 class Bicicleta {
@@ -63,7 +61,8 @@ Cliente "1"--"*" Valoración : pone
 Valoración "*"--"1" Vehículo : recibe
 Valoración "*"--"1" Estación : recibe
 
-Estación"1" -- "*"Vehículo : tiene
+Estación"1" -- "*"Vehículo : se coge
+Vehículo"*" -- "1"Estación :se deja en 
 
 'Relacion de Alquileres'
 Cliente "1"--"*"  Alquiler: tiene
@@ -81,5 +80,6 @@ end note
 
 Vehículo <|-- Bicicleta
 Vehículo <|-- PatineteEléctrico
+
 
 @enduml
