@@ -47,12 +47,8 @@ class Vehículo {
 class Estación {
     +estado
     +zona
-<<<<<<< HEAD
     +númeroVehículos
-=======
     +número
-    +valoraciones
->>>>>>> e24fa14f54121f5dab09931a9ba35d684e22a355
 }
 
 class Bicicleta {
