@@ -1,4 +1,4 @@
-@startuml
+@startuml DiagramaObjetos
 object Cliente1 {
   +nombre="Ana López"
   +correo=analop@gmail.com

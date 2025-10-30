@@ -1,62 +1,56 @@
 @startuml DiagramaClases
 
-skinparam note {
-  BackgroundColor #cce5ff
-  BorderColor #336699
-  FontStyle italic
-}
-
-class Usuario1 {
+object Usuario1 {
     +Fernando
     +fernando@hotmail.com
     +123456A
 }
 
-class Usuario2 {
+object Usuario2 {
     +Felipe
     +felipe@gmail.com
     +234855C
 
 }
 
-class Cliente {
+object Cliente {
     +mensual
 }
 
-class TécnicoMantenimiento {
+object TécnicoMantenimiento {
     +28-10-2025
 }
 
-class Valoración1 {
+object Valoración1 {
     +5/5
     +null
 }
 
-class Valoración2 {
+object Valoración2 {
     +3/5
     +Me cuesta enganchar la bici
 }
 
-class Alquiler {
+object Alquiler {
     +28-10-2025 15:44:02
     +15.5
     +0.0
 }
 
-class Vehículo {
+object Vehículo {
     +disponible
     +30.2
     +20
     +Reina Mercedes
 }
 
-class Estación {
+object Estación {
     +ocupada
     +Reina Mercedes
     +13
 }
 
-class Bicicleta {
+object Bicicleta {
     +individual
 }
 
@@ -74,17 +68,9 @@ Estación -- Vehículo : tiene
 
 'Relacion de Alquileres'
 Cliente --  Alquiler: tiene
-
-'Requisitos seguidos de relacion a linkear'
-note on link
-  **RN-001:** No eliminar usuarios que tengan alquiler activo
-end note
  
 Alquiler -- Vehículo: de
-note on link
-    **R.N.02**. Evitar que los usuarios
-    alquilen 2 vehículos simultáneamente
-end note
+
 Vehículo <|-- Bicicleta
 
 @enduml
