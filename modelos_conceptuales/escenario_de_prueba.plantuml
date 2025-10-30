@@ -1,0 +1,87 @@
+@startuml DiagramaClases
+
+skinparam note {
+  BackgroundColor #cce5ff
+  BorderColor #336699
+  FontStyle italic
+}
+
+class Usuario1 {
+    +Fernando
+    +fernando@hotmail.com
+    +123456A
+}
+
+class Usuario2 {
+    +Felipe
+    +felipe@gmail.com
+    +234855C
+
+}
+
+class Cliente {
+    +mensual
+}
+
+class TécnicoMantenimiento {
+    +28-10-2025
+}
+
+class Valoración1 {
+    +5/5
+    +null
+}
+
+class Valoración2 {
+    +3/5
+    +Me cuesta enganchar la bici
+}
+
+class Alquiler {
+    +28-10-2025 15:44:02
+    +15.5
+    +0.0
+}
+
+class Vehículo {
+    +disponible
+    +30.2
+    +20
+    +Reina Mercedes
+}
+
+class Estación {
+    +ocupada
+    +Reina Mercedes
+    +13
+}
+
+class Bicicleta {
+    +individual
+}
+
+
+Usuario1 <|-- Cliente
+Usuario2 <|-- TécnicoMantenimiento
+
+'Relación directa valoraciones'
+Cliente -- Valoración1 : pone
+Cliente -- Valoración2 : pone
+Valoración1 -- Vehículo : recibe
+Valoración2 -- Estación : recibe
+
+Estación -- Vehículo : tiene
+
+'Relacion de Alquileres'
+Cliente --  Alquiler: tiene
+
+'Requisitos seguidos de relacion a linkear'
+note on link
+  **RN-001:** No eliminar usuarios que tengan alquiler activo
+end note
+ 
+Alquiler -- Vehículo: de
+
+Vehículo <|-- Bicicleta
+
+@enduml
