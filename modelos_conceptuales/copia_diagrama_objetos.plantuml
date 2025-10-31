@@ -53,8 +53,8 @@ object Estacion1 {
 
 object Alquiler1 {
   tiempoInicio = 12/11/2025 16:44:02
-  duracion = "25 min"
-  coste = "0.0€"
+  duracion = 25 min
+  coste = 0.0 €
   lugarInicio = Bermejales, Enganche2
   lugarFin = Reina Mercedes, Enganche1
 }
