@@ -1,76 +1,151 @@
 @startuml DiagramaClases
 
+skinparam note {
+  BackgroundColor #cce5ff
+  BorderColor #336699
+  FontStyle italic
+}
+
 object Usuario1 {
-    +Fernando
-    +fernando@hotmail.com
-    +123456A
+    nombre= "Ana López"
+    correo= analop@gmail.com
+    contraseña= 11111111
 }
 
 object Usuario2 {
-    +Felipe
-    +felipe@gmail.com
-    +234855C
-
+    nombre= "Felipe Fernández"
+    correo= felipe@gmail.com
+    contraseña= 234855CA
 }
 
-object Cliente {
-    +mensual
+object Cliente1 {
+    tarifaActual= mensual
+    fechaNacimiento= 01/10/2000
+    /alquilerActivo= False
+}
+note right
+'''
+ **R.F.01.**. Registro de usuario.
+ La contraseña tendrá 8 dígitos.
+ **R.N.01.** No eliminar usuarios
+ que tengan alquiler activo.
+ **R.N.02.**. Evitar que los usuarios
+ alquilen 2 vehículos simultáneamente.
+ **R.N.04.** Edad mínima de 12 años.
+'''
+end note
+
+
+object TecnicoMantenimiento1 {
+    /fechaUltimoServicio= 02/11/2025
 }
 
-object TécnicoMantenimiento {
-    +28-10-2025
+object Reparacion1 {
+    fecha= 20/10/2025
+    detalles= "El vehículo tenía una rueda pinchada"
 }
 
-object Valoración1 {
-    +5/5
-    +null
+object Reparacion2 {
+    fecha= 02/11/2025
+    detalles= "Costaba enganchar el vehículo"
 }
 
-object Valoración2 {
-    +3/5
-    +Me cuesta enganchar la bici
+object Valoracion1 {
+    puntuacion= 5
+    comentario= null
 }
 
-object Alquiler {
-    +28-10-2025 15:44:02
-    +15.5
-    +0.0
+object Valoracion2 {
+    puntuacion= 3
+    comentario= "Me cuesta enganchar la bici"
 }
 
-object Vehículo {
-    +disponible
-    +30.2
-    +20
-    +Reina Mercedes
+object Alquiler1 {
+    tiempoInicio= 28/10/2025 15:44:02
+    duracion= 11 
+    distanciaRecorrida= 3.3
+    /costo= 0.0
+    /lugarInicio= La Torre del Oro
+    /lugarFin= Reina Mercedes
 }
 
-object Estación {
-    +ocupada
-    +Reina Mercedes
-    +13
+object Vehiculo1 {
+    /estado= disponible
+    /kilometraje= 30.2
+    /numeroUsos= 20
+    /localizacion= Reina Mercedes
+}
+note left
+'''
+ **R.N.03** Si usos >50 o kilometraje>500
+ estado=="mantenimiento pendiente".
+ **R.N.05.** Cambio de estado vehículo.
+'''
+end note
+
+object Estacion1 {
+    nombre= Reina Mercedes
+    /númeroVehículos= 1
 }
 
-object Bicicleta {
-    +individual
+object Estacion2 {
+    nombre= La Torre del Oro
+    /numeroVehículos= 0
+}
+
+object Enganche1 {
+    /estado= ocupado
+    número= 01
+}
+note right
+'''
+ **R.N.06.** Cambio de estado enganche.
+'''
+end note
+
+object Enganche2 {
+    /estado= libre
+    número= 01
+}
+note right
+'''
+ **R.N.06.** Cambio de estado enganche.
+'''
+end note
+
+object Bicicleta1 {
+    tipoBici= individual
 }
 
 
-Usuario1 <|-- Cliente
-Usuario2 <|-- TécnicoMantenimiento
+Usuario1 <|-- Cliente1
+Usuario2 <|-- TecnicoMantenimiento1
+
+Enganche1 "*"--* Estacion1 : pertenece a >
+Enganche2 "*"--* Estacion2 : pertenece a >
 
 'Relación directa valoraciones'
-Cliente -- Valoración1 : pone
-Cliente -- Valoración2 : pone
-Valoración1 -- Vehículo : recibe
-Valoración2 -- Estación : recibe
+Cliente1 "1"--"*" Valoracion1 : pone >
+Cliente1 "1"--"*" Valoracion2 : pone >
 
-Estación -- Vehículo : tiene
+Valoracion1 "*"--"1" Vehiculo1 : recibe <
+Valoracion2 "*"--"1" Enganche1 : recibe <
+
+TecnicoMantenimiento1 "1"--"*" Reparacion1 : realiza >
+TecnicoMantenimiento1 "1"--"*" Reparacion2 : realiza >
+Reparacion1 "*"--"1" Vehiculo1 : recibe <
+Reparacion2 "*"--"1" Enganche1 : recibe <
+
+Enganche1 "1" --"*" Vehiculo1 : se deja en <
+Enganche2 "1"--"*" Vehiculo1 : se coge en <
+
 
 'Relacion de Alquileres'
-Cliente --  Alquiler: tiene
+Cliente1 "1"--"*"  Alquiler1: realiza >
  
-Alquiler -- Vehículo: de
+Alquiler1 "*"--"1" Vehiculo1: de
 
-Vehículo <|-- Bicicleta
+Vehiculo1 <|-- Bicicleta1
+
 
 @enduml

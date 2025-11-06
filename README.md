@@ -263,16 +263,16 @@ Cambio de estado vehículo
 - Si un técnico de mantenimiento se lleva un vehículo aparece como "en mantenimiento".
 - Si un vehículo está en el almacen tras haberse reparado y está esperando que sea redistribuido aparece como "reparado".
 
-#### R.N.06. Cambio de estado estación <br>
+#### R.N.06. Cambio de estado enganche <br>
 Como administrador de EasyVPM,<br>
-quiero que el sistema cambie automáticamente el estado de las estaciones,<br>
-para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran las estaciones.
+quiero que el sistema cambie automáticamente el estado de los enganches,<br>
+para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran.
 
 **P.A.06.**
-Cambio de estado estación.
-- Si una estación se encuentra libre aparece como "libre" desde que alguien desengancha un vehículo de dicha estación.
-- Si una estación se encuentra ocupada aparece como "ocupada" desde que alguien enganche un vehículo en ella.
-- Si una estación se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) la estación aparece como "fuera de servicio".
+Cambio de estado enganche.
+- Si un enganche se encuentra libre aparece como "libre" desde que alguien desengancha el vehículo de él.
+- Si un enganche se encuentra ocupado aparece como "ocupado" desde que alguien enganche un vehículo en él.
+- Si un enganche se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) el enganche aparece como "fuera de servicio".
 
 #### R.N.07. Control de roles y permisos <br>
 Como administrador de EasyVPM,<br>

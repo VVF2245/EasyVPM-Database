@@ -15,79 +15,115 @@ class Usuario {
 class Cliente {
     +tarifaActual
     +fechaNacimiento
+    +/alquilerActivo
 }
-note left:**R.F.01**. Registro de usuario. \n La contraseña tendrá 8 dígitos.
+note right
+'''
+ **R.F.01.**. Registro de usuario.
+ La contraseña tendrá 8 dígitos.
+ **R.N.01.** No eliminar usuarios
+ que tengan alquiler activo.
+ **R.N.02.**. Evitar que los usuarios
+ alquilen 2 vehículos simultáneamente.
+ **R.N.04.** Edad mínima de 12 años.
+'''
+end note
 
-class TécnicoMantenimiento {
-    +fechaÚltimoServicio
+
+class TecnicoMantenimiento {
+    +/fechaUltimoServicio
 }
 
-class Valoración {
+class Reparacion {
+    +fecha
+    +detalles
+}
+
+class Valoracion {
     +puntuacion
     +comentario [0..1]
 }
 
+/'
+La distancia recorrida la cuenta el vehículo con un
+medidor incorporado y solo se registra cuando termina el recorrido.
+Por eso mismo no es derivada de lugar inicio o fin, porque si no si acabas
+en el mismo sitio la distancia recorrida sería 0.
+'/
 class Alquiler {
     +tiempoInicio: DateTime
-    +duracion: Double
-    +/costo: Double
+    +duracion: Double [0..1]
+    +distanciaRecorrida [0..1]
+    +/costo: Double [0..1]
     +/lugarInicio
-    +/lugarFin
+    +/lugarFin [0..1]
 }
 
-class Vehículo {
+/'
+La localización del vehículo se muestra cuando se guarda el vehículo.
+No se guarda localización por GPS.
+'/
+class Vehiculo {
     +/estado
     +/kilometraje
     +/numeroUsos
+    +/localizacion [0..1]
 }
+note left
+'''
+ **R.N.03** Si usos >50 o kilometraje>500
+ estado=="mantenimiento pendiente".
+ **R.N.05.** Cambio de estado vehículo.
+'''
+end note
 
-class Estación {
+class Estacion {
     +nombre
-    +númeroVehículos
+    +/númeroVehículos
 }
 
 class Enganche {
     +/estado
     +número
 }
+note right
+'''
+ **R.N.06.** Cambio de estado enganche.
+'''
+end note
 
 class Bicicleta {
     +tipoBici: str
 }
 
-class PatineteEléctrico {
-    +autonomíaBatería
+class PatineteElectrico {
+    +autonomiaBateria
 }
 
 Usuario <|-- Cliente
-Usuario <|-- TécnicoMantenimiento
+Usuario <|-- TecnicoMantenimiento
 
-Enganche "*"--* Estación
+Enganche "*"--* Estacion
 
 'Relación directa valoraciones'
-Cliente "1"--"*" Valoración : pone
-Valoración "*"--"1" Vehículo : recibe
-Valoración "*"--"1" Enganche : recibe
+Cliente "1"--"*" Valoracion : pone >
+Valoracion "*"--"1" Vehiculo : recibe <
+Valoracion "*"--"1" Enganche : recibe <
 
-Enganche"1" -- "*"Vehículo : se coge/ se deja en
+TecnicoMantenimiento "1"--"*" Reparacion : realiza >
+Reparacion "*"--"1" Vehiculo : recibe <
+Reparacion "*"--"1" Enganche : recibe <
+
+Enganche "1" --"*" Vehiculo : se coge/ se deja en
 
 
 'Relacion de Alquileres'
-Cliente "1"--"*"  Alquiler: tiene
-'Requisitos seguidos de relacion a linkear'
-note on link
-  **R.N.01:** No eliminar usuarios 
-  que tengan alquiler activo
-end note
+Cliente "1"--"*"  Alquiler: realiza >
  
-Alquiler "*"--"1" Vehículo: de
-note on link
-    **R.N.02**. Evitar que los usuarios
-    alquilen 2 vehículos simultáneamente
-end note
+Alquiler "*"--"1" Vehiculo: de
 
-Vehículo <|-- Bicicleta
-Vehículo <|-- PatineteEléctrico
+Vehiculo <|-- Bicicleta
+Vehiculo <|-- PatineteElectrico
 
 
 @enduml
