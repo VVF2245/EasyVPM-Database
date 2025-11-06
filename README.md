@@ -369,7 +369,7 @@ Compatibilidad técnica del sistema
 
 - con descripción textual y diagrama de objetos UML.
 
-<img src="modelos_conceptuales/EscenarioPruebas.png" width="50%"><br>
+<img src="modelos_conceptuales/EscenarioPruebas.png" width="70%"><br>
 
 
 ## 6. Matrices de trazabilidad
