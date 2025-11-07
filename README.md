@@ -362,14 +362,14 @@ Compatibilidad técnica del sistema
 
 - con restricciones.
 
-<img src="modelos_conceptuales/DiagramaClases.png" width="50%"><br>
+<img src="modelos_conceptuales/DiagramaClases.png" width="60%"><br>
 
 
 ### 5.2. Escenarios de prueba
 
 - con descripción textual y diagrama de objetos UML.
 
-<img src="modelos_conceptuales/EscenarioPruebas.png" width="70%"><br>
+<img src="modelos_conceptuales/EscenarioPruebas.png" width="90%"><br>
 
 
 ## 6. Matrices de trazabilidad
