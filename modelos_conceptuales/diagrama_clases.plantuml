@@ -103,7 +103,7 @@ class PatineteElectrico {
 Usuario <|-- Cliente
 Usuario <|-- TecnicoMantenimiento
 
-Enganche "*"--* Estacion
+Enganche "*"--* Estacion : pertenece a >
 
 'Relación directa valoraciones'
 Cliente "1"--"*" Valoracion : pone >
@@ -114,7 +114,7 @@ TecnicoMantenimiento "1"--"*" Reparacion : realiza >
 Reparacion "*"--"1" Vehiculo : recibe <
 Reparacion "*"--"1" Enganche : recibe <
 
-Enganche "1" --"*" Vehiculo : se coge/ se deja en
+Enganche "1" --"*" Vehiculo : se coge/ se deja en <
 
 
 'Relacion de Alquileres'
