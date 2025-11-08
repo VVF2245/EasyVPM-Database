@@ -18,7 +18,7 @@ Valoracion al Alquiler, no al vehiculo. Quitar valoracion de enganche
 Requisito info concreto, guardar info de cosas, nombres relevantes, etc-> modelo conceptual
 sacar entero del parrafo que pongamos(multiples vehiculos * vehiculos por ejemplo)
 
-Mantenimiento obligatorio cambiar nombre a: "No podra alquilarse un vehiculo con mas de X km desde la ultima fecha de revision"
+Mantenimiento obligatorio cambiar nombre a: "No podra alquilarse un vehiculo con mas de X km desde la ultima fecha de revision" HECHA
 
 R de cambio de estado de vehiculo y de estacion mal, PA Bien
 
@@ -29,8 +29,8 @@ PA de RF si no se puede comprobar de alguna manera(por ejemplo, la disponibilida
 
 Fiabilidad en RF ya esta.
 
-Modelado conceptual: clase no, usar Entidad. herencia no definida pues falta solapamiento.
-quitar tipos de atributos, fechaHora en vez de tiempo en  el nombre
-relacion entre alquiler-estacion(inicio y fin)
+Modelado conceptual: clase no, usar Entidad. herencia no definida pues falta solapamiento. HECHA 
+quitar tipos de atributos, fechaHora en vez de tiempo en  el nombre HECHA 
+relacion entre alquiler-estacion(inicio y fin) HECHA
 localizacion  es RN
-Enganche  relacion con Alquiler, no en Vehiculo
+Enganche  relacion con Alquiler, no en Vehiculo HECHA

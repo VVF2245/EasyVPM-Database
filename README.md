@@ -80,7 +80,6 @@ manera sencilla y segura,<br>
 para poder acceder al servicio de alquiler.
 
 **P.A.01.**
-Registro de usuario
 - El registro solicita nombre, correo, contraseña y fecha de nacimiento.
 - Se comprueba que la contraseña tiene 8 dígitos exactos.
 - El sistema verifica que el correo no esté duplicado.
@@ -93,7 +92,6 @@ quiero alquilar un vehículo desde la aplicación<br>
 para inciar mi viaje sin necesidad de gestiones manuales.
 
 **P.A.02.**
-Proceso del alquiler
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
@@ -107,7 +105,6 @@ para evitar pagos manuales o errores y así mejorar la experiencia<br>
 de usuario. <br>
 
 **P.A.03.**
-Cobro automático
 - La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
 - El sistema calcula a partir de los tiempos registrados el precio a pagar. 
 - El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
@@ -119,7 +116,6 @@ quiero poder recuperar mi contraseña si la olvido,<br>
 para no perder el acceso a mi cuenta.
 
 **P.A.04.**
-Recuperación de contraseña
 - El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
 - El enlace dura solo 24 horas o hasta utilizarlo.
 - El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
@@ -131,7 +127,6 @@ mediante un servicio de mapas <br>
 para recoger o devolver un vehículo fácilmente.
 
 **P.A.05.**
-Consulta de estaciones cercanas
 - El sistema muestra estaciones por geolocalización.
 - Cada estación muestra cuántos vehículos hay disponibles.
 - Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
@@ -145,7 +140,6 @@ para poder seleccionar el mejor vehículo disponible <br>
 para mis necesidades.
 
 **P.A.06.**
-Disponibilidad de los vehículos
 - El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
 - Los datos de disponibilidad se actualizan en tiempo real.
 - Se debe aplicar la regla de negocio R.N.06.
@@ -156,7 +150,6 @@ quiero que los clientes puedan poner valoración al vehículo o estación,<br>
 para poder conocer el estado real del servicio, detectar posibles incidencias y ayudar a mejorar el funcionamiento del servicio.
 
 **P.A.07.**
-Valoración del vehículo o estación
 - Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo o poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
 - El sistema registra la valoración junto al identificador del usuario, vehículo o estación y la fecha.
 - Las valoraciones bajas (por ejemplo 1 o 2 estrellas) y con comentario, explicando la incidencia o el porqué de la baja puntuación, se marcan automáticamente para revisión. <br>
@@ -174,7 +167,6 @@ para poder gestionar la empresa de manera eficiente y <br>
 tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 
 **P.A.01.**
-Gestión de información de usuarios, vehículos y estaciones(administrador)
 - Se puede registrar, editar y penalizar usuarios, vehículos y estaciones.
 - Los datos modificados se reflejan inmediatamente en el sistema.
 - No se permite duplicar registros con el mismo identificador.
@@ -187,7 +179,6 @@ y mi historial de alquileres, <br>
 para planificar mis desplazamientos y tomar decisiones informadas.
 
 **P.A.02.**
-Consulta de vehículos
 - El sistema muestra una descripción técnica del vehículo seleccionado.
 - El sistema muestra diversas reseñas así como un porcentaje de satisfacción general del vehículo.
 - El sistema muestra en el perfil el historial de alquileres.
@@ -199,7 +190,6 @@ quiero recibir informacion sobre inicidencias reportadas y el estado de los vehi
 para saber de que vehículos o estaciones me tengo que encargar.
 
 **P.A.03.**	
-Registro y gestión de incidencias/mantenimiento	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
 - Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En mantenimiento", “Reparado”).
 
@@ -212,7 +202,6 @@ mientras esté alquilando un vehículo,<br>
 para asegurar la devolución del vehículo y el registro del pago.
 
 **P.A.01.**
-No eliminar usuarios que tengan alquiler activo
 - Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
 - A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
 
@@ -222,18 +211,16 @@ quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
 
 **P.A.02.**
-Evitar que los usuarios alquilen 2 vehículos simultáneamente
 - Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
 - Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
-#### R.N.03. Mantenimiento obligatiorio <br>
+#### R.N.03. No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision <br>
 Como administrador de EasyVPM,<br>
 quiero que todos los vehículos que hayan superado<br>
 50 alquileres o 500 km recorridos deben pasar por revisión,<br>
 para asegurar la seguridad y calidad del servicio.
 
 **P.A.03.**
-Mantenimiento obligatiorio
 - Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
 - Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
 
@@ -244,7 +231,6 @@ puedan utilizar EasyVPM y alquilar un vehiculo<br>
 para garantizar la seguridad de los menores.
 
 **P.A.04.**
-Edad mínima obligatoria
 - Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
 - Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
 - Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
@@ -255,7 +241,6 @@ quiero que el sistema cambie automáticamente el estado de los vehículos,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
 
 **P.A.05.**
-Cambio de estado vehículo
 - Si un vehículo se encuentra en buen estado aparacerá como "disponible" desde que su último usuario lo coloque en una estación.
 - Si un vehículo está en mal estado aparecerá como "averiado" desde que lo informe un trabajador o cliente.
 - Si un vehículo está en uso aparecerá como "en uso" desde que alguien lo alquile.
@@ -269,7 +254,6 @@ quiero que el sistema cambie automáticamente el estado de los enganches,<br>
 para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran.
 
 **P.A.06.**
-Cambio de estado enganche.
 - Si un enganche se encuentra libre aparece como "libre" desde que alguien desengancha el vehículo de él.
 - Si un enganche se encuentra ocupado aparece como "ocupado" desde que alguien enganche un vehículo en él.
 - Si un enganche se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) el enganche aparece como "fuera de servicio".
@@ -280,7 +264,6 @@ quiero que el sistema tenga definido de forma clara los permisos de acceso segú
 para evitar que haya accesos indebidos a funciones críticas.
 
 **P.A.07.**
-Control de roles y permisos
 - Los clientes solo pueden acceder a funciones de consulta (estaciones, disponibilidad, historial) y alquiler.
 - Los administradores pueden gestionar todo el sistema.
 - Los técnicos solo pueden visualizar y actualizar el estado de incidencias o mantenimiento de vehículos.
@@ -299,7 +282,6 @@ quiero que el sistema permita incorporar hasta 1000 usuarios y vehículos simúl
 para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
 **P.A.01.**
-Escalabilidad del sistema
 - Registrar nuevos usuarios y verificar que pueden acceder y utilizar todas sus funciones.
 - Añadir nuevos vehículos y comprobar que se pueden registrar y alquilar correctamente.
 - Simular un incremento significativo de usuarios activos y comprobar que no provoque un fallo en el sistema y que el rendimiento de este sigue siendo aceptable.
@@ -310,7 +292,6 @@ quiero que la aplicación este disponible en todo momento, <br>
 para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
 
 **P.A.02.**
-Disponibilidad razonable
 - La aplicación debe estar disponible al menos el 90% del tiempo (exceptuando mantenimientos).
 - Comprobar que la aplicación se puede acceder en distintos momentos del día.
 - Simular simultaneidad de accesos de distintos usuarios para verificar que el sistema permanece operativo.
@@ -322,7 +303,6 @@ quiero que los datos de usuarios, pagos y vegículos estén protegidos,<br>
 para cumplir con la normativa de protección de datos y evitar accesos no autorizados.
 
 **P.A.03.**
-Seguridad de la información
 - Intentar acceder al sistema con un usuario no registrado y comprobar que el acceso es denegado.
 - Intentar acceder al sistema con un usuario registrado, pero sin permisos suficientes y comprobar que no puede realizar acciones restringidas.
 - Verificar que los datos sensibles (como credenciales y métodos de pago) están cifrados y no pueden leerse directamente desde la base de datos.
@@ -336,7 +316,6 @@ quiero que las funciones críticas como el registro del pago funcionen correctam
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
 **P.A.04.**
-Fiabilidad operaciones críticas
 - En caso de error durante el pago o el alquiler, el sistema debe mostrar un mensaje claro.
 - Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
 - Las operaciones completadas deben quedar registradas en el sistema sin duplicados.
@@ -347,7 +326,6 @@ quiero que el sistema funcione correctamente en distintos entornos (Android, iOS
 para asegurar la accesibilidad del servicio a la mayoría de usuarios.
 
 **P.A.05.**
-Compatibilidad técnica del sistema
 - La app debe ser usable desde Android (versión 11 o superior) e iOS (versión 14 o superior).
 - Debe tener accesi funcional básico desde navegadores web modernos (Chrome, Edge, Safari, Firefox).
 - Verificar que los usuarios pueden iniciar sesión, alquilar vehículos y consultar estaciones sin ningún problema desde estas plataformas.

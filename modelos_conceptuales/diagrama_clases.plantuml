@@ -115,14 +115,14 @@ Valoracion "*"--"1" Vehiculo : recibe <
 TecnicoMantenimiento "1"--"*" Reparacion : realiza >
 Reparacion "*"--"1" Vehiculo : recibe <
 
-Enganche "1" --"1" Alquiler: inicia <
-Enganche "1" --"1" Alquiler: finaliza en
+Enganche "1" --"1" Alquiler: tiene
 
 
 'Relacion de Alquileres'
 Cliente "1"--"*"  Alquiler: realiza >
  
 Alquiler "*"--"1" Vehiculo: de
+Alquiler "*"--"1" Estacion: inicia/termina
 
 Vehiculo <|-- Bicicleta
 Vehiculo <|-- PatineteElectrico
