@@ -6,18 +6,20 @@ skinparam note {
   FontStyle italic
 }
 
-entity Usuario {
+entity Usuario<<incompleta, disjunta>> {
     +nombre
     +correo
     +contraseña
 }
+note right: {incompleta, disjunta}
+
 
 entity Cliente {
     +tarifaActual
     +fechaNacimiento
     +/alquilerActivo
 }
-note right
+note left
 '''
  **R.F.01.**. Registro de usuario.
  La contraseña tendrá 8 dígitos.
@@ -69,13 +71,14 @@ entity Vehiculo {
     +/numeroUsos
     +/localizacion [0..1]
 }
-note left
+note right
 '''
  **R.N.03** Si usos >50 o kilometraje>500
  estado=="mantenimiento pendiente".
  **R.N.05.** Cambio de estado vehículo.
 '''
 end note
+note left of Vehiculo: {completa, disjunta}
 
 entity Estacion {
     +nombre
@@ -86,7 +89,7 @@ entity Enganche {
     +/estado
     +número
 }
-note right
+note left
 '''
  **R.N.06.** Cambio de estado enganche.
 '''
@@ -106,13 +109,11 @@ Usuario <|-- TecnicoMantenimiento
 Enganche "*"--* Estacion : pertenece a >
 
 'Relación directa valoraciones'
-Cliente "1"--"*" Valoracion : pone >
+Alquiler "1"--"*" Valoracion : pone >
 Valoracion "*"--"1" Vehiculo : recibe <
-Valoracion "*"--"1" Enganche : recibe <
 
 TecnicoMantenimiento "1"--"*" Reparacion : realiza >
 Reparacion "*"--"1" Vehiculo : recibe <
-Reparacion "*"--"1" Enganche : recibe <
 
 Enganche "1" --"*" Vehiculo : se coge/ se deja en <
 
