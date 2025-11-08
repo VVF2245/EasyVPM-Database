@@ -6,13 +6,13 @@ skinparam note {
   FontStyle italic
 }
 
-class Usuario {
+entity Usuario {
     +nombre
     +correo
     +contraseña
 }
 
-class Cliente {
+entity Cliente {
     +tarifaActual
     +fechaNacimiento
     +/alquilerActivo
@@ -30,16 +30,16 @@ note right
 end note
 
 
-class TecnicoMantenimiento {
+entity TecnicoMantenimiento {
     +/fechaUltimoServicio
 }
 
-class Reparacion {
+entity Reparacion {
     +fecha
     +detalles
 }
 
-class Valoracion {
+entity Valoracion {
     +puntuacion
     +comentario [0..1]
 }
@@ -50,7 +50,7 @@ medidor incorporado y solo se registra cuando termina el recorrido.
 Por eso mismo no es derivada de lugar inicio o fin, porque si no si acabas
 en el mismo sitio la distancia recorrida sería 0.
 '/
-class Alquiler {
+entity Alquiler {
     +tiempoInicio: DateTime
     +duracion: Double [0..1]
     +distanciaRecorrida [0..1]
@@ -63,7 +63,7 @@ class Alquiler {
 La localización del vehículo se muestra cuando se guarda el vehículo.
 No se guarda localización por GPS.
 '/
-class Vehiculo {
+entity Vehiculo {
     +/estado
     +/kilometraje
     +/numeroUsos
@@ -77,12 +77,12 @@ note left
 '''
 end note
 
-class Estacion {
+entity Estacion {
     +nombre
     +/númeroVehículos
 }
 
-class Enganche {
+entity Enganche {
     +/estado
     +número
 }
@@ -92,11 +92,11 @@ note right
 '''
 end note
 
-class Bicicleta {
+entity Bicicleta {
     +tipoBici: str
 }
 
-class PatineteElectrico {
+entity PatineteElectrico {
     +autonomiaBateria
 }
 
