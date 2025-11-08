@@ -53,10 +53,10 @@ Por eso mismo no es derivada de lugar inicio o fin, porque si no si acabas
 en el mismo sitio la distancia recorrida sería 0.
 '/
 entity Alquiler {
-    +tiempoInicio: DateTime
-    +duracion: Double [0..1]
+    +tiempoInicio
+    +duracion: [0..1]
     +distanciaRecorrida [0..1]
-    +/costo: Double [0..1]
+    +/costo: [0..1]
     +/lugarInicio
     +/lugarFin [0..1]
 }
@@ -96,7 +96,7 @@ note left
 end note
 
 entity Bicicleta {
-    +tipoBici: str
+    +tipoBici
 }
 
 entity PatineteElectrico {
@@ -115,7 +115,8 @@ Valoracion "*"--"1" Vehiculo : recibe <
 TecnicoMantenimiento "1"--"*" Reparacion : realiza >
 Reparacion "*"--"1" Vehiculo : recibe <
 
-Enganche "1" --"*" Vehiculo : se coge/ se deja en <
+Enganche "1" --"1" Alquiler: inicia <
+Enganche "1" --"1" Alquiler: finaliza en
 
 
 'Relacion de Alquileres'
