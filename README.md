@@ -159,6 +159,7 @@ para poder conocer el estado real del servicio, detectar posibles incidencias y 
 
 ### 4.1.1. Requisitos de información
 
+------------------- esto es antiguo ->
 #### R.I.01. Información para la gestión administrativa
 Como administrador de EasyVPM, <br>
 quiero acceder a información sobre el uso de los vehículos, <br>
@@ -170,7 +171,14 @@ tomar decisiones sobre expansión, mantenimiento y calidad del servicio.
 - Se puede registrar, editar y penalizar usuarios, vehículos y estaciones.
 - Los datos modificados se reflejan inmediatamente en el sistema.
 - No se permite duplicar registros con el mismo identificador.
+--------------------
 
+#### R.I.01. Información sobre los usuarios
+Como administrador de EasyVPM,
+quiero conocer el nombre, correo y contraseña de los usuarios.
+Además, si es un cliente quiero saber la tarifa contratada actualmente, su fecha de nacimiento y si tiene un alquiler activo. Si es técnico de mantenimiento quiero saber cuándo fue su último servicio.
+
+-------------------- esto es antiguo ->
 #### R.I.02. Información para el usuario
 Como usuario de EasyVPM, <br>
 quiero recibir informacion sobre las características <br>
@@ -182,8 +190,13 @@ para planificar mis desplazamientos y tomar decisiones informadas.
 - El sistema muestra una descripción técnica del vehículo seleccionado.
 - El sistema muestra diversas reseñas así como un porcentaje de satisfacción general del vehículo.
 - El sistema muestra en el perfil el historial de alquileres.
+-------------------
 
+#### R.I.02. Información sobre los vehículos
+Como administrador de EasyVPM,
+quiero conocer el estado de los vehículos, el kilometraje y el número de usos desde el último mantenimiento y su localización actual. Si es una bicicleta quiero saber qué tipo de bicicleta es, individual, tándem, etc. Si es un patinete eléctrico quiero saber qué autonomía tiene su batería.
 
+------------------- esto es antiguo ->
 #### R.I.03. Información para el mantenimiento
 Como tecnico de mantenimiento de EasyVPM,
 quiero recibir informacion sobre inicidencias reportadas y el estado de los vehiculos,
@@ -192,6 +205,22 @@ para saber de que vehículos o estaciones me tengo que encargar.
 **P.A.03.**	
 - Los usuarios pueden reportar una incidencia durante o después del alquiler.
 - Los técnicos reciben la notificación y pueden actualizar el estado del vehículo (por ejemplo: “En mantenimiento", “Reparado”).
+-------------------
+
+#### R.I.03. Información para el mantenimiento
+Como técnico de mantenimiento de EasyVPM,
+quiero conocer la fecha de las reparaciones realizadas y alguna información detallada sobre estas. También quiero conocer el estado de los vehículos y las valoraciones que se les ponen, en forma de puntuación y un comentario opcional,
+para saber si algún vehículo necesita mantenimiento.
+
+#### R.I.04. Información sobre estaciones
+Como administrador de EasyVPM,
+quiero conocer el nombre de las estaciones y el número de vehículos disponibles que tienen actualmente. Además quiero saber qué enganches tiene cada estación junto con el estado en el que se encuentra cada uno (libre, ocupado, etc.). Los enganches tienen que tener un número identificativo visible para los usuarios (distinto del ID interno del sistema),
+para que se pueda registrar en qué enganche exacto se encuentra cada vehículo.
+
+#### R.I.05. Información sobre alquileres
+Como administrador de EasyVPM,
+quiero conocer la fecha y hora de inicio y fin de los alquileres, la distancia recorrida con el vehículo, el costo de dicho alquiler y el lugar de inicio y fin del viaje.
+
 
 ### 4.1.2. Reglas de negocio
 
