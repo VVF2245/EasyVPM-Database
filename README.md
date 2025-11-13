@@ -48,9 +48,9 @@ para asegurar una correcta administración del servicio y garantizar su funciona
 #### R.G.0.1 Gestión de cuenta y acceso
 Como cliente de EasyVPM, <br>
 quiero una interfaz de acceso que me permita registrarme, iniciar sesión, <br>
-y recuperar mi contraseña fácilmente, <br> 
+recuperar mi contraseña fácilmente y eliminar mi cuenta, <br> 
 para poder entrar en mi cuenta y utilizar el servicio.
-(Engloba R.F.1 y R.F.4)
+(Engloba R.F.1, R.F.03 y R.F.4)
 
 ------------------- esto es antiguo ->
 #### R.G.02. Seguridad y fiabilidad de la APP
@@ -112,14 +112,27 @@ para inciar mi viaje sin necesidad de gestiones manuales.
 - Solo se permite iniciar alquiler si hay vehículos disponibles.
 - El sistema registra fecha y hora de inicio.
 - Se asocia el vehículo y la estación al alquiler.
-- Se debe aplicar la regla de negocio R.N.02.
-
-
-**P.A.03.**
+Se debe aplicar la regla de negocio R.N.02:
+   - Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
+   - Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 - La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
 - El sistema calcula a partir de los tiempos registrados el precio a pagar. 
 - El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
-Se debe aplicar la regla de negocio R.N.01.
+
+#### R.F.03. Eliminación de la cuenta
+Como cliente de EasyVPM, <br>
+quiero poder eliminar mi cuenta asi como mis datos asociados
+para poder tener control sobre mi informacion personal y asegurar mi privacidad.
+**P.A.03**
+- El cliente le da al boton de eliminar cuenta dentro de la seccion: Mi cuenta.
+- El sistema le mandara un código de autenticación a su correo asociado.
+- Si no le llega puede solicitar que se lo reenvien otra vez.
+- El cliente pondrá el código correspondiente en la aplicacion.
+- Si coincide se le pondra el mensaje "Eliminacion completada" y el sistema borrara su cuenta y datos.
+- Si no, le saldra mensaje de error y se le pedirá de nuevo el código.
+- Se debe aplicar la regla de negocio R.N.01.
+   - Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
+   - A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
 
 #### R.F.04. Recuperación de contraseña
 Como cliente de EasyVPM,<br>
@@ -138,7 +151,7 @@ mediante un servicio de mapas <br>
 para recoger o devolver un vehículo fácilmente.
 
 **P.A.05.**
-- El sistema muestra estaciones por geolocalización.
+- El sistema muestra estaciones por geolocalización? O por listado?.
 - Cada estación muestra cuántos vehículos hay disponibles.
 - Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
 - Se debe aplicar la regla de negocio R.N.02.
@@ -241,18 +254,12 @@ quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
 mientras esté alquilando un vehículo,<br>
 para asegurar la devolución del vehículo y el registro del pago.
 
-**P.A.01.**
-- Un cliente registrado sin alquileres activos puede eliminar su cuenta perfectamente desde la aplicación o la página web.
-- A un cliente registrado que quiera eliminar su cuenta teniendo alquilado un VMP no se le permitirá la opción de eliminar su cuenta desde ningún sitio hasta que finalize el alquiler y se devuelva el vehículo.
+
 
 #### R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente
 Como administardor de EasyVPM, <br>
 quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
 para evitar la falta de disponibilidad de vehículos.
-
-**P.A.02.**
-- Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
-- Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
 
 #### R.N.03. No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision <br>
 Como administrador de EasyVPM,<br>
