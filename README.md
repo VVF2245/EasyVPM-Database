@@ -66,7 +66,7 @@ con sus respectivas valoraciones, <br>
 para seleccionar el vehículo más adecuado segun mis necesidades.
 (R.F.5, RF.6 y RF.7) 
 
-
+------------------- esto es antiguo ->
 #### R.G.03. Interacción y satisfacción del usuario
 Como cliente de EasyVPM,<br>
 quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización,<br>
@@ -114,12 +114,6 @@ para inciar mi viaje sin necesidad de gestiones manuales.
 - Se asocia el vehículo y la estación al alquiler.
 - Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.03. Cobro automático(esto es RN)
-Como administrador, <br>
-quiero que el sistema calcule y cobre automáticamente el importe<br>
-del alquiler según el tiempo de uso, <br>
-para evitar pagos manuales o errores y así mejorar la experiencia<br>
-de usuario. <br>
 
 **P.A.03.**
 - La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
@@ -315,6 +309,12 @@ para evitar que haya accesos indebidos a funciones críticas.
 - Los técnicos solo pueden visualizar y actualizar el estado de incidencias o mantenimiento de vehículos.
 - Cualquier intento de acceder a una función no permitida debe mostrar un mensaje de "Acceso no autorizado".
 
+#### R.N.08. Cobro automático
+Como administrador, <br>
+quiero que el sistema calcule y cobre automáticamente el importe<br>
+del alquiler según el tiempo de uso, <br>
+para evitar pagos manuales o errores y así mejorar la experiencia<br>
+de usuario. <br>
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
