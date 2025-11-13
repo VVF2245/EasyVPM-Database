@@ -6,7 +6,7 @@ skinparam note {
   FontStyle italic
 }
 
-entity Usuario<<incompleta, disjunta>> {
+object Usuario<<Entity>> {
     +nombre
     +correo
     +contraseña
@@ -14,7 +14,7 @@ entity Usuario<<incompleta, disjunta>> {
 note right: {incompleta, disjunta}
 
 
-entity Cliente {
+object Cliente<<Entity>> {
     +tarifaActual
     +fechaNacimiento
     +/alquilerActivo
@@ -32,16 +32,16 @@ note left
 end note
 
 
-entity TecnicoMantenimiento {
+object TecnicoMantenimiento<<Entity>> {
     +/fechaUltimoServicio
 }
 
-entity Reparacion {
+object Reparacion<<Entity>> {
     +fecha
     +detalles
 }
 
-entity Valoracion {
+object Valoracion<<Entity>> {
     +puntuacion
     +comentario [0..1]
 }
@@ -52,7 +52,7 @@ medidor incorporado y solo se registra cuando termina el recorrido.
 Por eso mismo no es derivada de lugar inicio o fin, porque si no si acabas
 en el mismo sitio la distancia recorrida sería 0.
 '/
-entity Alquiler {
+object Alquiler<<Entity>> {
     +fechaHoraInicio
     +fechaHoraFin [0..1]
     +distanciaRecorrida [0..1]
@@ -65,7 +65,7 @@ entity Alquiler {
 La localización del vehículo se muestra cuando se guarda el vehículo.
 No se guarda localización por GPS.
 '/
-entity Vehiculo {
+object Vehiculo<<Entity>> {
     +/estado
     +/kilometraje
     +/numeroUsos
@@ -80,12 +80,12 @@ note right
 end note
 note left of Vehiculo: {completa, disjunta}
 
-entity Estacion {
+object Estacion<<Entity>> {
     +nombre
     +/numeroVehículos
 }
 
-entity Enganche {
+object Enganche<<Entity>> {
     +/estado
     +numero
 }
@@ -95,11 +95,11 @@ note left
 '''
 end note
 
-entity Bicicleta {
+object Bicicleta<<Entity>> {
     +tipoBici
 }
 
-entity PatineteElectrico {
+object PatineteElectrico<<Entity>> {
     +autonomiaBateria
 }
 
