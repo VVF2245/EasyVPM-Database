@@ -77,7 +77,7 @@ para utilizar la app sin complicaciones y de manera sencilla.
 
 El sistema de EasyVPM contará con los siguientes tipos de usuarios: 
 
-**Usuarios(Clientes)**
+**Clientes**
    * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones. 
 
 **Administradores**
