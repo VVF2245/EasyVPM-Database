@@ -60,17 +60,16 @@ para garantizar la continuidad del servicio, proteger la información y mantener
 
 #### R.G.02. Disponibilidad de estaciones y vehiculos
 Como cliente de EasyVPM, <br>
-quiero un listado de estaciones cercanas a mi ubicacion, <br>
-asi como un listado de vehiculos disponibles dentro de cada una, <br>
-con sus respectivas valoraciones, <br>
-para seleccionar el vehículo más adecuado segun mis necesidades.
-(R.F.5, RF.6 y RF.7) 
+quiero tener un listado de estaciones con sus vehiculos y valoraciones correspondientes, asi como un boton de alquiler,
+para seleccionar y alquilar el vehículo más adecuado segun mis necesidades.
+(R.F.2,R.F.5, RF.6 y RF.7) 
 
 ------------------- esto es antiguo ->
 #### R.G.03. Interacción y satisfacción del usuario
 Como cliente de EasyVPM,<br>
 quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización,<br>
 para utilizar la app sin complicaciones y de manera sencilla.
+
 
 
 ### 3.2. Usuarios del sistema
