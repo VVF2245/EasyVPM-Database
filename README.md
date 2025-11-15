@@ -50,7 +50,7 @@ Como cliente de EasyVPM, <br>
 quiero una interfaz de acceso que me permita registrarme, iniciar sesión, <br>
 recuperar mi contraseña fácilmente y eliminar mi cuenta, <br> 
 para poder entrar en mi cuenta y utilizar el servicio.
-(Engloba R.F.1, R.F.03 y R.F.4)
+(Engloba R.F.1, R.F.03, R.F.4 y R.F.08)
 
 ------------------- esto es antiguo ->
 #### R.G.02. Seguridad y fiabilidad de la APP
@@ -58,7 +58,7 @@ Como administrador de EasyVPM,<br>
 quiero que el sistema sea fiable y seguro incluso ante errores o interrupciones,<br>
 para garantizar la continuidad del servicio, proteger la información y mantener la integridad de las operaciones críticas como los pagos o alquileres.
 
-#### R.G.02. Disponibilidad de estaciones y vehiculos
+#### R.G.02. Alquiler de vehículos 
 Como cliente de EasyVPM, <br>
 quiero tener un listado de estaciones con sus vehiculos y valoraciones correspondientes, asi como un boton de alquiler,
 para seleccionar y alquilar el vehículo más adecuado segun mis necesidades.
@@ -179,6 +179,20 @@ para poder conocer el estado real del servicio, detectar posibles incidencias y 
 (*El comentario es necesario porque no vas a movilizar a un trabajador solo porque a algún gracioso le apetezca poner mala valoración*)
 - Si un vehículo o estación recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
 
+#### R.F.08. Actualizacion del Perfil
+Como cliente, <br>
+quiero poder actualizar mis datos personales
+para poder mantener mi información siempre correcta.
+
+**P.A.08**
+- El cliente le da al botón de editar perfil y le saldran los sisguientes campos: nombre, correo, contraseña y fecha de nacimiento.
+- Seleccionará el campo correspondiene y se le mandará un correo de verificación de cuenta.
+- Si corresponde, podra cambiar el campo escribiendo su nuevo valor.
+- El sistema actualizará los datos automáticamente.
+- RN.04
+
+
+
 
 ### 4.1.1. Requisitos de información
 
@@ -252,8 +266,6 @@ Como administrador de EasyVPM, <br>
 quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
 mientras esté alquilando un vehículo,<br>
 para asegurar la devolución del vehículo y el registro del pago.
-
-
 
 #### R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente
 Como administardor de EasyVPM, <br>
