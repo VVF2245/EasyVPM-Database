@@ -102,7 +102,7 @@ para poder acceder al servicio de alquiler.
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.04.
 
-#### R.F.02. Proceso de Alquiler
+#### R.F.02. Creación de Alquiler
 Como cliente, <br>
 quiero alquilar un vehículo desde la aplicación<br>
 para inciar mi viaje sin necesidad de gestiones manuales.

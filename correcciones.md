@@ -7,7 +7,7 @@ Pruebas aceptacion(PA) sin nombre
 Mas conciso pruebas de aceptacion(ser concretos)
 PA DE NEGOCIO quitarlas y  ponerlas en RF que afecten
 
-proceso de alquiler no es funcional(creacion de alquiler)
+proceso de alquiler no es funcional(creacion de alquiler) Hecha
 cobro automatico  es RN y pa(no es pantalla y las pantallas  son R.funcionales SIEMPRE)
 
 Borrar notificacion mantenimiento(valoracion dejarla)
