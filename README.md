@@ -167,17 +167,17 @@ para mis necesidades.
 - Los datos de disponibilidad se actualizan en tiempo real.
 - Se debe aplicar la regla de negocio R.N.06.
 
-#### R.F.07. Valoración del vehículo o estación
+#### R.F.07. Valoración del vehículo
 Como administrador de EasyVPM,<br>
-quiero que los clientes puedan poner valoración al vehículo o estación,<br>
+quiero que los clientes puedan poner valoración al vehículo,<br>
 para poder conocer el estado real del servicio, detectar posibles incidencias y ayudar a mejorar el funcionamiento del servicio.
 
 **P.A.07.**
-- Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo o poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
-- El sistema registra la valoración junto al identificador del usuario, vehículo o estación y la fecha.
+- Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo y poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
+- El sistema registra la valoración junto al identificador del usuario, vehículo y la fecha.
 - Las valoraciones bajas (por ejemplo 1 o 2 estrellas) y con comentario, explicando la incidencia o el porqué de la baja puntuación, se marcan automáticamente para revisión. <br>
 (*El comentario es necesario porque no vas a movilizar a un trabajador solo porque a algún gracioso le apetezca poner mala valoración*)
-- Si un vehículo o estación recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
+- Si un vehículo recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
 
 #### R.F.08. Actualizacion del Perfil
 Como cliente, <br>
