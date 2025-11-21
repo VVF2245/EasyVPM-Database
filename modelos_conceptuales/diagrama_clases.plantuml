@@ -31,6 +31,13 @@ note left
 '''
 end note
 
+object Pago<<Entity>> {
+    +/tipoPago
+    +cantidad
+    +fecha
+}
+'Tipo pago puede ser o mensual o individual
+
 
 object TecnicoMantenimiento<<Entity>> {
     +/fechaUltimoServicio
