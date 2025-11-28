@@ -130,6 +130,10 @@ Cliente "1"--"*"  Alquiler: realiza >
  
 Alquiler "*"--"1" Vehiculo: de
 
+'Relacion Pago'
+Cliente "1"--"*" Pago
+Pago "0..1"--"0..1" Alquiler
+
 Vehiculo <|-- Bicicleta
 Vehiculo <|-- PatineteElectrico
 

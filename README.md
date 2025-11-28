@@ -334,6 +334,15 @@ del alquiler según el tiempo de uso, <br>
 para evitar pagos manuales o errores y así mejorar la experiencia<br>
 de usuario. <br>
 
+#### R.N.09. Precio Alquiler con Mensualidad
+Como administrador de EasyVPM,<br>
+quiero que el sistema ponga un alquiler gratuito si ya se ha<br> realizado un pago mensual.
+
+#### R.N.10. Cantidad a pagar
+Como administrador de EasyVPM,<br>
+quiero que si la tarifa del cliente es individual, que se le <br>
+cobre el coste del alquiler, y si la tarifa es mensual, que pueda<br> realizar el pago correspondiente al mes.
+
 ### 4.2. Mapa de historias de usuario (opcional)
 
 <img src="mapa_historias/mapa_historias.png"  width="150%"><br>
