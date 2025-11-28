@@ -1,0 +1,75 @@
+USUARIO(
+    idUsuario PK,
+    nombre,
+    correo UNIQUE,
+    contraseña
+)
+CLIENTE(
+    idCliente PK FK → USUARIO.idUsuario,
+    tarifaActual,
+    fechaNacimiento
+)
+TECNICO_MANTENIMIENTO(
+    idTecnico PK FK → USUARIO.idUsuario,
+    fechaUltimoServicio
+)
+PAGO(
+    idPago PK,
+    idCliente FK → CLIENTE.idCliente,
+    idAlquiler FK → ALQUILER.idAlquiler NULL,
+    tipoPago,     -- derivado pero almacenable
+    cantidad,
+    fecha
+)
+VEHICULO(
+    idVehiculo PK,
+    estado,
+    kilometraje,
+    numeroUsos,
+    localizacion
+)
+BICICLETA(
+    idVehiculo PK FK → VEHICULO.idVehiculo,
+    tipoBici
+)
+PATINETE_ELECTRICO(
+    idVehiculo PK FK → VEHICULO.idVehiculo,
+    autonomiaBateria
+)
+ESTACION(
+    idEstacion PK,
+    nombre
+)
+ENGANCHE(
+    idEnganche PK,
+    idEstacion FK → ESTACION.idEstacion,
+    numero,
+    estado
+)
+ALQUILER(
+    idAlquiler PK,
+    idCliente FK → CLIENTE.idCliente,
+    idVehiculo FK → VEHICULO.idVehiculo,
+    idEngancheInicio FK → ENGANCHE.idEnganche,
+    idEngancheFin FK → ENGANCHE.idEnganche NULL,
+    fechaHoraInicio,
+    fechaHoraFin NULL,
+    distanciaRecorrida NULL,
+    costo NULL,
+    lugarInicio,
+    lugarFin NULL
+)
+VALORACION(
+    idValoracion PK,
+    idAlquiler FK → ALQUILER.idAlquiler,
+    idVehiculo FK → VEHICULO.idVehiculo,
+    puntuacion,
+    comentario NULL
+)
+REPARACION(
+    idReparacion PK,
+    idTecnico FK → TECNICO_MANTENIMIENTO.idTecnico,
+    idVehiculo FK → VEHICULO.idVehiculo,
+    fecha,
+    detalles
+)
