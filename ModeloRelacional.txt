@@ -23,10 +23,10 @@ PAGO(
 )
 VEHICULO(
     idVehiculo PK,
-    estado,
-    kilometraje,
-    numeroUsos,
-    localizacion
+    estado, --derivado pero almacenable
+    kilometraje,    --derivado pero almacenable
+    numeroUsos,    --derivado pero almacenable
+    localizacion  --derivado pero almacenable
 )
 BICICLETA(
     idVehiculo PK FK → VEHICULO.idVehiculo,
@@ -44,7 +44,7 @@ ENGANCHE(
     idEnganche PK,
     idEstacion FK → ESTACION.idEstacion,
     numero,
-    estado
+    estado  --derivado pero almacenable
 )
 ALQUILER(
     idAlquiler PK,
@@ -55,9 +55,9 @@ ALQUILER(
     fechaHoraInicio,
     fechaHoraFin NULL,
     distanciaRecorrida NULL,
-    costo NULL,
-    lugarInicio,
-    lugarFin NULL
+    costo NULL,  --derivado pero almacenable
+    lugarInicio, --derivado pero almacenable
+    lugarFin NULL  --derivado pero almacenable
 )
 VALORACION(
     idValoracion PK,
@@ -72,4 +72,5 @@ REPARACION(
     idVehiculo FK → VEHICULO.idVehiculo,
     fecha,
     detalles
+
 )
