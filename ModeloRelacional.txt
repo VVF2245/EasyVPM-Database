@@ -1,7 +1,7 @@
 USUARIO(
     idUsuario PK,
     nombre,
-    correo UNIQUE,
+    correo AK,
     contraseña
 )
 CLIENTE(
@@ -36,9 +36,10 @@ PATINETE_ELECTRICO(
     idVehiculo PK FK → VEHICULO.idVehiculo,
     autonomiaBateria
 )
+'El nombre de la estación es único porque la app solo se va a usar en Sevilla y no van a coincidir dos nombres de estaciones'
 ESTACION(
     idEstacion PK,
-    nombre
+    nombre AK
 )
 ENGANCHE(
     idEnganche PK,
