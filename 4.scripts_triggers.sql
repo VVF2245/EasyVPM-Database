@@ -64,3 +64,15 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER limite_usos_kilometraje AFTER UPDATE ON Vehiculos
+FOR EACH ROW
+BEGIN
+    IF NEW.numeroUsos > 50 OR NEW.kilometraje > 500.00 THEN
+        UPDATE Vehiculos
+        SET estado = 'mantenimiento pendiente'
+        WHERE id = NEW.id;
+    END IF;
+END //
+DELIMITER ;
