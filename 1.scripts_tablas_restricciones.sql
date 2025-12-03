@@ -24,32 +24,9 @@ CREATE TABLE Tecnicos_Mantenimiento (
         ON UPDATE CASCADE
 );
 
-
-'''
-Está puesto el ON DELETE SET NULL por si se borra un cliente o
-se borra un alquiler, que no se borren los pagos por si es necesario
-dejarlos registrados (política de empresa o declarar ganancias).
-
-PREGUNTAR DAMIÁN PORQUE HE PUESTO SET NULL para seguir esta lógica
-'''
-CREATE TABLE Pagos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    clienteId INT,
-    alquilerId INT,
-    tipoPago VARCHAR(50) NOT NULL,
-    cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
-    fecha DATE NOT NULL,
-    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
-        ON DELETE SET NULL
-        ON UPDATE CASCADE,
-    FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
-        ON DELETE SET NULL
-        ON UPDATE CASCADE
-);
-
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50) NOT NULL,
+    estado ENUM('disponible','en_uso','dañado','mantenimiento', 'mantenimiento_pendiente'),
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     numeroUsos INT NOT NULL DEFAULT 0,
     localizacion VARCHAR(200)
@@ -75,18 +52,22 @@ CREATE TABLE Patinetes_Electricos (
 
 CREATE TABLE Estaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre UNIQUE NOT NULL
+    nombre VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
+<<<<<<< HEAD
+    numero INT NOT NULL,
+=======
     estacionId INT NOT NULL,
     numero VARCHAR(50) NOT NULL,
-    estado VARCHAR(50) NOT NULL
+    estado ENUM('disponible','en_uso','dañado','mantenimiento','mantenimiento_pendiente'),
+>>>>>>> e230f949f17f4605c355fae6722262c7c3d03865
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    CONSTRAINT uq_estacion_numero UNIQUE (estacionId, numero)
+        ON UPDATE CASCADE
+
 );
 
 
@@ -100,29 +81,44 @@ PREGUNTAR A DAMIÁN PORQUE HE PUESTO EL SET NULL para seguir esta lógica.
 '''
 CREATE TABLE Alquileres (
     id INT PRIMARY KEY AUTO_INCREMENT,
+<<<<<<< HEAD
+    fechaHoraInicio DATETME NOT NULL,
+    fechaHoraFin DATETIME,
+    distanciaRecorrida DECIMAL (5,2) CHECK (distanciaRecorrida >= 0),
+=======
     clienteId INT,
     vehiculoId INT,
     engancheInicioId INT,
     engancheFinId INT,
     fechaHoraInicio DATETIME NOT NULL,
-    fechaHoraFin DATETIME,
+    fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
     distanciaRecorrida DECIMAL(5,2),
-    costo DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
+    costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0),
     lugarInicio VARCHAR(200) NOT NULL,
     lugarFin VARCHAR(200),
+>>>>>>> e230f949f17f4605c355fae6722262c7c3d03865
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE SET NULL
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (engancheInicioId) REFERENCES Enganches(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (engancheFinId) REFERENCES Enganches(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
+<<<<<<< HEAD
+    FOREIGN KEY (engancheInicioId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (engancheFinId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+=======
     
+>>>>>>> e230f949f17f4605c355fae6722262c7c3d03865
 );
 
 
@@ -140,13 +136,18 @@ de datos.
 '''
 CREATE TABLE Valoraciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
+<<<<<<< HEAD
+    puntuacion INT CHECK(puntuacion >=0 AND puntuacion <=5),
+    comentario VARCHAR(500)
+=======
     alquilerId INT,
     vehiculoId INT NOT NULL,
-    puntuacion INT NOT NULL,
+    puntuacion INT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
     comentario VARCHAR(500),
+>>>>>>> e230f949f17f4605c355fae6722262c7c3d03865
     FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
-        ON DELETE SET NULL
-        ON UPDATE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -163,6 +164,17 @@ Preguntar a Damián porque he puesto las FK como opcionales para seguir esta ló
 '''
 CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
+<<<<<<< HEAD
+    fecha DATE,
+    detalles VARCHAR(500),
+    FOREIGN KEY(tecnicoId) REFERENCES Tecnicos_Mantenimiento(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY(vehiculoId) REFERENCES Vehiculos(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+=======
     tecnicoId INT,
     vehiculoId INT,
     fecha DATE NOT NULL,
@@ -174,3 +186,26 @@ CREATE TABLE Reparaciones (
         ON DELETE SET NULL
         ON UPDATE CASCADE,
 );
+
+'''
+Está puesto el ON DELETE SET NULL por si se borra un cliente o
+se borra un alquiler, que no se borren los pagos por si es necesario
+dejarlos registrados (política de empresa o declarar ganancias).
+
+PREGUNTAR DAMIÁN PORQUE HE PUESTO SET NULL para seguir esta lógica
+'''
+CREATE TABLE Pagos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    clienteId INT,
+    alquilerId INT,
+    tipoPago VARCHAR(50) NOT NULL,
+    cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
+    fecha DATE NOT NULL,
+    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+>>>>>>> e230f949f17f4605c355fae6722262c7c3d03865
