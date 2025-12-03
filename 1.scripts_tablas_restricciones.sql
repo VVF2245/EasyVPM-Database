@@ -67,25 +67,57 @@ CREATE TABLE Patinetes_Electricos (
 
 CREATE TABLE Estaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-
+    nombre VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    numero INT NOT NULL,
+    FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 
 );
 
 CREATE TABLE Alquileres (
     id INT PRIMARY KEY AUTO_INCREMENT,
-
+    fechaHoraInicio DATETME NOT NULL,
+    fechaHoraFin DATETIME,
+    distanciaRecorrida DECIMAL (5,2) CHECK (distanciaRecorrida >= 0),
+    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+    FOREIGN KEY (engancheInicioId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (engancheFinId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE Valoraciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-
+    puntuacion INT CHECK(puntuacion >=0 AND puntuacion <=5),
+    comentario VARCHAR(500)
+    FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+    FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-
+    fecha DATE,
+    detalles VARCHAR(500),
+    FOREIGN KEY(tecnicoId) REFERENCES Tecnicos_Mantenimiento(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY(vehiculoId) REFERENCES Vehiculos(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
