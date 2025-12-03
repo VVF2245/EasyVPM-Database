@@ -29,10 +29,12 @@ CREATE TABLE Tecnicos_Mantenimiento (
 Está puesto el ON DELETE SET NULL por si se borra un cliente o
 se borra un alquiler, que no se borren los pagos por si es necesario
 dejarlos registrados (política de empresa o declarar ganancias).
+
+PREGUNTAR DAMIÁN PORQUE HE PUESTO SET NULL para seguir esta lógica
 '''
 CREATE TABLE Pagos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    clienteId INT NOT NULL,
+    clienteId INT,
     alquilerId INT,
     tipoPago VARCHAR(50) NOT NULL,
     cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
@@ -93,12 +95,14 @@ Está puesto el SET NULL para que el borrar una entidad relacionada
 con alquiler no borre el alquiler. Esto es por si por ejemplo un vehículo
 se queda obsoleto y lo borran de la base de datos, pero quieres
 seguir teniendo registro de qué alquiler ha realizado el usuario.
+
+PREGUNTAR A DAMIÁN PORQUE HE PUESTO EL SET NULL para seguir esta lógica.
 '''
 CREATE TABLE Alquileres (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    clienteId INT NOT NULL,
-    vehiculoId INT NOT NULL,
-    engancheInicioId INT NOT NULL,
+    clienteId INT,
+    vehiculoId INT,
+    engancheInicioId INT,
     engancheFinId INT,
     fechaHoraInicio DATETIME NOT NULL,
     fechaHoraFin DATETIME,
@@ -112,6 +116,13 @@ CREATE TABLE Alquileres (
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
+    FOREIGN KEY (engancheInicioId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (engancheFinId) REFERENCES Enganches(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+    
 );
 
 
@@ -129,7 +140,7 @@ de datos.
 '''
 CREATE TABLE Valoraciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    alquilerId INT NOT NULL,
+    alquilerId INT,
     vehiculoId INT NOT NULL,
     puntuacion INT NOT NULL,
     comentario VARCHAR(500),
@@ -147,11 +158,13 @@ de mantenimiento a lo mejor queremos seguir sabiendo qué reparaciones se han he
 a un vehículo específico.
 De la misma manera está puesto ON DELETE SET NULL el vehiculoId, por si hace falta
 un recuento de qué reparaciones ha hecho x técnico de mantenimiento.
+
+Preguntar a Damián porque he puesto las FK como opcionales para seguir esta lógica.
 '''
 CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    tecnicoId INT NOT NULL,
-    vehiculoId INT NOT NULL,
+    tecnicoId INT,
+    vehiculoId INT,
     fecha DATE NOT NULL,
     detalles VARCHAR(1000) NOT NULL,
     FOREIGN KEY (tecnicoId) REFERENCES Tecnicos_Mantenimiento(id)
