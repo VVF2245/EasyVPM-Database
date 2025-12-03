@@ -26,7 +26,7 @@ CREATE TABLE Tecnicos_Mantenimiento (
 
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    estado ENUM('disponible','en_uso','dañado','mantenimiento'),
+    estado ENUM('disponible','en_uso','dañado','mantenimiento', 'mantenimiento_pendiente'),
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     numeroUsos INT NOT NULL DEFAULT 0,
     localizacion VARCHAR(200)
@@ -59,7 +59,7 @@ CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
     estacionId INT NOT NULL,
     numero VARCHAR(50) NOT NULL,
-    estado ENUM('disponible','en_uso','dañado','mantenimiento'),
+    estado ENUM('disponible','en_uso','dañado','mantenimiento','mantenimiento_pendiente'),
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
