@@ -24,6 +24,12 @@ CREATE TABLE Tecnicos_Mantenimiento (
         ON UPDATE CASCADE
 );
 
+
+'''
+Está puesto el ON DELETE SET NULL por si se borra un cliente o
+se borra un alquiler, que no se borren los pagos por si es necesario
+dejarlos registrados (política de empresa o declarar ganancias).
+'''
 CREATE TABLE Pagos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     clienteId INT NOT NULL,
@@ -81,6 +87,13 @@ CREATE TABLE Enganches (
     CONSTRAINT uq_estacion_numero UNIQUE (estacionId, numero)
 );
 
+
+'''
+Está puesto el SET NULL para que el borrar una entidad relacionada
+con alquiler no borre el alquiler. Esto es por si por ejemplo un vehículo
+se queda obsoleto y lo borran de la base de datos, pero quieres
+seguir teniendo registro de qué alquiler ha realizado el usuario.
+'''
 CREATE TABLE Alquileres (
     id INT PRIMARY KEY AUTO_INCREMENT,
     clienteId INT NOT NULL,
@@ -101,6 +114,19 @@ CREATE TABLE Alquileres (
         ON UPDATE CASCADE
 );
 
+
+'''
+Está puesto ON DELETE SET NULL en alquilerId porque aunque borren un
+alquiler a lo mejor te sigue haciendo falta el comentario que han hecho sobre
+el vehículo. Por ejemplo, si está en mal estado y por alguna razón
+borran el alquiler se borraría la valoración y no sabrían que el vehículo
+necesita mantenimiento.
+
+Está puesto ON DELETE CASCADE en vehiculoId porque las valoraciones son
+irrelevantes si se elimina x vehículo al que referencian. No es necesario
+saber que x vehículo tiene una rueda pinchada si ya se ha borrado de la base
+de datos.
+'''
 CREATE TABLE Valoraciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     alquilerId INT NOT NULL,
@@ -115,6 +141,13 @@ CREATE TABLE Valoraciones (
         ON UPDATE CASCADE
 );
 
+'''
+Está puesto ON DELETE SET NULL en tecnicoId porque si se borra un técnico
+de mantenimiento a lo mejor queremos seguir sabiendo qué reparaciones se han hecho
+a un vehículo específico.
+De la misma manera está puesto ON DELETE SET NULL el vehiculoId, por si hace falta
+un recuento de qué reparaciones ha hecho x técnico de mantenimiento.
+'''
 CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     tecnicoId INT NOT NULL,
@@ -125,6 +158,6 @@ CREATE TABLE Reparaciones (
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         ON UPDATE CASCADE,
 );
