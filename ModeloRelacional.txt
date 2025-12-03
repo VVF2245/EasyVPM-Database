@@ -1,58 +1,60 @@
 USUARIO(
-    idUsuario PK,
+    usuarioId PK,
     nombre,
     correo AK,
     contraseña
 )
 CLIENTE(
-    idCliente PK FK → USUARIO.idUsuario,
+    clienteId PK FK → USUARIO.usuarioId,
     tarifaActual,
     fechaNacimiento
 )
 TECNICO_MANTENIMIENTO(
-    idTecnico PK FK → USUARIO.idUsuario,
-    fechaUltimoServicio
+    tecnicoId PK FK → USUARIO.usuarioId,
+    fechaUltimoServicio -- derivado pero almacenable
 )
 PAGO(
-    idPago PK,
-    idCliente FK → CLIENTE.idCliente,
-    idAlquiler FK → ALQUILER.idAlquiler NULL,
+    pagoId PK,
+    clienteId FK → CLIENTE.clienteId,
+    alquilerId FK → ALQUILER.alquilerId NULL,
     tipoPago,     -- derivado pero almacenable
     cantidad,
     fecha
 )
 VEHICULO(
-    idVehiculo PK,
+    vehiculoId PK,
     estado, --derivado pero almacenable
     kilometraje,    --derivado pero almacenable
     numeroUsos,    --derivado pero almacenable
     localizacion  --derivado pero almacenable
 )
 BICICLETA(
-    idVehiculo PK FK → VEHICULO.idVehiculo,
+    bicicletaId AK,
+    vehiculoId PK FK → VEHICULO.idVehiculo,
     tipoBici
 )
 PATINETE_ELECTRICO(
-    idVehiculo PK FK → VEHICULO.idVehiculo,
+    patineteElectricoId
+    vehiculoId PK FK → VEHICULO.vehiculoId,
     autonomiaBateria
 )
 'El nombre de la estación es único porque la app solo se va a usar en Sevilla y no van a coincidir dos nombres de estaciones'
 ESTACION(
-    idEstacion PK,
+    estacionId PK,
     nombre AK
 )
 ENGANCHE(
-    idEnganche PK,
-    idEstacion FK → ESTACION.idEstacion,
+    engancheId PK,
+    estacionId FK → ESTACION.estacionId,
     numero,
     estado  --derivado pero almacenable
 )
 ALQUILER(
-    idAlquiler PK,
-    idCliente FK → CLIENTE.idCliente,
-    idVehiculo FK → VEHICULO.idVehiculo,
-    idEngancheInicio FK → ENGANCHE.idEnganche,
-    idEngancheFin FK → ENGANCHE.idEnganche NULL,
+    alquilerId PK,
+    clienteId FK → CLIENTE.clienteId,
+    vehiculoId FK → VEHICULO.vehiculoId,
+    engancheInicioId FK → ENGANCHE.engancheId,
+    engancheFinId FK → ENGANCHE.engancheId NULL,
     fechaHoraInicio,
     fechaHoraFin NULL,
     distanciaRecorrida NULL,
@@ -61,16 +63,16 @@ ALQUILER(
     lugarFin NULL  --derivado pero almacenable
 )
 VALORACION(
-    idValoracion PK,
-    idAlquiler FK → ALQUILER.idAlquiler,
-    idVehiculo FK → VEHICULO.idVehiculo,
+    valoracionId PK,
+    alquilerId FK → ALQUILER.alquilerId,
+    vehiculoId FK → VEHICULO.vehiculoId,
     puntuacion,
     comentario NULL
 )
 REPARACION(
-    idReparacion PK,
-    idTecnico FK → TECNICO_MANTENIMIENTO.idTecnico,
-    idVehiculo FK → VEHICULO.idVehiculo,
+    reparacionId PK,
+    tecnicoId FK → TECNICO_MANTENIMIENTO.tecnicoId,
+    vehiculoId FK → VEHICULO.vehiculoId,
     fecha,
     detalles
 

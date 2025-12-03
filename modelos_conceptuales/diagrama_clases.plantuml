@@ -74,8 +74,8 @@ No se guarda localización por GPS.
 '/
 object Vehiculo<<Entity>> {
     +/estado
-    +/kilometraje
-    +/numeroUsos
+    +/kilometraje = 0.00
+    +/numeroUsos = 0
     +/localizacion [0..1]
 }
 note right
