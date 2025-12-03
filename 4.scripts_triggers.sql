@@ -30,3 +30,37 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER no_eliminar_usuario BEFORE DELETE ON Usuarios
+FOR EACH ROW
+BEGIN
+    -- comprobar si tiene algún alquiler activo
+    IF EXISTS (
+        SELECT 1
+        FROM Clientes
+        JOIN Alquileres ON alquileres.clienteId = clientes.id
+        WHERE clientes.usuarioId = OLD.id AND Alquileres.fechaHoraFin IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No se puede eliminar un usuario que tenga un alquiler activo';
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER un_vehiculo_por_usuario BEFORE INSERT ON Alquileres
+FOR EACH ROW
+BEGIN
+    IF NEW.clienteId IS NOT NULL AND NEW.fechaHoraFin IS NULL THEN
+        IF EXISTS (
+            SELECT 1
+            FROM Alquileres
+            WHERE clienteId = NEW.clienteId AND fechaHoraFIN IS NULL
+        ) THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
+        END IF;
+    END IF;
+END //
+DELIMITER ;
