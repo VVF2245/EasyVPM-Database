@@ -76,3 +76,156 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+--tiggers cambio de estado vehiculos
+--se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
+DELIMITER //
+
+CREATE TRIGGER trg_inicio_alquiler 
+AFTER INSERT ON Alquileres
+FOR EACH ROW
+BEGIN
+    UPDATE Vehiculos
+    SET estado = 'en_uso'
+    WHERE id = NEW.vehiculoId;
+
+    UPDATE Enganches
+    SET estado = 'libre'
+    WHERE id = NEW.engancheId;
+END;
+//
+
+DELIMITER //
+
+CREATE TRIGGER trg_fin_alquiler
+AFTER UPDATE ON Alquileres
+FOR EACH ROW
+BEGIN
+    IF NEW.fechaHoraFin IS NOT NULL AND OLD.fechaHoraFin IS NULL THEN
+
+        -- El enganche pasa a "en_uso"
+        UPDATE Enganches
+        SET estado = 'en_uso'
+        WHERE id = NEW.engancheId;
+
+        -- Aumentar contadores del vehículo
+        UPDATE Vehiculos
+        SET 
+            total_alquileres = total_alquileres + 1,
+            km_acumulados = km_acumulados + NEW.kmRecorridos
+        WHERE id = NEW.vehiculoId;
+
+        -- Si supera límites pasa a "mantenimiento pendiente"
+        UPDATE Vehiculos
+        SET estado = 'mantenimiento_pendiente'
+        WHERE id = NEW.vehiculoId
+        AND (total_alquileres >= 50 OR km_acumulados >= 500);
+
+        -- Si no supera límites → disponible
+        UPDATE Vehiculos
+        SET estado = 'disponible'
+        WHERE id = NEW.vehiculoId
+        AND (total_alquileres < 50 AND km_acumulados < 500);
+
+    END IF;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+--cuando se registra una reparacion vehiculo pasa a "mantenimiento"
+CREATE TRIGGER trg_reparacion_vehiculo
+AFTER INSERT ON Reparaciones
+FOR EACH ROW
+BEGIN
+    UPDATE Vehiculos
+    SET estado = 'mantenimiento'
+    WHERE id = NEW.vehiculoId;
+END;
+//
+
+DELIMITER ;
+--si se registra una valoracion muy baja el vehiculo pasa a "dañado"
+DELIMITER //
+
+CREATE TRIGGER trg_valoracion_danada
+AFTER INSERT ON Valoraciones
+FOR EACH ROW
+BEGIN
+    IF NEW.puntuacion <= 2 THEN
+        UPDATE Vehiculos
+        SET estado = 'dañado'
+        WHERE id = NEW.vehiculoId;
+    END IF;
+END;
+//
+
+DELIMITER ;
+
+--calculo del cobro 
+CREATE TRIGGER trg_calcular_costo_alquiler
+BEFORE UPDATE ON Alquileres
+FOR EACH ROW
+BEGIN
+    -- Solo calcular si se está finalizando el alquiler
+    IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
+        
+        DECLARE minutos INT;
+        DECLARE tarifa DECIMAL(5,2) DEFAULT 0.20;   -- tarifa base por minuto
+        DECLARE fechaMensualidad DATE;
+
+        -- Buscar la última mensualidad del cliente
+        SELECT fecha
+        INTO fechaMensualidad
+        FROM Pagos
+        WHERE clienteId = NEW.clienteId
+          AND tipoPago = 'mensualidad' --quiza deberiamos cambiar el tipo pago a un enum porque solo puede ser o mensualidad o cobro normal
+        ORDER BY fecha DESC
+        LIMIT 1;
+
+        -- Si existe mensualidad y sigue activa entonces costo gratuito
+        IF fechaMensualidad IS NOT NULL 
+           AND fechaMensualidad >= DATE_SUB(NEW.fechaHoraFin, INTERVAL 30 DAY) THEN
+            
+            SET NEW.costo = 0;
+
+        ELSE
+            -- Calcular tiempo en minutos
+            SET minutos = TIMESTAMPDIFF(MINUTE, OLD.fechaHoraInicio, NEW.fechaHoraFin);
+
+            IF minutos < 0 THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'La fecha de fin debe ser posterior a la de inicio.';
+            END IF;
+
+            -- Calcular costo normal
+            SET NEW.costo = minutos * tarifa;
+        END IF;
+
+    END IF;
+END;
+
+--registro automatico del pago
+CREATE TRIGGER trg_registrar_pago
+AFTER UPDATE ON Alquileres
+FOR EACH ROW
+BEGIN
+    -- Solo ejecutar cuando el alquiler pasa de "sin fecha fin" a "finalizado"
+    IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
+        
+        INSERT INTO Pagos (clienteId, alquilerId, tipoPago, cantidad, fecha)
+        VALUES (
+            NEW.clienteId,
+            NEW.id,
+            'cargo_automático',
+            NEW.costo,
+            CURDATE()
+        );
+
+    END IF;
+END;
+
+
+
+
