@@ -39,11 +39,6 @@ Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una 
 ## 3. Visión general del sistema
 
 ### 3.1. Requisitos generales
-------------------- esto es antiguo ->
-#### R.G.01. Gestión global del servicio de movilidad
-Como administrador de EasyVPM,<br>
-quiero que el sistema sea capaz de almacenar y gestionar la información relacionada con los usuarios, los vehículos alquilados y las estaciones,<br>
-para asegurar una correcta administración del servicio y garantizar su funcionamiento continuo.
 
 #### R.G.0.1 Gestión de cuenta y acceso
 Como cliente de EasyVPM, <br>
@@ -52,11 +47,6 @@ recuperar mi contraseña fácilmente y eliminar mi cuenta, <br>
 para poder entrar en mi cuenta y utilizar el servicio.
 (Engloba R.F.1, R.F.03, R.F.4 y R.F.08)
 
-------------------- esto es antiguo ->
-#### R.G.02. Seguridad y fiabilidad de la APP
-Como administrador de EasyVPM,<br>
-quiero que el sistema sea fiable y seguro incluso ante errores o interrupciones,<br>
-para garantizar la continuidad del servicio, proteger la información y mantener la integridad de las operaciones críticas como los pagos o alquileres.
 
 #### R.G.02. Alquiler de vehículos 
 Como cliente de EasyVPM, <br>
@@ -64,11 +54,6 @@ quiero tener un listado de estaciones con sus vehiculos y valoraciones correspon
 para seleccionar y alquilar el vehículo más adecuado segun mis necesidades.
 (R.F.2,R.F.5, RF.6 y RF.7) 
 
-------------------- esto es antiguo ->
-#### R.G.03. Interacción y satisfacción del usuario
-Como cliente de EasyVPM,<br>
-quiero que el sistema ofrezca una interfaz clara y minimalista, con diversas opciones de visualización,<br>
-para utilizar la app sin complicaciones y de manera sencilla.
 
 
 
