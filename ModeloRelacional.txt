@@ -13,14 +13,6 @@ TECNICO_MANTENIMIENTO(
     tecnicoId PK FK → USUARIO.usuarioId,
     fechaUltimoServicio -- derivado pero almacenable
 )
-PAGO(
-    pagoId PK,
-    clienteId FK → CLIENTE.clienteId,
-    alquilerId FK → ALQUILER.alquilerId NULL,
-    tipoPago,     -- derivado pero almacenable
-    cantidad,
-    fecha
-)
 VEHICULO(
     vehiculoId PK,
     estado, --derivado pero almacenable
@@ -75,5 +67,12 @@ REPARACION(
     vehiculoId FK → VEHICULO.vehiculoId,
     fecha,
     detalles
-
+)
+PAGO(
+    pagoId PK,
+    clienteId FK → CLIENTE.clienteId,
+    alquilerId FK → ALQUILER.alquilerId NULL,
+    tipoPago,     -- derivado pero almacenable
+    cantidad,
+    fecha
 )

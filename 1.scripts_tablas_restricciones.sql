@@ -24,9 +24,10 @@ CREATE TABLE Tecnicos_Mantenimiento (
         ON UPDATE CASCADE
 );
 
+'Quito el enum por la explicación que dio Damián en clase y porque con el trigger del atributo derivado ya aparecerán los estados que digamos'
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    estado ENUM('disponible','en_uso','dañado','mantenimiento', 'mantenimiento_pendiente'),
+    estado VARCHAR(50) NOT NULL,
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     numeroUsos INT NOT NULL DEFAULT 0,
     localizacion VARCHAR(200)
@@ -52,18 +53,18 @@ CREATE TABLE Patinetes_Electricos (
 
 CREATE TABLE Estaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL
+    nombre VARCHAR(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
     estacionId INT NOT NULL,
     numero INT NOT NULL,
-    estado VARCHAR(50),
+    estado VARCHAR(50) NOT NULL,
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
-
+        ON UPDATE CASCADE,
+    CONSTRAINT uq_estacion_numero UNIQUE (estacionId, numero)
 );
 
 
@@ -121,7 +122,7 @@ CREATE TABLE Valoraciones (
     puntuacion INT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
     comentario VARCHAR(500),
     FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         ON UPDATE CASCADE
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
