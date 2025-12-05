@@ -177,7 +177,7 @@ BEGIN
     --cuando se termina la reparacion el vehiculo pasa a "reparado"
     IF NEW.fechaFin IS NOT NULL AND OLD.fechaFin IS NULL THEN
         UPDATE Vehiculos
-        SET estaod = 'reparado'
+        SET estado = 'reparado'
         WHERE id = NEW.vehiculoId
     END IF;
 
@@ -269,5 +269,19 @@ UPDATE Vehiculos
     SET kilometros=0.0,
     numeroUsos=0
     WHERE Vehiculos.id=new.vehiculoId;
+END //
+DELIMITER ;
+
+
+--edad minima
+DELIMITER //
+CREATE TRIGGER edadMinima
+BEFORE INSERT ON Usuarios
+FOR EACH ROW
+BEGIN 
+IF TIMESTAMPDIFF(YEAR, new.fechaNacimiento, CURDATE()) <12 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
+    'La edad minima para registrarse es 12 años';
+END IF;
 END //
 DELIMITER ;
