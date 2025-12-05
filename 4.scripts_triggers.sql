@@ -232,14 +232,11 @@ END //
 DELIMITER ;
 
 
--- No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision
---Estamos suponiendo que los usos y los km se reinician tras un mantenimiento
 DELIMITER //
 CREATE TRIGGER no_alquiler_disponible
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
---Declaramamos los usos y los kilometros del vehiculo a alquilar
 --no podemos verter new.id pues todavia no se creo el alquiler
 DECLARE v_estado VARCHAR(255);
 SELECT Vehiculo.estado INTO v_estado FROM Alquileres
