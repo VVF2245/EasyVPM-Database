@@ -142,7 +142,8 @@ CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     tecnicoId INT,
     vehiculoId INT,
-    fecha DATE NOT NULL,
+    fechaInicio DATE NOT NULL,
+    fechaFin DATE CHECK(fechaFin >= fechaInicio),
     detalles VARCHAR(1000) NOT NULL,
     FOREIGN KEY (tecnicoId) REFERENCES Tecnicos_Mantenimiento(id)
         ON DELETE SET NULL
