@@ -7,9 +7,9 @@ skinparam note {
 }
 
 object Usuario<<Entity>> {
-    +nombre
     +correo
     +contraseña
+    +nombre
 }
 note right: {incompleta, disjunta}
 
@@ -94,11 +94,13 @@ note left of Vehiculo: {completa, disjunta}
 object Estacion<<Entity>> {
     +nombre
     +/numeroVehículos
+    +borrado[0..1]
 }
 
 object Enganche<<Entity>> {
-    +/estado
     +numero
+    +/estado
+    +borrado[0..1]
 }
 note left
 '''
