@@ -18,6 +18,7 @@ object Cliente<<Entity>> {
     +tarifaActual
     +fechaNacimiento
     +/alquilerActivo
+    +borrado[0..1]
 }
 note left
 '''
@@ -41,6 +42,7 @@ object Pago<<Entity>> {
 
 object TecnicoMantenimiento<<Entity>> {
     +/fechaUltimoServicio
+    +borrado[0..1]
 }
 
 object Reparacion<<Entity>> {
@@ -78,6 +80,7 @@ object Vehiculo<<Entity>> {
     +/kilometraje = 0.00
     +/numeroUsos = 0
     +/localizacion [0..1]
+    +borrado [0..1]
 }
 note right
 '''
@@ -118,10 +121,10 @@ Enganche "*"--* Estacion : pertenece a >
 
 'Relación directa valoraciones'
 Alquiler "1"--"*" Valoracion : pone >
-Valoracion "*"--"1" Vehiculo : recibe <
+Valoracion "*"--* Vehiculo : recibe <
 
 TecnicoMantenimiento "1"--"*" Reparacion : realiza >
-Reparacion "*"--"1" Vehiculo : recibe <
+Reparacion "*"--* Vehiculo : recibe <
 
 Enganche "1" --"1" Alquiler: inicia/termina en <
 
@@ -132,7 +135,7 @@ Cliente "1"--"*"  Alquiler: realiza >
 Alquiler "*"--"1" Vehiculo: de
 
 'Relacion Pago'
-Cliente "1"--"*" Pago
+Cliente *--"*" Pago
 Pago "0..1"--"0..1" Alquiler
 
 Vehiculo <|-- Bicicleta
