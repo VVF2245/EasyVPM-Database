@@ -44,7 +44,8 @@ object TecnicoMantenimiento<<Entity>> {
 }
 
 object Reparacion<<Entity>> {
-    +fecha
+    +fechaInicio
+    +fechaFin
     +detalles
 }
 
