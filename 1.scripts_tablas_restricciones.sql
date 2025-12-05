@@ -9,7 +9,8 @@ CREATE TABLE Clientes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
     tarifaActual VARCHAR(50) NOT NULL,
-    fechaNacimiento DATE NOT NULL CHECK(fechaNacimiento <= (CURDATE() - INTERVAL 12 YEAR)),
+    fechaNacimiento DATE NOT NULL,
+    CONSTRAINT NominimoEdad CHECK(fechaNacimiento <= (CURDATE() - INTERVAL 12 YEAR)),
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
