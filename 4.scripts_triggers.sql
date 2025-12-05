@@ -102,17 +102,10 @@ BEGIN
             kilometraje = kilometraje + NEW.distanciaRecorrida
         WHERE id = NEW.vehiculoId;
 
-        -- Si supera límites pasa a "mantenimiento pendiente"
-        UPDATE Vehiculos
-        SET estado = 'mantenimiento_pendiente'
-        WHERE id = NEW.vehiculoId
-        AND (numeroUsos >= 50 OR distanciaRecorrida >= 500);
-
         -- Si no supera límites → disponible
         UPDATE Vehiculos
         SET estado = 'disponible'
-        WHERE id = NEW.vehiculoId
-        AND (numeroUsos < 50 AND distanciaRecorrida < 500);
+        WHERE id = NEW.vehiculoId;
 
     END IF;
 
@@ -141,7 +134,6 @@ END;
 DELIMITER ;
 
 
-
 DELIMITER //
 CREATE TRIGGER pagos_borrar
 AFTER UPDATE ON Pagos
@@ -161,8 +153,10 @@ AFTER INSERT ON Reparaciones
 FOR EACH ROW
 BEGIN
     UPDATE Vehiculos
-    SET estado = 'en_mantenimiento'
-    WHERE id = NEW.vehiculoId;
+    SET estado = 'en_mantenimiento', 
+    kilometros=0.0,
+    numeroUsos=0
+    WHERE Vehiculos.id = NEW.vehiculoId;
 END;
 //
 
@@ -241,37 +235,22 @@ DELIMITER ;
 -- No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision
 --Estamos suponiendo que los usos y los km se reinician tras un mantenimiento
 DELIMITER //
-CREATE TRIGGER no_alquiler_hasta_revision
+CREATE TRIGGER no_alquiler_disponible
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
 --Declaramamos los usos y los kilometros del vehiculo a alquilar
-DECLARE numeroUsos INT;
-DECLARE kilometros DECIMAL(10, 2);
-SELECT Vehiculos.numeroUsos, Vehiculos.kilometros INTO numeroUsos, kilometros FROM Alquileres 
-WHERE Vehiculos.id=new.vehiculoId;
 --no podemos verter new.id pues todavia no se creo el alquiler
-
-IF (numeroUsos >=50 OR kilometros>=500) THEN
+DECLARE v_estado VARCHAR(255);
+SELECT Vehiculo.estado INTO v_estado FROM Alquileres
+JOIN Vehiculos ON Alquileres.vehiculoId=Vehiculos.id
+WHERE Vehiculos.id=NEW.vehiculoId
+IF (estado != "disponible") THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
-    'No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision';
+    'Vehiculo no disponible para alquilar';
 END IF;
 END //
 DELIMITER ;
-
---reiniciar km y usos
-DELIMITER //
-CREATE TRIGGER despuesReparacion
-AFTER INSERT ON Reparacion
-FOR EACH ROW 
-BEGIN
-UPDATE Vehiculos 
-    SET kilometros=0.0,
-    numeroUsos=0
-    WHERE Vehiculos.id=new.vehiculoId;
-END //
-DELIMITER ;
-
 
 --edad minima
 DELIMITER //
