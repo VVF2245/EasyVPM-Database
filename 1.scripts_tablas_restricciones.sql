@@ -11,6 +11,8 @@ CREATE TABLE Clientes (
     tarifaActual VARCHAR(50) NOT NULL,
     fechaNacimiento DATE NOT NULL,
     CONSTRAINT NominimoEdad CHECK(fechaNacimiento <= (CURDATE() - INTERVAL 12 YEAR)),
+    alquilerActivo BOOLEAN NOT NULL, 'ALQUILER ACTIVO ES DERIVADO, FALTA TRIGGER'
+    borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -20,6 +22,7 @@ CREATE TABLE Tecnicos_Mantenimiento (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
     fechaUltimoServicio DATE NOT NULL,
+    borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -31,13 +34,14 @@ CREATE TABLE Vehiculos (
     estado VARCHAR(50) NOT NULL,
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     numeroUsos INT NOT NULL DEFAULT 0,
-    localizacion VARCHAR(200)
+    localizacion VARCHAR(200), 'LOCALIZACION DERIVADA, falta trigger'
+    borrado BOOLEAN NOT NULL
 );
 
 CREATE TABLE Bicicletas (
     id INT PRIMARY KEY AUTO_INCREMENT,
     vehiculoId INT NOT NULL,
-    tipoBici VARCHAR(50),
+    tipoBici VARCHAR(50) NOT NULL,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -46,7 +50,7 @@ CREATE TABLE Bicicletas (
 CREATE TABLE Patinetes_Electricos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     vehiculoId INT NOT NULL,
-    autonomiaBateria DECIMAL(4,1),
+    autonomiaBateria DECIMAL(4,1) NOT NULL,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -79,9 +83,9 @@ PREGUNTAR A DAMIÁN PORQUE HE PUESTO EL SET NULL para seguir esta lógica.
 '''
 CREATE TABLE Alquileres (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    clienteId INT,
-    vehiculoId INT,
-    engancheInicioId INT,
+    clienteId INT NOT NULL,
+    vehiculoId INT NOT NULL,
+    engancheInicioId INT NOT NULL,
     engancheFinId INT,
     fechaHoraInicio DATETIME NOT NULL,
     fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
@@ -90,13 +94,13 @@ CREATE TABLE Alquileres (
     lugarInicio VARCHAR(200) NOT NULL,
     lugarFin VARCHAR(200),
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (engancheInicioId) REFERENCES Enganches(id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (engancheFinId) REFERENCES Enganches(id)
         ON DELETE SET NULL
@@ -142,7 +146,7 @@ Preguntar a Damián porque he puesto las FK como opcionales para seguir esta ló
 CREATE TABLE Reparaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     tecnicoId INT,
-    vehiculoId INT,
+    vehiculoId INT NOT NULL,
     fechaInicio DATE NOT NULL,
     fechaFin DATE CHECK(fechaFin >= fechaInicio),
     detalles VARCHAR(1000) NOT NULL,
@@ -150,7 +154,7 @@ CREATE TABLE Reparaciones (
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE,
 );
 
@@ -163,13 +167,13 @@ PREGUNTAR DAMIÁN PORQUE HE PUESTO SET NULL para seguir esta lógica
 '''
 CREATE TABLE Pagos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    clienteId INT,
+    clienteId INT NOT NULL,
     alquilerId INT,
     tipoPago VARCHAR(50) NOT NULL,
     cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
     fecha DATE NOT NULL,
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
         ON DELETE SET NULL
