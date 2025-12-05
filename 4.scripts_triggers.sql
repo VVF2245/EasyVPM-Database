@@ -227,5 +227,36 @@ BEGIN
 END;
 
 
+-- No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision
+--Estamos suponiendo que los usos y los km se reinician tras un mantenimiento
+DELIMITER //
+CREATE TRIGGER no_alquiler_hasta_revision
+BEFORE INSERT ON Alquileres
+FOR EACH ROW
+BEGIN
+--Declaramamos los usos y los kilometros del vehiculo a alquilar
+DECLARE numeroUsos INT;
+DECLARE kilometros DECIMAL(10, 2);
+SELECT Vehiculos.numeroUsos, Vehiculos.kilometros INTO numeroUsos, kilometros FROM Alquileres 
+WHERE Vehiculos.id=new.vehiculoId;
+--no podemos verter new.id pues todavia no se creo el alquiler
 
+IF (numeroUsos >=50 OR kilometros>=500) THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
+    'No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision';
+END IF;
+END //
+DELIMITER ;
 
+--reiniciar km y usos
+DELIMITER //
+CREATE TRIGGER despuesReparacion
+AFTER INSERT ON Reparacion
+FOR EACH ROW 
+BEGIN
+UPDATE Vehiculos 
+    SET kilometros=0.0,
+    numeroUsos=0
+    WHERE Vehiculos.id=new.vehiculoId;
+END //
+DELIMITER ;
