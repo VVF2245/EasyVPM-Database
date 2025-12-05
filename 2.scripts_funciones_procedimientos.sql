@@ -1,1 +1,0 @@
--- usuarios que mas ha gastado en alquiler->premium 
