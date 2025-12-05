@@ -248,16 +248,3 @@ IF (estado != "disponible") THEN
 END IF;
 END //
 DELIMITER ;
-
---edad minima
-DELIMITER //
-CREATE TRIGGER edadMinima
-BEFORE INSERT ON Usuarios
-FOR EACH ROW
-BEGIN 
-IF TIMESTAMPDIFF(YEAR, new.fechaNacimiento, CURDATE()) <12 THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
-    'La edad minima para registrarse es 12 años';
-END IF;
-END //
-DELIMITER ;
