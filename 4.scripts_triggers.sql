@@ -84,29 +84,6 @@ END;
 DELIMITER ;
 
 
-DELIMITER //
---registro automatico del pago
-CREATE TRIGGER trg_registrar_pago
-AFTER UPDATE ON Alquileres
-FOR EACH ROW
-BEGIN
-    -- Solo ejecutar cuando el alquiler pasa de "sin fecha fin" a "finalizado"
-    IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
-        
-        INSERT INTO Pagos (clienteId, alquilerId, tipoPago, cantidad, fecha)
-        VALUES (
-            NEW.clienteId,
-            NEW.id,
-            'cargo_automático',
-            NEW.costo,
-            CURDATE()
-        );
-
-    END IF;
-END;
-
-DELIMITER ;
-
 CREATE TRIGGER trg_A_update_alquiler
 AFTER UPDATE ON Alquileres
 FOR EACH ROW
@@ -136,6 +113,21 @@ BEGIN
         SET estado = 'disponible'
         WHERE id = NEW.vehiculoId
         AND (numeroUsos < 50 AND distanciaRecorrida < 500);
+
+    END IF;
+
+    --registro automatico del pago
+    -- Solo ejecutar cuando el alquiler pasa de "sin fecha fin" a "finalizado"
+    IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
+        
+        INSERT INTO Pagos (clienteId, alquilerId, tipoPago, cantidad, fecha)
+        VALUES (
+            NEW.clienteId,
+            NEW.id,
+            'cargo_automático',
+            NEW.costo,
+            CURDATE()
+        );
 
     END IF;
 
