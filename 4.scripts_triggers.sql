@@ -1,3 +1,18 @@
+--el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
+DELIMITER //
+
+CREATE TRIGGER trg_cliente_edad_minima
+BEFORE INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+    IF NEW.fechaNacimiento > (CURDATE() - INTERVAL 12 YEAR) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente debe tener al menos 12 años';
+    END IF;
+END//
+
+DELIMITER ;
+
 DELIMITER //
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
 BEFORE INSERT ON Alquileres
