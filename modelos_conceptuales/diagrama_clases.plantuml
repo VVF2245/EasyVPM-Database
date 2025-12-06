@@ -85,7 +85,7 @@ object Vehiculo<<Entity>> {
 note right
 '''
  **R.N.03** Si usos >50 o kilometraje>500
- estado=="mantenimiento pendiente".
+ estado=="mantenimiento_pendiente".
  **R.N.05.** Cambio de estado vehículo.
 '''
 end note

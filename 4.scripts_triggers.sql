@@ -74,9 +74,7 @@ BEGIN
         INTO fechaMensualidad
         FROM Pagos
         WHERE clienteId = NEW.clienteId
-          AND tipoPago = 'mensualidad' -- +quiza deberiamos cambiar el tipo pago a un enum porque solo puede ser o mensualidad o cobro normal
-                                        -- -o se puede poner que simplemente no sea tarifa individual, por si el cliente añade pagos anuales o trimestrales o lo que sea
-                                        -- -pero lo que importa para calcular el cost del alquiler es si es tarifa individual o no
+          AND tipoPago != 'mensualidad'
         ORDER BY fecha DESC
         LIMIT 1;
 
@@ -108,16 +106,16 @@ BEGIN
 END //
 DELIMITER ;
 
-
+DELIMITER //
 CREATE TRIGGER trg_A_update_alquiler
 AFTER UPDATE ON Alquileres
 FOR EACH ROW
 BEGIN
     IF NEW.fechaHoraFin IS NOT NULL AND OLD.fechaHoraFin IS NULL THEN
 
-        -- El enganche pasa a "en_uso"
+        -- El enganche pasa a "ocupado"
         UPDATE Enganches
-        SET estado = 'en_uso'
+        SET estado = 'ocupado'
         WHERE id = NEW.engancheFinId;
 
         -- Aumentar contadores del vehículo
@@ -127,17 +125,27 @@ BEGIN
             kilometraje = kilometraje + NEW.distanciaRecorrida
         WHERE id = NEW.vehiculoId;
 
-        -- Si no supera límites → disponible
-        UPDATE Vehiculos
-        SET estado = 'disponible'
-        WHERE id = NEW.vehiculoId;
+        DECLARE v_usos INT;
+        DECLARE v_km DECIMAL(5,2);
 
-    END IF;
+        SELECT numeroUsos, kilometraje
+        INTO v_usos, v_km
+        FROM Vehiculos
+        WHERE id = NEW.vehiculoId
 
-    --registro automatico del pago
-    -- Solo ejecutar cuando el alquiler pasa de "sin fecha fin" a "finalizado"
-    IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
+        IF v_usos > 50 OR v_km > 500.00 THEN
+            UPDATE Vehiculos
+            SET estado = 'mantenimiento_pendiente'
+            WHERE id = NEW.vehiculoId;
         
+        -- Si no supera límites → disponible
+        ELSE
+            UPDATE Vehiculos
+            SET estado = 'disponible'
+            WHERE id = NEW.vehiculoId;
+        END IF;
+
+        --registro automatico del pago
         INSERT INTO Pagos (clienteId, alquilerId, tipoPago, cantidad, fecha)
         VALUES (
             NEW.clienteId,
@@ -149,12 +157,11 @@ BEGIN
 
     END IF;
 END //
-
 DELIMITER ;
 
 DELIMITER //
 --cuando se registra una reparacion vehiculo pasa a "en_mantenimiento"
-CREATE TRIGGER trg_reparacion_vehiculo
+CREATE TRIGGER trg_A_insert_reparaciones_vehiculo
 AFTER INSERT ON Reparaciones
 FOR EACH ROW
 BEGIN
@@ -169,7 +176,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER trg_update_reparaciones
+CREATE TRIGGER trg_A_update_reparaciones
 AFTER UPDATE ON Reparaciones
 FOR EACH ROW
 BEGIN
@@ -189,7 +196,7 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE TRIGGER no_eliminar_usuario
+CREATE TRIGGER trg_B_delete_usuarios_no_eliminar
 BEFORE DELETE ON Usuarios
 FOR EACH ROW
 BEGIN
@@ -218,19 +225,6 @@ BEGIN
         UPDATE Vehiculos
         SET estado = 'averiado'
         WHERE id = NEW.vehiculoId;
-    END IF;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE TRIGGER limite_usos_kilometraje
-AFTER UPDATE ON Vehiculos
-FOR EACH ROW
-BEGIN
-    IF NEW.numeroUsos > 50 OR NEW.kilometraje > 500.00 THEN
-        UPDATE Vehiculos
-        SET estado = 'mantenimiento_pendiente'
-        WHERE id = NEW.id;
     END IF;
 END //
 DELIMITER ;

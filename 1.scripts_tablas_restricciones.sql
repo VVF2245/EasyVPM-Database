@@ -31,9 +31,9 @@ CREATE TABLE Tecnicos_Mantenimiento (
 'Quito el enum por la explicación que dio Damián en clase y porque con el trigger del atributo derivado ya aparecerán los estados que digamos'
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50) NOT NULL, 'derivado'
-    kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, 'derivado'
-    numeroUsos INT NOT NULL DEFAULT 0, 'derivado'
+    estado VARCHAR(50) NOT NULL, 'derivado, trigger hecho'
+    kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, 'derivado, trigger hecho'
+    numeroUsos INT NOT NULL DEFAULT 0, 'derivado, trigger hecho'
     localizacion VARCHAR(200), 'LOCALIZACION DERIVADA, falta trigger'
     borrado BOOLEAN NOT NULL
 );
@@ -67,7 +67,7 @@ CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
     estacionId INT NOT NULL,
     numero INT NOT NULL,
-    estado VARCHAR(50) NOT NULL, 'derivado'
+    estado VARCHAR(50) NOT NULL, 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
         ON DELETE CASCADE
@@ -84,7 +84,7 @@ CREATE TABLE Alquileres (
     fechaHoraInicio DATETIME NOT NULL,
     fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
     distanciaRecorrida DECIMAL(5,2),
-    costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), 'derivada'
+    costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), 'derivada, trigger hecho'
     lugarInicio VARCHAR(200) NOT NULL, 'derivada'
     lugarFin VARCHAR(200), 'derivada'
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
