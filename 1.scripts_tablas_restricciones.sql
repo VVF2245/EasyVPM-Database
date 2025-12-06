@@ -21,7 +21,7 @@ CREATE TABLE Clientes (
 CREATE TABLE Tecnicos_Mantenimiento (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
-    fechaFinUltimoServicio DATE NOT NULL, 'Atributo derivado, falta trigger'
+    fechaFinUltimoServicio DATE NOT NULL, 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE

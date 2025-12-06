@@ -148,26 +148,8 @@ BEGIN
         );
 
     END IF;
-
-    -- si estas dos claves foráneas quedan NULL se borra la fila
-    IF NEW.clienteId IS NULL AND NEW.vehiculoId IS NULL THEN
-        DELETE FROM Alquileres WHERE id = NEW.id;
-    END IF;
 END //
 
-DELIMITER ;
-
-
-DELIMITER //
-CREATE TRIGGER pagos_borrar
-AFTER UPDATE ON Pagos
-FOR EACH ROW
-BEGIN
-    -- si las dos claves foráneas quedan NULL se borra la fila
-    IF NEW.clienteId IS NULL AND NEW.alquilerId IS NULL THEN
-        DELETE FROM Pagos WHERE id = NEW.id;
-    END IF;
-END //
 DELIMITER ;
 
 DELIMITER //
@@ -191,16 +173,16 @@ CREATE TRIGGER trg_update_reparaciones
 AFTER UPDATE ON Reparaciones
 FOR EACH ROW
 BEGIN
-    --cuando se termina la reparacion el vehiculo pasa a "reparado"
+    
     IF NEW.fechaFin IS NOT NULL AND OLD.fechaFin IS NULL THEN
+        --cuando se termina la reparacion el vehiculo pasa a "reparado"
         UPDATE Vehiculos
         SET estado = 'reparado'
-        WHERE id = NEW.vehiculoId
-    END IF;
+        WHERE id = NEW.vehiculoId;
 
-    -- si las dos claves foráneas quedan NULL se borra la fila
-    IF NEW.tecnicoId IS NULL AND NEW.vehiculoId IS NULL THEN
-        DELETE FROM Reparaciones WHERE id = NEW.id;
+        UPDATE Tecnicos_Mantenimiento
+        SET fechaFinUltimoServicio = NEW.fechaFin
+        WHERE id = NEW.tecnicoId;
     END IF;
 END //
 DELIMITER ;
