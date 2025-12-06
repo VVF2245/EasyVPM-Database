@@ -216,6 +216,70 @@ END //
 DELIMITER ;
 
 DELIMITER //
+CREATE TRIGGER trg_A_update_enganches_actualizar_estacion
+AFTER UPDATE ON Enganches
+FOR EACH ROW
+BEGIN
+    IF OLD.estado != NEW.estado OR OLD.estacionId != NEW.estacionId THEN
+
+        -- Recalcular para la estacion antigua si ha habido cambio de estación
+        IF OLD.estacionId != NEW.estacionId THEN
+            UPDATE Estaciones
+            SET numeroVehiculos = (
+                SELECT COUNT(*)
+                FROM Enganches
+                WHERE estacionId = OLD.estacionId AND estado = 'ocupado'
+            )
+            WHERE id = OLD.estacionId;
+        END IF;
+
+        -- Recalcular para la estación antigua o si no ha habido cambio de estación
+        UPDATE Estaciones
+        SET numeroVehiculos = (
+            SELECT COUNT(*)
+            FROM Enganches
+            WHERE estacionId = NEW.estacionId AND estado = 'ocupado'
+        )
+        WHERE id = NEW.estacionId;
+
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+-- para que se actualice el número de vehículos en la estación si se crean enganches nuevos
+CREATE TRIGGER trg_A_insert_enganches_actualizar_estacion
+AFTER INSERT ON Enganches
+FOR EACH ROW
+BEGIN
+    UPDATE Estaciones
+    SET numeroVehiculos = (
+        SELECT COUNT(*)
+        FROM Enganches
+        WHERE estacionId = NEW.estacionId AND estado = 'ocupado'
+    )
+    WHERE id = NEW.estacionId;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+-- para que se actualice el número de vehículos en la estación si se crean enganches nuevos
+CREATE TRIGGER trg_A_delete_enganches_actualizar_estacion
+AFTER DELETE ON Enganches
+FOR EACH ROW
+BEGIN
+    UPDATE Estaciones
+    SET numeroVehiculos = (
+        SELECT COUNT(*)
+        FROM Enganches
+        WHERE estacionId = OLD.estacionId AND estado = 'ocupado'
+    )
+    WHERE id = OLD.estacionId;
+END //
+DELIMITER ;
+
+DELIMITER //
 --cuando se registra una reparacion vehiculo pasa a "en_mantenimiento"
 CREATE TRIGGER trg_A_insert_reparaciones_vehiculo
 AFTER INSERT ON Reparaciones
