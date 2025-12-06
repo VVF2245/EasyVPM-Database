@@ -1,16 +1,31 @@
 DELIMITER //
-CREATE TRIGGER un_vehiculo_por_usuario
+CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
     IF NEW.clienteId IS NOT NULL AND NEW.fechaHoraFin IS NULL THEN
-        IF EXISTS (
-            SELECT 1
-            FROM Alquileres
-            WHERE clienteId = NEW.clienteId AND fechaHoraFIN IS NULL
-        ) THEN
+        DECLARE activo BOOLEAN;
+
+        SELECT alquilerActivo
+        INTO activo
+        FROM Clientes
+        WHERE id = NEW.clienteId
+
+        IF activo = TRUE THEN
             SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
+        END IF;
+
+        --comprobar que el vehículo está disponible
+        DECLARE v_estado VARCHAR(255);
+
+        SELECT estado
+        INTO v_estado
+        FROM Vehiculos
+        WHERE id = NEW.vehiculoId;
+        IF v_estado != 'disponible' THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'El vehículo no está disponible para alquilar';
         END IF;
     END IF;
 END //
@@ -24,15 +39,20 @@ CREATE TRIGGER trg_A_insert_alquileres
 AFTER INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
-    UPDATE Vehiculos
-    SET estado = 'en_uso'
-    WHERE id = NEW.vehiculoId;
+    IF NEW.fechaHoraFin = NULL THEN
+        UPDATE Vehiculos
+        SET estado = 'en_uso'
+        WHERE id = NEW.vehiculoId;
 
-    UPDATE Enganches
-    SET estado = 'libre'
-    WHERE id = NEW.engancheInicioId;
-END;
-//
+        UPDATE Enganches
+        SET estado = 'libre'
+        WHERE id = NEW.engancheInicioId;
+
+        UPDATE Clientes
+        SET alquilerActivo = TRUE
+        WHERE id = NEW.clienteId;
+    END IF;
+END//
 
 DELIMITER ;
 
@@ -79,8 +99,13 @@ BEGIN
             SET NEW.costo = minutos * tarifa;
         END IF;
 
+        -- poner que el cliente ya no tiene un alquiler activo
+        UPDATE Clientes
+        SET alquilerActivo = FALSE
+        WHERE id = NEW.clienteId
+
     END IF;
-END;
+END //
 DELIMITER ;
 
 
@@ -128,8 +153,7 @@ BEGIN
     IF NEW.clienteId IS NULL AND NEW.vehiculoId IS NULL THEN
         DELETE FROM Alquileres WHERE id = NEW.id;
     END IF;
-END;
-//
+END //
 
 DELIMITER ;
 
@@ -157,8 +181,7 @@ BEGIN
     kilometros=0.0,
     numeroUsos=0
     WHERE Vehiculos.id = NEW.vehiculoId;
-END;
-//
+END //
 
 DELIMITER ;
 
@@ -179,7 +202,7 @@ BEGIN
     IF NEW.tecnicoId IS NULL AND NEW.vehiculoId IS NULL THEN
         DELETE FROM Reparaciones WHERE id = NEW.id;
     END IF;
-END;
+END //
 DELIMITER ;
 
 
@@ -214,8 +237,7 @@ BEGIN
         SET estado = 'averiado'
         WHERE id = NEW.vehiculoId;
     END IF;
-END;
-//
+END //
 DELIMITER ;
 
 DELIMITER //
@@ -225,26 +247,9 @@ FOR EACH ROW
 BEGIN
     IF NEW.numeroUsos > 50 OR NEW.kilometraje > 500.00 THEN
         UPDATE Vehiculos
-        SET estado = 'mantenimiento pendiente'
+        SET estado = 'mantenimiento_pendiente'
         WHERE id = NEW.id;
     END IF;
 END //
 DELIMITER ;
 
-
-DELIMITER //
-CREATE TRIGGER no_alquiler_disponible
-BEFORE INSERT ON Alquileres
-FOR EACH ROW
-BEGIN
---no podemos verter new.id pues todavia no se creo el alquiler
-DECLARE v_estado VARCHAR(255);
-SELECT Vehiculo.estado INTO v_estado FROM Alquileres
-JOIN Vehiculos ON Alquileres.vehiculoId=Vehiculos.id
-WHERE Vehiculos.id=NEW.vehiculoId
-IF (estado != "disponible") THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
-    'Vehiculo no disponible para alquilar';
-END IF;
-END //
-DELIMITER ;
