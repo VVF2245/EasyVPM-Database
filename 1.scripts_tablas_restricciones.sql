@@ -59,7 +59,7 @@ CREATE TABLE Patinetes_Electricos (
 CREATE TABLE Estaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) UNIQUE NOT NULL,
-    numeroVehiculos INT NOT NULL, 'NUMERO VEHICULOS DERIVADA FALTA TRIGGER'
+    numeroVehiculos INT NOT NULL, 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL
 );
 
@@ -134,7 +134,7 @@ CREATE TABLE Pagos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     clienteId INT NOT NULL,
     alquilerId INT,
-    tipoPago VARCHAR(50) NOT NULL, 'derivada'
+    tipoPago VARCHAR(50) NOT NULL, 'derivado, trigger hecho, pero a lo mejor falta para cuando haces pagos mensuales (no es automático)'
     cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
     fecha DATE NOT NULL,
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
