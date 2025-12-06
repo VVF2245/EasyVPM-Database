@@ -1,24 +1,28 @@
 USUARIO(
     usuarioId PK,
-    nombre,
     correo AK,
-    contraseña
+    contraseña,
+    nombre
 )
 CLIENTE(
     clienteId PK FK → USUARIO.usuarioId,
     tarifaActual,
-    fechaNacimiento
+    fechaNacimiento,
+    alquilerActivo,
+    borrado
 )
 TECNICO_MANTENIMIENTO(
     tecnicoId PK FK → USUARIO.usuarioId,
-    fechaUltimoServicio -- derivado pero almacenable
+    fechaFinUltimoServicio, -- derivado pero almacenable
+    borrado
 )
 VEHICULO(
     vehiculoId PK,
     estado, --derivado pero almacenable
     kilometraje,    --derivado pero almacenable
     numeroUsos,    --derivado pero almacenable
-    localizacion  --derivado pero almacenable
+    localizacion,  --derivado pero almacenable
+    borrado
 )
 BICICLETA(
     bicicletaId AK,
@@ -33,13 +37,15 @@ PATINETE_ELECTRICO(
 'El nombre de la estación es único porque la app solo se va a usar en Sevilla y no van a coincidir dos nombres de estaciones'
 ESTACION(
     estacionId PK,
-    nombre AK
+    nombre AK,
+    borrado
 )
 ENGANCHE(
     engancheId PK,
     estacionId FK → ESTACION.estacionId,
     numero,
-    estado  --derivado pero almacenable
+    estado,  --derivado pero almacenable
+    borrado
 )
 ALQUILER(
     alquilerId PK,

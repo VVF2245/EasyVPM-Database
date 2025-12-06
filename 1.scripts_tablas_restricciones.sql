@@ -10,7 +10,7 @@ CREATE TABLE Clientes (
     usuarioId INT NOT NULL,
     tarifaActual VARCHAR(50) NOT NULL,
     fechaNacimiento DATE NOT NULL,
-    alquilerActivo BOOLEAN NOT NULL, 'ALQUILER ACTIVO ES DERIVADO, FALTA TRIGGER'
+    alquilerActivo BOOLEAN NOT NULL, 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
@@ -21,7 +21,7 @@ CREATE TABLE Clientes (
 CREATE TABLE Tecnicos_Mantenimiento (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
-    fechaUltimoServicio DATE NOT NULL, 'Atributo derivado, falta trigger'
+    fechaFinUltimoServicio DATE NOT NULL, 'Atributo derivado, falta trigger'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE

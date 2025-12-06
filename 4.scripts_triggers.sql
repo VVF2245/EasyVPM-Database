@@ -39,7 +39,7 @@ CREATE TRIGGER trg_A_insert_alquileres
 AFTER INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
-    IF NEW.fechaHoraFin = NULL THEN
+    IF NEW.fechaHoraFin IS NULL THEN
         UPDATE Vehiculos
         SET estado = 'en_uso'
         WHERE id = NEW.vehiculoId;

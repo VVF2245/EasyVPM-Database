@@ -18,7 +18,7 @@ object Cliente<<Entity>> {
     +tarifaActual
     +fechaNacimiento
     +/alquilerActivo
-    +borrado[0..1]
+    +borrado
 }
 note left
 '''
@@ -41,8 +41,8 @@ object Pago<<Entity>> {
 
 
 object TecnicoMantenimiento<<Entity>> {
-    +/fechaUltimoServicio
-    +borrado[0..1]
+    +/fechaFinUltimoServicio
+    +borrado
 }
 
 object Reparacion<<Entity>> {
@@ -80,7 +80,7 @@ object Vehiculo<<Entity>> {
     +/kilometraje = 0.00
     +/numeroUsos = 0
     +/localizacion [0..1]
-    +borrado [0..1]
+    +borrado
 }
 note right
 '''
@@ -94,13 +94,13 @@ note left of Vehiculo: {completa, disjunta}
 object Estacion<<Entity>> {
     +nombre
     +/numeroVehículos
-    +borrado[0..1]
+    +borrado
 }
 
 object Enganche<<Entity>> {
     +numero
     +/estado
-    +borrado[0..1]
+    +borrado
 }
 note left
 '''
