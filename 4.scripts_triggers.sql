@@ -27,21 +27,37 @@ BEGIN
             SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'El vehículo no está disponible para alquilar';
         END IF;
+
+        -- Obtener localización enganche inicio alquiler
+        DECLARE v_estacionInicio VARCHAR(255);
+        DECLARE v_numInicio INT;
+
+        SELECT Estaciones.nombre, Enganches.numero
+        INTO v_estacionInicio, v_numInicio
+        FROM Enganches
+        JOIN Estaciones ON Enganches.estacionId = Estaciones.id
+        WHERE Enganches.id = NEW.engancheInicioId;
+
+        UPDATE Alquileres
+        SET lugarInicio = CONCAT('Estación ', v_estacionInicio, ' Enganche ', v_numInicio)
+        WHERE id = NEW.id;
     END IF;
 END //
 DELIMITER ;
 
---tiggers cambio de estado vehiculos
---se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
-DELIMITER //
 
+DELIMITER //
+--se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
 CREATE TRIGGER trg_A_insert_alquileres 
 AFTER INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
     IF NEW.fechaHoraFin IS NULL THEN
+
+        --no hay localización gps del vehículo al desengancharlo, por eso NULL
         UPDATE Vehiculos
-        SET estado = 'en_uso'
+        SET estado = 'en_uso',
+            localizacion = NULL
         WHERE id = NEW.vehiculoId;
 
         UPDATE Enganches
@@ -102,6 +118,20 @@ BEGIN
         SET alquilerActivo = FALSE
         WHERE id = NEW.clienteId
 
+        -- Poner la localización final del alquiler
+        DECLARE v_estacionFin VARCHAR(255);
+        DECLARE v_numFin INT;
+
+        SELECT Estaciones.nombre, Enganches.numero
+        INTO v_estacionFin, v_numFin
+        FROM Enganches
+        JOIN Estaciones ON Enganches.estacionId = Estaciones.id
+        WHERE Enganches.id = NEW.engancheFinId;
+
+        UPDATE Alquileres
+        SET lugarFin = CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
+        WHERE id = NEW.id;
+
     END IF;
 END //
 DELIMITER ;
@@ -118,11 +148,22 @@ BEGIN
         SET estado = 'ocupado'
         WHERE id = NEW.engancheFinId;
 
+        -- Obtener datos del enganche final
+        DECLARE v_estacion VARCHAR(255);
+        DECLARE v_numEnganche INT;
+
+        SELECT Estaciones.nombre, Enganches.numero
+        INTO v_estacion, v_numEnganche
+        FROM Enganches
+        JOIN Estaciones ON Enganches.estacionId = Estaciones.id
+        WHERE Enganches.id = NEW.engancheFinId;
+
         -- Aumentar contadores del vehículo
         UPDATE Vehiculos
         SET 
             numeroUsos = numeroUsos + 1,
-            kilometraje = kilometraje + NEW.distanciaRecorrida
+            kilometraje = kilometraje + NEW.distanciaRecorrida,
+            localizacion = CONCAT('Estación ', v_estacion, ' Enganche ', v_numEnganche)
         WHERE id = NEW.vehiculoId;
 
         DECLARE v_usos INT;

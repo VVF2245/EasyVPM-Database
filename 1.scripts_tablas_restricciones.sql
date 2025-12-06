@@ -34,7 +34,7 @@ CREATE TABLE Vehiculos (
     estado VARCHAR(50) NOT NULL, 'derivado, trigger hecho'
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, 'derivado, trigger hecho'
     numeroUsos INT NOT NULL DEFAULT 0, 'derivado, trigger hecho'
-    localizacion VARCHAR(200), 'LOCALIZACION DERIVADA, falta trigger'
+    localizacion VARCHAR(200), 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL
 );
 
@@ -85,8 +85,8 @@ CREATE TABLE Alquileres (
     fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
     distanciaRecorrida DECIMAL(5,2),
     costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), 'derivada, trigger hecho'
-    lugarInicio VARCHAR(200) NOT NULL, 'derivada'
-    lugarFin VARCHAR(200), 'derivada'
+    lugarInicio VARCHAR(200) NOT NULL, 'derivada, trigger hecho'
+    lugarFin VARCHAR(200), 'derivada, trigger hecho'
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
