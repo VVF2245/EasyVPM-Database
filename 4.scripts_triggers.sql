@@ -5,12 +5,11 @@ CREATE TRIGGER trg_cliente_edad_minima
 BEFORE INSERT ON Clientes
 FOR EACH ROW
 BEGIN
-    IF NEW.fechaNacimiento > (CURDATE() - INTERVAL 12 YEAR) THEN
+    IF TIMESTAMPDIFF(YEAR, new.fechaNacimiento, CURDATE()) <12 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El cliente debe tener al menos 12 años';
     END IF;
 END//
-
 DELIMITER ;
 
 DELIMITER //
