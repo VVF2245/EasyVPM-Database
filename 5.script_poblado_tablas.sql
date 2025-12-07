@@ -1,21 +1,22 @@
+'Se han puesto las contraseñas con un hash de BcryptGenerator. Las contraseñas no se meten tal cual a la BBDD y las reglas de negocio de estas deberían estar fuera (longitud y etc)'
 INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
-('ana@hotmail.com',      'passAna123',      'Ana Torres'),
-('luis@gmail.com',       'passLuis123',     'Luis Martínez'),
-('carlos@gmail.com',     'passCarlos123',   'Carlos Pérez'),
-('laura@hotmail.com',     'passLaura123',    'Laura Gómez'),
-('jorge@gmail.com',      'passJorge123',    'Jorge Medina'),
-('sofia@gmail.com',      'passSofia123',    'Sofía Requena'),
-('tecnico1@empresa.com', 'Tecnico123',      'Mario López'),
-('tecnico2@empresa.com', 'Tecnico456',      'Lucía Navarro'),
-('tecnico3@empresa.com', 'Tecnico789',      'Sergio Vidal');
+('ana@hotmail.com',      '$2a$12$OmDnsaGjXSVbxEu6z33QUOw11WIUuFGk8lRh1vmgNatDdBchdIium',      'Ana Torres'),
+('luis@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk2JHj3OvTLJE1q1YKDq',     'Luis Martínez'),
+('carlos@gmail.com',     '$2a$12$4hzpkDHlZXZGwHqkniH9h.qKMAupvj7a9InLLrRmA9BRVyhLZHmCq',   'Carlos Pérez'),
+('laura@hotmail.com',     '$2a$12$wWUFBJwaiTaLJ5OOlEYDIuYL3KgSXPsbfDMNlfXkZly7WCAejiUC2',    'Laura Gómez'),
+('jorge@gmail.com',      '$2a$12$cUb3ISV/w2yx8LNS/1QKE.d/diXREhqmIqR0BL2ADqHzQQKxV7mL6',    'Jorge Medina'),
+('sofia@gmail.com',      '$2a$12$Y7rd3mmwQdT24ZaXcNy6Q.JzxrfS971qG2Em7mLcstCftDR/O2jjq',    'Sofía Requena'),
+('tecnico1@empresa.com', '$2a$12$x6YIqdu52sa8FjBDTWoB..yfYnLlAahLuVxHcO/FPKDkT6CoVzWjW',      'Mario López'),
+('tecnico2@empresa.com', '$2a$12$gIoTiMZcOt5JJwDEPLdh9.s2uqbOR0JCxrK2wvlt8oLeYHRHbSMtu',      'Lucía Navarro'),
+('tecnico3@empresa.com', '$2a$12$dprYIR4UG3G7YguteFUVC.PPIDRyGPafQ7qwwbop4pwZJj0FC3a1.',      'Sergio Vidal');
 
 INSERT INTO Clientes (usuarioId, tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
 (1, 'Básica',  '1995-04-12', FALSE, FALSE),
 (2, 'Premium', '1992-07-21', FALSE, FALSE),
-(3, 'Básica',  '2000-02-10', TRUE,  FALSE),
+(3, 'Básica',  '2000-02-10', TRUE, FALSE),
 (4, 'Básica',  '1988-11-05', FALSE, FALSE),
 (5, 'Premium', '1999-06-18', FALSE, FALSE),
-(6, 'Básica',  '1996-09-02', TRUE,  FALSE);
+(6, 'Básica',  '1996-09-02', TRUE, FALSE);
 
 INSERT INTO Tecnicos_Mantenimiento (usuarioId, fechaFinUltimoServicio, borrado) VALUES
 (7, '2024-05-20', FALSE),
@@ -55,9 +56,9 @@ INSERT INTO Vehiculos (estado, kilometraje, numeroUsos, localizacion, borrado) V
 ('DISPONIBLE',   9.99,  1,  'Estación Universidad de Sevilla', FALSE),
 ('DISPONIBLE',  25.00,  4,  'Estación Universidad de Sevilla', FALSE),
 
--- Vehículos en uso por Sevilla
-('EN_USO',      55.00,  8,  'En ruta por el Puente de Triana', FALSE),
-('EN_USO',      60.00,  7,  'En ruta por Nervión', FALSE),
+-- Vehículos en uso por Sevilla (las bicicletas en uso no vamos a guardar localización porque para ser realista necesita una clase que actualice cada x tiempo)
+('EN_USO',      55.00,  8,  NULL, FALSE),
+('EN_USO',      60.00,  7,  NULL, FALSE),
 
 -- Vehículos en reparación (taller en Sevilla Este)
 ('EN_REPARACION', 120.10, 12, 'Taller – Sevilla Este', FALSE),

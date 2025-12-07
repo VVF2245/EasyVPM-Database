@@ -41,7 +41,7 @@ object Pago<<Entity>> {
 
 
 object TecnicoMantenimiento<<Entity>> {
-    +/fechaFinUltimoServicio
+    +/fechaFinUltimoServicio[0..1]
     +borrado
 }
 

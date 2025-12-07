@@ -13,7 +13,7 @@ CLIENTE(
 )
 TECNICO_MANTENIMIENTO(
     tecnicoId PK FK → USUARIO.usuarioId,
-    fechaFinUltimoServicio, -- derivado pero almacenable
+    fechaFinUltimoServicio NULL, -- derivado pero almacenable
     borrado
 )
 VEHICULO(

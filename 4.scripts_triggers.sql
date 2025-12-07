@@ -24,7 +24,7 @@ BEGIN
         SELECT alquilerActivo
         INTO activo
         FROM Clientes
-        WHERE id = NEW.clienteId
+        WHERE id = NEW.clienteId;
 
         IF activo = TRUE THEN
             SIGNAL SQLSTATE '45000'
@@ -53,9 +53,7 @@ BEGIN
         JOIN Estaciones ON Enganches.estacionId = Estaciones.id
         WHERE Enganches.id = NEW.engancheInicioId;
 
-        UPDATE Alquileres
-        SET lugarInicio = CONCAT('Estación ', v_estacionInicio, ' Enganche ', v_numInicio)
-        WHERE id = NEW.id;
+        SET NEW.lugarInicio = CONCAT('Estación ', v_estacionInicio, ' Enganche ', v_numInicio);
     END IF;
 END //
 DELIMITER ;
@@ -97,7 +95,8 @@ BEGIN
     IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
         
         DECLARE minutos INT;
-        DECLARE tarifa DECIMAL(5,2) DEFAULT 0.20;   -- tarifa base por minuto
+        DECLARE tarifa DECIMAL(5,2);
+        SET tarifa = 0.20;   -- tarifa base por minuto
         DECLARE fechaMensualidad DATE;
 
         -- Buscar la última mensualidad del cliente
@@ -156,16 +155,19 @@ CREATE TRIGGER trg_A_update_alquiler
 AFTER UPDATE ON Alquileres
 FOR EACH ROW
 BEGIN
+    -- Obtener datos del enganche final
+    DECLARE v_estacion VARCHAR(255);
+    DECLARE v_numEnganche INT;
+
+    DECLARE v_usos INT;
+    DECLARE v_km DECIMAL(5,2);
+    
     IF NEW.fechaHoraFin IS NOT NULL AND OLD.fechaHoraFin IS NULL THEN
 
         -- El enganche pasa a "ocupado"
         UPDATE Enganches
         SET estado = 'ocupado'
         WHERE id = NEW.engancheFinId;
-
-        -- Obtener datos del enganche final
-        DECLARE v_estacion VARCHAR(255);
-        DECLARE v_numEnganche INT;
 
         SELECT Estaciones.nombre, Enganches.numero
         INTO v_estacion, v_numEnganche
@@ -181,13 +183,11 @@ BEGIN
             localizacion = CONCAT('Estación ', v_estacion, ' Enganche ', v_numEnganche)
         WHERE id = NEW.vehiculoId;
 
-        DECLARE v_usos INT;
-        DECLARE v_km DECIMAL(5,2);
 
         SELECT numeroUsos, kilometraje
         INTO v_usos, v_km
         FROM Vehiculos
-        WHERE id = NEW.vehiculoId
+        WHERE id = NEW.vehiculoId;
 
         IF v_usos > 50 OR v_km > 500.00 THEN
             UPDATE Vehiculos
@@ -287,7 +287,7 @@ FOR EACH ROW
 BEGIN
     UPDATE Vehiculos
     SET estado = 'en_mantenimiento', 
-    kilometros=0.0,
+    kilometraje=0.0,
     numeroUsos=0
     WHERE Vehiculos.id = NEW.vehiculoId;
 END //

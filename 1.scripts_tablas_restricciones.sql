@@ -21,7 +21,7 @@ CREATE TABLE Clientes (
 CREATE TABLE Tecnicos_Mantenimiento (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
-    fechaFinUltimoServicio DATE NOT NULL, 'derivado, trigger hecho'
+    fechaFinUltimoServicio DATE, 'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
@@ -109,7 +109,7 @@ CREATE TABLE Valoraciones (
     comentario VARCHAR(500),
     FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
         ON DELETE SET NULL
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -127,7 +127,7 @@ CREATE TABLE Reparaciones (
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE,
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE Pagos (
