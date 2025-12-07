@@ -18,8 +18,11 @@ CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
+    DECLARE activo BOOLEAN;
+    DECLARE v_estado VARCHAR(255);
+    DECLARE v_estacionInicio VARCHAR(255);
+    DECLARE v_numInicio INT;
     IF NEW.clienteId IS NOT NULL AND NEW.fechaHoraFin IS NULL THEN
-        DECLARE activo BOOLEAN;
 
         SELECT alquilerActivo
         INTO activo
@@ -32,7 +35,6 @@ BEGIN
         END IF;
 
         --comprobar que el vehículo está disponible
-        DECLARE v_estado VARCHAR(255);
 
         SELECT estado
         INTO v_estado
@@ -44,8 +46,6 @@ BEGIN
         END IF;
 
         -- Obtener localización enganche inicio alquiler
-        DECLARE v_estacionInicio VARCHAR(255);
-        DECLARE v_numInicio INT;
 
         SELECT Estaciones.nombre, Enganches.numero
         INTO v_estacionInicio, v_numInicio
@@ -91,13 +91,16 @@ CREATE TRIGGER trg_B_update_Alquileres
 BEFORE UPDATE ON Alquileres
 FOR EACH ROW
 BEGIN
+    DECLARE minutos INT;
+    DECLARE tarifa DECIMAL(5,2);
+    DECLARE fechaMensualidad DATE;
+    DECLARE v_estacionFin VARCHAR(255);
+    DECLARE v_numFin INT;
+
+    SET tarifa = 0.20;   -- tarifa base por minuto
+
     -- Solo calcular si se está finalizando el alquiler
     IF OLD.fechaHoraFin IS NULL AND NEW.fechaHoraFin IS NOT NULL THEN
-        
-        DECLARE minutos INT;
-        DECLARE tarifa DECIMAL(5,2);
-        SET tarifa = 0.20;   -- tarifa base por minuto
-        DECLARE fechaMensualidad DATE;
 
         -- Buscar la última mensualidad del cliente
         SELECT fecha
@@ -130,11 +133,9 @@ BEGIN
         -- poner que el cliente ya no tiene un alquiler activo
         UPDATE Clientes
         SET alquilerActivo = FALSE
-        WHERE id = NEW.clienteId
+        WHERE id = NEW.clienteId;
 
         -- Poner la localización final del alquiler
-        DECLARE v_estacionFin VARCHAR(255);
-        DECLARE v_numFin INT;
 
         SELECT Estaciones.nombre, Enganches.numero
         INTO v_estacionFin, v_numFin
@@ -143,8 +144,7 @@ BEGIN
         WHERE Enganches.id = NEW.engancheFinId;
 
         UPDATE Alquileres
-        SET lugarFin = CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
-        WHERE id = NEW.id;
+        SET NEW.lugarFin = CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin);
 
     END IF;
 END //
@@ -161,7 +161,7 @@ BEGIN
 
     DECLARE v_usos INT;
     DECLARE v_km DECIMAL(5,2);
-    
+
     IF NEW.fechaHoraFin IS NOT NULL AND OLD.fechaHoraFin IS NULL THEN
 
         -- El enganche pasa a "ocupado"
