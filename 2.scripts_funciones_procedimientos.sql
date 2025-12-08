@@ -18,6 +18,14 @@ DECLARE v_vehiculoId INT;
 DECLARE v_usos INT;
 DECLARE v_kmTotal DECIMAL (10,2);
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+    ROLLBACK;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
+    'ERROR AL FINALIZAR ALQUILER';
+END;
+
+START TRANSACTION;
 -- 1. Obtener datos actuales del alquiler y vehiculo
 SELECT vehiculoId, fechaHoraInicio, clienteId 
 INTO v_vehiculoId, v_fechaInicio, v_clienteId
@@ -87,6 +95,8 @@ UPDATE Vehiculos
 
 INSERT INTO Pagos(clienteId, alquilerId, tipoPago, cantidad, fecha)
 VALUES (v_clienteId, p_alquilerId, 'cargo_automatico', v_costo, CURDATE());
+
+COMMIT;
 
 END //
 DELIMITER ;
