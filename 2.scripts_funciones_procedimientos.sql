@@ -55,19 +55,20 @@ ELSE
 END IF;
 
 -- 3. Obtener datos localizacion final
-SELECT Estaciones.nombre, Enganches.numero INTO v_estacionFin, 
-v_numFin FROM Enganches JOIN Estaciones ON
-Enganches.estacionId=Estaciones.id;
+SELECT Estaciones.nombre, Enganches.numero
+INTO v_estacionFin, v_numFin
+FROM Enganches 
+JOIN Estaciones ON Enganches.estacionId=Estaciones.id
 WHERE Enganches.id=p_engancheFinId;
 
 -- 4. Actualizar alquiler
 UPDATE Alquileres
 SET fechaHoraFin=p_fechaFin,
-    engancheFinId=p_enganchFinId,
+    engancheFinId=p_engancheFinId,
     distanciaRecorrida=p_distanciaRecorrida,
     costo=v_costo,
-    lugarFin= CONCAT('Estacion', v_estacionFn, 'Enganche', v_numFin)
-WHERE id=p_aquilerId;
+    lugarFin= CONCAT('Estación ', v_estacionFin, ' Enganche ', v_numFin)
+WHERE id=p_alquilerId;
 
 -- 5. Actualizar cliente y enganche
 UPDATE Clientes
@@ -81,7 +82,7 @@ WHERE id=p_engancheFinId;
 UPDATE Vehiculos
     SET numeroUsos=numeroUsos+1,
     kilometraje=kilometraje+p_distanciaRecorrida,
-    localizacion== CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
+    localizacion= CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
     WHERE id=v_vehiculoId;
 
 SELECT numeroUsos, kilometraje INTO v_usos, v_kmTotal
