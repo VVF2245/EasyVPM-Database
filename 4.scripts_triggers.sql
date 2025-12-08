@@ -1,4 +1,4 @@
---el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
+-- el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
 DELIMITER //
 
 CREATE TRIGGER trg_cliente_edad_minima
@@ -9,7 +9,7 @@ BEGIN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El cliente debe tener al menos 12 años';
     END IF;
-END//
+END //
 DELIMITER ;
 
 DELIMITER //
@@ -33,13 +33,13 @@ BEGIN
                 SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
         END IF;
 
-        --comprobar que el vehículo está disponible
+        -- comprobar que el vehículo está disponible
 
         SELECT estado
         INTO v_estado
         FROM Vehiculos
         WHERE id = NEW.vehiculoId;
-        IF v_estado != 'disponible' THEN
+        IF v_estado = 'disponible' THEN
             SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'El vehículo no está disponible para alquilar';
         END IF;
@@ -59,14 +59,14 @@ DELIMITER ;
 
 
 DELIMITER //
---se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
+-- se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
 CREATE TRIGGER trg_A_insert_alquileres 
 AFTER INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
     IF NEW.fechaHoraFin IS NULL THEN
 
-        --no hay localización gps del vehículo al desengancharlo, por eso NULL
+        -- no hay localización gps del vehículo al desengancharlo, por eso NULL
         UPDATE Vehiculos
         SET estado = 'en_uso',
             localizacion = NULL
@@ -85,7 +85,7 @@ END//
 DELIMITER ;
 
 DELIMITER //
---calculo del cobro 
+-- calculo del cobro 
 CREATE TRIGGER trg_B_update_Alquileres
 BEFORE UPDATE ON Alquileres
 FOR EACH ROW

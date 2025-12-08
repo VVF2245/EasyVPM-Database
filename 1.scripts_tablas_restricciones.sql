@@ -10,31 +10,30 @@ CREATE TABLE Clientes (
     usuarioId INT NOT NULL,
     tarifaActual VARCHAR(50) NOT NULL,
     fechaNacimiento DATE NOT NULL,
-    alquilerActivo BOOLEAN NOT NULL, 'derivado, trigger hecho'
-    borrado BOOLEAN NOT NULL,
-    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    CONSTRAINT NoMinimoEdad CHECK(fechaNacimiento <= (CURDATE() - INTERVAL 12 YEAR))
-);
-
-CREATE TABLE Tecnicos_Mantenimiento (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    usuarioId INT NOT NULL,
-    fechaFinUltimoServicio DATE, 'derivado, trigger hecho'
+    alquilerActivo BOOLEAN NOT NULL, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-'Quito el enum por la explicación que dio Damián en clase y porque con el trigger del atributo derivado ya aparecerán los estados que digamos'
+CREATE TABLE Tecnicos_Mantenimiento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuarioId INT NOT NULL,
+    fechaFinUltimoServicio DATE, --'derivado, trigger hecho'
+    borrado BOOLEAN NOT NULL,
+    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- Quito el enum por la explicación que dio Damián en clase y porque con el trigger del atributo derivado ya aparecerán los estados que digamos'
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50) NOT NULL, 'derivado, trigger hecho'
+    estado VARCHAR(50) NOT NULL, --'derivado, trigger hecho'
     kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, 'derivado, trigger hecho'
-    numeroUsos INT NOT NULL DEFAULT 0, 'derivado, trigger hecho'
-    localizacion VARCHAR(200), 'derivado, trigger hecho'
+    numeroUsos INT NOT NULL DEFAULT 0, --'derivado, trigger hecho'
+    localizacion VARCHAR(200), --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL
 );
 
@@ -59,7 +58,7 @@ CREATE TABLE Patinetes_Electricos (
 CREATE TABLE Estaciones (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) UNIQUE NOT NULL,
-    numeroVehiculos INT NOT NULL, 'derivado, trigger hecho'
+    numeroVehiculos INT NOT NULL, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL
 );
 
@@ -67,7 +66,7 @@ CREATE TABLE Enganches (
     id INT PRIMARY KEY AUTO_INCREMENT,
     estacionId INT NOT NULL,
     numero INT NOT NULL,
-    estado VARCHAR(50) NOT NULL, 'derivado, trigger hecho'
+    estado VARCHAR(50) NOT NULL, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
         ON DELETE CASCADE
@@ -84,9 +83,9 @@ CREATE TABLE Alquileres (
     fechaHoraInicio DATETIME NOT NULL,
     fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
     distanciaRecorrida DECIMAL(5,2),
-    costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), 'derivada, trigger hecho'
-    lugarInicio VARCHAR(200) NOT NULL, 'derivada, trigger hecho'
-    lugarFin VARCHAR(200), 'derivada, trigger hecho'
+    costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), --'derivada, trigger hecho'
+    lugarInicio VARCHAR(200) NOT NULL, --'derivada, trigger hecho'
+    lugarFin VARCHAR(200), --'derivada, trigger hecho'
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
@@ -134,7 +133,7 @@ CREATE TABLE Pagos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     clienteId INT NOT NULL,
     alquilerId INT,
-    tipoPago VARCHAR(50) NOT NULL, 'derivado, trigger hecho, pero a lo mejor falta para cuando haces pagos mensuales (no es automático)'
+    tipoPago VARCHAR(50) NOT NULL, -- derivado, trigger hecho, pero a lo mejor falta para cuando haces pagos mensuales (no es automático)
     cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
     fecha DATE NOT NULL,
     FOREIGN KEY (clienteId) REFERENCES Clientes(id)
