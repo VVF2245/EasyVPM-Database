@@ -294,57 +294,162 @@ para saber dónde puedo dejar un vehículo al finalizar el alquiler.
 - Excluir enganches borrados
 - Ordenar por número de enganche
 
-#### R.F.06. Creación de Alquiler
+#### R.F.19. Creación de Alquiler
 Como cliente, <br>
-quiero alquilar un vehículo desde la aplicación<br>
-para inciar mi viaje sin necesidad de gestiones manuales.
+quiero iniciar un alquiler seleccionando un vehículo disponible en una estación,<br>
+para poder usarlo inmediatamente.
 
-**P.A.06.**
-- Solo se permite iniciar alquiler si hay vehículos disponibles.
-- El sistema registra fecha y hora de inicio.
-- Se asocia el vehículo y la estación al alquiler.
-Se debe aplicar la regla de negocio R.N.02:
-   - Un cliente puede alquilar un VMP si no tiene activo ninguno y no se recibe mensaje de error.
-   - Un cliente al intentar alquilar un VMP teniendo uno ya activo recibe un mensaje de prestámo invalido por superar el número de vehículos alquilados permitido.
-- La aplicacion registra el tiempo en el que se devuelve el vehículo a la estación.
-- El sistema calcula a partir de los tiempos registrados el precio a pagar. 
-- El sistema permite pagar con tarjeta de crédito o a través de sistemas de pago en línea como PayPal, por ejemplo, desde la aplicación.
+**P.A.19.**
+- El sistema valida que el vehículo esté en estado "disponible".
+- Se comprueba que el cliente no tenga otro alquiler activo.
+- Se registra fecha y hora de inicio, vehículo, estación de inicio y enganche asociado.
+- El sistema cambia el estado del vehículo a "en_uso".
+- El sistema cambia el estado del enganche donde estaba el vehículo a "libre".
 
-#### R.F.05. Consulta de estaciones cercanas
-Como cliente, <br>
-quiero ver las estaciones más cercanas a mi ubicación (GPS) <br>
-mediante un servicio de mapas <br>
-para recoger o devolver un vehículo fácilmente.
+#### R.F.20. Finalización del alquiler
+Como cliente de EasyVPM,<br>
+quiero finalizar mi alquiler dejando el vehículo en un enganche libre,<br>
+para cerrar el servicio y que se me cobre lo correspondiente.
 
-**P.A.05.**
-- El sistema muestra estaciones por geolocalización? O por listado?.
-- Cada estación muestra cuántos vehículos hay disponibles.
-- Si el usuario no permite el acceso a la ubicación, el sistema muestra un mensaje adecuado.
-- Se debe aplicar la regla de negocio R.N.02.
+**P.A.20.**
+- El cliente selecciona un enganche libre de la estación donde devuelve el vehículo
+- El sistema registra fecha y hora de finalización.
+- Se calcula el coste total según la duración y la tarifa activa.
+- El vehículo pasa a estado "disponible".
+- El enganche donde se deja el vehículo pasa a "ocupado".
+- Se genera el pago asociado al alquiler.
 
-#### R.F.06. Disponibilidad de los vehículos
-Como cliente, <br>
-quiero ver la cantidad y el tipo de vehículos <br>
-que hay en cada estación, <br>
-para poder seleccionar el mejor vehículo disponible <br>
-para mis necesidades.
+#### R.F.21. Historial de alquileres
+Como cliente de EasyVPM,<br>
+quiero consultar mis alquileres anteriores,<br>
+para revisar mis usos.
 
-**P.A.06.**
-- El usuario puede ver cuántos vehículos hay en cada estación y de qué tipo (bicicletas, scooters, etc.).
-- Los datos de disponibilidad se actualizan en tiempo real.
-- Se debe aplicar la regla de negocio R.N.06.
+**P.A.21.**
+- Se listan los alquileres realizados del cliente.
+- Se muestra vehículo, fechas de inicio y fin, duración y coste total.
+- Se permite filtrar por rango de fechas.
 
-#### R.F.07. Valoración del vehículo
+#### R.F.22. Consulta de vehículos en alquiler
 Como administrador de EasyVPM,<br>
-quiero que los clientes puedan poner valoración al vehículo,<br>
-para poder conocer el estado real del servicio, detectar posibles incidencias y ayudar a mejorar el funcionamiento del servicio.
+quiero consultar todos los vehículos que están actualmente en uso,<br>
+para monitorear su uso.
 
-**P.A.07.**
-- Al finalizar el alquiler la aplicación ofrece la opción de valorar el vehículo y poner algún comentario (por ejemplo, de 1 a 5 estrellas con comentario opcional).
-- El sistema registra la valoración junto al identificador del usuario, vehículo y la fecha.
-- Las valoraciones bajas (por ejemplo 1 o 2 estrellas) y con comentario, explicando la incidencia o el porqué de la baja puntuación, se marcan automáticamente para revisión. <br>
-(*El comentario es necesario porque no vas a movilizar a un trabajador solo porque a algún gracioso le apetezca poner mala valoración*)
-- Si un vehículo recibe varias valoraciones bajas y sin comentarios se marca automáticamente para revisión (varias personas opinan que no está muy bien y por lo tanto se revisa).
+**P.A.22.**
+- Se listan alquileres que no hayan terminado.
+- Se muestra cliente, vehículo, estación y enganche de salida, fecha y hora de inicio.
+- Se puede filtrar por estación, tipo de vehículo o cliente.
+
+#### R.F.23. Registro de pago
+Como cliente de EasyVPM,<br>
+quiero poder pagar mi mensualidad de forma manual desde la aplicación,<br>
+para renovar mi tarifa y seguir gozando de sus beneficios.
+
+**P.A.23.**
+- El cliente accede a la sección de pagos -> mensualidad.
+- El sistema muestra el importe de la mensualidad y la fecha de vencimiento.
+
+#### R.F.24. Consulta de pagos (cliente)
+Como cliente de EasyVPM,<br>
+quiero consultar mis pagos realizados,<br>
+para tener control sobre mis gastos.
+
+**P.A.24.**
+- Se listan pagos realizados del cliente.
+- Se muestra fecha, importe, tipo de pago y alquiler asociado.
+- Se permite filtrar por rango de fechas o tipo de pago.
+
+#### R.F.25. Consulta de pagos (administrador)
+Como administrador de EasyVPM,<br>
+quiero consultar todos los pagos registrados,<br>
+para controlar la facturación del sistema.
+
+**P.A.25.**
+- Se listan pagos de todos los clientes.
+- Se permite filtrar por cliente, fecha, tipo de pago o importe.
+
+#### R.F.26. Inicio de reparación
+Como técnico de mantenimiento de EasyVPM,<br>
+quiero poder registrar el inicio de una reparación,<br>
+para indicar que estoy trabajando en un vehículo y sacarlo del servicio.
+
+**P.A.26.**
+- El técnico selecciona un vehículo con estado "averiado" o "mantenimiento_pendiente".
+- El sistema crea un registro de reparación con técnico responsable, fecha de inicio.
+- El estado del vehículo pasa automáticamente a "en_reparación".
+- El sistema impide iniciar una reparación si un vehículo está alquilado o ya está en reparación.
+
+#### R.F.27. Finalización de reparación
+COmo técnico de mantenimiento,<br>
+quiero poder marcar una reparación como finalizada,<br>
+para que el vehículo vuelva al servicio cuando esté en condiciones.
+
+**P.A.27.**
+- El técnico selecciona una reparación activa.
+- Se añade la fecha de finalización de la reparación y se indica detalladamente qué le sucedía al vehículo y lo que le ha hecho.
+- El vehículo cambia su estado a "reparado" para que pasen a recogerlo y recoloquen.
+
+#### R.F.28. Consulta de reparaciones activas
+Como técnico de mantenimiento,<br>
+quiero consultar las reparaciones que estén actualmente sin terminar,<br>
+para organizar mi trabajo del día.
+
+**P.A.28.**
+- El sistema muestra las reparaciones sin fecha de fin.
+- Se incluye vehículo, técnico asignado, fecha de inicio.
+- Se puede ordenar por antigüedad.
+- No se muestran reparaciones de vehículos borrados.
+
+#### R.F.29 Historial de reparaciones
+Como técnico de EasyVPM,<br>
+quiero ver el historial completo de reparaciones de un vehículo,<br>
+para conocer sus averías anteriores.
+
+**P.A.29.**
+- Se muestran registros ya finalizados.
+- Se incluye fecha de inicio, fecha de fin, técnico, descripción del problema.
+- Permite filtrar por técnico o intervalo de fechas.
+
+#### R.F.30. Registro de valoración
+Como cliente de EasyVPM,<br>
+quiero poder enviar una valoración sobre su vehículo después de usarlo,<br>
+para indicar la calidad del servicio y el estado del vehículo.
+
+**P.A.30.**
+- El cliente solo puede valorar un vehículo si ha completado un alquiler del mismo.
+- Se recoge una puntuación (1-5) y un comentario opcional.
+- El sistema verifica que no haya una valoración duplicada para ese mismo alquiler.
+- Si la puntuación es <=2 el sistema cambia el estado del vehículo a averiado automáticamente.
+- La valoración queda registrada con fecha y hora.
+
+#### R.F.31. Consulta de valoraciones de un vehículo
+Como técnico de mantenimiento de EasyVPM,<br>
+quiero consultar todas las valoraciones de un vehículo,<br>
+para tener una visión del estado percibido por los clientes.
+
+**P.A.31.**
+- Se muestran las valoraciones incluyendo cliente, fecha, puntuación y comentario.
+- Se puede ordenar por fecha o puntuación.
+- Permite filtrar por puntuación baja (1-2) para detectar problemas urgentes.
+
+#### R.F.32. Promedio de valoraciones de un vehículo
+Como administrador de EasyVPM,<br>
+quiero consultar la valoración media de cada vehículo,<br>
+para evaluar su aceptación y rendimiento.
+
+**P.A.32.**
+- El sistema calcula el promedio de puntuaciones de todas las valoraciones.
+- Muestra número total de valoraciones y media de puntuación.
+- Se puede filtrar por vehículos mejor o peor valorados.
+
+#### R.F.33. Historial personal de valoraciones
+Como cliente de EasyVPM,<br>
+quiero consultar las valoraciones que he enviado,<br>
+para revisar mi historial de opiniones.
+
+**P.A.33.**
+- Muestra las valoraciones realizadas por el cliente.
+- Incluye fecha, vehículo, puntuación y comentario (opcional).
+- Permite filtrar por fecha o vehículo.
 
 
 
