@@ -33,7 +33,7 @@ FROM Alquileres
 WHERE Alquileres.id=p_alquilerId;
 
 -- Validar fecha
-SET v_minutos= TIMESTAMPDIFF(MINUTE, v_fechaInicio, p_fechaFin);
+SET v_minutos = TIMESTAMPDIFF(MINUTE, v_fechaInicio, p_fechaFin);
 IF v_minutos < 0 THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
     'La fecha fin no puede ser anterior a la inicio';
@@ -49,50 +49,50 @@ ORDER BY fecha DESC LIMIT 1;
 -- Validar Mensualidad
 IF v_fechaMensualidad IS NOT NULL AND
 v_fechaMensualidad >= DATE_SUB(p_fechaFin, INTERVAL 30 DAY) THEN
-    SET v_costo=0;
+    SET v_costo = 0;
 ELSE 
-    SET v_costo=v_minutos* 0.20; --Tarifa Base
+    SET v_costo = v_minutos* 0.20; --Tarifa Base
 END IF;
 
 -- 3. Obtener datos localizacion final
 SELECT Estaciones.nombre, Enganches.numero
 INTO v_estacionFin, v_numFin
 FROM Enganches 
-JOIN Estaciones ON Enganches.estacionId=Estaciones.id
-WHERE Enganches.id=p_engancheFinId;
+JOIN Estaciones ON Enganches.estacionId = Estaciones.id
+WHERE Enganches.id = p_engancheFinId;
 
 -- 4. Actualizar alquiler
 UPDATE Alquileres
-SET fechaHoraFin=p_fechaFin,
-    engancheFinId=p_engancheFinId,
-    distanciaRecorrida=p_distanciaRecorrida,
-    costo=v_costo,
-    lugarFin= CONCAT('Estación ', v_estacionFin, ' Enganche ', v_numFin)
-WHERE id=p_alquilerId;
+SET fechaHoraFin = p_fechaFin,
+    engancheFinId = p_engancheFinId,
+    distanciaRecorrida = p_distanciaRecorrida,
+    costo = v_costo,
+    lugarFin = CONCAT('Estación ', v_estacionFin, ' Enganche ', v_numFin)
+WHERE id = p_alquilerId;
 
 -- 5. Actualizar cliente y enganche
 UPDATE Clientes
-    SET alquilerActivo=FALSE
-    WHERE id=v_clienteId;
+    SET alquilerActivo = FALSE
+    WHERE id = v_clienteId;
 UPDATE Enganches
-    SET estado='ocupado'
-WHERE id=p_engancheFinId;
+    SET estado ='ocupado'
+WHERE id = p_engancheFinId;
 
 --6. Actualizar Vehiculos
 UPDATE Vehiculos
-    SET numeroUsos=numeroUsos+1,
-    kilometraje=kilometraje+p_distanciaRecorrida,
-    localizacion= CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
-    WHERE id=v_vehiculoId;
+    SET numeroUsos = numeroUsos + 1,
+    kilometraje = kilometraje + p_distanciaRecorrida,
+    localizacion = CONCAT('Estacion ', v_estacionFin, ' Enganche ', v_numFin)
+    WHERE id = v_vehiculoId;
 
 SELECT numeroUsos, kilometraje INTO v_usos, v_kmTotal
-FROM Vehiculos WHERE id=v_vehiculoId;
+FROM Vehiculos WHERE id = v_vehiculoId;
 
 -- Actualizar estado vehiculo
 UPDATE Vehiculos
-    SET estado= IF(v_usos>50 OR v_kmTotal >500.00, 
+    SET estado = IF(v_usos>50 OR v_kmTotal >500.00, 
     'mantenimiento_pendiente', 'disponible')
-    WHERE id=v_vehiculoId;
+    WHERE id = v_vehiculoId;
 
 INSERT INTO Pagos(clienteId, alquilerId, tipoPago, cantidad, fecha)
 VALUES (v_clienteId, p_alquilerId, 'cargo_automatico', v_costo, CURDATE());
