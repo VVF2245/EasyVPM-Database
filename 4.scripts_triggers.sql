@@ -39,7 +39,7 @@ BEGIN
         INTO v_estado
         FROM Vehiculos
         WHERE id = NEW.vehiculoId;
-        IF v_estado = 'disponible' THEN
+        IF v_estado != 'disponible' THEN
             SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'El vehículo no está disponible para alquilar';
         END IF;
