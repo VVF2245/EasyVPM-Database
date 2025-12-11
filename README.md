@@ -95,7 +95,7 @@ El sistema de EasyVPM contará con los siguientes tipos de usuarios:
 
 ### 4.1. Requisitos funcionales
 
-#### R.F.01. Registro de usuario
+#### R.F.1.01. Registro de usuario
 Como administrador de EasyVPM, <br>
 quiero que mis clientes y técnicos de mantenimiento se puedan registrar al sistema,<br>
 para poder acceder al servicio de alquiler.
@@ -106,9 +106,9 @@ para poder acceder al servicio de alquiler.
 - Se comprueba que la contraseña tiene más de 8 dígitos.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
-- Se debe aplicar la regla de negocio R.N.04.
+- Se debe aplicar la regla de negocio R.N.01.
 
-#### R.F.02. Eliminación de la cuenta
+#### R.F.1.02. Eliminación de la cuenta
 Como cliente de EasyVPM, <br>
 quiero poder eliminar mi cuenta asi como mis datos asociados,<br>
 para poder tener control sobre mi informacion personal y asegurar mi privacidad.
@@ -121,9 +121,9 @@ para poder tener control sobre mi informacion personal y asegurar mi privacidad.
 - Si coincide se le pondra el mensaje "Eliminacion completada" y el sistema borrara su cuenta y datos.
 - Si no, le saldra mensaje de error y se le pedirá de nuevo el código.
 - En el sistema realmente se hace un soft delete y se activa la cuenta como "borrada" para no tenerla en cuenta para las estadísticas ni recuentos.
-- Se debe aplicar la regla de negocio R.N.01.
+- Se debe aplicar la regla de negocio R.N.02.
 
-#### R.F.03. Actualización de datos de la cuenta
+#### R.F.1.03. Actualización de datos de la cuenta
 Como usuario de EasyVPM,<br>
 quiero poder modificar mis datos personales desde mi perfil,<br>
 para mantener mi información actualizada y correcta en el sistema.
@@ -136,9 +136,10 @@ para mantener mi información actualizada y correcta en el sistema.
 - Los cambios no se guardan hasta que el usuario confirme.
 - Si el correo introducido ya existe en otra cuenta, el sistema muestra un mensaje indicando que está duplicado.
 - Al completar la actualización, el sistema muestra el mensaje "Datos actualizados correctamente"
+- Se debe aplicar la regla de negocio R.N.01.
 
 
-#### R.F.04. Recuperación de contraseña
+#### R.F.1.04. Recuperación de contraseña
 Como cliente de EasyVPM,<br>
 quiero poder recuperar mi contraseña si la olvido,<br>
 para no perder el acceso a mi cuenta.
@@ -148,7 +149,7 @@ para no perder el acceso a mi cuenta.
 - El enlace dura solo 24 horas o hasta utilizarlo.
 - El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
 
-#### R.F.05. Consulta de información personal
+#### R.F.1.05. Consulta de información personal
 Como cliente de EasyVPM,<br>
 quiero consultar mis datos personales,<br>
 para verificar que mi información está correcta.
@@ -159,7 +160,7 @@ para verificar que mi información está correcta.
 - Si es cliente muestra también fecha de nacimiento, tarifa actual y si tiene algún alquiler activo.
 - Si es técnico de mantenimiento muestra además la fecha del último servicio realizado.
 
-#### R.F.06. Registro de vehículos
+#### R.F.2.01. Registro de vehículos
 Como administrador de EasyVPM,<br>
 quiero poder registrar nuevos vehículos en el sistema,<br>
 para incorporarlos a la flota disponible para alquiler.
@@ -172,7 +173,7 @@ para incorporarlos a la flota disponible para alquiler.
 - Se registran los atributos generales del vehículo: estado inicial, localización, kilometraje inicial, número de usos inicial y borrado = FALSE.
 - El sistema le crea automáticamente un identificador único (autoincrement)
 
-#### R.F.07 Eliminación de vehículos
+#### R.F.2.02 Eliminación de vehículos
 Como administrador de EasyVPM,<br>
 quiero poder eliminar vehículos de la flota,<br>
 para mantener actualizada la disponibilidad de la plataforma.
@@ -182,8 +183,9 @@ para mantener actualizada la disponibilidad de la plataforma.
 - El sistema comprueba que no esté asociado a un alquiler activo.
 - Si no está en uso, se marca como borrado = TRUE (soft delete)
 - Si el vehículo tiene alquileres históricos o registros de reparaciones, estos permanecen por si acaso.
+- Se debe aplicar la regla de negocio R.N.04.
 
-#### R.F.08. Actualización de valores de un vehículo
+#### R.F.2.03. Actualización de valores de un vehículo
 Como administrador de EasyVPM,<br>
 quiero poder modificar los datos de los vehículos,<br>
 para mantener la información actualizada sobre la flota.
@@ -195,7 +197,7 @@ para mantener la información actualizada sobre la flota.
 - El sistema valida que los valores sean consistentes (por ejemplo, kilometraje >=0, número de usos >= o).
 - Se actualizan las estaciones y enganches si procede.
 
-#### R.F.09. Lista vehículos para mantenimiento
+#### R.F.2.04. Lista vehículos para mantenimiento
 Como técnico de mantenimiento de EasyVPM,<br>
 quiero poder consultar qué vehículos están con estado mantenimiento_pendiente o averiado,<br>
 para poder planificar su revisión y reparación de forma eficiente.
@@ -206,7 +208,7 @@ para poder planificar su revisión y reparación de forma eficiente.
 - Excluir vehículos borrados.
 - Permitir ordenar por kilometraje o número de usos para priorizar los vehículos más necesitados de revisión.
 
-#### R.F.10. Lista de vehículos disponibles por estación
+#### R.F.2.05. Lista de vehículos disponibles por estación
 Como cliente de EasyVPM,<br>
 quiero poder consultar qué vehículos en una estación concreta,<br>
 para poder elegir uno que pueda recoger ahí fácilmente.
@@ -217,7 +219,7 @@ para poder elegir uno que pueda recoger ahí fácilmente.
 - Mostrar información: id del vehículo, tipo (bicicleta o patinete), autonomía (si es patinete), tipo de bicicleta (si es bicicleta) localización exacta
 - Excluir vehículos borrados
 
-#### R.F.11. Registro de estaciones
+#### R.F.3.01. Registro de estaciones
 Como administrador de EasyVPM,<br>
 quiero poder registrar nuevas estaciones en el sistema,<br>
 para ampliar la cobertura del servicio de alquiler.
@@ -227,7 +229,7 @@ para ampliar la cobertura del servicio de alquiler.
 - Inicializar el número de vehículos a 0.
 - Marcar la estación como no borrada.
 
-#### R.F.12. Actualización de estación
+#### R.F.3.02. Actualización de estación
 Como administrador de EasyVPM,<br>
 quiero poder modificar los datos de las estaciones existentes,<br>
 para mantener la información actualizada.
@@ -236,7 +238,7 @@ para mantener la información actualizada.
 - Permitir actualizar nombre y estado de borrado.
 - Validar que el nombre no se duplique con otra estación activa.
 
-#### R.F.13. Eliminación de estación
+#### R.F.3.03. Eliminación de estación
 Como administrador de EasyVPM,<br>
 quiero poder eliminar estaciones del sistema,<br>
 para mantener la base de datos limpia y solo con estaciones activas.
@@ -246,7 +248,7 @@ para mantener la base de datos limpia y solo con estaciones activas.
 - Evitar la eliminación si existen enganches con vehículos activos asociados.
 - Actualizar automáticamente la disponibilidad de enganches y vehículos asociados.
 
-#### R.F.14. Consulta de estaciones
+#### R.F.3.04. Consulta de estaciones
 Como cliente de EasyVPM,<br>
 quiero poder consultar todas las estaciones disponibles,<br>
 para saber dónde puedo recoger o devolver un vehículo.
@@ -255,7 +257,7 @@ para saber dónde puedo recoger o devolver un vehículo.
 - Mostrar información: nombre de la estación, número de vehículos disponibles y localización.
 - Excluir estaciones marcadas como borradas
 
-#### R.F.15. Registro de enganche
+#### R.F.3.05. Registro de enganche
 Como administrador de EasyVPM,<br>
 quiero poder registrar nuevos enganches en las estaciones,<br>
 para organizar la colocación de los vehículos.
@@ -265,7 +267,7 @@ para organizar la colocación de los vehículos.
 - Inicializar estado del enganche como "libre".
 - Evitar duplicados de número de enganche en la misma estación.
 
-#### R.F.16. Actualización de enganche
+#### R.F.3.06. Actualización de enganche
 Como administrador de EasyVPM,<br>
 quiero poder actualizar el estado de un enganche,<br>
 para reflejar si está ocupado o libre.
@@ -273,8 +275,10 @@ para reflejar si está ocupado o libre.
 **P.A.15.**
 - Permitir cambiar el estado y la estación asociada.
 - Actualizar automáticamente el número de vehículos de la estación asociada.
+- Se debe aplicar la regla de negocio R.N.08.
+- Se debe aplicar la regla de negocio R.N.09.
 
-#### R.F.17. Eliminación de enganche
+#### R.F.3.07. Eliminación de enganche
 Como administrador de EasyVPM,<br>
 quiero poder eliminar enganches del sistema,<br>
 para reorganizar la estación y gestionar la disponibilidad de espacios.
@@ -284,7 +288,7 @@ para reorganizar la estación y gestionar la disponibilidad de espacios.
 - Evitar la eliminación si hay un vehículo asignado o un alquiler activo en el enganche.
 - Actualizar automáticamente el número de vehículos disponibles de la estación asociada.
 
-#### R.F.18. Consulta de enganches
+#### R.F.3.08. Consulta de enganches
 Como cliente de EasyVPM,<br>
 quiero poder consultar los enganches disponibles en una estación,<br>
 para saber dónde puedo dejar un vehículo al finalizar el alquiler.
@@ -294,7 +298,7 @@ para saber dónde puedo dejar un vehículo al finalizar el alquiler.
 - Excluir enganches borrados
 - Ordenar por número de enganche
 
-#### R.F.19. Creación de Alquiler
+#### R.F.4.01. Creación de Alquiler
 Como cliente, <br>
 quiero iniciar un alquiler seleccionando un vehículo disponible en una estación,<br>
 para poder usarlo inmediatamente.
@@ -303,10 +307,10 @@ para poder usarlo inmediatamente.
 - El sistema valida que el vehículo esté en estado "disponible".
 - Se comprueba que el cliente no tenga otro alquiler activo.
 - Se registra fecha y hora de inicio, vehículo, estación de inicio y enganche asociado.
-- El sistema cambia el estado del vehículo a "en_uso".
-- El sistema cambia el estado del enganche donde estaba el vehículo a "libre".
+- Se debe aplicar la regla de negocio R.N.03.
+- Se debe aplicar la regla de negocio R.N.13.
 
-#### R.F.20. Finalización del alquiler
+#### R.F.4.02. Finalización del alquiler
 Como cliente de EasyVPM,<br>
 quiero finalizar mi alquiler dejando el vehículo en un enganche libre,<br>
 para cerrar el servicio y que se me cobre lo correspondiente.
@@ -318,8 +322,11 @@ para cerrar el servicio y que se me cobre lo correspondiente.
 - El vehículo pasa a estado "disponible".
 - El enganche donde se deja el vehículo pasa a "ocupado".
 - Se genera el pago asociado al alquiler.
+- Se debe aplicar la regla de negocio R.N.11.
+- Se debe aplicar la regla de negocio R.N.12.
+- Se debe aplicar la regla de negocio R.N.14.
 
-#### R.F.21. Historial de alquileres
+#### R.F.4.03. Historial de alquileres
 Como cliente de EasyVPM,<br>
 quiero consultar mis alquileres anteriores,<br>
 para revisar mis usos.
@@ -329,7 +336,7 @@ para revisar mis usos.
 - Se muestra vehículo, fechas de inicio y fin, duración y coste total.
 - Se permite filtrar por rango de fechas.
 
-#### R.F.22. Consulta de vehículos en alquiler
+#### R.F.4.04. Consulta de vehículos en alquiler
 Como administrador de EasyVPM,<br>
 quiero consultar todos los vehículos que están actualmente en uso,<br>
 para monitorear su uso.
@@ -339,7 +346,7 @@ para monitorear su uso.
 - Se muestra cliente, vehículo, estación y enganche de salida, fecha y hora de inicio.
 - Se puede filtrar por estación, tipo de vehículo o cliente.
 
-#### R.F.23. Registro de pago
+#### R.F.5.01. Registro de pago
 Como cliente de EasyVPM,<br>
 quiero poder pagar mi mensualidad de forma manual desde la aplicación,<br>
 para renovar mi tarifa y seguir gozando de sus beneficios.
@@ -348,7 +355,7 @@ para renovar mi tarifa y seguir gozando de sus beneficios.
 - El cliente accede a la sección de pagos -> mensualidad.
 - El sistema muestra el importe de la mensualidad y la fecha de vencimiento.
 
-#### R.F.24. Consulta de pagos (cliente)
+#### R.F.5.02. Consulta de pagos (cliente)
 Como cliente de EasyVPM,<br>
 quiero consultar mis pagos realizados,<br>
 para tener control sobre mis gastos.
@@ -358,7 +365,7 @@ para tener control sobre mis gastos.
 - Se muestra fecha, importe, tipo de pago y alquiler asociado.
 - Se permite filtrar por rango de fechas o tipo de pago.
 
-#### R.F.25. Consulta de pagos (administrador)
+#### R.F.5.03. Consulta de pagos (administrador)
 Como administrador de EasyVPM,<br>
 quiero consultar todos los pagos registrados,<br>
 para controlar la facturación del sistema.
@@ -367,7 +374,7 @@ para controlar la facturación del sistema.
 - Se listan pagos de todos los clientes.
 - Se permite filtrar por cliente, fecha, tipo de pago o importe.
 
-#### R.F.26. Inicio de reparación
+#### R.F.6.01. Inicio de reparación
 Como técnico de mantenimiento de EasyVPM,<br>
 quiero poder registrar el inicio de una reparación,<br>
 para indicar que estoy trabajando en un vehículo y sacarlo del servicio.
@@ -376,9 +383,9 @@ para indicar que estoy trabajando en un vehículo y sacarlo del servicio.
 - El técnico selecciona un vehículo con estado "averiado" o "mantenimiento_pendiente".
 - El sistema crea un registro de reparación con técnico responsable, fecha de inicio.
 - El estado del vehículo pasa automáticamente a "en_reparación".
-- El sistema impide iniciar una reparación si un vehículo está alquilado o ya está en reparación.
+- Se debe aplicar la regla de negocio R.N.06.
 
-#### R.F.27. Finalización de reparación
+#### R.F.6.02. Finalización de reparación
 COmo técnico de mantenimiento,<br>
 quiero poder marcar una reparación como finalizada,<br>
 para que el vehículo vuelva al servicio cuando esté en condiciones.
@@ -387,8 +394,9 @@ para que el vehículo vuelva al servicio cuando esté en condiciones.
 - El técnico selecciona una reparación activa.
 - Se añade la fecha de finalización de la reparación y se indica detalladamente qué le sucedía al vehículo y lo que le ha hecho.
 - El vehículo cambia su estado a "reparado" para que pasen a recogerlo y recoloquen.
+- Se debe aplicar la regla de negocio R.N.07.
 
-#### R.F.28. Consulta de reparaciones activas
+#### R.F.6.03. Consulta de reparaciones activas
 Como técnico de mantenimiento,<br>
 quiero consultar las reparaciones que estén actualmente sin terminar,<br>
 para organizar mi trabajo del día.
@@ -399,7 +407,7 @@ para organizar mi trabajo del día.
 - Se puede ordenar por antigüedad.
 - No se muestran reparaciones de vehículos borrados.
 
-#### R.F.29 Historial de reparaciones
+#### R.F.6.04. Historial de reparaciones
 Como técnico de EasyVPM,<br>
 quiero ver el historial completo de reparaciones de un vehículo,<br>
 para conocer sus averías anteriores.
@@ -409,7 +417,7 @@ para conocer sus averías anteriores.
 - Se incluye fecha de inicio, fecha de fin, técnico, descripción del problema.
 - Permite filtrar por técnico o intervalo de fechas.
 
-#### R.F.30. Registro de valoración
+#### R.F.7.01. Registro de valoración
 Como cliente de EasyVPM,<br>
 quiero poder enviar una valoración sobre su vehículo después de usarlo,<br>
 para indicar la calidad del servicio y el estado del vehículo.
@@ -420,8 +428,9 @@ para indicar la calidad del servicio y el estado del vehículo.
 - El sistema verifica que no haya una valoración duplicada para ese mismo alquiler.
 - Si la puntuación es <=2 el sistema cambia el estado del vehículo a averiado automáticamente.
 - La valoración queda registrada con fecha y hora.
+- Se debe aplicar la regla de negocio R.N.10.
 
-#### R.F.31. Consulta de valoraciones de un vehículo
+#### R.F.7.02. Consulta de valoraciones de un vehículo
 Como técnico de mantenimiento de EasyVPM,<br>
 quiero consultar todas las valoraciones de un vehículo,<br>
 para tener una visión del estado percibido por los clientes.
@@ -431,7 +440,7 @@ para tener una visión del estado percibido por los clientes.
 - Se puede ordenar por fecha o puntuación.
 - Permite filtrar por puntuación baja (1-2) para detectar problemas urgentes.
 
-#### R.F.32. Promedio de valoraciones de un vehículo
+#### R.F.7.03. Promedio de valoraciones de un vehículo
 Como administrador de EasyVPM,<br>
 quiero consultar la valoración media de cada vehículo,<br>
 para evaluar su aceptación y rendimiento.
@@ -441,7 +450,7 @@ para evaluar su aceptación y rendimiento.
 - Muestra número total de valoraciones y media de puntuación.
 - Se puede filtrar por vehículos mejor o peor valorados.
 
-#### R.F.33. Historial personal de valoraciones
+#### R.F.7.04. Historial personal de valoraciones
 Como cliente de EasyVPM,<br>
 quiero consultar las valoraciones que he enviado,<br>
 para revisar mi historial de opiniones.
@@ -491,31 +500,9 @@ para saber si algún vehículo necesita mantenimiento.
 
 ### 4.1.2. Reglas de negocio
 
-#### R.N.01. No eliminar usuarios que tengan alquiler activo
-Como administrador de EasyVPM, <br>
-quiero que el cliente no pueda eliminar su cuenta de la aplicación<br>
-mientras esté alquilando un vehículo,<br>
-para asegurar la devolución del vehículo y el registro del pago.
-
-#### R.N.02. Evitar que los usuarios alquilen 2 vehículos simultáneamente
-Como administardor de EasyVPM, <br>
-quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
-para evitar la falta de disponibilidad de vehículos.
-
-#### R.N.03. No podra alquilarse un vehiculo con mas de 500 km o 50 alquileres desde la ultima fecha de revision <br>
+#### R.N.01. Edad mínima obligatoria <br>
 Como administrador de EasyVPM,<br>
-quiero que todos los vehículos que hayan superado<br>
-50 alquileres o 500 km recorridos deben pasar por revisión,<br>
-para asegurar la seguridad y calidad del servicio.
-
-**P.A.03.**
-- Cada vez que un cliente finalize un alquiler, se registrará el uso de ese VMP, asi como los kilometros realizados, y se sumarán al total de usos y kilometros de ese vehículo.
-- Cuando se supere los 50 usos o 500 km se cambiará el estado del VMP (estado: mantenimiento pendiente) y se avisará a los técnicos de mantenimiento para que revisen el VMP. Después, se reiniciará el número de usos y kilometros y volverá a estar disponible.
-
-#### R.N.04. Edad mínima obligatoria <br>
-Como administrador de EasyVPM,<br>
-quiero que solo los usuarios mayores de 12 años<br>
-puedan utilizar EasyVPM y alquilar un vehiculo<br>
+quiero que solo los usuarios mayores de 12 años puedan utilizar EasyVPM y alquilar un vehiculo,<br>
 para garantizar la seguridad de los menores.
 
 **P.A.04.**
@@ -523,55 +510,69 @@ para garantizar la seguridad de los menores.
 - Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
 - Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
 
-#### R.N.05. Cambio de estado vehículo <br>
+#### R.N.02. No eliminar usuarios que tengan alquiler activo
+Como administrador de EasyVPM, <br>
+quiero que no se pueda eliminar (ni hacer soft delete) la cuenta del cliente mientras esté alquilando un vehículo,<br>
+para asegurar la devolución del vehículo y el registro del pago.
+
+#### R.N.03. Evitar que los usuarios alquilen 2 vehículos simultáneamente
+Como administardor de EasyVPM, <br>
+quiero que el cliente no pudea alquilar más de un vehículo a la vez,<br>
+para evitar la falta de disponibilidad de vehículos.
+
+#### R.N.04. No eliminar vehículos que estén en uso
 Como administrador de EasyVPM,<br>
-quiero que el sistema cambie automáticamente el estado de los vehículos,<br>
-para que el cliente y el técnico de mantenimiento sepa desde la app cómo se encuentran los vehículos.
+quiero que no se pueda borrar (o hacer soft delete) un vehículo cuyo estado sea "en_uso".
 
-**P.A.05.**
-- Si un vehículo se encuentra en buen estado aparacerá como "disponible" desde que su último usuario lo coloque en una estación.
-- Si un vehículo está en mal estado aparecerá como "averiado" desde que lo informe un trabajador o cliente.
-- Si un vehículo está en uso aparecerá como "en uso" desde que alguien lo alquile.
-- Si un vehículo alcanza los 50 alquileres o 500 km aparecerá como "mantenimiento pendiente".
-- Si un técnico de mantenimiento se lleva un vehículo aparece como "en mantenimiento".
-- Si un vehículo está en el almacen tras haberse reparado y está esperando que sea redistribuido aparece como "reparado".
-
-#### R.N.06. Cambio de estado enganche <br>
+#### R.N.05. Cambio de estado al superar uso máximo
 Como administrador de EasyVPM,<br>
-quiero que el sistema cambie automáticamente el estado de los enganches,<br>
-para que el cliente y el técnico de mantenimiento sepa desde la app en qué estado se encuentran.
+quiero que todos los vehículos que hayan superado 50 alquileres o 500 km recorridos se les cambie el estado a *"mantenimiento_pendiente"*,<br>
+para asegurar la seguridad y calidad del servicio.
 
-**P.A.06.**
-- Si un enganche se encuentra libre aparece como "libre" desde que alguien desengancha el vehículo de él.
-- Si un enganche se encuentra ocupado aparece como "ocupado" desde que alguien enganche un vehículo en él.
-- Si un enganche se estropea o hay algún motivo temporal que afecta a la zona (por ejemplo hay celebración con carrozas y prohíben la circulación de VMPs) el enganche aparece como "fuera de servicio".
-
-#### R.N.07. Control de roles y permisos <br>
+#### R.N.06. Cambio de estado al iniciar reparación
 Como administrador de EasyVPM,<br>
-quiero que el sistema tenga definido de forma clara los permisos de acceso según el tipo de usuario,
-para evitar que haya accesos indebidos a funciones críticas.
+quiero que cuando se inicie el mantenimiento de un vehículo se le cambie el estado a *"en_mantenimiento"*,<br>
+para indicar que el vehículo está siendo intervenido y no puede ser utilizado por los usuarios.
 
-**P.A.07.**
-- Los clientes solo pueden acceder a funciones de consulta (estaciones, disponibilidad, historial) y alquiler.
-- Los administradores pueden gestionar todo el sistema.
-- Los técnicos solo pueden visualizar y actualizar el estado de incidencias o mantenimiento de vehículos.
-- Cualquier intento de acceder a una función no permitida debe mostrar un mensaje de "Acceso no autorizado".
+#### R.N.07. Cambio de estado al terminar reparación
+Como administrador de EasyVPM,<br>
+quiero que cuando se termine la reparación de un vehículo se le cambie el estado a *"reparado"* y se reinicien a 0 los usos y el kilometraje,<br>
+para dejar claro que el vehículo está en condiciones óptimas y listo para ser redistribuido.
 
-#### R.N.08. Cobro automático
+#### R.N.08. Cambios de estado al iniciar alquiler
+Como administrador de EasyVPM,<br>
+quiero que cuando se inicie un alquiler el vehículo escogido cambie de estado *"disponible"* a *"en_uso"* y que el enganche donde se encontraba este pase de *"ocupado"* a *"libre"*,<br>
+para reflejar correctamente la disponibilidad del vehículo y el uso real de los enganches en tiempo real.
+
+#### R.N.09. Cambios de estado al finalizar alquiler
+Como administrador de EasyVPM,<br>
+quiero que cuando se termine un alquiler y se escoja un engache final el vehículo dejado cambie de estado *"en_uso"* a *"disponible"* y que el enganche donde se deja pase de *"libre"* a *"ocupado"*,<br>
+para mantener actualizada la ocupación de la estación y asegurar que el vehículo vuelve a estar disponible para otros usuarios.
+
+#### R.N.10. Cambio de estado al recibir valoración baja
+Como administrador de EasyVPM,<br>
+quiero que si un vehículo recibe una valoración menor o igual a 2 sobre 5 que cambie su estado a *"averiado"*,<br>
+para asegurar que el vehículo sea revisado por un técnico.
+
+#### R.N.11. Cobro automático
 Como administrador, <br>
-quiero que el sistema calcule y cobre automáticamente el importe<br>
-del alquiler según el tiempo de uso, <br>
-para evitar pagos manuales o errores y así mejorar la experiencia<br>
-de usuario. <br>
+quiero que el sistema calcule y cobre automáticamente el importe
+del alquiler según el tiempo de uso (0.2 euros por minuto),<br>
+para evitar pagos manuales o errores y así mejorar la experiencia de usuario.
 
-#### R.N.09. Precio Alquiler con Mensualidad
+#### R.N.12. Precio Alquiler con Mensualidad
 Como administrador de EasyVPM,<br>
-quiero que el sistema ponga un alquiler gratuito si ya se ha<br> realizado un pago mensual.
+quiero que el sistema aplique un coste de alquiler igual a 0 cuando el cliente tenga una mensualidad activa dentro de los últimos 30 días.
 
-#### R.N.10. Cantidad a pagar
+#### R.N.13. Coger solo vehículos disponibles
 Como administrador de EasyVPM,<br>
-quiero que si la tarifa del cliente es individual, que se le <br>
-cobre el coste del alquiler, y si la tarifa es mensual, que pueda<br> realizar el pago correspondiente al mes.
+quiero que el sistema solo permita inicar un alquiler si el vehículo seleccionado está en estado "disponible".
+
+#### R.N.14. Dejar vehículo solo en enganches libres
+Como administrador de EasyVPM,<br>
+quiero que el sistema solo permita finalizar un alquiler en un enganche que esté libre,<br>
+para evitar conflictos de uso y garantizar que los vehículos se coloquen correctamente en la estación.
+
 
 ### 4.2. Mapa de historias de usuario (opcional)
 

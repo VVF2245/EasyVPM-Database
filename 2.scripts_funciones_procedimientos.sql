@@ -101,3 +101,54 @@ BEGIN
 
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE OR REPLACE PROCEDURE mover_vehiculo(
+    IN p_vehiculoId INT,
+    IN p_nuevoEngancheId INT
+)
+BEGIN
+    DECLARE v_engancheActualId INT;
+    DECLARE v_estadoEnganche VARCHAR(50);
+    DECLARE v_estacionNombre VARCHAR(255);
+    DECLARE v_estacionId INT;
+    DECLARE v_numEnganche INT;
+
+    -- Obtener el enganche actual del vehículo (si tiene)
+    SELECT e.id
+    INTO v_engancheActualId
+    FROM Enganches e
+    JOIN Alquileres a ON a.vehiculoId = p_vehiculoId
+    WHERE a.engancheFinId = e.id
+    ORDER BY a.fechaHoraFin DESC
+    LIMIT 1;
+
+    -- Verificar que el nuevo enganche está libre
+    SELECT estado, numero, estacionId
+    INTO v_estadoEnganche, v_numEnganche, v_estacionId
+    FROM Enganches
+    WHERE id = p_nuevoEngancheId;
+
+    IF v_estadoEnganche != 'libre' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El enganche destino no está libre';
+    END IF;
+
+    -- Actualizar enganche antiguo a libre (si existía)
+    IF v_engancheActualId IS NOT NULL THEN
+        UPDATE Enganches
+        SET estado = 'libre'
+        WHERE id = v_engancheActualId;
+    END IF;
+
+    -- Actualizar enganche nuevo a ocupado
+    UPDATE Enganches
+    SET estado = 'ocupado'
+    WHERE id = p_nuevoEngancheId;
+
+    -- Actualizar vehículo
+    UPDATE Vehiculos
+    SET localizacion = CONCAT('Estación ', v_estacionNombre, ' Enganche ', v_numEnganche)
+    WHERE id = p_vehiculoId;
+END //
+DELIMITER ;
