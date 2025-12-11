@@ -113,7 +113,7 @@ Como cliente de EasyVPM, <br>
 quiero poder eliminar mi cuenta asi como mis datos asociados,<br>
 para poder tener control sobre mi informacion personal y asegurar mi privacidad.
 
-**P.A.02**
+**P.A.1.02**
 - El cliente le da al boton de eliminar cuenta dentro de la seccion: Mi cuenta.
 - El sistema le mandara un código de autenticación a su correo asociado.
 - Si no le llega puede solicitar que se lo reenvien otra vez.
@@ -128,7 +128,7 @@ Como usuario de EasyVPM,<br>
 quiero poder modificar mis datos personales desde mi perfil,<br>
 para mantener mi información actualizada y correcta en el sistema.
 
-**P.A.03**
+**P.A.1.03**
 - El usuario selecciona la opción editar perfil en la seccion: Mi cuenta.
 - Si el usuario es cliente, también puede actualizar la fecha de nacimiento y su tarifa contratada.
 - Si el usuario modifica el correo electrónico, el sistema envía un código de verificación al nuevo correo.
@@ -144,7 +144,7 @@ Como cliente de EasyVPM,<br>
 quiero poder recuperar mi contraseña si la olvido,<br>
 para no perder el acceso a mi cuenta.
 
-**P.A.04.**
+**P.A.1.04.**
 - El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
 - El enlace dura solo 24 horas o hasta utilizarlo.
 - El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
@@ -154,7 +154,7 @@ Como cliente de EasyVPM,<br>
 quiero consultar mis datos personales,<br>
 para verificar que mi información está correcta.
 
-**P.A.05.**
+**P.A.1.05.**
 - EL usuario accede a la sección Mi cuenta.
 - El sistema muestra nombre, correo.
 - Si es cliente muestra también fecha de nacimiento, tarifa actual y si tiene algún alquiler activo.
@@ -165,7 +165,7 @@ Como administrador de EasyVPM,<br>
 quiero poder registrar nuevos vehículos en el sistema,<br>
 para incorporarlos a la flota disponible para alquiler.
 
-**P.A.06**
+**P.A.2.01**
 - Se solicita el tipo de vehículo (bicicleta, patinete eléctrico, ...)
 - Se registran los atributos correspondientes
 - Para bicicletas: tipoBici
@@ -178,7 +178,7 @@ Como administrador de EasyVPM,<br>
 quiero poder eliminar vehículos de la flota,<br>
 para mantener actualizada la disponibilidad de la plataforma.
 
-**P.A.07**
+**P.A.2.02**
 - El administrador selecciona el vehículo que desea eliminar.
 - El sistema comprueba que no esté asociado a un alquiler activo.
 - Si no está en uso, se marca como borrado = TRUE (soft delete)
@@ -190,7 +190,7 @@ Como administrador de EasyVPM,<br>
 quiero poder modificar los datos de los vehículos,<br>
 para mantener la información actualizada sobre la flota.
 
-**P.A.08.**
+**P.A.2.03.**
 - Se selecciona el vehículo a actualizar.
 - Se pueden modificar los atributos: estado, localización, kilometraje y número de usos.
 - Para las bicicletas, tipoBici y para los patinetes eléctricos, autonomiaBateria.
@@ -202,7 +202,7 @@ Como técnico de mantenimiento de EasyVPM,<br>
 quiero poder consultar qué vehículos están con estado mantenimiento_pendiente o averiado,<br>
 para poder planificar su revisión y reparación de forma eficiente.
 
-**P.A.09.**
+**P.A.2.04.**
 - Filtrar vehículos por estado: mantenimiento_pendiente y averiado.
 - Mostrar información: id del vehículo, tipo, localización, número de usos, kilometraje.
 - Excluir vehículos borrados.
@@ -213,7 +213,7 @@ Como cliente de EasyVPM,<br>
 quiero poder consultar qué vehículos en una estación concreta,<br>
 para poder elegir uno que pueda recoger ahí fácilmente.
 
-**P.A.10.**
+**P.A.2.05.**
 - Filtrar vehículos por estado: disponible
 - Filtrar por la estación seleccionada por el cliente.
 - Mostrar información: id del vehículo, tipo (bicicleta o patinete), autonomía (si es patinete), tipo de bicicleta (si es bicicleta) localización exacta
@@ -224,7 +224,7 @@ Como administrador de EasyVPM,<br>
 quiero poder registrar nuevas estaciones en el sistema,<br>
 para ampliar la cobertura del servicio de alquiler.
 
-**P.A.11.**
+**P.A.3.01.**
 - Solicitar nombre único de la estación
 - Inicializar el número de vehículos a 0.
 - Marcar la estación como no borrada.
@@ -234,7 +234,7 @@ Como administrador de EasyVPM,<br>
 quiero poder modificar los datos de las estaciones existentes,<br>
 para mantener la información actualizada.
 
-**P.A.12.**
+**P.A.3.02.**
 - Permitir actualizar nombre y estado de borrado.
 - Validar que el nombre no se duplique con otra estación activa.
 
@@ -243,7 +243,7 @@ Como administrador de EasyVPM,<br>
 quiero poder eliminar estaciones del sistema,<br>
 para mantener la base de datos limpia y solo con estaciones activas.
 
-**P.A.13.**
+**P.A.3.03.**
 - Marcar la estación como borrada (soft delete).
 - Evitar la eliminación si existen enganches con vehículos activos asociados.
 - Actualizar automáticamente la disponibilidad de enganches y vehículos asociados.
@@ -253,7 +253,7 @@ Como cliente de EasyVPM,<br>
 quiero poder consultar todas las estaciones disponibles,<br>
 para saber dónde puedo recoger o devolver un vehículo.
 
-**P.A.13.**
+**P.A.3.04.**
 - Mostrar información: nombre de la estación, número de vehículos disponibles y localización.
 - Excluir estaciones marcadas como borradas
 
@@ -262,7 +262,7 @@ Como administrador de EasyVPM,<br>
 quiero poder registrar nuevos enganches en las estaciones,<br>
 para organizar la colocación de los vehículos.
 
-**P.A.14.**
+**P.A.3.05.**
 - Solicitar número de enganche dentro de la estación.
 - Inicializar estado del enganche como "libre".
 - Evitar duplicados de número de enganche en la misma estación.
@@ -272,7 +272,7 @@ Como administrador de EasyVPM,<br>
 quiero poder actualizar el estado de un enganche,<br>
 para reflejar si está ocupado o libre.
 
-**P.A.15.**
+**P.A.3.06.**
 - Permitir cambiar el estado y la estación asociada.
 - Actualizar automáticamente el número de vehículos de la estación asociada.
 - Se debe aplicar la regla de negocio R.N.08.
@@ -283,7 +283,7 @@ Como administrador de EasyVPM,<br>
 quiero poder eliminar enganches del sistema,<br>
 para reorganizar la estación y gestionar la disponibilidad de espacios.
 
-**P.A.17.**
+**P.A.3.07.**
 - Marcar el enganche como borrado (soft delete) en lugar de eliminar del todo.
 - Evitar la eliminación si hay un vehículo asignado o un alquiler activo en el enganche.
 - Actualizar automáticamente el número de vehículos disponibles de la estación asociada.
@@ -293,7 +293,7 @@ Como cliente de EasyVPM,<br>
 quiero poder consultar los enganches disponibles en una estación,<br>
 para saber dónde puedo dejar un vehículo al finalizar el alquiler.
 
-**P.A.16.**
+**P.A.3.08.**
 - Mostrar enganches libres por estación.
 - Excluir enganches borrados
 - Ordenar por número de enganche
@@ -303,7 +303,7 @@ Como cliente, <br>
 quiero iniciar un alquiler seleccionando un vehículo disponible en una estación,<br>
 para poder usarlo inmediatamente.
 
-**P.A.19.**
+**P.A.4.01.**
 - El sistema valida que el vehículo esté en estado "disponible".
 - Se comprueba que el cliente no tenga otro alquiler activo.
 - Se registra fecha y hora de inicio, vehículo, estación de inicio y enganche asociado.
@@ -315,7 +315,7 @@ Como cliente de EasyVPM,<br>
 quiero finalizar mi alquiler dejando el vehículo en un enganche libre,<br>
 para cerrar el servicio y que se me cobre lo correspondiente.
 
-**P.A.20.**
+**P.A.4.02.**
 - El cliente selecciona un enganche libre de la estación donde devuelve el vehículo
 - El sistema registra fecha y hora de finalización.
 - Se calcula el coste total según la duración y la tarifa activa.
@@ -331,7 +331,7 @@ Como cliente de EasyVPM,<br>
 quiero consultar mis alquileres anteriores,<br>
 para revisar mis usos.
 
-**P.A.21.**
+**P.A.4.03.**
 - Se listan los alquileres realizados del cliente.
 - Se muestra vehículo, fechas de inicio y fin, duración y coste total.
 - Se permite filtrar por rango de fechas.
@@ -341,7 +341,7 @@ Como administrador de EasyVPM,<br>
 quiero consultar todos los vehículos que están actualmente en uso,<br>
 para monitorear su uso.
 
-**P.A.22.**
+**P.A.4.04.**
 - Se listan alquileres que no hayan terminado.
 - Se muestra cliente, vehículo, estación y enganche de salida, fecha y hora de inicio.
 - Se puede filtrar por estación, tipo de vehículo o cliente.
@@ -351,7 +351,7 @@ Como cliente de EasyVPM,<br>
 quiero poder pagar mi mensualidad de forma manual desde la aplicación,<br>
 para renovar mi tarifa y seguir gozando de sus beneficios.
 
-**P.A.23.**
+**P.A.5.01.**
 - El cliente accede a la sección de pagos -> mensualidad.
 - El sistema muestra el importe de la mensualidad y la fecha de vencimiento.
 
@@ -360,7 +360,7 @@ Como cliente de EasyVPM,<br>
 quiero consultar mis pagos realizados,<br>
 para tener control sobre mis gastos.
 
-**P.A.24.**
+**P.A.5.02.**
 - Se listan pagos realizados del cliente.
 - Se muestra fecha, importe, tipo de pago y alquiler asociado.
 - Se permite filtrar por rango de fechas o tipo de pago.
@@ -370,7 +370,7 @@ Como administrador de EasyVPM,<br>
 quiero consultar todos los pagos registrados,<br>
 para controlar la facturación del sistema.
 
-**P.A.25.**
+**P.A.5.03.**
 - Se listan pagos de todos los clientes.
 - Se permite filtrar por cliente, fecha, tipo de pago o importe.
 
@@ -379,7 +379,7 @@ Como técnico de mantenimiento de EasyVPM,<br>
 quiero poder registrar el inicio de una reparación,<br>
 para indicar que estoy trabajando en un vehículo y sacarlo del servicio.
 
-**P.A.26.**
+**P.A.6.01.**
 - El técnico selecciona un vehículo con estado "averiado" o "mantenimiento_pendiente".
 - El sistema crea un registro de reparación con técnico responsable, fecha de inicio.
 - El estado del vehículo pasa automáticamente a "en_reparación".
@@ -390,7 +390,7 @@ COmo técnico de mantenimiento,<br>
 quiero poder marcar una reparación como finalizada,<br>
 para que el vehículo vuelva al servicio cuando esté en condiciones.
 
-**P.A.27.**
+**P.A.6.02.**
 - El técnico selecciona una reparación activa.
 - Se añade la fecha de finalización de la reparación y se indica detalladamente qué le sucedía al vehículo y lo que le ha hecho.
 - El vehículo cambia su estado a "reparado" para que pasen a recogerlo y recoloquen.
@@ -401,7 +401,7 @@ Como técnico de mantenimiento,<br>
 quiero consultar las reparaciones que estén actualmente sin terminar,<br>
 para organizar mi trabajo del día.
 
-**P.A.28.**
+**P.A.6.03.**
 - El sistema muestra las reparaciones sin fecha de fin.
 - Se incluye vehículo, técnico asignado, fecha de inicio.
 - Se puede ordenar por antigüedad.
@@ -412,7 +412,7 @@ Como técnico de EasyVPM,<br>
 quiero ver el historial completo de reparaciones de un vehículo,<br>
 para conocer sus averías anteriores.
 
-**P.A.29.**
+**P.A.6.04.**
 - Se muestran registros ya finalizados.
 - Se incluye fecha de inicio, fecha de fin, técnico, descripción del problema.
 - Permite filtrar por técnico o intervalo de fechas.
@@ -422,7 +422,7 @@ Como cliente de EasyVPM,<br>
 quiero poder enviar una valoración sobre su vehículo después de usarlo,<br>
 para indicar la calidad del servicio y el estado del vehículo.
 
-**P.A.30.**
+**P.A.7.01.**
 - El cliente solo puede valorar un vehículo si ha completado un alquiler del mismo.
 - Se recoge una puntuación (1-5) y un comentario opcional.
 - El sistema verifica que no haya una valoración duplicada para ese mismo alquiler.
@@ -435,7 +435,7 @@ Como técnico de mantenimiento de EasyVPM,<br>
 quiero consultar todas las valoraciones de un vehículo,<br>
 para tener una visión del estado percibido por los clientes.
 
-**P.A.31.**
+**P.A.7.02.**
 - Se muestran las valoraciones incluyendo cliente, fecha, puntuación y comentario.
 - Se puede ordenar por fecha o puntuación.
 - Permite filtrar por puntuación baja (1-2) para detectar problemas urgentes.
@@ -445,7 +445,7 @@ Como administrador de EasyVPM,<br>
 quiero consultar la valoración media de cada vehículo,<br>
 para evaluar su aceptación y rendimiento.
 
-**P.A.32.**
+**P.A.7.03.**
 - El sistema calcula el promedio de puntuaciones de todas las valoraciones.
 - Muestra número total de valoraciones y media de puntuación.
 - Se puede filtrar por vehículos mejor o peor valorados.
@@ -455,7 +455,7 @@ Como cliente de EasyVPM,<br>
 quiero consultar las valoraciones que he enviado,<br>
 para revisar mi historial de opiniones.
 
-**P.A.33.**
+**P.A.7.04.**
 - Muestra las valoraciones realizadas por el cliente.
 - Incluye fecha, vehículo, puntuación y comentario (opcional).
 - Permite filtrar por fecha o vehículo.
