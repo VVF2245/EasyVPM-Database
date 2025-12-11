@@ -45,32 +45,32 @@ Como administrador de EasyVPM,<br>
 quiero que el sistema gestione y almacene información de los usuarios,<br>
 para poder identificar y administrar adecuadamente a quienes utilizan la plataforma.
 
-### R.G.02. Gestión integral de la flota de vehículos
+#### R.G.02. Gestión integral de la flota de vehículos
 Como administrador del sistema,<br>
 quiero gestionar la información y el estado de los vehículos registrados en la plataforma,<br>
 para mantener actualizada y controlada la flota disponible para el servicio.
 
-### R.G.03. Gestión de estaciones
+#### R.G.03. Gestión de estaciones
 Como administrador del sistema,<br>
 quiero que se gestionen las estaciones y sus enganches asociados,<br>
 para controlar la disponibilidad y distribución de los vehículos en cada ubicación.
 
-### R.G.04. Gestión del proceso de alquiler
+#### R.G.04. Gestión del proceso de alquiler
 Como usuario del sistema,<br>
 quiero realizar el proceso completo de alquiler y devolución de vehículos,<br>
 para poder utilizar el servicio de movilidad de forma autónoma.
 
-### R.G.05. Gestión de pagos
+#### R.G.05. Gestión de pagos
 Como usuario del sistema,<br>
 quiero realizar los pagos de mis alquileres y que el sistema registre dicha información,<br>
 para garantizar que mis transacciones quedan correctamente reflejadas.
 
-### R.G.06. Mantenimiento de los vehículos
+#### R.G.06. Mantenimiento de los vehículos
 Como técnico de mantenimiento de EasyVPM,<br>
 quiero que el sistema registre información sobre las reparaciones efectuadas en los vehículos,<br>
 para asegurar un seguimiento adecuado de su estado y funcionamiento.
 
-### R.G.07 Valoraciones de los vehículos
+#### R.G.07 Valoraciones de los vehículos
 Como usuario del sistema,<br>
 quiero poder valorar los vehículos tras su uso,<br>
 para contribuir a informar sobre su estado y ayudar a detectar incidencias.
