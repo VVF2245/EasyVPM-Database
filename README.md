@@ -254,7 +254,7 @@ quiero poder consultar todas las estaciones disponibles,<br>
 para saber dónde puedo recoger o devolver un vehículo.
 
 **P.A.13.**
-- Mostrar información: nombre de la estación, número de vehículos disponibles y localización.
+- Mostrar información: nombre de la estación, número de vehículos disponibles y número de enganches libres.
 - Excluir estaciones marcadas como borradas
 
 #### R.F.3.05. Registro de enganche
@@ -333,7 +333,7 @@ para revisar mis usos.
 
 **P.A.21.**
 - Se listan los alquileres realizados del cliente.
-- Se muestra vehículo, fechas de inicio y fin, duración y coste total.
+- Se muestra vehículo, fecha y hora de inicio, duración y coste total.
 - Se permite filtrar por rango de fechas.
 
 #### R.F.4.04. Consulta de vehículos en alquiler
