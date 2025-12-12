@@ -56,6 +56,11 @@ object Valoracion<<Entity>> {
     +puntuacion
     +comentario [0..1]
 }
+note right
+'''
+**R.N.16.** Valoración con puntuación del 1 al 5
+'''
+end note
 
 /'
 La distancia recorrida la cuenta el vehículo con un
@@ -71,7 +76,7 @@ object Alquiler<<Entity>> {
     +/lugarInicio
     +/lugarFin [0..1]
 }
-note right
+note left
 '''
 **R.N.03.** Evitar que los usuarios
 alquilen 2 vehículos simultáneamente.
@@ -116,7 +121,7 @@ object Enganche<<Entity>> {
     +/estado
     +borrado
 }
-note left
+note right
 '''
  **R.N.08.** Cambios de estado al iniciar alquiler.
  **R.N.09.** Cambios de estado al finalizar alquiler.
@@ -143,8 +148,8 @@ Valoracion "*"--* Vehiculo : recibe <
 TecnicoMantenimiento "1"--"*" Reparacion : realiza >
 Reparacion "*"--* Vehiculo : recibe <
 
-Enganche "1" --"1" Alquiler: inicia/termina en <
-
+Enganche "1" --"1" Alquiler: inicia en <
+Enganche "1" --"1" Alquiler: termina en <
 
 'Relacion de Alquileres'
 Cliente "1"--"*"  Alquiler: realiza >

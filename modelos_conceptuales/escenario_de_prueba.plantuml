@@ -11,105 +11,154 @@ object Usuario1 {
     correo= analop@gmail.com
     contraseña= 11111111
 }
+note right: {incompleta, disjunta}
+note left of Usuario1
+'''
+**R.N.15.** Contraseña de más de 8 caracteres
+'''
+end note
 
 object Usuario2 {
     nombre= "Felipe Fernández"
     correo= felipe@gmail.com
     contraseña= 234855CA
 }
+note right: {incompleta, disjunta}
+note left of Usuario1
+'''
+**R.N.15.** Contraseña de más de 8 caracteres
+'''
+end note
+
 
 object Cliente1 {
     tarifaActual= mensual
     fechaNacimiento= 01/10/2000
     /alquilerActivo= False
+    borrado= False
 }
-note right
+note left
 '''
- **R.F.01.**. Registro de usuario.
- La contraseña tendrá 8 dígitos.
- **R.N.01.** No eliminar usuarios
- que tengan alquiler activo.
- **R.N.02.**. Evitar que los usuarios
- alquilen 2 vehículos simultáneamente.
- **R.N.04.** Edad mínima de 12 años.
+**R.N.01.** Edad mínima de 12 años.
+**R.N.02.** No eliminar usuarios
+que tengan alquiler activo.
 '''
 end note
 
+object Pago1 {
+    /tipoPago= individual
+    cantidad= 5.99
+    fecha= 27/10/2025
+}
+'Tipo pago puede ser o mensual o individual
+
 
 object TecnicoMantenimiento1 {
-    /fechaUltimoServicio= 02/11/2025
+    /fechaFinUltimoServicio= 22/10/2025
+    borrado= False
 }
 
 object Reparacion1 {
-    fecha= 20/10/2025
+    fechaInicio= 20/10/2025
+    fechaFin= 22/10/2025
     detalles= "El vehículo tenía una rueda pinchada"
 }
 
-object Reparacion2 {
-    fecha= 02/11/2025
-    detalles= "Costaba enganchar el vehículo"
-}
+
 
 object Valoracion1 {
     puntuacion= 5
     comentario= null
 }
+note right
+'''
+**R.N.16.** Valoración con puntuación del 1 al 5
+'''
+end note
 
-object Valoracion2 {
-    puntuacion= 3
-    comentario= "Me cuesta enganchar la bici"
-}
-
+/'
+La distancia recorrida la cuenta el vehículo con un
+medidor incorporado y solo se registra cuando termina el recorrido.
+Por eso mismo no es derivada de lugar inicio o fin, porque si no si acabas
+en el mismo sitio la distancia recorrida sería 0.
+'/
 object Alquiler1 {
-    tiempoInicio= 28/10/2025 15:44:02
-    duracion= 11 
+    fechaHoraInicio= 28/10/2025 15:44:02
+    fechaHoraFin= 28/10/2025 15:55:23
     distanciaRecorrida= 3.3
     /costo= 0.0
     /lugarInicio= La Torre del Oro
     /lugarFin= Reina Mercedes
 }
-
-object Vehiculo1 {
-    /estado= disponible
-    /kilometraje= 30.2
-    /numeroUsos= 20
-    /localizacion= Reina Mercedes
-}
-note left
+note right
 '''
- **R.N.03** Si usos >50 o kilometraje>500
- estado=="mantenimiento pendiente".
- **R.N.05.** Cambio de estado vehículo.
+**R.N.03.** Evitar que los usuarios
+alquilen 2 vehículos simultáneamente.
+**R.N.12.** Precio alquiler con mensualidad.
+**R.N.13.** Coger solo vehículos disponibles.
+**R.N.14.** Dejar vehículo solo en enganches libres.
 '''
 end note
 
+/'
+La localización del vehículo se muestra cuando se guarda el vehículo.
+No se guarda localización por GPS.
+'/
+object Vehiculo1 {
+    /estado= disponible
+    /kilometraje = 30.2
+    /numeroUsos = 20
+    /localizacion = Estación Reina Mercedes Enganche 1
+    borrado= False
+}
+note right
+'''
+**R.N.04.** No eliminar vehículos que estén en uso
+**R.N.05.** Cambio de estado al superar uso máximo.
+**R.N.06.** Cambio de estado al iniciar reparación.
+**R.N.07.** Cambio de estado al terminar reparacion.
+**R.N.08.** Cambios de estado al iniciar alquiler.
+**R.N.09.** Cambios de estado al finalizar alquiler
+**R.N.10.** Cambio de estado al recibir valoración baja
+'''
+end note
+note left of Vehiculo1: {completa, disjunta}
+
+
 object Estacion1 {
     nombre= Reina Mercedes
-    /númeroVehículos= 1
+    /numeroVehiculos= 1
+    borrado= False
 }
 
 object Estacion2 {
     nombre= La Torre del Oro
-    /numeroVehículos= 0
+    /numeroVehiculos= 0
+    borrado= False
 }
+
 
 object Enganche1 {
     /estado= ocupado
-    número= 01
+    número= 1
+    borrado= False
 }
-note right
+note left
 '''
- **R.N.06.** Cambio de estado enganche.
+ **R.N.08.** Cambios de estado al iniciar alquiler.
+ **R.N.09.** Cambios de estado al finalizar alquiler.
 '''
 end note
 
 object Enganche2 {
     /estado= libre
-    número= 01
+    número= 1
+    borrado= False
 }
-note right
+note left
 '''
- **R.N.06.** Cambio de estado enganche.
+ **R.N.08.** Cambios de estado al iniciar alquiler.
+ **R.N.09.** Cambios de estado al finalizar alquiler.
 '''
 end note
 
@@ -125,25 +174,25 @@ Enganche1 "*"--* Estacion1 : pertenece a >
 Enganche2 "*"--* Estacion2 : pertenece a >
 
 'Relación directa valoraciones'
-Cliente1 "1"--"*" Valoracion1 : pone >
-Cliente1 "1"--"*" Valoracion2 : pone >
-
-Valoracion1 "*"--"1" Vehiculo1 : recibe <
-Valoracion2 "*"--"1" Enganche1 : recibe <
+Alquiler1 "1"--"*" Valoracion1 : pone >
+Valoracion1 "*"--* Vehiculo1 : recibe <
 
 TecnicoMantenimiento1 "1"--"*" Reparacion1 : realiza >
-TecnicoMantenimiento1 "1"--"*" Reparacion2 : realiza >
-Reparacion1 "*"--"1" Vehiculo1 : recibe <
-Reparacion2 "*"--"1" Enganche1 : recibe <
+Reparacion1 "*"--* Vehiculo1 : recibe <
 
-Enganche1 "1" --"*" Vehiculo1 : se deja en <
-Enganche2 "1"--"*" Vehiculo1 : se coge en <
+Enganche1 "1" --"1" Alquiler1: termina en <
+Enganche2 "1" --"1" Alquiler1: inicia en <
+
 
 
 'Relacion de Alquileres'
 Cliente1 "1"--"*"  Alquiler1: realiza >
  
 Alquiler1 "*"--"1" Vehiculo1: de
+
+'Relacion Pago'
+Cliente1 *--"*" Pago1
+Pago1 "0..1"--"0..1" Alquiler1
 
 Vehiculo1 <|-- Bicicleta1
 

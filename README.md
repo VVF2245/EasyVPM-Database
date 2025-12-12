@@ -580,6 +580,10 @@ Como administrador de EasyVPM,<br>
 quiero que las contraseñas sean igual o más largas que los 8 dígitos,<br>
 para intentar que las cuentas de los usuarios estén más protegidas.
 
+#### R.N.16. Valoración con puntuación del 1 al 5
+Como administrador de EasyVPM,<br>
+quiero que las valoraciones tengan una puntuación del 1 al 5.
+
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
