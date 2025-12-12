@@ -107,6 +107,7 @@ para poder acceder al servicio de alquiler.
 - El sistema verifica que el correo no esté duplicado.
 - Se envía un correo de confirmación al completar el registro.
 - Se debe aplicar la regla de negocio R.N.01.
+- Se debe alicar la regla de negocio R.N.15.
 
 #### R.F.1.02. Eliminación de la cuenta
 Como cliente de EasyVPM, <br>
@@ -137,6 +138,7 @@ para mantener mi información actualizada y correcta en el sistema.
 - Si el correo introducido ya existe en otra cuenta, el sistema muestra un mensaje indicando que está duplicado.
 - Al completar la actualización, el sistema muestra el mensaje "Datos actualizados correctamente"
 - Se debe aplicar la regla de negocio R.N.01.
+- Se debe aplicar la regla de negocio R.N.15.
 
 
 #### R.F.1.04. Recuperación de contraseña
@@ -560,7 +562,7 @@ quiero que el sistema calcule y cobre automáticamente el importe
 del alquiler según el tiempo de uso (0.2 euros por minuto),<br>
 para evitar pagos manuales o errores y así mejorar la experiencia de usuario.
 
-#### R.N.12. Precio Alquiler con Mensualidad
+#### R.N.12. Precio alquiler con mensualidad
 Como administrador de EasyVPM,<br>
 quiero que el sistema aplique un coste de alquiler igual a 0 cuando el cliente tenga una mensualidad activa dentro de los últimos 30 días.
 
@@ -572,6 +574,11 @@ quiero que el sistema solo permita inicar un alquiler si el vehículo selecciona
 Como administrador de EasyVPM,<br>
 quiero que el sistema solo permita finalizar un alquiler en un enganche que esté libre,<br>
 para evitar conflictos de uso y garantizar que los vehículos se coloquen correctamente en la estación.
+
+#### R.N.15. Contraseña de más de 8 caracteres
+Como administrador de EasyVPM,<br>
+quiero que las contraseñas sean igual o más largas que los 8 dígitos,<br>
+para intentar que las cuentas de los usuarios estén más protegidas.
 
 
 ### 4.2. Mapa de historias de usuario (opcional)

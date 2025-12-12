@@ -12,6 +12,11 @@ object Usuario<<Entity>> {
     +nombre
 }
 note right: {incompleta, disjunta}
+note left of Usuario
+'''
+**R.N.15.** Contraseña de más de 8 caracteres
+'''
+end note
 
 
 object Cliente<<Entity>> {
@@ -22,13 +27,9 @@ object Cliente<<Entity>> {
 }
 note left
 '''
- **R.F.01.**. Registro de usuario.
- La contraseña tendrá 8 dígitos.
- **R.N.01.** No eliminar usuarios
- que tengan alquiler activo.
- **R.N.02.**. Evitar que los usuarios
- alquilen 2 vehículos simultáneamente.
- **R.N.04.** Edad mínima de 12 años.
+**R.N.01.** Edad mínima de 12 años.
+**R.N.02.** No eliminar usuarios
+que tengan alquiler activo.
 '''
 end note
 
@@ -70,6 +71,15 @@ object Alquiler<<Entity>> {
     +/lugarInicio
     +/lugarFin [0..1]
 }
+note right
+'''
+**R.N.03.** Evitar que los usuarios
+alquilen 2 vehículos simultáneamente.
+**R.N.12.** Precio alquiler con mensualidad.
+**R.N.13.** Coger solo vehículos disponibles.
+**R.N.14.** Dejar vehículo solo en enganches libres.
+'''
+end note
 
 /'
 La localización del vehículo se muestra cuando se guarda el vehículo.
@@ -84,9 +94,13 @@ object Vehiculo<<Entity>> {
 }
 note right
 '''
- **R.N.03** Si usos >50 o kilometraje>500
- estado=="mantenimiento_pendiente".
- **R.N.05.** Cambio de estado vehículo.
+**R.N.04.** No eliminar vehículos que estén en uso
+**R.N.05.** Cambio de estado al superar uso máximo.
+**R.N.06.** Cambio de estado al iniciar reparación.
+**R.N.07.** Cambio de estado al terminar reparacion.
+**R.N.08.** Cambios de estado al iniciar alquiler.
+**R.N.09.** Cambios de estado al finalizar alquiler
+**R.N.10.** Cambio de estado al recibir valoración baja
 '''
 end note
 note left of Vehiculo: {completa, disjunta}
@@ -104,7 +118,8 @@ object Enganche<<Entity>> {
 }
 note left
 '''
- **R.N.06.** Cambio de estado enganche.
+ **R.N.08.** Cambios de estado al iniciar alquiler.
+ **R.N.09.** Cambios de estado al finalizar alquiler.
 '''
 end note
 
