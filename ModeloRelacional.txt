@@ -1,58 +1,56 @@
-USUARIO(
-    usuarioId PK,
+Usuarios(
+    id PK,
     correo AK,
     contraseña,
     nombre
 )
-CLIENTE(
-    clienteId PK FK → USUARIO.usuarioId,
+Clientes(
+    id PK FK → Usuarios.id,
     tarifaActual,
     fechaNacimiento,
     alquilerActivo,
     borrado
 )
-TECNICO_MANTENIMIENTO(
-    tecnicoId PK FK → USUARIO.usuarioId,
+Tecnicos_Mantenimiento(
+    id PK FK → Usuarios.id,
     fechaFinUltimoServicio NULL, -- derivado pero almacenable
     borrado
 )
-VEHICULO(
-    vehiculoId PK,
+Vehiculos(
+    id PK,
     estado, --derivado pero almacenable
     kilometraje,    --derivado pero almacenable
     numeroUsos,    --derivado pero almacenable
     localizacion,  --derivado pero almacenable
     borrado
 )
-BICICLETA(
-    bicicletaId AK,
-    vehiculoId PK FK → VEHICULO.idVehiculo,
+Bicicletas(
+    id PK FK → Vehiculos.id,
     tipoBici
 )
-PATINETE_ELECTRICO(
-    patineteElectricoId
-    vehiculoId PK FK → VEHICULO.vehiculoId,
+Patinetes_Electricos(
+    id PK FK → Vehiculos.id,
     autonomiaBateria
 )
 'El nombre de la estación es único porque la app solo se va a usar en Sevilla y no van a coincidir dos nombres de estaciones'
-ESTACION(
-    estacionId PK,
+Estaciones(
+    id PK,
     nombre AK,
     borrado
 )
-ENGANCHE(
-    engancheId PK,
-    estacionId FK → ESTACION.estacionId,
+Enganches(
+    id PK,
+    estacionId FK → Estaciones.id,
     numero,
     estado,  --derivado pero almacenable
     borrado
 )
-ALQUILER(
-    alquilerId PK,
-    clienteId FK → CLIENTE.clienteId,
-    vehiculoId FK → VEHICULO.vehiculoId,
-    engancheInicioId FK → ENGANCHE.engancheId,
-    engancheFinId FK → ENGANCHE.engancheId NULL,
+Alquileres(
+    id PK,
+    clienteId FK → Clientes.id,
+    vehiculoId FK → Vehiculos.id,
+    engancheInicioId FK → Enganches.id,
+    engancheFinId FK → Enganches.id NULL,
     fechaHoraInicio,
     fechaHoraFin NULL,
     distanciaRecorrida NULL,
@@ -60,24 +58,24 @@ ALQUILER(
     lugarInicio, --derivado pero almacenable
     lugarFin NULL  --derivado pero almacenable
 )
-VALORACION(
-    valoracionId PK,
-    alquilerId FK → ALQUILER.alquilerId,
-    vehiculoId FK → VEHICULO.vehiculoId,
+Valoraciones(
+    id PK,
+    alquilerId FK → Alquileres.id,
+    vehiculoId FK → Vehiculos.id,
     puntuacion,
     comentario NULL
 )
-REPARACION(
-    reparacionId PK,
-    tecnicoId FK → TECNICO_MANTENIMIENTO.tecnicoId,
-    vehiculoId FK → VEHICULO.vehiculoId,
+Reparaciones(
+    id PK,
+    tecnicoId FK → Tecnicos_Mantenimiento.id,
+    vehiculoId FK → Vehiculos.id,
     fecha,
     detalles
 )
-PAGO(
-    pagoId PK,
-    clienteId FK → CLIENTE.clienteId,
-    alquilerId FK → ALQUILER.alquilerId NULL,
+Pagos(
+    id PK,
+    clienteId FK → Clientes.id,
+    alquilerId FK → Alquileres.id NULL,
     tipoPago,     -- derivado pero almacenable
     cantidad,
     fecha
