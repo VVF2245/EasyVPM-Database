@@ -2,9 +2,19 @@
 -- START TRANSACTION;
 -- INSERT INTO Alquileres(clienteId, vehiculoId, engancheInicioId)
 -- VALUES (1, 1, 1);
--- CALL finalizar_alquiler(1, "2025-12-13",3, 30.5);
+-- SELECT * FROM Alquileres
+-- CALL finalizar_alquiler(1, "2025-12-13",3, 55.5);
+-- SELECT * FROM Alquileres
 -- ROLLBACK;
 
+-- Caso negativo
+-- START TRANSACTION;
+-- INSERT INTO Alquileres(clienteId, vehiculoId, engancheInicioId)
+-- VALUES (1, 1, 1);
+-- SELECT * FROM Alquileres
+-- CALL finalizar_alquiler(1, "1456-12-13",3, 30.5);
+-- SELECT * FROM Alquileres
+-- ROLLBACK;
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
