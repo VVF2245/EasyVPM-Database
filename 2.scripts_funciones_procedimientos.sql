@@ -9,8 +9,7 @@
 -- START TRANSACTION;
 -- SELECT * FROM Alquileres
 -- CALL finalizar_alquiler(1, "2025-03-18 8:45:00",3, 3.20);
--- SELECT * FROM Alquileres
--- ROLLBACK;
+-- SELECT * FROM Alquileres;
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
@@ -199,7 +198,7 @@ DELIMITER ;
 -- START TRANSACTION;
 -- CALL pago_mensual(2);
 -- SELECT * FROM Pagos;
--- ROLLBACK;
+
 
 DELIMITER //
 CREATE OR REPLACE  PROCEDURE pago_mensual(
@@ -253,6 +252,19 @@ END //
 DELIMITER ;
 
 -- El soft delete se hace con procedimiento para evitar inconsistencias
+-- Caso positivo
+-- START TRANSACTION;
+-- SELECT * FROM Vehiculos
+-- CALL soft_delete_vehiculo(1)
+-- SELECT * FROM Vehiculos
+-- ROLLBACK;
+
+--Caso negativo
+-- START TRANSACTION;
+-- SELECT * FROM Vehiculos
+-- CALL soft_delete_vehiculo(1)
+-- CALL soft_delete_vehiculo(1)
+
 DELIMITER //
 CREATE OR REPLACE PROCEDURE soft_delete_vehiculo(
     IN p_vehiculoId INT
