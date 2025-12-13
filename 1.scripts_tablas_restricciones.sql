@@ -17,7 +17,7 @@ CREATE TABLE Clientes (
 );
 
 CREATE TABLE Tecnicos_Mantenimiento (
-    usuarioId INT PRIMARY KEY AUTO_INCREMENT,
+    usuarioId INT PRIMARY KEY,
     fechaFinUltimoServicio DATE, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
