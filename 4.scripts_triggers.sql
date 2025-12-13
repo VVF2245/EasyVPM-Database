@@ -339,21 +339,28 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE TRIGGER trg_B_delete_usuarios_no_eliminar
-BEFORE DELETE ON Usuarios
+
+CREATE TRIGGER trg_no_elim_cli_alq
+BEFORE UPDATE ON Clientes
 FOR EACH ROW
 BEGIN
-    -- comprobar si tiene algún alquiler activo
-    IF EXISTS (
-        SELECT 1
-        FROM Clientes
-        JOIN Alquileres ON alquileres.clienteId = clientes.usuarioId
-        WHERE clientes.usuarioId = OLD.id AND Alquileres.fechaHoraFin IS NULL
-    ) THEN
-        SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No se puede eliminar un usuario que tenga un alquiler activo';
+    -- Solo cuando se intenta hacer soft delete
+    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+
+        -- Comprobar alquiler activo
+        IF EXISTS (
+            SELECT 1
+            FROM Alquileres
+            WHERE Alquileres.clienteId = OLD.usuarioId
+              AND Alquileres.fechaHoraFin IS NULL
+        ) THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No se puede eliminar un cliente con un alquiler activo';
+        END IF;
+
     END IF;
 END //
+
 DELIMITER ;
 
 --si se registra una valoracion muy baja el vehiculo pasa a "averiado"
