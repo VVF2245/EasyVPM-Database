@@ -23,8 +23,8 @@ object Usuario2 {
     correo= felipe@gmail.com
     contraseña= 234855CA
 }
-note right: {incompleta, disjunta}
-note left of Usuario1
+note left: {incompleta, disjunta}
+note right of Usuario2
 '''
 **R.N.15.** Contraseña de más de 8 caracteres
 '''
@@ -131,31 +131,30 @@ object Estacion1 {
     borrado= False
 }
 
-object Estacion2 {
-    nombre= La Torre del Oro
-    /numeroVehiculos= 0
-    borrado= False
-}
-
-
 object Enganche1 {
-    /estado= ocupado
     número= 1
+    /estado= ocupado
     borrado= False
 }
-note left
+note top
 '''
  **R.N.08.** Cambios de estado al iniciar alquiler.
  **R.N.09.** Cambios de estado al finalizar alquiler.
 '''
 end note
 
-object Enganche2 {
-    /estado= libre
-    número= 1
+object Estacion2 {
+    nombre= La Torre del Oro
+    /numeroVehiculos= 0
     borrado= False
 }
-note left
+
+object Enganche2 {
+    número= 1
+    /estado= libre
+    borrado= False
+}
+note top
 '''
  **R.N.08.** Cambios de estado al iniciar alquiler.
  **R.N.09.** Cambios de estado al finalizar alquiler.

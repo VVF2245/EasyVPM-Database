@@ -21,8 +21,8 @@ BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
-        'ERROR AL FINALIZAR ALQUILER';
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'ERROR AL FINALIZAR ALQUILER';
     END;
 
     START TRANSACTION;
@@ -30,20 +30,20 @@ BEGIN
     SELECT vehiculoId, fechaHoraInicio, clienteId 
     INTO v_vehiculoId, v_fechaInicio, v_clienteId
     FROM Alquileres 
-    WHERE Alquileres.id=p_alquilerId;
+    WHERE Alquileres.id = p_alquilerId;
 
     -- Validar fecha
     SET v_minutos = TIMESTAMPDIFF(MINUTE, v_fechaInicio, p_fechaFin);
     IF v_minutos < 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT=
-        'La fecha fin no puede ser anterior a la inicio';
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La fecha fin no puede ser anterior a la inicio';
     END IF;
 
     -- 2. Calculo del cobro
     -- Buscamos fechas de mensualidad activa
     SELECT fecha INTO v_fechaMensualidad
     FROM Pagos
-    WHERE clienteId = v_clienteId AND tipoPago='mensualidad'
+    WHERE clienteId = v_clienteId AND tipoPago ='mensualidad'
     ORDER BY fecha DESC LIMIT 1;
 
     -- Validar Mensualidad
@@ -73,7 +73,7 @@ BEGIN
     -- 5. Actualizar cliente y enganche
     UPDATE Clientes
         SET alquilerActivo = FALSE
-        WHERE id = v_clienteId;
+        WHERE usuarioId = v_clienteId;
     UPDATE Enganches
         SET estado ='ocupado'
     WHERE id = p_engancheFinId;
@@ -114,6 +114,15 @@ BEGIN
     DECLARE v_estacionId INT;
     DECLARE v_numEnganche INT;
 
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al mover el vehículo';
+    END;
+
+    START TRANSACTION;
+
     -- Obtener el enganche actual del vehículo (si tiene)
     SELECT e.id
     INTO v_engancheActualId
@@ -127,7 +136,8 @@ BEGIN
     SELECT estado, numero, estacionId
     INTO v_estadoEnganche, v_numEnganche, v_estacionId
     FROM Enganches
-    WHERE id = p_nuevoEngancheId;
+    WHERE id = p_nuevoEngancheId
+    LIMIT 1;
 
     IF v_estadoEnganche != 'libre' THEN
         SIGNAL SQLSTATE '45000'
@@ -146,9 +156,115 @@ BEGIN
     SET estado = 'ocupado'
     WHERE id = p_nuevoEngancheId;
 
+    -- guardar nombre nueva estación
+    SELECT e.nombre
+    INTO v_estacionNombre
+    FROM Estaciones e
+    JOIN Enganches en ON en.estacionId = e.id
+    WHERE en.id = p_nuevoEngancheId
+    LIMIT 1;
+
     -- Actualizar vehículo
     UPDATE Vehiculos
     SET localizacion = CONCAT('Estación ', v_estacionNombre, ' Enganche ', v_numEnganche)
     WHERE id = p_vehiculoId;
+
+    COMMIT;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE OR REPLACE  PROCEDURE pago_mensual(
+    IN p_usuarioId INT
+)
+BEGIN
+    DECLARE v_clienteId INT;
+    DECLARE v_cantidad DECIMAL(5,2);
+    DECLARE v_pagosActivos INT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error inesperado al registrar el pago';
+    END;
+
+    SET v_cantidad = 5.99;
+
+    START TRANSACTION;
+
+    SELECT id INTO v_clienteId
+    FROM Clientes
+    WHERE usuarioId = p_usuarioId AND borrado = FALSE
+    FOR UPDATE;
+
+    IF v_clienteId IS NULL THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El usuario no es cliente válido';
+    END IF;
+
+    SELECT COUNT(*) INTO v_pagosActivos
+    FROM Pagos
+    WHERE clienteId = v_clienteId 
+        AND tipoPago = 'mensualidad'
+        AND TIMESTAMPDIFF(DAY, fecha, CURDATE()) < 30
+    FOR UPDATE;
+
+    IF v_pagosActivos > 0 THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente ya tiene una mensualidad activa';
+    END IF;
+
+    INSERT INTO Pagos (clienteId, tipoPago, cantidad, fecha)
+    VALUES (v_clienteId, 'mensualidad', v_cantidad, CURDATE());
+
+    COMMIT
+END //
+DELIMITER ;
+
+-- El soft delete se hace con procedimiento para evitar inconsistencias
+DELIMITER //
+CREATE OR REPLACE PROCEDURE soft_delete_vehiculo(
+    IN p_vehiculoId INT
+)
+BEGIN
+    DECLARE v_estado VARCHAR(50);
+    DECLARE v_borrado BOOLEAN;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al borrar el vehículo';
+    END;
+
+    START TRANSACTION;
+
+    SELECT estado, borrado
+    INTO v_estado, v_borrado
+    FROM Vehiculos
+    WHERE id = p_vehiculoId
+    FOR UPDATE;
+
+    IF v_borrado = TRUE THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El vehículo ya está borrado';
+    END IF;
+
+    IF v_estado = 'en_uso' THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar un vehículo en uso';
+    END IF;
+
+    UPDATE Vehiculos
+    SET borrado = TRUE
+    WHERE id = p_vehiculoId;
+
+    COMMIT;
 END //
 DELIMITER ;

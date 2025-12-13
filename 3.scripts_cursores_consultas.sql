@@ -8,7 +8,7 @@ CREATE OR REPLACE VIEW vw_listaReparacionesTecnico AS
 SELECT u.nombre, COUNT (r.id) AS listaReparaciones
 FROM Usuarios u
 JOIN Tecnicos_Mantenimiento t ON u.id = t.usuarioId
-LEFT JOIN Reparaciones r ON t.id = r.tecnicoId
+LEFT JOIN Reparaciones r ON t.usuarioId = r.tecnicoId
 GROUP BY u.id, u.nombre;
 
 
@@ -91,7 +91,7 @@ CREATE OR REPLACE VIEW vw_historialAlquileres AS
 SELECT u.correo, a.id, a.vehiculoId, a.fechaHoraInicio, 
     TIMESTAMPDIFF(MINUTE, a.fechaHoraInicio, a.fechaHoraFin) AS duracion, a.costo
 FROM Alquileres a
-JOIN Clientes c ON a.clienteId = c.id
+JOIN Clientes c ON a.clienteId = c.usuarioId
 JOIN Usuarios u ON c.usuarioId = u.id
 ORDER BY u.correo, a.id
 
@@ -108,7 +108,7 @@ CREATE OR REPLACE VIEW vw_reparacionesActivas AS
 SELECT r.id AS reparacionId, r.vehiculoId, r.tecnicoId, u.nombre AS nombreTecnico, r.fechaInicio
 FROM Reparaciones r
 JOIN Vehiculos v ON r.vehiculoId = v.id
-JOIN Tecnicos_Mantenimiento t ON r.tecnicoId = t.id
+JOIN Tecnicos_Mantenimiento t ON r.tecnicoId = t.usuarioId
 JOIN Usuarios u ON t.usuarioId = u.id
 WHERE r.fechaFin IS NULL AND v.borrado = FALSE
 ORDER BY r.fechaInicio ASC;
@@ -119,7 +119,7 @@ ORDER BY r.fechaInicio ASC;
 CREATE OR REPLACE VIEW vw_historialReparaciones AS
 SELECT r.fechaInicio, r.fechaFin, r.tecnicoId, u.nombre AS nombreTecnico, r.detalles
 FROM Reparaciones r
-JOIN Tecnicos_Mantenimiento t ON r.tecnicoId = t.id
+JOIN Tecnicos_Mantenimiento t ON r.tecnicoId = t.usuarioId
 JOIN Usuarios u ON t.usuarioId = u.id
 WHERE r.fechaFin IS NOT NULL
 ORDER BY r.fechaInicio ASC;
@@ -133,7 +133,7 @@ SELECT v.id AS valoracionId, v.vehiculoId, a.clienteId, u.nombre AS nombreClient
     a.fechaHoraFin AS fecha, v.puntuacion, v.comentario
 FROM Valoraciones v
 JOIN Alquileres a ON v.alquilerId = a.id
-JOIN Clientes c ON a.clienteId = c.id
+JOIN Clientes c ON a.clienteId = c.usuarioId
 JOIN Usuarios u ON c.usuarioId = u.id
 ORDER BY v.vehiculoId;
 

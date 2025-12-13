@@ -5,7 +5,7 @@ CREATE TRIGGER trg_cliente_edad_minima
 BEFORE INSERT ON Clientes
 FOR EACH ROW
 BEGIN
-    IF TIMESTAMPDIFF(YEAR, new.fechaNacimiento, CURDATE()) <12 THEN
+    IF TIMESTAMPDIFF(YEAR, NEW.fechaNacimiento, CURDATE()) <12 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El cliente debe tener al menos 12 años';
     END IF;
@@ -26,7 +26,7 @@ BEGIN
         SELECT alquilerActivo
         INTO activo
         FROM Clientes
-        WHERE id = NEW.clienteId;
+        WHERE usuarioId = NEW.clienteId;
 
         IF activo = TRUE THEN
             SIGNAL SQLSTATE '45000'
@@ -78,7 +78,7 @@ BEGIN
 
         UPDATE Clientes
         SET alquilerActivo = TRUE
-        WHERE id = NEW.clienteId;
+        WHERE usuarioId = NEW.clienteId;
     END IF;
 END//
 
@@ -132,7 +132,7 @@ BEGIN
         -- poner que el cliente ya no tiene un alquiler activo
         UPDATE Clientes
         SET alquilerActivo = FALSE
-        WHERE id = NEW.clienteId;
+        WHERE usuarioId = NEW.clienteId;
 
         -- Poner la localización final del alquiler
 
@@ -263,7 +263,7 @@ DELIMITER ;
 
 
 DELIMITER //
--- para que se actualice el número de vehículos en la estación si se crean enganches nuevos
+-- para que se actualice el número de vehículos en la estación si se borran enganches
 CREATE TRIGGER trg_A_delete_enganches_actualizar_estacion
 AFTER DELETE ON Enganches
 FOR EACH ROW
@@ -308,7 +308,7 @@ BEGIN
 
         UPDATE Tecnicos_Mantenimiento
         SET fechaFinUltimoServicio = NEW.fechaFin
-        WHERE id = NEW.tecnicoId;
+        WHERE usuarioId = NEW.tecnicoId;
     END IF;
 END //
 DELIMITER ;
@@ -323,7 +323,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM Clientes
-        JOIN Alquileres ON alquileres.clienteId = clientes.id
+        JOIN Alquileres ON alquileres.clienteId = clientes.usuarioId
         WHERE clientes.usuarioId = OLD.id AND Alquileres.fechaHoraFin IS NULL
     ) THEN
         SIGNAL SQLSTATE '45000'

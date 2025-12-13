@@ -141,17 +141,7 @@ para mantener mi información actualizada y correcta en el sistema.
 - Se debe aplicar la regla de negocio R.N.15.
 
 
-#### R.F.1.04. Recuperación de contraseña
-Como cliente de EasyVPM,<br>
-quiero poder recuperar mi contraseña si la olvido,<br>
-para no perder el acceso a mi cuenta.
-
-**P.A.1.04.**
-- El usuario introduce su correo electrónico registrado y recibe un enlace temporal de autenticación.
-- El enlace dura solo 24 horas o hasta utilizarlo.
-- El sistema obliga al usuario a establecer una nueva contraseña antes de poder a acceder.
-
-#### R.F.1.05. Consulta de información personal
+#### R.F.1.04. Consulta de información personal
 Como cliente de EasyVPM,<br>
 quiero consultar mis datos personales,<br>
 para verificar que mi información está correcta.

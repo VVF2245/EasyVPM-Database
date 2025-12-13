@@ -6,8 +6,7 @@ CREATE TABLE Usuarios (
 );
 
 CREATE TABLE Clientes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    usuarioId INT NOT NULL,
+    usuarioId INT PRIMARY KEY,
     tarifaActual VARCHAR(50) NOT NULL,
     fechaNacimiento DATE NOT NULL,
     alquilerActivo BOOLEAN NOT NULL, --'derivado, trigger hecho'
@@ -18,8 +17,7 @@ CREATE TABLE Clientes (
 );
 
 CREATE TABLE Tecnicos_Mantenimiento (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    usuarioId INT NOT NULL,
+    usuarioId INT PRIMARY KEY AUTO_INCREMENT,
     fechaFinUltimoServicio DATE, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
@@ -38,8 +36,7 @@ CREATE TABLE Vehiculos (
 );
 
 CREATE TABLE Bicicletas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    vehiculoId INT NOT NULL,
+    vehiculoId INT PRIMARY KEY AUTO_INCREMENT,
     tipoBici VARCHAR(50) NOT NULL,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
@@ -47,8 +44,7 @@ CREATE TABLE Bicicletas (
 );
 
 CREATE TABLE Patinetes_Electricos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    vehiculoId INT NOT NULL,
+    vehiculoId INT PRIMARY KEY AUTO_INCREMENT,
     autonomiaBateria DECIMAL(4,1) NOT NULL,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
         ON DELETE CASCADE
@@ -86,7 +82,7 @@ CREATE TABLE Alquileres (
     costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), --'derivada, trigger hecho'
     lugarInicio VARCHAR(200) NOT NULL, --'derivada, trigger hecho'
     lugarFin VARCHAR(200), --'derivada, trigger hecho'
-    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
+    FOREIGN KEY (clienteId) REFERENCES Clientes(usuarioId)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
@@ -121,7 +117,7 @@ CREATE TABLE Reparaciones (
     fechaInicio DATE NOT NULL,
     fechaFin DATE CHECK(fechaFin >= fechaInicio),
     detalles VARCHAR(1000) NOT NULL,
-    FOREIGN KEY (tecnicoId) REFERENCES Tecnicos_Mantenimiento(id)
+    FOREIGN KEY (tecnicoId) REFERENCES Tecnicos_Mantenimiento(usuarioId)
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (vehiculoId) REFERENCES Vehiculos(id)
@@ -136,7 +132,7 @@ CREATE TABLE Pagos (
     tipoPago VARCHAR(50) NOT NULL, -- derivado, trigger hecho, pero a lo mejor falta para cuando haces pagos mensuales (no es automático)
     cantidad DECIMAL(5, 2) NOT NULL CHECK (cantidad >= 0),
     fecha DATE NOT NULL,
-    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
+    FOREIGN KEY (clienteId) REFERENCES Clientes(usuarioId)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (alquilerId) REFERENCES Alquileres(id)
