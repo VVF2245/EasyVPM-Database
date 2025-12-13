@@ -250,15 +250,13 @@ BEGIN
 
     COMMIT;
 END//
---eliminacion vehiculo(si no tiene alquiler activo) 
+--eliminacion vehiculo(no tengo en cuenta el alquiler porque de eso se encarga el trigger)
 DELIMITER //
 
 CREATE PROCEDURE eliminarVehiculo (
     IN p_vehiculoId INT
 )
 BEGIN
-    DECLARE v_activos INT;
-
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
@@ -268,25 +266,13 @@ BEGIN
 
     START TRANSACTION;
 
-    -- Comprobar alquiler activo
-    SELECT COUNT(*)
-    INTO v_activos
-    FROM Alquileres
-    WHERE vehiculoId = p_vehiculoId
-      AND fechaFin IS NULL;
-
-    IF v_activos > 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El vehículo tiene un alquiler activo';
-    END IF;
-
-    -- Soft delete
     UPDATE Vehiculos
     SET borrado = TRUE
     WHERE id = p_vehiculoId;
 
     COMMIT;
 END//
+
 DELIMITER ;
 
 DELIMITER //
