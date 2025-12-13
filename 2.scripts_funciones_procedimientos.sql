@@ -187,6 +187,19 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Usuario empieza a pagar mensualidad
+
+-- Caso positivo
+-- START TRANSACTON;
+-- CALL pago_mensual(1);
+-- SELECT * FROM Pagos;
+-- ROLLBACK;
+
+-- Caso negativo
+-- START TRANSACTION;
+-- CALL pago_mensual(2);
+-- SELECT * FROM Pagos;
+-- ROLLBACK;
 
 DELIMITER //
 CREATE OR REPLACE  PROCEDURE pago_mensual(
@@ -235,7 +248,7 @@ BEGIN
     INSERT INTO Pagos (clienteId, tipoPago, cantidad, fecha)
     VALUES (v_clienteId, 'mensualidad', v_cantidad, CURDATE());
 
-    COMMIT
+    COMMIT;
 END //
 DELIMITER ;
 
