@@ -70,14 +70,56 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM Alquileres
-        WHERE clienteId = OLD.usuarioId
-          AND fechaHoraFin IS NULL
+        WHERE Alquileres.clienteId = OLD.usuarioId
+          AND Alquileres.fechaHoraFin IS NULL
     ) THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT =
         'No se puede eliminar un cliente con alquiler activo';
     END IF;
 END;
+
+DELIMITER //
+
+CREATE TRIGGER trg_no_elim_veh_alq
+BEFORE UPDATE ON Vehiculos
+FOR EACH ROW
+BEGIN
+    -- Solo cuando se intenta hacer soft delete
+    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+
+        -- Comprobar alquiler activo
+        IF EXISTS (
+            SELECT 1
+            FROM Alquileres
+            WHERE Alquileres.vehiculoId = OLD.id
+              AND Alquileres.fechaHoraFin IS NULL
+        ) THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No se puede eliminar un vehículo con un alquiler activo';
+        END IF;
+
+    END IF;
+END//
+
+DELIMITER ;
+
+-- de la misma manera que con los clientes voy a hacer un 2º trigger para asegurarme de que no se hace un DELETE real con los vehiculos en alquiler
+DELIMITER//
+CREATE TRIGGER trg_no_delete_veh_alq
+BEFORE DELETE ON Vehiculos
+FOR EACH ROW
+BEGIN
+    IF EXISTS (1 
+    FROM ALQUILERES
+    WHERE Alquileres.vehiculoId=OLD.id
+        AND Alquileres.fechaHoraFin is NULL
+    )THEN 
+        SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No se puede eliminar un vehículo con un alquiler activo';
+    END IF;
+END//
+DELIMITER;
 
 DELIMITER //
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
