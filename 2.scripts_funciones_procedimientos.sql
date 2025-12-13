@@ -115,6 +115,19 @@ BEGIN
 END //
 DELIMITER ;
 
+--SELECT * FROM vw_enganchesLibresPorEstacion
+--SELECT * FROM vw_vehiculosDisponibles
+
+-- Caso positivo(id enganche libre)
+-- Caso negativo(id enganche ocupado)
+-- START TRANSACTION;
+-- SELECT * FROM Vehiculos;
+-- SELECT * FROM Enganches;
+-- CALL mover_vehiculo(...)
+-- SELECT v.localizacion FROM Vehiculos v 
+-- JOIN Enganches e ON v.localizacion.contains(e.numero) WHERE v.id=...;
+-- ROLLBACK;
+
 DELIMITER //
 CREATE OR REPLACE PROCEDURE mover_vehiculo(
     IN p_vehiculoId INT,
