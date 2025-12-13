@@ -11,6 +11,58 @@
 -- CALL finalizar_alquiler(1, "2025-03-18 8:45:00",3, 3.20);
 -- SELECT * FROM Alquileres;
 
+--Procedimiento de creacion de un usuario(sea cliente o tecnico)
+DELIMITER //
+
+CREATE PROCEDURE registrar_usuario (
+    IN p_nombre VARCHAR(255),
+    IN p_correo VARCHAR(255),
+    IN p_contrasena VARCHAR(255),
+    IN p_tipo ENUM('CLIENTE', 'TECNICO'),
+    IN p_tarifa VARCHAR(50),
+    IN p_fechaNacimiento DATE
+)
+BEGIN
+    DECLARE v_usuarioId INT;
+
+    -- Manejo de errores
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al registrar usuario';
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO Usuarios (nombre, correo, contraseña)
+    VALUES (p_nombre, p_correo, p_contrasena);
+
+    SET v_usuarioId = LAST_INSERT_ID();
+
+    IF p_tipo = 'CLIENTE' THEN
+        INSERT INTO Clientes (
+            usuarioId, tarifaActual, fechaNacimiento, alquilerActivo, borrado
+        )
+        VALUES (
+            v_usuarioId, p_tarifa, p_fechaNacimiento, FALSE, FALSE
+        );
+
+    ELSEIF p_tipo = 'TECNICO' THEN
+        INSERT INTO Tecnicos_Mantenimiento (
+            usuarioId, fechaFinUltimoServicio, borrado
+        )
+        VALUES (
+            v_usuarioId, NULL, FALSE
+        );
+    END IF;
+
+    COMMIT;
+END //
+
+DELIMITER ;
+
+
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
     IN p_alquilerId INT,
