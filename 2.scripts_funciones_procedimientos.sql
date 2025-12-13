@@ -115,6 +115,71 @@ END //
 
 DELIMITER ;
 
+--Modificar usuario
+DELIMITER //
+
+CREATE PROCEDURE editar_perfil_inicio (
+    IN p_usuarioId INT,
+    IN p_nuevoCorreo VARCHAR(255),
+    IN p_nuevaContrasena VARCHAR(255),
+    IN p_nuevaTarifa VARCHAR(50),
+    IN p_nuevaFechaNacimiento DATE
+)
+BEGIN
+    -- Manejo de errores
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al editar perfil';
+    END;
+
+    START TRANSACTION;
+
+    -- Correo duplicado
+    IF p_nuevoCorreo IS NOT NULL AND EXISTS (
+        SELECT 1 FROM Usuarios
+        WHERE correo = p_nuevoCorreo
+          AND id <> p_usuarioId
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El correo ya existe';
+    END IF;
+
+    -- Usuarios
+    UPDATE Usuarios
+    SET
+        correo = COALESCE(p_nuevoCorreo, correo), --Nota: coalesce lo que hace es coger el primer valor no null de la lista que se le pasa, si el usuario no modifica la contraseña pues se queda la antigua
+        contraseña = COALESCE(p_nuevaContrasena, contraseña)
+    WHERE id = p_usuarioId;
+
+    -- Clientes (solo si existe)
+    UPDATE Clientes
+    SET
+        tarifaActual = COALESCE(p_nuevaTarifa, tarifaActual),
+        fechaNacimiento = COALESCE(p_nuevaFechaNacimiento, fechaNacimiento)
+    WHERE usuarioId = p_usuarioId;
+
+    -- NO COMMIT AQUÍ
+END //
+
+DELIMITER ;
+--confirmacion o no de los cambios
+DELIMITER //
+
+CREATE PROCEDURE editar_perfil_confirmar (
+    IN p_confirmar BOOLEAN
+)
+BEGIN
+    IF p_confirmar THEN
+        COMMIT;
+    ELSE
+        ROLLBACK;
+    END IF;
+END //
+
+DELIMITER ;
+
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
