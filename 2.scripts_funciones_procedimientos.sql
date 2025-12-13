@@ -179,7 +179,32 @@ BEGIN
 END //
 
 DELIMITER ;
+--Consulta cuenta(quiza es mejor hacerlo con una vista, ademas tengo que revisar bien este codigo porque creo que se puede hacer mejor)
+CREATE PROCEDURE ver_mi_cuenta (
+    IN p_usuarioId INT
+)
+BEGIN
+    SELECT
+        u.id AS usuarioId,
+        u.nombre,
+        u.correo,
 
+        -- Datos de cliente
+        c.fechaNacimiento,
+        c.tarifaActual,
+        c.alquilerActivo,
+
+        -- Datos de técnico
+        t.fechaFinUltimoServicio
+    FROM Usuarios u
+    LEFT JOIN Clientes c
+        ON c.usuarioId = u.id AND c.borrado = FALSE
+    LEFT JOIN Tecnicos_Mantenimiento t
+        ON t.usuarioId = u.id AND t.borrado = FALSE
+    WHERE u.id = p_usuarioId;
+END //
+
+DELIMITER ;
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
