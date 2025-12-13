@@ -62,6 +62,59 @@ END //
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE eliminar_usuario_soft (
+    IN p_usuarioId INT
+)
+BEGIN
+    DECLARE v_esCliente INT DEFAULT 0;
+    DECLARE v_esTecnico INT DEFAULT 0;
+
+    -- Manejo de errores
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al eliminar usuario';
+    END;
+
+    START TRANSACTION;
+
+    -- Comprobar si es cliente
+    SELECT COUNT(*) INTO v_esCliente
+    FROM Clientes
+    WHERE usuarioId = p_usuarioId;
+
+    -- Comprobar si es técnico
+    SELECT COUNT(*) INTO v_esTecnico
+    FROM Tecnicos_Mantenimiento
+    WHERE usuarioId = p_usuarioId;
+
+    -- Validación
+    IF v_esCliente = 0 AND v_esTecnico = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El usuario no existe como cliente ni técnico';
+    END IF;
+
+    -- Soft delete según tipo
+    IF v_esCliente > 0 THEN
+        UPDATE Clientes
+        SET borrado = TRUE
+        WHERE usuarioId = p_usuarioId;
+    END IF;
+
+    IF v_esTecnico > 0 THEN
+        UPDATE Tecnicos_Mantenimiento
+        SET borrado = TRUE
+        WHERE usuarioId = p_usuarioId;
+    END IF;
+
+    COMMIT;
+END //
+
+DELIMITER ;
+
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
