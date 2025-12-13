@@ -137,6 +137,24 @@ FOR EACH ROW
                 SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganche activo';
     END IF;
 END//
+DELIMITER;
+
+
+DELIMITER//
+CREATE TRIGGER trg_no_DELETE_estacion_enganches
+BEFORE DELETE ON Estaciones
+FOR EACH ROW 
+
+    IF EXISTS(
+    SELECT 1
+    FROM Enganches
+    WHERE Enganches.estacionId=OLD.id
+    )THEN
+        SIGNAL SQLSTATE '45000'
+                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganche activo';
+    END IF;
+END//
+DELIMITER;
 DELIMITER //
     
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
