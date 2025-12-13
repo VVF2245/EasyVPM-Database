@@ -4,7 +4,7 @@ DELIMITER //
 -- Caso positivo
 -- START TRANSACTION;
 -- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
--- ('ana@hotmail.com',      '$2a$12$OmDnsaGjXSVbxEu6z33QUOw11WIUuFGk8lRh1vmgNatDdBchdIium',      'Ana Torres'),
+-- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
 -- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
 -- ('Básica',  '1995-04-12', FALSE, FALSE);
@@ -16,7 +16,7 @@ DELIMITER //
 -- Caso negativo
 -- START TRANSACTION;
 -- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
--- ('luis@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk2JHj3OvTLJE1q1YKDq',     'Luis Martínez'),
+-- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
 -- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
 -- ('Básica',  '2020-04-12', FALSE, FALSE);
