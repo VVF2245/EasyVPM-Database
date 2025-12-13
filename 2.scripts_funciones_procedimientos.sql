@@ -1,3 +1,11 @@
+-- Caso positivo
+-- START TRANSACTION;
+-- INSERT INTO Alquileres(clienteId, vehiculoId, engancheInicioId)
+-- VALUES (1, 1, 1);
+-- CALL finalizar_alquiler(1, "2025-12-13",3, 30.5);
+-- ROLLBACK;
+
+
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
     IN p_alquilerId INT,

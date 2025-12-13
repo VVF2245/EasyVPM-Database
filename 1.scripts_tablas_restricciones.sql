@@ -75,13 +75,13 @@ CREATE TABLE Alquileres (
     clienteId INT NOT NULL,
     vehiculoId INT NOT NULL,
     engancheInicioId INT NOT NULL,
-    engancheFinId INT,
+    engancheFinId INT DEFAULT NULL,
     fechaHoraInicio DATETIME NOT NULL,
     fechaHoraFin DATETIME CHECK (fechaHoraFin IS NULL OR fechaHoraFin > fechaHoraInicio),
     distanciaRecorrida DECIMAL(5,2),
     costo DECIMAL(5, 2) NOT NULL CHECK (costo >= 0), --'derivada, trigger hecho'
     lugarInicio VARCHAR(200) NOT NULL, --'derivada, trigger hecho'
-    lugarFin VARCHAR(200), --'derivada, trigger hecho'
+    lugarFin VARCHAR(200) DEFAULT NULL, --'derivada, trigger hecho'
     FOREIGN KEY (clienteId) REFERENCES Clientes(usuarioId)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
