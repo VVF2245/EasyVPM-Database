@@ -203,7 +203,90 @@ BEGIN
         ON t.usuarioId = u.id AND t.borrado = FALSE
     WHERE u.id = p_usuarioId;
 END //
+--Un mismo procedimiento para patinetes y bicis
+DELIMITER//
+CREATE PROCEDURE registrarVehiculo (
+    IN p_tipoVehiculo VARCHAR(20), -- 'bicicleta' | 'patinete'
+    IN p_estado VARCHAR(50),
+    IN p_localizacion VARCHAR(200),
+    IN p_tipoBici VARCHAR(50),
+    IN p_autonomiaBateria DECIMAL(4,1)
+)
+BEGIN
+    DECLARE v_vehiculoId INT;
 
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al registrar el vehículo';
+    END;
+
+    START TRANSACTION;
+
+    -- Inserción en Vehiculos (atributos generales)
+    INSERT INTO Vehiculos (
+        estado, kilometraje, numeroUsos, localizacion, borrado
+    )
+    VALUES (
+        p_estado, 0.00, 0, p_localizacion, FALSE
+    );
+
+    SET v_vehiculoId = LAST_INSERT_ID();
+
+    -- Inserción según tipo
+    IF p_tipoVehiculo = 'bicicleta' THEN
+        INSERT INTO Bicicletas (vehiculoId, tipoBici)
+        VALUES (v_vehiculoId, p_tipoBici);
+
+    ELSEIF p_tipoVehiculo = 'patinete' THEN
+        INSERT INTO Patinetes_Electricos (vehiculoId, autonomiaBateria)
+        VALUES (v_vehiculoId, p_autonomiaBateria);
+
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo de vehículo no válido';
+    END IF;
+
+    COMMIT;
+END//
+--eliminacion vehiculo(si no tiene alquiler activo) 
+DELIMITER //
+
+CREATE PROCEDURE eliminarVehiculo (
+    IN p_vehiculoId INT
+)
+BEGIN
+    DECLARE v_activos INT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al eliminar el vehículo';
+    END;
+
+    START TRANSACTION;
+
+    -- Comprobar alquiler activo
+    SELECT COUNT(*)
+    INTO v_activos
+    FROM Alquileres
+    WHERE vehiculoId = p_vehiculoId
+      AND fechaFin IS NULL;
+
+    IF v_activos > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El vehículo tiene un alquiler activo';
+    END IF;
+
+    -- Soft delete
+    UPDATE Vehiculos
+    SET borrado = TRUE
+    WHERE id = p_vehiculoId;
+
+    COMMIT;
+END//
 DELIMITER ;
 
 DELIMITER //
