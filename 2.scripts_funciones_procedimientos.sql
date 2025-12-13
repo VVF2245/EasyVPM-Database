@@ -149,7 +149,8 @@ BEGIN
     -- Usuarios
     UPDATE Usuarios
     SET
-        correo = COALESCE(p_nuevoCorreo, correo), --Nota: coalesce lo que hace es coger el primer valor no null de la lista que se le pasa, si el usuario no modifica la contraseña pues se queda la antigua
+        --Nota: coalesce lo que hace es coger el primer valor no null de la lista que se le pasa, si el usuario no modifica la contraseña pues se queda la antigua
+        correo = COALESCE(p_nuevoCorreo, correo), 
         contraseña = COALESCE(p_nuevaContrasena, contraseña)
     WHERE id = p_usuarioId;
 
@@ -179,31 +180,6 @@ BEGIN
 END //
 
 DELIMITER ;
---Consulta cuenta(quiza es mejor hacerlo con una vista, ademas tengo que revisar bien este codigo porque creo que se puede hacer mejor)
-DELIMITER //
-CREATE PROCEDURE ver_mi_cuenta (
-    IN p_usuarioId INT
-)
-BEGIN
-    SELECT
-        u.id AS usuarioId,
-        u.nombre,
-        u.correo,
-
-        -- Datos de cliente
-        c.fechaNacimiento,
-        c.tarifaActual,
-        c.alquilerActivo,
-
-        -- Datos de técnico
-        t.fechaFinUltimoServicio
-    FROM Usuarios u
-    LEFT JOIN Clientes c
-        ON c.usuarioId = u.id AND c.borrado = FALSE
-    LEFT JOIN Tecnicos_Mantenimiento t
-        ON t.usuarioId = u.id AND t.borrado = FALSE
-    WHERE u.id = p_usuarioId;
-END //
 --Un mismo procedimiento para patinetes y bicis
 DELIMITER//
 CREATE PROCEDURE registrarVehiculo (
