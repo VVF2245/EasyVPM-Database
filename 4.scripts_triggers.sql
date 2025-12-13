@@ -110,7 +110,7 @@ CREATE TRIGGER trg_no_delete_veh_alq
 BEFORE DELETE ON Vehiculos
 FOR EACH ROW
 BEGIN
-    IF EXISTS (1 
+    IF EXISTS (SELECT 1 
     FROM ALQUILERES
     WHERE Alquileres.vehiculoId=OLD.id
         AND Alquileres.fechaHoraFin is NULL
@@ -121,7 +121,24 @@ BEGIN
 END//
 DELIMITER;
 
+DELIMITER//
+CREATE TRIGGER trg_no_borrado_estacion_enganches
+BEFORE UPDATE ON Estaciones
+FOR EACH ROW 
+    -- Solo cuando se intenta hacer soft delete
+    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+
+    IF EXISTS(
+    SELECT 1
+    FROM Enganches
+    WHERE Enganches.estacionId=OLD.id
+    )THEN
+        SIGNAL SQLSTATE '45000'
+                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganche activo';
+    END IF;
+END//
 DELIMITER //
+    
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
