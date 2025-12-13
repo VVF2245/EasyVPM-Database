@@ -1,6 +1,30 @@
 -- el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
 DELIMITER //
 
+-- Caso positivo
+-- START TRANSACTION;
+-- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
+-- ('ana@hotmail.com',      '$2a$12$OmDnsaGjXSVbxEu6z33QUOw11WIUuFGk8lRh1vmgNatDdBchdIium',      'Ana Torres'),
+
+-- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
+-- ('Básica',  '1995-04-12', FALSE, FALSE);
+
+-- SELECT * FROM Usuarios;
+-- SELECT * FROM Clientes;
+-- ROLLBACK;
+
+-- Caso negativo
+-- START TRANSACTION;
+-- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
+-- ('luis@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk2JHj3OvTLJE1q1YKDq',     'Luis Martínez'),
+
+-- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
+-- ('Básica',  '2020-04-12', FALSE, FALSE);
+
+-- SELECT * FROM Usuarios;
+-- SELECT * FROM Clientes;
+-- ROLLBACK;
+
 CREATE TRIGGER trg_cliente_edad_minima
 BEFORE INSERT ON Clientes
 FOR EACH ROW
