@@ -274,7 +274,51 @@ BEGIN
 END//
 
 DELIMITER ;
+--registrar una estacion
+DELIMITER//
+CREATE OR REPLACE PROCEDURE registro_estacion(
+    IN p_nombre VARCHAR(200)
+)
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al registrar el vehículo';
+    END;
+    START TRANSACTION;
 
+    INSERT INTO Estaciones(nombre, numeroVehiculos, borrado)
+    VALUES(p_nombre, 0,FALSE);
+
+    COMMIT;
+    END//
+DELIMITER;
+--modificar una estacion(solo se permite modificar el nombre)
+CREATE OR REPLACE PROCEDURE modificar_estacion(
+    IN p_id INT,
+    IN p_nombre VARCHAR(255),
+)
+    BEGIN
+    -- Handler de errores
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error al actualizar la estación';
+    END;
+
+    START TRANSACTION;
+
+    -- Actualización de la estación
+    UPDATE Estaciones
+    SET 
+        nombre = p_nombre,
+    WHERE id = p_id;
+
+    COMMIT;
+END//
+
+DELIMITER ;
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
     IN p_alquilerId INT,
