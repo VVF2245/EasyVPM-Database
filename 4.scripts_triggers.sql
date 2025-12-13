@@ -1,5 +1,4 @@
--- el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
-DELIMITER //
+
 
 -- Caso positivo
 -- START TRANSACTION;
@@ -25,6 +24,8 @@ DELIMITER //
 -- SELECT * FROM Clientes;
 -- ROLLBACK;
 
+-- el requisito de edad lo ponemos como trigger porque a heidisql no le gusta operar con curdate()
+DELIMITER //
 CREATE TRIGGER trg_cliente_edad_minima
 BEFORE INSERT ON Clientes
 FOR EACH ROW
@@ -35,6 +36,48 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER trg_no_elim_cli_alq
+BEFORE UPDATE ON Clientes
+FOR EACH ROW
+BEGIN
+    -- Solo cuando se intenta hacer soft delete
+    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+
+        -- Comprobar alquiler activo
+        IF EXISTS (
+            SELECT 1
+            FROM Alquileres
+            WHERE Alquileres.clienteId = OLD.usuarioId
+              AND Alquileres.fechaHoraFin IS NULL
+        ) THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No se puede eliminar un cliente con un alquiler activo';
+        END IF;
+
+    END IF;
+END //
+DELIMITER;
+
+--Este trigger es para evitar que se haga un DELETE real, sin el aunque tengamos que no se pueda hacer soft delete con cliente activo se sigue pudiendo eliminar totalmente a un cliente
+CREATE TRIGGER trg_clientes_no_delete_con_alquiler
+BEFORE DELETE ON Clientes
+FOR EACH ROW
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Alquileres
+        WHERE clienteId = OLD.usuarioId
+          AND fechaHoraFin IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'No se puede eliminar un cliente con alquiler activo';
+    END IF;
+END;
 
 DELIMITER //
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
@@ -335,32 +378,6 @@ BEGIN
         WHERE usuarioId = NEW.tecnicoId;
     END IF;
 END //
-DELIMITER ;
-
-
-DELIMITER //
-
-CREATE TRIGGER trg_no_elim_cli_alq
-BEFORE UPDATE ON Clientes
-FOR EACH ROW
-BEGIN
-    -- Solo cuando se intenta hacer soft delete
-    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
-
-        -- Comprobar alquiler activo
-        IF EXISTS (
-            SELECT 1
-            FROM Alquileres
-            WHERE Alquileres.clienteId = OLD.usuarioId
-              AND Alquileres.fechaHoraFin IS NULL
-        ) THEN
-            SIGNAL SQLSTATE '45000'
-                SET MESSAGE_TEXT = 'No se puede eliminar un cliente con un alquiler activo';
-        END IF;
-
-    END IF;
-END //
-
 DELIMITER ;
 
 --si se registra una valoracion muy baja el vehiculo pasa a "averiado"
