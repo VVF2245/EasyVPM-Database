@@ -180,6 +180,7 @@ END //
 
 DELIMITER ;
 --Consulta cuenta(quiza es mejor hacerlo con una vista, ademas tengo que revisar bien este codigo porque creo que se puede hacer mejor)
+DELIMITER //
 CREATE PROCEDURE ver_mi_cuenta (
     IN p_usuarioId INT
 )
