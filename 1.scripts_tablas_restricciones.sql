@@ -29,7 +29,7 @@ CREATE TABLE Tecnicos_Mantenimiento (
 CREATE TABLE Vehiculos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(50) NOT NULL, --'derivado, trigger hecho'
-    kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, 'derivado, trigger hecho'
+    kilometraje DECIMAL(5,2) NOT NULL DEFAULT 0.00, --'derivado, trigger hecho'
     numeroUsos INT NOT NULL DEFAULT 0, --'derivado, trigger hecho'
     localizacion VARCHAR(200), --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL
