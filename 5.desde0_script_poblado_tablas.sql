@@ -88,7 +88,7 @@ INSERT INTO Alquileres (
     lugarFin
 )
 VALUES
-(1, 3,  1, 4, '2025-03-18 09:10:00', '2025-03-18 09:35:00', 3.20, 4.80, 'Plaza Nueva', 'Alameda de Hércules'),
+(1, 3,  1, 4, '2025-03-18 09:10:00', NULL, 3.20, 4.80, 'Plaza Nueva', NULL),
 
 (2, 1,  4, 7, '2025-03-18 10:00:00', '2025-03-18 10:22:00', 2.10, 3.15, 'Alameda de Hércules', 'Triana'),
 
