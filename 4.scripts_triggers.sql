@@ -392,13 +392,13 @@ END //
 DELIMITER ;
 
 DELIMITER //
---cuando se registra una reparacion vehiculo pasa a "en_mantenimiento"
+--cuando se registra una reparacion vehiculo pasa a "mantenimiento pendiente"
 CREATE TRIGGER trg_A_insert_reparaciones_vehiculo
 AFTER INSERT ON Reparaciones
 FOR EACH ROW
 BEGIN
     UPDATE Vehiculos
-    SET estado = 'en_mantenimiento', 
+    SET estado = 'mantenimiento_pendiente', 
     kilometraje=0.0,
     numeroUsos=0
     WHERE Vehiculos.id = NEW.vehiculoId;
@@ -426,7 +426,7 @@ BEGIN
 END //
 DELIMITER ;
 
---si se registra una valoracion muy baja el vehiculo pasa a "averiado"
+--si se registra una valoracion muy baja el vehiculo pasa a "pendiente de mantenimiento"
 DELIMITER //
 
 CREATE TRIGGER trg_A_insert_valoracion
@@ -436,7 +436,7 @@ BEGIN
     --si un vehiculo tiene una valoracion igual o menor a 2 pasa su estado a averiado para que lo revisen urgentemente
     IF NEW.puntuacion <= 2 THEN
         UPDATE Vehiculos
-        SET estado = 'averiado'
+        SET estado = 'mantenimiento_pendiente'
         WHERE id = NEW.vehiculoId;
     END IF;
 END //
