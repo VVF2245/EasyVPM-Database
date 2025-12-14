@@ -1,5 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ENtV2bNj)
-# Título Proyecto
+# Base de Datos EasyVPM
 
 ## Miembros del grupo L6-VVF2245
 
@@ -10,11 +10,12 @@
 
 ## 1. Introducción al problema
 
-- Descripción del problema para poner en contexto el proyecto, incluyendo información sobre los clientes y usuarios, la situación actual, problemas, expectativas, etc. Se valorará la presencia de información multimedia (fotos, gráficos, documentos escaneados, etc.).
+EasyVPM es una empresa dedicada al alquiler de vehículos de movilidad personal (como bicicletas y patinetes eléctricos) que actualmente gestiona los alquileres y operaciones de forma manual, mediante papeleo y procesos poco eficientes.<br>
+<br>
+Este método provoca errores en el control de los vehículos, dificultad para conocer su estado real, problemas en la gestión de pagos y falta de información actualizada sobre los alquileres activos, estaciones y enganches disponibles. Además el seguimiento del mantenimiento de los vehículos resulta poco fiable.<br>
+<br>
+Ante el crecimiento de la empresa, buscan modernizarse implantando una plataforma centralizada que facilite la gestión de usuarios, vehículos, estaciones, alquileres, pagos, reparaciones y valoraciones, garantizando la consistencia de los datos y automatizando los procesos clave.<br>
 
-EasyVPM es una empresa dedicada al alquiler de vehículos de movilidad personal que actualmente gestiona los alquileres de forma manual, mediante papeleo y procesos poco eficientes.
-Ante su crecimiento, la empresa busca modernizarse implantando una plataforma centralizada que facilite la gestión de usuarios, vehículos y estaciones.
-Además, EasyVPM quiere mejorar su imagen y atraer nuevos clientes mediante una aplicación sencilla, moderna y fácil de usar, que ofrezca una experiencia ágil tanto para la empresa como para los usuarios.
 
 <img src="imagenes/imagen_transicion.png" alt="Objetivo de EasyVPM" width="40%"><br>
 <em>Objetivo de EasyVPM</em>
@@ -76,8 +77,6 @@ quiero poder valorar los vehículos tras su uso,<br>
 para contribuir a informar sobre su estado y ayudar a detectar incidencias.
 
 
-
-
 ### 3.2. Usuarios del sistema
 
 El sistema de EasyVPM contará con los siguientes tipos de usuarios: 
@@ -130,9 +129,8 @@ quiero poder modificar mis datos personales desde mi perfil,<br>
 para mantener mi información actualizada y correcta en el sistema.
 
 **P.A.1.03**
-- El usuario selecciona la opción editar perfil en la seccion: Mi cuenta.
+- Se actualizan los datos del usuario
 - Si el usuario es cliente, también puede actualizar la fecha de nacimiento.
-- Si el usuario modifica el correo electrónico, el sistema envía un código de verificación al nuevo correo.
 - Si el usuario modifica la contraseña, el sistema exige que tenga al menos 8 caracteres.
 - Si el correo introducido ya existe en otra cuenta, el sistema muestra un mensaje indicando que está duplicado.
 - Al completar la actualización, el sistema muestra el mensaje "Datos actualizados correctamente"
@@ -146,7 +144,7 @@ quiero consultar mis datos personales,<br>
 para verificar que mi información está correcta.
 
 **P.A.1.05.**
-- EL usuario accede a la sección Mi cuenta.
+- Se hace la consulta
 - El sistema muestra nombre, correo.
 - Si es cliente muestra también fecha de nacimiento y si tiene algún alquiler activo.
 - Si es técnico de mantenimiento muestra además la fecha del último servicio realizado.
