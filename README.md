@@ -771,7 +771,13 @@ Pagos(<br>
 
 ### 7.1.  Justificación de la estrategia de transformación de jerarquías
 
-- si se identificaron jerarquías en el MC.
+En el modelo conceptual se han definido dos jerarquías de generalización/especialización: Usuario–Cliente/TécnicoMantenimiento y Vehículo–Bicicleta/PatineteEléctrico. Para su transformación al modelo relacional se ha aplicado la estrategia de tabla por superclase y tabla por subclase.
+
+En la jerarquía Usuario–Cliente/TécnicoMantenimiento, la tabla Usuarios recoge los atributos comunes a todos los usuarios del sistema, mientras que las tablas Clientes y Tecnicos_Mantenimiento almacenan los atributos específicos de cada subtipo, utilizando como clave primaria la misma clave que referencia a Usuarios. Esta estrategia evita la duplicación de datos, permite mantener la jerarquía incompleta y disjunta definida en el UML y facilita la aplicación de reglas de negocio específicas para cada rol.
+
+En la jerarquía Vehículo–Bicicleta/PatineteEléctrico, la tabla Vehiculos contiene los atributos comunes a todos los vehículos, mientras que las tablas Bicicletas y Patinetes_Electricos almacenan únicamente los atributos propios de cada tipo. Esta solución evita la aparición de valores nulos, mejora la normalización del modelo y permite la extensibilidad del sistema ante la incorporación de nuevos tipos de vehículos.
+
+En ambos casos, la estrategia seleccionada garantiza la integridad referencial mediante claves foráneas y refleja fielmente el modelo conceptual definido, siendo la opción más adecuada para el sistema desarrollado.
 
 
 ### 8. Matriz de trazabilidad MC/SQL (opcional):
