@@ -131,7 +131,7 @@ para mantener mi información actualizada y correcta en el sistema.
 
 **P.A.1.03**
 - El usuario selecciona la opción editar perfil en la seccion: Mi cuenta.
-- Si el usuario es cliente, también puede actualizar la fecha de nacimiento y su tarifa contratada.
+- Si el usuario es cliente, también puede actualizar la fecha de nacimiento.
 - Si el usuario modifica el correo electrónico, el sistema envía un código de verificación al nuevo correo.
 - Si el usuario modifica la contraseña, el sistema exige que tenga al menos 8 caracteres.
 - Si el correo introducido ya existe en otra cuenta, el sistema muestra un mensaje indicando que está duplicado.
@@ -148,7 +148,7 @@ para verificar que mi información está correcta.
 **P.A.1.05.**
 - EL usuario accede a la sección Mi cuenta.
 - El sistema muestra nombre, correo.
-- Si es cliente muestra también fecha de nacimiento, tarifa actual y si tiene algún alquiler activo.
+- Si es cliente muestra también fecha de nacimiento y si tiene algún alquiler activo.
 - Si es técnico de mantenimiento muestra además la fecha del último servicio realizado.
 
 #### R.F.2.01. Registro de vehículos
@@ -309,7 +309,7 @@ para cerrar el servicio y que se me cobre lo correspondiente.
 **P.A.4.02.**
 - El cliente selecciona un enganche libre de la estación donde devuelve el vehículo
 - El sistema registra fecha y hora de finalización.
-- Se calcula el coste total según la duración y la tarifa activa.
+- Se calcula el coste total según la duración y si ha pagado una mensualidad hace menos de 30 días.
 - El vehículo pasa a estado "disponible".
 - El enganche donde se deja el vehículo pasa a "ocupado".
 - Se genera el pago asociado al alquiler.
@@ -458,12 +458,15 @@ para revisar mi historial de opiniones.
 #### R.I.01. Información sobre los usuarios
 Como administrador de EasyVPM,<br>
 quiero conocer el nombre, correo y contraseña de los usuarios.
-Si es un cliente quiero saber la tarifa contratada actualmente, su fecha de nacimiento y si tiene un alquiler activo. 
+Si es un cliente quiero saber su fecha de nacimiento y si tiene un alquiler activo. 
 Si es técnico de mantenimiento quiero saber cuándo terminó su último servicio.
+Si es administrador no quiero ninguna información extra.
 
 #### R.I.02. Información sobre los vehículos
 Como administrador de EasyVPM,<br>
-quiero conocer el estado de los vehículos, el kilometraje y el número de usos desde el último mantenimiento y su localización actual. Si es una bicicleta quiero saber qué tipo de bicicleta es, individual, tándem, etc. Si es un patinete eléctrico quiero saber qué autonomía tiene su batería.
+quiero conocer el estado de los vehículos, el kilometraje y el número de usos desde el último mantenimiento y su localización actual.
+Si es una bicicleta quiero saber qué tipo de bicicleta es, individual, tándem, etc.
+Si es un patinete eléctrico quiero saber qué autonomía tiene su batería.
 
 #### R.I.03. Información sobre estaciones
 Como administrador de EasyVPM,<br>

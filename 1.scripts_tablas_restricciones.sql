@@ -7,7 +7,6 @@ CREATE TABLE Usuarios (
 
 CREATE TABLE Clientes (
     usuarioId INT PRIMARY KEY,
-    tarifaActual VARCHAR(50) NOT NULL,
     fechaNacimiento DATE NOT NULL,
     alquilerActivo BOOLEAN NOT NULL, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,

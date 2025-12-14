@@ -6,7 +6,6 @@ Usuarios(
 )
 Clientes(
     id PK FK → Usuarios.id,
-    tarifaActual,
     fechaNacimiento,
     alquilerActivo,
     borrado

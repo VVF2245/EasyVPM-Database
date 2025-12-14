@@ -32,7 +32,6 @@ end note
 
 
 object Cliente1 {
-    tarifaActual= mensual
     fechaNacimiento= 01/10/2000
     /alquilerActivo= False
     borrado= False

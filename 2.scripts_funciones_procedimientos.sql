@@ -125,7 +125,6 @@ CREATE PROCEDURE editar_perfil_inicio (
     IN p_usuarioId INT,
     IN p_nuevoCorreo VARCHAR(255),
     IN p_nuevaContrasena VARCHAR(255),
-    IN p_nuevaTarifa VARCHAR(50),
     IN p_nuevaFechaNacimiento DATE
 )
 BEGIN
@@ -160,7 +159,6 @@ BEGIN
     -- Clientes (solo si existe)
     UPDATE Clientes
     SET
-        tarifaActual = COALESCE(p_nuevaTarifa, tarifaActual),
         fechaNacimiento = COALESCE(p_nuevaFechaNacimiento, fechaNacimiento)
     WHERE usuarioId = p_usuarioId;
 

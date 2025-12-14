@@ -5,7 +5,7 @@
 -- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
 -- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
--- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
+-- INSERT INTO Clientes (fechaNacimiento, alquilerActivo, borrado) VALUES
 -- ('Básica',  '1995-04-12', FALSE, FALSE);
 
 -- SELECT * FROM Usuarios;
@@ -17,7 +17,7 @@
 -- INSERT INTO Usuarios (correo, contraseña, nombre) VALUES
 -- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
--- INSERT INTO Clientes (tarifaActual, fechaNacimiento, alquilerActivo, borrado) VALUES
+-- INSERT INTO Clientes (fechaNacimiento, alquilerActivo, borrado) VALUES
 -- ('Básica',  '2020-04-12', FALSE, FALSE);
 
 -- SELECT * FROM Usuarios;
