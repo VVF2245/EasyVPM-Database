@@ -652,34 +652,61 @@ para confiar en el sistema y evitar errores o pérdidas de datos.
 
 - Matriz de trazabilidad entre los elementos del modelo conceptual y los requisitos.
 
-| Requisito                                          | Usuario | Cliente | TécnicoMantenimiento | Vehículo | Bicicleta | PatineteEléctrico | Estación | Enganche | Alquiler | Pago | Reparación | Valoración | Cliente–Alquiler | Alquiler–Vehículo | Alquiler–Enganche | Enganche–Estación | Técnico–Reparación | Alquiler–Pago | Alquiler–Valoración |
-| -------------------------------------------------- | ------- | ------- | -------------------- | -------- | --------- | ----------------- | -------- | -------- | -------- | ---- | ---------- | ---------- | ---------------- | ----------------- | ----------------- | ----------------- | ------------------ | ------------- | ------------------- |
-| **RI-1** Datos de usuario                          | X       | X       | X                    |          |           |                   |          |          |          |      |            |            |                  |                   |                   |                   |                    |               |                     |
-| **RI-2** Datos del cliente                         |         | X       |                      |          |           |                   |          |          | X        | X    |            |            | X                |                   |                   |                   |                    | X             |                     |
-| **RI-3** Datos del técnico                         |         |         | X                    |          |           |                   |          |          |          |      | X          |            |                  |                   |                   |                   | X                  |               |                     |
-| **RI-4** Datos del vehículo                        |         |         |                      | X        | X         | X                 |          |          |          |      |            |            |                  | X                 |                   |                   |                    |               |                     |
-| **RI-5** Datos de estaciones                       |         |         |                      |          |           |                   | X        | X        |          |      |            |            |                  |                   |                   | X                 |                    |               |                     |
-| **RF-1** Crear alquiler                            |         | X       |                      | X        |           |                   |          | X        | X        |      |            |            | X                | X                 | X                 |                   |                    |               |                     |
-| **RF-2** Finalizar alquiler                        |         | X       |                      | X        |           |                   |          | X        | X        |      |            |            | X                | X                 | X                 |                   |                    |               |                     |
-| **RF-3** Registrar pago                            |         | X       |                      |          |           |                   |          |          | X        | X    |            |            | X                |                   |                   |                   |                    | X             |                     |
-| **RF-4** Registrar reparación                      |         |         | X                    | X        |           |                   |          | X        |          |      | X          |            |                  |                   |                   |                   | X                  |               |                     |
-| **RN-01** Edad mínima 12 años                      |         | X       |                      |          |           |                   |          |          |          |      |            |            |                  |                   |                   |                   |                    |               |                     |
-| **RN-02** No eliminar usuarios con alquiler activo | X       | X       |                      |          |           |                   |          |          | X        |      |            |            | X                |                   |                   |                   |                    |               |                     |
-| **RN-03** Un alquiler activo por cliente           |         | X       |                      |          |           |                   |          |          | X        |      |            |            | X                |                   |                   |                   |                    |               |                     |
-| **RN-04** No eliminar vehículos en uso             |         |         |                      | X        |           |                   |          |          | X        |      |            |            |                  | X                 |                   |                   |                    |               |                     |
-| **RN-05** Cambio de estado por km máximo           |         |         |                      | X        |           |                   |          |          |          |      |            |            |                  |                   |                   |                   |                    |               |                     |
-| **RN-06** Cambio de estado al iniciar reparación   |         |         | X                    | X        |           |                   |          | X        |          |      | X          |            |                  |                   |                   |                   | X                  |               |                     |
-| **RN-07** Cambio de estado al terminar reparación  |         |         | X                    | X        |           |                   |          | X        |          |      | X          |            |                  |                   |                   |                   | X                  |               |                     |
-| **RN-08** Cambios de estado al iniciar alquiler    |         |         |                      | X        |           |                   |          | X        | X        |      |            |            |                  | X                 | X                 |                   |                    |               |                     |
-| **RN-09** Cambios de estado al finalizar alquiler  |         |         |                      | X        |           |                   |          | X        | X        |      |            |            |                  | X                 | X                 |                   |                    |               |                     |
-| **RN-10** Cambio por valoración baja               |         |         |                      | X        |           |                   |          |          |          |      |            | X          |                  |                   |                   |                   |                    |               | X                   |
-| **RN-13** Solo vehículos disponibles               |         |         |                      | X        |           |                   |          |          | X        |      |            |            |                  | X                 |                   |                   |                    |               |                     |
-| **RN-14** Dejar vehículo solo en enganches libres  |         |         |                      | X        |           |                   |          | X        | X        |      |            |            |                  |                   | X                 |                   |                    |               |                     |
-| **RN-15** Contraseña > 8 caracteres                | X       |         |                      |          |           |                   |          |          |          |      |            |            |                  |                   |                   |                   |                    |               |                     |
-| **RN-16** Valoración entre 1 y 5                   |         |         |                      |          |           |                   |          |          |          |      |            | X          |                  |                   |                   |                   |                    |               | X                   |
-
-
-
+| Requisito                                | Usu | Cli | Tec | Veh | Bic | Pat | Est | Eng | Alq | Pag | Rep | Val | C–A | A–V | A–E | E–Est | T–R | A–P | A–Val |
+| ---------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :---: | :-: | :-: | :---: |
+| **RI-01 Datos usuario**                  |  X  |  X  |  X  |     |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RI-02 Datos cliente**                  |     |  X  |     |     |     |     |     |     |  X  |     |     |     |  X  |     |     |       |     |     |       |
+| **RI-03 Datos técnico**                  |     |     |  X  |     |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RI-04 Datos vehículo**                 |     |     |     |  X  |  X  |  X  |     |     |     |     |     |     |     |  X  |     |       |     |     |       |
+| **RI-05 Datos estaciones**               |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RI-06 Datos mantenimiento**            |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RI-07 Datos valoraciones**             |     |     |  X  |  X  |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |       |
+| **RF-1.01 Registro usuario**             |  X  |  X  |  X  |     |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-1.02 Eliminar cuenta**              |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |  X  |     |     |       |     |     |       |
+| **RF-1.03 Actualizar datos**             |  X  |  X  |  X  |     |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-1.04 Consultar perfil**             |  X  |  X  |  X  |     |     |     |     |     |  X  |     |     |     |  X  |     |     |       |     |     |       |
+| **RF-2.01 Registrar vehículo**           |     |     |     |  X  |  X  |  X  |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-2.02 Eliminar vehículo**            |     |     |     |  X  |     |     |     |     |  X  |     |     |     |     |  X  |     |       |     |     |       |
+| **RF-2.03 Actualizar vehículo**          |     |     |     |  X  |  X  |  X  |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-2.04 Vehículos mantenimiento**      |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |     |     |       |
+| **RF-2.05 Vehículos por estación**       |     |  X  |     |  X  |  X  |  X  |  X  |     |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-3.01 Registrar estación**           |     |     |     |     |     |     |  X  |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-3.02 Actualizar estación**          |     |     |     |     |     |     |  X  |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-3.03 Eliminar estación**            |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-3.04 Consultar estaciones**         |     |  X  |     |     |     |     |  X  |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RF-3.05 Registrar enganche**           |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-3.06 Actualizar enganche**          |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-3.07 Eliminar enganche**            |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-3.08 Consultar enganches**          |     |  X  |     |     |     |     |  X  |  X  |     |     |     |     |     |     |     |   X   |     |     |       |
+| **RF-4.01 Crear alquiler**               |     |  X  |     |  X  |     |     |  X  |  X  |  X  |     |     |     |  X  |  X  |  X  |       |     |     |       |
+| **RF-4.02 Finalizar alquiler**           |     |  X  |     |  X  |     |     |  X  |  X  |  X  |  X  |     |     |  X  |  X  |  X  |       |     |  X  |       |
+| **RF-4.03 Historial alquileres**         |     |  X  |     |  X  |     |     |     |     |  X  |  X  |     |     |  X  |  X  |     |       |     |     |       |
+| **RF-4.04 Alquileres activos**           |     |     |     |  X  |     |     |  X  |  X  |  X  |     |     |     |     |  X  |  X  |       |     |     |       |
+| **RF-5.01 Registrar pago**               |     |  X  |     |     |     |     |     |     |  X  |  X  |     |     |     |     |     |       |     |     |   X   |
+| **RF-5.02 Consulta pagos cliente**       |     |  X  |     |     |     |     |     |     |     |  X  |     |     |     |     |     |       |     |     |       |
+| **RF-5.03 Consulta pagos admin**         |  X  |     |     |     |     |     |     |     |     |  X  |     |     |     |     |     |       |     |     |       |
+| **RF-6.01 Iniciar reparación**           |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RF-6.02 Finalizar reparación**         |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RF-6.03 Reparaciones activas**         |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RF-6.04 Historial reparaciones**       |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RF-7.01 Registrar valoración**         |     |  X  |     |  X  |     |     |     |     |  X  |     |     |  X  |  X  |  X  |     |       |     |     |   X   |
+| **RF-7.02 Valoraciones vehículo**        |     |     |  X  |  X  |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |       |
+| **RF-7.03 Promedio valoraciones**        |  X  |     |     |  X  |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |       |
+| **RF-7.04 Historial valoraciones**       |     |  X  |     |  X  |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |       |
+| **RN-01 Edad ≥ 12**                      |     |  X  |     |     |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RN-02 No borrar cliente con alquiler** |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |  X  |     |     |       |     |     |       |
+| **RN-03 Un alquiler activo**             |     |  X  |     |     |     |     |     |     |  X  |     |     |     |  X  |     |     |       |     |     |       |
+| **RN-04 No borrar vehículo en uso**      |     |     |     |  X  |     |     |     |     |  X  |     |     |     |     |  X  |     |       |     |     |       |
+| **RN-05 Cambio por km/usos**             |     |     |     |  X  |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RN-06 Estado al iniciar reparación**   |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RN-07 Estado al finalizar reparación** |     |     |  X  |  X  |     |     |     |     |     |     |  X  |     |     |     |     |       |  X  |     |       |
+| **RN-08 Estado al iniciar alquiler**     |     |     |     |  X  |     |     |     |  X  |  X  |     |     |     |     |  X  |  X  |       |     |     |       |
+| **RN-09 Estado al finalizar alquiler**   |     |     |     |  X  |     |     |     |  X  |  X  |     |     |     |     |  X  |  X  |       |     |     |       |
+| **RN-10 Valoración baja → averiado**     |     |     |     |  X  |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |   X   |
+| **RN-13 Solo vehículos disponibles**     |     |     |     |  X  |     |     |     |     |  X  |     |     |     |     |  X  |     |       |     |     |       |
+| **RN-14 Enganche libre al devolver**     |     |     |     |  X  |     |     |     |  X  |  X  |     |     |     |     |  X  |  X  |       |     |     |       |
+| **RN-15 Contraseña ≥ 8**                 |  X  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |       |     |     |       |
+| **RN-16 Valoración 1–5**                 |     |     |     |     |     |     |     |     |     |     |     |  X  |     |     |     |       |     |     |   X   |
 
 -- fin entregable 2 --
 
