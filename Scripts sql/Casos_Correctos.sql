@@ -86,8 +86,8 @@ CALL pago_mensual(3);
 
 CALL iniciar_alquiler(
     3,
-    1,
-    1
+    2,
+    2
 );
 
 CALL finalizar_alquiler(
@@ -130,5 +130,6 @@ CALL mover_vehiculo(
 
 
 --  12 Eliminación lógica correcta (sin alquiler activo)
+
 
 CALL eliminar_usuario_soft(4);
