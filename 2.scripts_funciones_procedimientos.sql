@@ -13,7 +13,7 @@
 
 --Procedimiento de creacion de un usuario(sea cliente o tecnico)
 DELIMITER //
-CREATE PROCEDURE registrar_usuario (
+CREATE OR REPLACE PROCEDURE registrar_usuario (
     IN p_nombre VARCHAR(255),
     IN p_correo VARCHAR(255),
     IN p_contrasena VARCHAR(255),
@@ -67,7 +67,7 @@ DELIMITER ;
 
 -- lo hemos hecho con la intención de que no se le haga soft delete a los administradores (no son ni clientes ni técnicos)
 DELIMITER //
-CREATE PROCEDURE eliminar_usuario_soft (
+CREATE OR REPLACE PROCEDURE eliminar_usuario_soft (
     IN p_usuarioId INT
 )
 BEGIN
@@ -121,7 +121,7 @@ DELIMITER ;
 
 --Modificar usuario
 DELIMITER //
-CREATE PROCEDURE editar_perfil_inicio (
+CREATE OR REPLACE PROCEDURE editar_perfil_inicio (
     IN p_usuarioId INT,
     IN p_nuevoCorreo VARCHAR(255),
     IN p_nuevaContrasena VARCHAR(255),
@@ -169,7 +169,7 @@ DELIMITER ;
 
 --Un mismo procedimiento para patinetes y bicis
 DELIMITER//
-CREATE PROCEDURE registrarVehiculo (
+CREATE OR REPLACE PROCEDURE registrarVehiculo (
     IN p_tipoVehiculo VARCHAR(20), -- 'bicicleta' | 'patinete'
     IN p_estado VARCHAR(50),
     IN p_localizacion VARCHAR(200),
@@ -217,7 +217,7 @@ END//
 --eliminacion vehiculo(no tengo en cuenta el alquiler porque de eso se encarga el trigger)
 DELIMITER //
 
-CREATE PROCEDURE eliminarVehiculo (
+CREATE OR REPLACE PROCEDURE eliminarVehiculo (
     IN p_vehiculoId INT
 )
 BEGIN
@@ -305,7 +305,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE iniciar_alquiler (
+CREATE OR REPLACE PROCEDURE iniciar_alquiler (
     IN p_clienteId INT,
     IN p_vehiculoId INT,
     IN p_engancheInicioId INT
@@ -481,6 +481,44 @@ BEGIN
     COMMIT;
 
 END //
+DELIMITER ;
+
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE reparar_vehiculo (
+    IN p_tecnicoId INT,
+    IN p_vehiculoId INT
+)
+BEGIN
+    /* Verificar que el técnico existe y no está borrado */
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Tecnicos_Mantenimiento
+        WHERE usuarioId = p_tecnicoId
+          AND borrado = FALSE
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El técnico no es válido';
+    END IF;
+
+    /* Cambiar estado del vehículo */
+    UPDATE Vehiculos
+    SET estado = 'disponible'
+    WHERE id = p_vehiculoId
+      AND estado = 'mantenimiento_pendiente'
+      AND borrado = FALSE;
+
+    IF ROW_COUNT() = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El vehículo no estaba en mantenimiento';
+    END IF;
+
+    /* Actualizar fecha último servicio */
+    UPDATE Tecnicos_Mantenimiento
+    SET fechaFinUltimoServicio = CURDATE()
+    WHERE usuarioId = p_tecnicoId;
+END//
+
 DELIMITER ;
 
 --SELECT * FROM vw_enganchesLibresPorEstacion
