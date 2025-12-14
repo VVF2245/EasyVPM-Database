@@ -304,6 +304,82 @@ END //
 DELIMITER ;
 
 DELIMITER //
+
+CREATE PROCEDURE iniciar_alquiler (
+    IN p_clienteId INT,
+    IN p_vehiculoId INT,
+    IN p_engancheInicioId INT
+)
+BEGIN
+    DECLARE v_estadoVehiculo VARCHAR(50);
+    DECLARE v_estadoEnganche VARCHAR(50);
+
+    /* 1. Validar que el cliente no tenga alquiler activo */
+    IF EXISTS (
+        SELECT 1
+        FROM Alquileres
+        WHERE clienteId = p_clienteId
+          AND fechaHoraFin IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
+    END IF;
+
+    /* 2. Validar que el vehículo esté disponible */
+    SELECT estado
+    INTO v_estadoVehiculo
+    FROM Vehiculos
+    WHERE id = p_vehiculoId
+      AND borrado = FALSE;
+
+    IF v_estadoVehiculo IS NULL OR v_estadoVehiculo <> 'disponible' THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El vehículo no está disponible';
+    END IF;
+
+    /* 3. Validar que el enganche esté ocupado */
+    SELECT estado
+    INTO v_estadoEnganche
+    FROM Enganches
+    WHERE id = p_engancheInicioId
+      AND borrado = FALSE;
+
+    IF v_estadoEnganche IS NULL OR v_estadoEnganche <> 'ocupado' THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El enganche no tiene un vehículo disponible';
+    END IF;
+
+    /* 4. Insertar alquiler */
+    INSERT INTO Alquileres (
+        clienteId,
+        vehiculoId,
+        engancheInicioId,
+        fechaHoraInicio,
+        costo,
+        lugarInicio
+    ) VALUES (
+        p_clienteId,
+        p_vehiculoId,
+        p_engancheInicioId,
+        NOW(),
+        0,
+        'Estación de inicio'
+    );
+
+    /* 5. Actualizar estados */
+    UPDATE Vehiculos
+    SET estado = 'alquilado'
+    WHERE id = p_vehiculoId;
+
+    UPDATE Enganches
+    SET estado = 'libre'
+    WHERE id = p_engancheInicioId;
+
+END//
+
+DELIMITER ;
+
+DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
     IN p_alquilerId INT,
     IN p_fechaFin DATETIME,
