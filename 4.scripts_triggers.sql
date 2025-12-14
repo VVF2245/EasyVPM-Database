@@ -125,9 +125,9 @@ DELIMITER//
 CREATE TRIGGER trg_no_borrado_estacion_enganches
 BEFORE UPDATE ON Estaciones
 FOR EACH ROW 
+BEGIN
     -- Solo cuando se intenta hacer soft delete
     IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
-
     IF EXISTS(
     SELECT 1
     FROM Enganches
@@ -140,22 +140,24 @@ END//
 DELIMITER;
 
 
-DELIMITER//
-CREATE TRIGGER trg_no_DELETE_estacion_enganches
-BEFORE DELETE ON Estaciones
-FOR EACH ROW 
-
-    IF EXISTS(
-    SELECT 1
-    FROM Enganches
-    WHERE Enganches.estacionId=OLD.id
-    )THEN
-        SIGNAL SQLSTATE '45000'
-                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganche activo';
-    END IF;
-END//
-DELIMITER;
 DELIMITER //
+
+CREATE TRIGGER trg_no_delete_estacion_enganches
+BEFORE DELETE ON Estaciones
+FOR EACH ROW
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Enganches
+        WHERE estacionId = OLD.id
+          AND borrado = FALSE
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No se puede eliminar una estación con enganches activos';
+    END IF;
+END//
+
+DELIMITER ;
     
 CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
 BEFORE INSERT ON Alquileres
