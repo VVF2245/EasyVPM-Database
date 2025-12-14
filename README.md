@@ -134,7 +134,6 @@ para mantener mi información actualizada y correcta en el sistema.
 - Si el usuario es cliente, también puede actualizar la fecha de nacimiento y su tarifa contratada.
 - Si el usuario modifica el correo electrónico, el sistema envía un código de verificación al nuevo correo.
 - Si el usuario modifica la contraseña, el sistema exige que tenga al menos 8 caracteres.
-- Los cambios no se guardan hasta que el usuario confirme.
 - Si el correo introducido ya existe en otra cuenta, el sistema muestra un mensaje indicando que está duplicado.
 - Al completar la actualización, el sistema muestra el mensaje "Datos actualizados correctamente"
 - Se debe aplicar la regla de negocio R.N.01.

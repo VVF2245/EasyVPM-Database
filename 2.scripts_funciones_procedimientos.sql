@@ -13,14 +13,15 @@
 
 --Procedimiento de creacion de un usuario(sea cliente o tecnico)
 DELIMITER //
-
 CREATE PROCEDURE registrar_usuario (
     IN p_nombre VARCHAR(255),
     IN p_correo VARCHAR(255),
     IN p_contrasena VARCHAR(255),
-    IN p_tipo ENUM('CLIENTE', 'TECNICO'),
-    IN p_tarifa VARCHAR(50),
-    IN p_fechaNacimiento DATE
+
+    -- datos cliente (son ocpionales)
+    IN p_fechaNacimiento DATE,
+
+    IN p_esTecnico BOOLEAN
 )
 BEGIN
     DECLARE v_usuarioId INT;
@@ -40,15 +41,15 @@ BEGIN
 
     SET v_usuarioId = LAST_INSERT_ID();
 
-    IF p_tipo = 'CLIENTE' THEN
+    IF p_fechaNacimiento IS NOT NULL THEN
         INSERT INTO Clientes (
-            usuarioId, tarifaActual, fechaNacimiento, alquilerActivo, borrado
+            usuarioId, fechaNacimiento, alquilerActivo, borrado
         )
         VALUES (
-            v_usuarioId, p_tarifa, p_fechaNacimiento, FALSE, FALSE
+            v_usuarioId, p_fechaNacimiento, FALSE, FALSE
         );
 
-    ELSEIF p_tipo = 'TECNICO' THEN
+    ELSE IF p_esTecnico = TRUE THEN
         INSERT INTO Tecnicos_Mantenimiento (
             usuarioId, fechaFinUltimoServicio, borrado
         )
@@ -57,13 +58,15 @@ BEGIN
         );
     END IF;
 
+    -- si no es ninguna es administrador
+
     COMMIT;
 END //
-
 DELIMITER ;
 
-DELIMITER //
 
+-- lo hemos hecho con la intención de que no se le haga soft delete a los administradores (no son ni clientes ni técnicos)
+DELIMITER //
 CREATE PROCEDURE eliminar_usuario_soft (
     IN p_usuarioId INT
 )
@@ -115,9 +118,9 @@ END //
 
 DELIMITER ;
 
+
 --Modificar usuario
 DELIMITER //
-
 CREATE PROCEDURE editar_perfil_inicio (
     IN p_usuarioId INT,
     IN p_nuevoCorreo VARCHAR(255),
@@ -161,25 +164,11 @@ BEGIN
         fechaNacimiento = COALESCE(p_nuevaFechaNacimiento, fechaNacimiento)
     WHERE usuarioId = p_usuarioId;
 
-    -- NO COMMIT AQUÍ
+    COMMIT;
 END //
-
 DELIMITER ;
---confirmacion o no de los cambios
-DELIMITER //
 
-CREATE PROCEDURE editar_perfil_confirmar (
-    IN p_confirmar BOOLEAN
-)
-BEGIN
-    IF p_confirmar THEN
-        COMMIT;
-    ELSE
-        ROLLBACK;
-    END IF;
-END //
 
-DELIMITER ;
 --Un mismo procedimiento para patinetes y bicis
 DELIMITER//
 CREATE PROCEDURE registrarVehiculo (
