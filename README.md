@@ -86,7 +86,7 @@ El sistema de EasyVPM contará con los siguientes tipos de usuarios:
    * Se registran para alquilar vehículos, consultar estaciones y disponibilidad, iniciar y finalizar alquileres, y proporcionar valoraciones. 
 
 **Administradores**
-   * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento, y generan informes para la empresa. 
+   * Gestionan usuarios, vehículos y estaciones, supervisan incidencias y mantenimiento.
 
 **Técnicos de mantenimiento**
    * Reciben notificaciones de incidencias, actualizan el estado de los vehículos y realizan reparaciones. 
@@ -595,8 +595,8 @@ para poder ampliar el servicio sin afectar el rendimiento del sistema.
 
 #### R.N.F.02. Disponibilidad razonable <br>
 Como cliente de EasyVPM, <br>
-quiero que la aplicación este disponible en todo momento, <br>
-para poder acceder al servicio sin interrupciones y aprovecharla al máximo.
+quiero que el sistema este disponible la mayoría del tiempo, <br>
+para poder acceder al servicio sin interrupciones.
 
 **P.A.02.**
 - La aplicación debe estar disponible al menos el 90% del tiempo (exceptuando mantenimientos).
@@ -618,25 +618,16 @@ para cumplir con la normativa de protección de datos y evitar accesos no autori
 - Intentar acceder a una función restringida muestra un mensaje de “Acceso no autorizado”.
 
 #### R.N.F.04. Fiabilidad operaciones críticas
-Como cliente de EasyVPM, <br>
-quiero que las funciones críticas como el registro del pago funcionen correctamente, <br>
+Como administrador de EasyVPM, <br>
+quiero que el sistema garantice la correcta ejecución de las operaciones críticas, <br>
 para confiar en el sistema y evitar errores o pérdidas de datos.
 
 **P.A.04.**
-- En caso de error durante el pago o el alquiler, el sistema debe mostrar un mensaje claro.
-- Verificar que los registros de alquiler, inicio y fin de viaje se guardan correctamente aun en caso de interrupción de red.
+- En caso de error durante una operación crítica (pago, alquiler, etc), el sistema debe mostrar un mensaje claro.
+- Las operaciones de inicio y finalización de alquiler deberán quedar correctamente registradas en la base de datos o no registrarse en absoluto.
 - Las operaciones completadas deben quedar registradas en el sistema sin duplicados.
+- Las operaciones críticas deberán implementarse mediante procedures y transacciones para que se garantice la atomicidad de las operaciones.
 
-#### R.N.F.05. Compatibilidad técnica del sistema
-Como responsable TIC de EasyVPM, <br>
-quiero que el sistema funcione correctamente en distintos entornos (Android, iOS y navegadores web modernos), <br>
-para asegurar la accesibilidad del servicio a la mayoría de usuarios.
-
-**P.A.05.**
-- La app debe ser usable desde Android (versión 11 o superior) e iOS (versión 14 o superior).
-- Debe tener accesi funcional básico desde navegadores web modernos (Chrome, Edge, Safari, Firefox).
-- Verificar que los usuarios pueden iniciar sesión, alquilar vehículos y consultar estaciones sin ningún problema desde estas plataformas.
-- Las pantallas deben adaptarse a distintos tamaños de dispositivos.
 
 
 -- fin entregable 1 --
@@ -705,6 +696,88 @@ para asegurar la accesibilidad del servicio a la mayoría de usuarios.
 ## 7. Modelo relacional en 3FN
 
 - Relaciones obtenidas al aplicar la transformación del modelo conceptual.
+
+Usuarios(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; correo AK,<br>
+&nbsp;&nbsp;&nbsp; contraseña,<br>
+&nbsp;&nbsp;&nbsp; nombre<br>
+)<br>
+Clientes(<br>
+&nbsp;&nbsp;&nbsp; id PK FK → Usuarios.id,<br>
+&nbsp;&nbsp;&nbsp; fechaNacimiento,<br>
+&nbsp;&nbsp;&nbsp; alquilerActivo,<br>
+&nbsp;&nbsp;&nbsp; borrado<br>
+)<br>
+Tecnicos_Mantenimiento(<br>
+&nbsp;&nbsp;&nbsp; id PK FK → Usuarios.id,<br>
+&nbsp;&nbsp;&nbsp; fechaFinUltimoServicio NULL,<br>
+&nbsp;&nbsp;&nbsp; borrado<br>
+)<br>
+Vehiculos(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; estado,<br>
+&nbsp;&nbsp;&nbsp; kilometraje,<br>
+&nbsp;&nbsp;&nbsp; numeroUsos,<br>
+&nbsp;&nbsp;&nbsp; localizacion,<br>
+&nbsp;&nbsp;&nbsp; borrado<br>
+)<br>
+Bicicletas(<br>
+&nbsp;&nbsp;&nbsp; id PK FK → Vehiculos.id,<br>
+&nbsp;&nbsp;&nbsp; tipoBici<br>
+)<br>
+Patinetes_Electricos(<br>
+&nbsp;&nbsp;&nbsp; id PK FK → Vehiculos.id,<br>
+&nbsp;&nbsp; autonomiaBateria<br>
+)<br>
+'El nombre de la estación es único porque la app solo se va a usar en Sevilla y no van a coincidir dos nombres de estaciones'<br>
+Estaciones(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; nombre AK,<br>
+&nbsp;&nbsp;&nbsp; borrado<br>
+)<br>
+Enganches(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; estacionId FK → Estaciones.id,<br>
+&nbsp;&nbsp;&nbsp; numero,<br>
+&nbsp;&nbsp;&nbsp; estado,<br>
+&nbsp;&nbsp;&nbsp; borrado<br>
+)<br>
+Alquileres(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; clienteId FK → Clientes.id,<br>
+&nbsp;&nbsp;&nbsp; vehiculoId FK → Vehiculos.id,<br>
+&nbsp;&nbsp;&nbsp; engancheInicioId FK → Enganches.id,<br>
+&nbsp;&nbsp;&nbsp; engancheFinId FK → Enganches.id NULL,<br>
+&nbsp;&nbsp;&nbsp; fechaHoraInicio,<br>
+&nbsp;&nbsp;&nbsp; fechaHoraFin NULL,<br>
+&nbsp;&nbsp;&nbsp; distanciaRecorrida NULL,<br>
+&nbsp;&nbsp;&nbsp; costo NULL,<br>
+&nbsp;&nbsp;&nbsp; lugarInicio,<br>
+&nbsp;&nbsp;&nbsp; lugarFin NULL<br>
+)<br>
+Valoraciones(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; alquilerId FK → Alquileres.id,<br>
+&nbsp;&nbsp;&nbsp; vehiculoId FK → Vehiculos.id,<br>
+&nbsp;&nbsp;&nbsp; puntuacion,<br>
+&nbsp;&nbsp;&nbsp; comentario NULL<br>
+)<br>
+Reparaciones(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; tecnicoId FK → Tecnicos_Mantenimiento.id,<br>
+&nbsp;&nbsp;&nbsp; vehiculoId FK → Vehiculos.id,<br>
+&nbsp;&nbsp;&nbsp; fecha,<br>
+&nbsp;&nbsp;&nbsp; detalles<br>
+)<br>
+Pagos(<br>
+&nbsp;&nbsp;&nbsp; id PK,<br>
+&nbsp;&nbsp;&nbsp; clienteId FK → Clientes.id,<br>
+&nbsp;&nbsp;&nbsp; alquilerId FK → Alquileres.id NULL,<br>
+&nbsp;&nbsp;&nbsp; tipoPago,<br>
+&nbsp;&nbsp;&nbsp; cantidad,<br>
+&nbsp;&nbsp;&nbsp; fecha<br>
+)<br>
 
 ### 7.1.  Justificación de la estrategia de transformación de jerarquías
 
