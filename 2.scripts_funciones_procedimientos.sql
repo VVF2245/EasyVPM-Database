@@ -503,9 +503,9 @@ BEGIN
 
     /* Cambiar estado del vehículo */
     UPDATE Vehiculos
-    SET estado = 'disponible'
+    SET estado = 'reparado'
     WHERE id = p_vehiculoId
-      AND estado = 'mantenimiento_pendiente'
+      AND estado = 'en_mantenimiento'
       AND borrado = FALSE;
 
     IF ROW_COUNT() = 0 THEN

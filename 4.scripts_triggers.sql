@@ -392,13 +392,14 @@ END //
 DELIMITER ;
 
 DELIMITER //
---cuando se registra una reparacion vehiculo pasa a "mantenimiento pendiente"
+-- cuando se registra una reparacion vehiculo pasa a "en_mantenimiento"
+-- porque no ha terminado la reparación y si un tecnico quiere ver qué vehículos faltan por reparar los filtra mejor
 CREATE TRIGGER trg_A_insert_reparaciones_vehiculo
 AFTER INSERT ON Reparaciones
 FOR EACH ROW
 BEGIN
     UPDATE Vehiculos
-    SET estado = 'mantenimiento_pendiente', 
+    SET estado = 'en_mantenimiento', 
     kilometraje=0.0,
     numeroUsos=0
     WHERE Vehiculos.id = NEW.vehiculoId;
@@ -426,7 +427,7 @@ BEGIN
 END //
 DELIMITER ;
 
---si se registra una valoracion muy baja el vehiculo pasa a "pendiente de mantenimiento"
+--si se registra una valoracion muy baja el vehiculo pasa a "mantenimiento_pendiente"
 DELIMITER //
 
 CREATE TRIGGER trg_A_insert_valoracion
