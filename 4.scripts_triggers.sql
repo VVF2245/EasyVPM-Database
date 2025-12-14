@@ -132,9 +132,10 @@ BEGIN
     SELECT 1
     FROM Enganches
     WHERE Enganches.estacionId=OLD.id
+    AND estado='ocupado'
     )THEN
         SIGNAL SQLSTATE '45000'
-                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganche activo';
+                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganches ocupados';
     END IF;
 END//
 DELIMITER;
@@ -150,10 +151,11 @@ BEGIN
         SELECT 1
         FROM Enganches
         WHERE estacionId = OLD.id
+          AND estado = 'ocupado'
           AND borrado = FALSE
     ) THEN
         SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No se puede eliminar una estación con enganches activos';
+            SET MESSAGE_TEXT = 'No se puede eliminar la estación: tiene enganches ocupados';
     END IF;
 END//
 
