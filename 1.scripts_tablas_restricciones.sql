@@ -64,7 +64,7 @@ CREATE TABLE Enganches (
     estado VARCHAR(50) NOT NULL, --'derivado, trigger hecho'
     borrado BOOLEAN NOT NULL,
     FOREIGN KEY (estacionId) REFERENCES Estaciones(id)
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
         ON UPDATE CASCADE,
     CONSTRAINT uq_estacion_numero UNIQUE (estacionId, numero)
 );
