@@ -159,74 +159,39 @@ BEGIN
     END IF;
 END//
 
-DELIMITER ;
-    
-CREATE TRIGGER trg_B_insert_alquileres_validar_inicio
+DELIMITER //
+
+CREATE TRIGGER trg_un_solo_alquiler_activo
 BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
-    DECLARE activo BOOLEAN;
-    DECLARE v_estado VARCHAR(255);
-    DECLARE v_estacionInicio VARCHAR(255);
-    DECLARE v_numInicio INT;
-    IF NEW.clienteId IS NOT NULL AND NEW.fechaHoraFin IS NULL THEN
-
-        SELECT alquilerActivo
-        INTO activo
-        FROM Clientes
-        WHERE usuarioId = NEW.clienteId;
-
-        IF activo = TRUE THEN
-            SIGNAL SQLSTATE '45000'
-                SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
-        END IF;
-
-        -- comprobar que el vehículo está disponible
-
-        SELECT estado
-        INTO v_estado
-        FROM Vehiculos
-        WHERE id = NEW.vehiculoId;
-        IF v_estado != 'disponible' THEN
-            SIGNAL SQLSTATE '45000'
-                SET MESSAGE_TEXT = 'El vehículo no está disponible para alquilar';
-        END IF;
-
-        -- Obtener localización enganche inicio alquiler
-
-        SELECT Estaciones.nombre, Enganches.numero
-        INTO v_estacionInicio, v_numInicio
-        FROM Enganches
-        JOIN Estaciones ON Enganches.estacionId = Estaciones.id
-        WHERE Enganches.id = NEW.engancheInicioId;
-
-        SET NEW.lugarInicio = CONCAT('Estación ', v_estacionInicio, ' Enganche ', v_numInicio);
+    IF EXISTS (
+        SELECT 1
+        FROM Alquileres
+        WHERE clienteId = NEW.clienteId
+          AND fechaHoraFin IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El cliente ya tiene un alquiler activo';
     END IF;
-END //
+END//
+
 DELIMITER ;
 
-
 DELIMITER //
--- se crea alquiler, vehiculo pasa a "en uso" y el enganche a "disponible"
-CREATE TRIGGER trg_A_insert_alquileres 
-AFTER INSERT ON Alquileres
+
+CREATE TRIGGER trg_vehiculo_disponible
+BEFORE INSERT ON Alquileres
 FOR EACH ROW
 BEGIN
-    IF NEW.fechaHoraFin IS NULL THEN
-
-        -- no hay localización gps del vehículo al desengancharlo, por eso NULL
-        UPDATE Vehiculos
-        SET estado = 'en_uso',
-            localizacion = NULL
-        WHERE id = NEW.vehiculoId;
-
-        UPDATE Enganches
-        SET estado = 'libre'
-        WHERE id = NEW.engancheInicioId;
-
-        UPDATE Clientes
-        SET alquilerActivo = TRUE
-        WHERE usuarioId = NEW.clienteId;
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Vehiculos
+        WHERE id = NEW.vehiculoId
+          AND estado = 'disponible'
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Solo se pueden alquilar vehículos disponibles';
     END IF;
 END//
 
