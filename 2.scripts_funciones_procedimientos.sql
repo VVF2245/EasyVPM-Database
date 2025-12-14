@@ -281,8 +281,28 @@ CREATE OR REPLACE PROCEDURE modificar_estacion(
 
     COMMIT;
 END//
+DELIMITER;
 
+DELIMITER //
+CREATE OR REPLACE PROCEDURE eliminar_estacion(
+    IN p_id INT
+)
+-- Handler de errores
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+    ROLLBACK;
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Error al eliminar la estacion';
+END;
+START TRANSACTION;
+    UPDATE Estaciones
+    SET borrado = TRUE
+    WHERE id = p_id;
+
+    COMMIT;
+END //  
 DELIMITER ;
+
 DELIMITER //
 CREATE OR REPLACE PROCEDURE finalizar_alquiler(
     IN p_alquilerId INT,
