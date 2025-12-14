@@ -197,7 +197,7 @@ Alquiler1 "*"--"1" Vehiculo1: de
 'Relacion Pago'
 Cliente1 *--"*" Pago1
 Cliente1 *--"*" Pago2
-Pago2 "0..1"--"0..1" Alquiler1
+Pago2 "1..1"--"0..1" Alquiler1
 
 Vehiculo1 <|-- Bicicleta1
 
