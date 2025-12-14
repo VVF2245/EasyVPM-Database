@@ -552,15 +552,16 @@ DELIMITER ;
 -- El soft delete se hace con procedimiento para evitar inconsistencias
 -- Caso positivo
 -- START TRANSACTION;
--- SELECT * FROM Vehiculos
+-- SELECT borrado FROM Vehiculos WHERE id = 1
 -- CALL soft_delete_vehiculo(1)
--- SELECT * FROM Vehiculos
+-- SELECT borrado FROM Vehiculos WHERE id = 1
 -- ROLLBACK;
 
 --Caso negativo
 -- START TRANSACTION;
--- SELECT * FROM Vehiculos
+-- SELECT borrado FROM Vehiculos WHERE id = 1
 -- CALL soft_delete_vehiculo(1)
+-- SELECT borrado FROM Vehiculos WHERE id = 1
 -- CALL soft_delete_vehiculo(1)
 
 DELIMITER //
