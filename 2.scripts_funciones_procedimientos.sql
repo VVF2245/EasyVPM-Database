@@ -368,7 +368,7 @@ BEGIN
 
     /* 5. Actualizar estados */
     UPDATE Vehiculos
-    SET estado = 'alquilado'
+    SET estado = 'en uso'
     WHERE id = p_vehiculoId;
 
     UPDATE Enganches
