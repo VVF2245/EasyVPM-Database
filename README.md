@@ -840,4 +840,5 @@ Se consideran todo tipo de constraints declarativas (aquellas definidas durante 
 
 ## Referencias
 
-
+- W3Schools - SQL Tutorial: https://www.w3schools.com/sql/
+- Microsoft Learn - SQL Documentation: https://learn.microsoft.com/sql/
