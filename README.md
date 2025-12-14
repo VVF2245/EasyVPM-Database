@@ -543,7 +543,7 @@ para mantener actualizada la ocupación de la estación y asegurar que el vehíc
 
 #### R.N.10. Cambio de estado al recibir valoración baja
 Como administrador de EasyVPM,<br>
-quiero que si un vehículo recibe una valoración menor o igual a 2 sobre 5 que cambie su estado a *"averiado"*,<br>
+quiero que si un vehículo recibe una valoración menor o igual a 2 sobre 5 que cambie su estado a *"mantenimiento_pendiente"*,<br>
 para asegurar que el vehículo sea revisado por un técnico.
 
 #### R.N.11. Cobro automático
@@ -577,7 +577,7 @@ quiero que las valoraciones tengan una puntuación del 1 al 5.
 
 ### 4.2. Mapa de historias de usuario (opcional)
 
-<img src="mapa_historias/mapa_historias.png"  width="150%"><br>
+
 
 ### 4.3. Requisitos no funcionales (opcional)
 
@@ -644,6 +644,16 @@ para confiar en el sistema y evitar errores o pérdidas de datos.
 - con descripción textual y diagrama de objetos UML.
 
 <img src="modelos_conceptuales/EscenarioPruebas.png" width="90%"><br>
+
+Ana López es una clienta de EasyVPM, mayor de 12 años, con un usuario activo y sin alquiler en curso. Su contraseña cumple con la regla de negocio de longitud mínima (R.N.15). Felipe Fernández es un técnico de mantenimiento registrado, con la fecha de su último servicio correctamente actualizada.<br>
+<br>
+En este escenario Ana realiza un alquiler de una bicicleta individual que se encuentra disponible en la estación "La Torre del Oro", en el enganche 1. El sistema verifica que el vehículo está disponible (R.N.13) y que Ana no tiene otro alquiler activo (R.N.03). El enganche de inicio está ocupado y al regisrar el alquiler se actualiza su estado (R.N.08).<br>
+<br>
+Durante el alquiler el vehículo recorre 3.3 km y, al finalizar, Ana deja la bicicleta en el enganche libre de la estación "Reina Mercedes" (R.N.14). El sistema actualiza automáticamente la ubicación del vehículo y su estado final, cumpliendo con las reglas de negocio relacionadas con finalización de alquiler (R.N.09).<br>
+<br>
+Tras el alquiler Ana valora la bicicleta y le pone una puntuación de 5 sobre 5 (R.N.16).<br>
+<br>
+El sistema también gestiona los pagos y esa es la razón por la cual el alquiler de Ana le salió gratuito. El sistema ya sabía que Ana había realizado un pago mensual (5.99 €) previo al alquiler de la bicicleta.
 
 
 ## 6. Matrices de trazabilidad

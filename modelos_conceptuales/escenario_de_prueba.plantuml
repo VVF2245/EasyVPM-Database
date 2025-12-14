@@ -45,9 +45,15 @@ que tengan alquiler activo.
 end note
 
 object Pago1 {
-    /tipoPago= individual
+    /tipoPago= mensualidad
     cantidad= 5.99
     fecha= 27/10/2025
+}
+
+object Pago2 {
+    /tipoPago= cargo_automatico
+    cantidad= 0.00
+    fecha= 28/10/2025
 }
 'Tipo pago puede ser o mensual o individual
 
@@ -190,7 +196,8 @@ Alquiler1 "*"--"1" Vehiculo1: de
 
 'Relacion Pago'
 Cliente1 *--"*" Pago1
-Pago1 "0..1"--"0..1" Alquiler1
+Cliente1 *--"*" Pago2
+Pago2 "0..1"--"0..1" Alquiler1
 
 Vehiculo1 <|-- Bicicleta1
 
