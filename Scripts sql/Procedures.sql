@@ -176,6 +176,9 @@ CREATE OR REPLACE PROCEDURE iniciar_alquiler (
 BEGIN
     DECLARE v_estadoVehiculo VARCHAR(50);
     DECLARE v_estadoEnganche VARCHAR(50);
+    DECLARE v_estacion VARCHAR(255);
+    DECLARE v_numEnganche INT;
+    DECLARE v_lugarInicio VARCHAR(255);
 
     START TRANSACTION;
 
@@ -199,16 +202,24 @@ BEGIN
         SET MESSAGE_TEXT = 'Enganche inválido';
     END IF;
 
+    SELECT e.nombre, en.numero
+    INTO v_estacion, v_numEnganche
+    FROM Enganches en
+    JOIN Estaciones e ON e.id = en.estacionId
+    WHERE en.id = p_engancheInicioId;
+
+    SET v_lugarInicio = CONCAT('Estación ', v_estacion, ' Enganche ', v_numEnganche);
+
     INSERT INTO Alquileres (
         clienteId, vehiculoId, engancheInicioId,
         fechaHoraInicio, costo, lugarInicio
     )
     VALUES (
         p_clienteId, p_vehiculoId, p_engancheInicioId,
-        NOW(), 0, 'Estación de inicio'
+        NOW(), 0, v_lugarInicio
     );
 
-    UPDATE Vehiculos SET estado = 'en uso' WHERE id = p_vehiculoId;
+    UPDATE Vehiculos SET estado = 'en_uso' WHERE id = p_vehiculoId;
     UPDATE Enganches SET estado = 'libre' WHERE id = p_engancheInicioId;
     UPDATE Clientes SET alquilerActivo = 1 WHERE usuarioId = p_clienteId;
 
