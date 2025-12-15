@@ -1,5 +1,24 @@
 DELIMITER //
 
+CREATE TRIGGER trg_no_dos_aquileres
+BEFORE INSERT ON Alquileres
+FOR EACH ROW
+BEGIN 
+    DECLARE alquileres_activos INT;
+
+    -- accedemos a los alquileres activos del cliente
+    SELECT COUNT(*) INTO alquileres_activos
+    FROM Alquileres
+    WHERE clienteId=NEW.clienteId AND fechaFin IS NULL;
+
+    IF alquileres_activos > 0 THEN
+        SIGNAL SQLSTATE ' 45000' 
+        SET MESSAGE_TEXT 'No se puede tener más de 1 alquiler activo' 
+    END IF;
+END//
+
+DELIMITER ;
+    
 CREATE TRIGGER trg_cliente_edad_minima
 BEFORE INSERT ON Clientes
 FOR EACH ROW
