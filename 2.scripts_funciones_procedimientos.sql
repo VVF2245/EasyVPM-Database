@@ -314,6 +314,14 @@ BEGIN
     DECLARE v_estadoVehiculo VARCHAR(50);
     DECLARE v_estadoEnganche VARCHAR(50);
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+    ROLLBACK;
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Error al eliminar la estacion';
+END;
+
+    START TRANSACTION;
     /* 1. Validar que el cliente no tenga alquiler activo */
     IF EXISTS (
         SELECT 1
@@ -375,6 +383,7 @@ BEGIN
     SET estado = 'libre'
     WHERE id = p_engancheInicioId;
 
+    COMMIT;
 END//
 
 DELIMITER ;
