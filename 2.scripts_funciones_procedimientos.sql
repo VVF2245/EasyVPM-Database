@@ -46,15 +46,15 @@ BEGIN
             usuarioId, fechaNacimiento, alquilerActivo, borrado
         )
         VALUES (
-            v_usuarioId, p_fechaNacimiento, FALSE, FALSE
+            v_usuarioId, p_fechaNacimiento, 0, 0
         );
 
-    ELSE IF p_esTecnico = TRUE THEN
+    ELSE IF p_esTecnico = 1 THEN
         INSERT INTO Tecnicos_Mantenimiento (
             usuarioId, fechaFinUltimoServicio, borrado
         )
         VALUES (
-            v_usuarioId, NULL, FALSE
+            v_usuarioId, NULL, 0
         );
     END IF;
 
@@ -103,13 +103,13 @@ BEGIN
     -- Soft delete según tipo
     IF v_esCliente > 0 THEN
         UPDATE Clientes
-        SET borrado = TRUE
+        SET borrado = 1
         WHERE usuarioId = p_usuarioId;
     END IF;
 
     IF v_esTecnico > 0 THEN
         UPDATE Tecnicos_Mantenimiento
-        SET borrado = TRUE
+        SET borrado = 1
         WHERE usuarioId = p_usuarioId;
     END IF;
 
@@ -193,7 +193,7 @@ BEGIN
         estado, kilometraje, numeroUsos, localizacion, borrado
     )
     VALUES (
-        p_estado, 0.00, 0, p_localizacion, FALSE
+        p_estado, 0.00, 0, p_localizacion, 0
     );
 
     SET v_vehiculoId = LAST_INSERT_ID();
@@ -231,7 +231,7 @@ BEGIN
     START TRANSACTION;
 
     UPDATE Vehiculos
-    SET borrado = TRUE
+    SET borrado = 1
     WHERE id = p_vehiculoId;
 
     COMMIT;
@@ -252,7 +252,7 @@ CREATE OR REPLACE PROCEDURE registro_estacion(
     START TRANSACTION;
 
     INSERT INTO Estaciones(nombre, numeroVehiculos, borrado)
-    VALUES(p_nombre, 0,FALSE);
+    VALUES(p_nombre, 0, 0);
 
     COMMIT;
     END//
@@ -296,7 +296,7 @@ BEGIN
 END;
 START TRANSACTION;
     UPDATE Estaciones
-    SET borrado = TRUE
+    SET borrado = 1
     WHERE id = p_id;
 
     COMMIT;
@@ -313,6 +313,9 @@ CREATE OR REPLACE PROCEDURE iniciar_alquiler (
 BEGIN
     DECLARE v_estadoVehiculo VARCHAR(50);
     DECLARE v_estadoEnganche VARCHAR(50);
+    DECLARE v_estacion VARCHAR(255);
+    DECLARE v_numEnganche INT;
+    DECLARE v_lugarInicio VARCHAR(255);
 
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 BEGIN
@@ -338,11 +341,11 @@ END;
     INTO v_estadoVehiculo
     FROM Vehiculos
     WHERE id = p_vehiculoId
-      AND borrado = FALSE;
+      AND borrado = 0;
 
-    IF v_estadoVehiculo IS NULL OR v_estadoVehiculo <> 'disponible' THEN
+    IF v_estadoVehiculo <> 'disponible' THEN
         SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'El vehículo no está disponible';
+        SET MESSAGE_TEXT = 'Vehículo no disponible';
     END IF;
 
     /* 3. Validar que el enganche esté ocupado */
@@ -350,12 +353,21 @@ END;
     INTO v_estadoEnganche
     FROM Enganches
     WHERE id = p_engancheInicioId
-      AND borrado = FALSE;
+      AND borrado = 0;
 
     IF v_estadoEnganche IS NULL OR v_estadoEnganche <> 'ocupado' THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'El enganche no tiene un vehículo disponible';
     END IF;
+
+    SELECT e.nombre, en.numero
+    INTO v_estacion, v_numEnganche
+    FROM Enganches en
+    JOIN Estaciones e ON e.id = en.estacionId
+    WHERE en.id = p_engancheInicioId;
+
+    SET v_lugarInicio = CONCAT('Estación ', v_estacion, ' Enganche ', v_numEnganche);
+
 
     /* 4. Insertar alquiler */
     INSERT INTO Alquileres (
@@ -371,7 +383,7 @@ END;
         p_engancheInicioId,
         NOW(),
         0,
-        'Estación de inicio'
+        v_lugarInicio
     );
 
     /* 5. Actualizar estados */
@@ -462,7 +474,7 @@ BEGIN
 
     -- 5. Actualizar cliente y enganche
     UPDATE Clientes
-        SET alquilerActivo = FALSE
+        SET alquilerActivo = 0
         WHERE usuarioId = v_clienteId;
     UPDATE Enganches
         SET estado ='ocupado'
@@ -504,7 +516,7 @@ BEGIN
         SELECT 1
         FROM Tecnicos_Mantenimiento
         WHERE usuarioId = p_tecnicoId
-          AND borrado = FALSE
+          AND borrado = 0
     ) THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'El técnico no es válido';
@@ -515,7 +527,7 @@ BEGIN
     SET estado = 'reparado'
     WHERE id = p_vehiculoId
       AND estado = 'en_mantenimiento'
-      AND borrado = FALSE;
+      AND borrado = 0;
 
     IF ROW_COUNT() = 0 THEN
         SIGNAL SQLSTATE '45000'
@@ -650,7 +662,7 @@ BEGIN
 
     SELECT id INTO v_clienteId
     FROM Clientes
-    WHERE usuarioId = p_usuarioId AND borrado = FALSE
+    WHERE usuarioId = p_usuarioId AND borrado = 0
     FOR UPDATE;
 
     IF v_clienteId IS NULL THEN
@@ -717,7 +729,7 @@ BEGIN
     WHERE id = p_vehiculoId
     FOR UPDATE;
 
-    IF v_borrado = TRUE THEN
+    IF v_borrado = 1 THEN
         ROLLBACK;
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El vehículo ya está borrado';
@@ -730,7 +742,7 @@ BEGIN
     END IF;
 
     UPDATE Vehiculos
-    SET borrado = TRUE
+    SET borrado = 1
     WHERE id = p_vehiculoId;
 
     COMMIT;
