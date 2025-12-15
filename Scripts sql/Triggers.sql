@@ -6,7 +6,6 @@ FOR EACH ROW
 BEGIN 
     DECLARE alquileres_activos INT;
 
-    -- accedemos a los alquileres activos del cliente
     SELECT COUNT(*) INTO alquileres_activos
     FROM Alquileres
     WHERE clienteId=NEW.clienteId AND fechaFin IS NULL;
