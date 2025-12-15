@@ -321,7 +321,7 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION
 BEGIN
     ROLLBACK;
     SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Error al eliminar la estacion';
+    SET MESSAGE_TEXT = 'Error al iniciar alquiler.';
 END;
 
     START TRANSACTION;
