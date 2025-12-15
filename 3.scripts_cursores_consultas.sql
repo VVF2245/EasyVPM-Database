@@ -1,31 +1,3 @@
--- top 5 vehiculos mas usados por los clientes
--- lista reparaciones de un tecnico
--- agrupar reparaciones por vehiculo
-
-
-
-CREATE OR REPLACE VIEW vw_listaReparacionesTecnico AS
-SELECT u.nombre, COUNT (r.id) AS listaReparaciones
-FROM Usuarios u
-JOIN Tecnicos_Mantenimiento t ON u.id = t.usuarioId
-LEFT JOIN Reparaciones r ON t.usuarioId = r.tecnicoId
-GROUP BY u.id, u.nombre;
-
-
-CREATE OR REPLACE VIEW vw_listaReparacionesVehiculo AS
-SELECT v.id, COUNT (Reparaciones.id) AS listaReparaciones
-FROM Vehiculos v
-LEFT JOIN Reparaciones r ON v.id = r.vehiculoId
-GROUP BY v.id;
-
-
-CREATE OR REPLACE VIEW vw_top5vehiculosMasUsados AS
-SELECT v.id AS vehiculoId
-FROM Vehiculos v
-JOIN Alquileres a ON v.id = a.vehiculoId
-GROUP BY v.id
-ORDER BY COUNT(a.id) DESC
-LIMIT 5;
 
 
 -- esto se filtra con un SELECT * FROM vw_info_usuario WHERE usuarioId = @usuarioId
@@ -43,7 +15,7 @@ LEFT JOIN Tecnicos_Mantenimiento t ON u.id = t.usuarioId;
 CREATE OR REPLACE VIEW vw_vehiculosMantenimiento AS
 SELECT v.id AS vehiculoId, v.estado, v.localizacion, v.numeroUsos, v.kilometraje
 FROM Vehiculos v
-WHERE v.estado IN ('mantenimiento_pendiente', 'averiado') AND v.borrado = FALSE;
+WHERE v.estado IN ('mantenimiento_pendiente', 'averiado') AND v.borrado = 0;
 
 
 -- aquí pregunto si es bicicleta o patinete porque al cliente si que le puede interesar a la hora de alquilar
@@ -60,7 +32,7 @@ SELECT v.id AS vehiculoId, v.estado, v.localizacion, v.numeroUsos, v.kilometraje
 FROM Vehiculos v
 LEFT JOIN Bicicletas b ON v.id = b.vehiculoId
 LEFT JOIN Patinetes_Electricos p ON v.id = p.vehiculoId
-WHERE v.estado == 'disponible' AND v.borrado = FALSE;
+WHERE v.estado == 'disponible' AND v.borrado = 0;
 
 
 -- te agrupa por estaciones y te muestra el número de enganches y de huecos que tiene cada estación
@@ -70,8 +42,8 @@ SELECT e.nombre AS nombreEstacion, e.numeroVehiculos AS vehiculosDisponibles,
     SUM( IF( en.estado = 'libre', 1, 0)) AS enganchesLibres
 
 FROM Estaciones e
-LEFT JOIN Enganches en ON en.estacionId = e.id AND en.borrado = FALSE
-WHERE e.borrado = FALSE
+LEFT JOIN Enganches en ON en.estacionId = e.id AND en.borrado = 0
+WHERE e.borrado = 0
 GROUP BY e.id, e.nombre;
 
 
@@ -81,7 +53,7 @@ CREATE OR REPLACE VIEW vw_enganchesLibresPorEstacion AS
 SELECT e.nombre AS nombreEstacion, en.numero AS enganchesLibres
 FROM Estaciones e
 JOIN Enganches en AS en ON en.estacionId = e.id
-WHERE e.borrado = FALSE AND en.borrado = FALSE AND en.estado = 'libre'
+WHERE e.borrado = 0 AND en.borrado = 0 AND en.estado = 'libre'
 ORDER BY e.nombre, en.numero ASC;
 
 
@@ -110,7 +82,7 @@ FROM Reparaciones r
 JOIN Vehiculos v ON r.vehiculoId = v.id
 JOIN Tecnicos_Mantenimiento t ON r.tecnicoId = t.usuarioId
 JOIN Usuarios u ON t.usuarioId = u.id
-WHERE r.fechaFin IS NULL AND v.borrado = FALSE
+WHERE r.fechaFin IS NULL AND v.borrado = 0
 ORDER BY r.fechaInicio ASC;
 
 
@@ -160,3 +132,33 @@ FROM Pagos p
 JOIN Clientes c ON p.clienteId = c.id
 JOIN Usuarios u ON c.usuarioId = u.id
 ORDER BY p.clienteId;
+
+
+-- VISTAS EXTRA que pueden ser utiles, pero no son requisitos funcionales
+
+-- top 5 vehiculos mas usados por los clientes
+-- lista reparaciones de un tecnico
+-- agrupar reparaciones por vehiculo
+
+CREATE OR REPLACE VIEW vw_listaReparacionesTecnico AS
+SELECT u.nombre, COUNT (r.id) AS listaReparaciones
+FROM Usuarios u
+JOIN Tecnicos_Mantenimiento t ON u.id = t.usuarioId
+LEFT JOIN Reparaciones r ON t.usuarioId = r.tecnicoId
+GROUP BY u.id, u.nombre;
+
+
+CREATE OR REPLACE VIEW vw_listaReparacionesVehiculo AS
+SELECT v.id, COUNT (Reparaciones.id) AS listaReparaciones
+FROM Vehiculos v
+LEFT JOIN Reparaciones r ON v.id = r.vehiculoId
+GROUP BY v.id;
+
+
+CREATE OR REPLACE VIEW vw_top5vehiculosMasUsados AS
+SELECT v.id AS vehiculoId
+FROM Vehiculos v
+JOIN Alquileres a ON v.id = a.vehiculoId
+GROUP BY v.id
+ORDER BY COUNT(a.id) DESC
+LIMIT 5;
