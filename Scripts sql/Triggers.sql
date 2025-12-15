@@ -12,8 +12,8 @@ BEGIN
     WHERE clienteId=NEW.clienteId AND fechaFin IS NULL;
 
     IF alquileres_activos > 0 THEN
-        SIGNAL SQLSTATE ' 45000' 
-        SET MESSAGE_TEXT 'No se puede tener más de 1 alquiler activo' 
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'No se puede tener más de 1 alquiler activo';
     END IF;
 END//
 
