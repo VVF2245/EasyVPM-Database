@@ -6,7 +6,7 @@
 -- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
 -- INSERT INTO Clientes (fechaNacimiento, alquilerActivo, borrado) VALUES
--- ('Básica',  '1995-04-12', FALSE, FALSE);
+-- ('Básica',  '1995-04-12', 0, 0);
 
 -- SELECT * FROM Usuarios;
 -- SELECT * FROM Clientes;
@@ -18,7 +18,7 @@
 -- ('german@gmail.com',       '$2a$12$wntX/gxexnKFT8GbXxBYi.KmgDs3WCsuCMk25673OvTLJE1q1YKDq',     'Germán Martín'),
 
 -- INSERT INTO Clientes (fechaNacimiento, alquilerActivo, borrado) VALUES
--- ('Básica',  '2020-04-12', FALSE, FALSE);
+-- ('Básica',  '2020-04-12', 0, 0);
 
 -- SELECT * FROM Usuarios;
 -- SELECT * FROM Clientes;
@@ -45,7 +45,7 @@ BEFORE UPDATE ON Clientes
 FOR EACH ROW
 BEGIN
     -- Solo cuando se intenta hacer soft delete
-    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+    IF OLD.borrado = 0 AND NEW.borrado = 1 THEN
 
         -- Comprobar alquiler activo
         IF EXISTS (
@@ -70,8 +70,8 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM Alquileres
-        WHERE Alquileres.clienteId = OLD.usuarioId
-          AND Alquileres.fechaHoraFin IS NULL
+        WHERE clienteId = OLD.usuarioId
+          AND fechaHoraFin IS NULL
     ) THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT =
@@ -86,7 +86,7 @@ BEFORE UPDATE ON Vehiculos
 FOR EACH ROW
 BEGIN
     -- Solo cuando se intenta hacer soft delete
-    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
+    IF OLD.borrado = 0 AND NEW.borrado = 1 THEN
 
         -- Comprobar alquiler activo
         IF EXISTS (
@@ -112,8 +112,8 @@ FOR EACH ROW
 BEGIN
     IF EXISTS (SELECT 1 
     FROM ALQUILERES
-    WHERE Alquileres.vehiculoId=OLD.id
-        AND Alquileres.fechaHoraFin is NULL
+    WHERE vehiculoId = OLD.id
+        AND fechaHoraFin is NULL
     )THEN 
         SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'No se puede eliminar un vehículo con un alquiler activo';
@@ -127,15 +127,16 @@ BEFORE UPDATE ON Estaciones
 FOR EACH ROW 
 BEGIN
     -- Solo cuando se intenta hacer soft delete
-    IF OLD.borrado = FALSE AND NEW.borrado = TRUE THEN
-    IF EXISTS(
-    SELECT 1
-    FROM Enganches
-    WHERE Enganches.estacionId=OLD.id
-    AND estado='ocupado'
-    )THEN
-        SIGNAL SQLSTATE '45000'
-                SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganches ocupados';
+    IF OLD.borrado = 0 AND NEW.borrado = 1 THEN
+        IF EXISTS(
+            SELECT 1
+            FROM Enganches
+            WHERE estacionId = OLD.id
+                AND estado='ocupado'
+        )THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESAGGE_TEXT='No se puede eliminar una estacion con un enganches ocupados';
+        END IF;
     END IF;
 END//
 DELIMITER;
@@ -152,12 +153,12 @@ BEGIN
         FROM Enganches
         WHERE estacionId = OLD.id
           AND estado = 'ocupado'
-          AND borrado = FALSE
     ) THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'No se puede eliminar la estación: tiene enganches ocupados';
     END IF;
 END//
+DELIMITER ;
 
 DELIMITER //
 
@@ -244,7 +245,7 @@ BEGIN
 
         -- poner que el cliente ya no tiene un alquiler activo
         UPDATE Clientes
-        SET alquilerActivo = FALSE
+        SET alquilerActivo = 0
         WHERE usuarioId = NEW.clienteId;
 
         -- Poner la localización final del alquiler
@@ -332,30 +333,16 @@ CREATE TRIGGER trg_A_update_enganches_actualizar_estacion
 AFTER UPDATE ON Enganches
 FOR EACH ROW
 BEGIN
-    IF OLD.estado != NEW.estado OR OLD.estacionId != NEW.estacionId THEN
+    UPDATE Estaciones
+    SET numeroVehiculos = (
+        SELECT COUNT(*)
+        FROM Enganches
+        WHERE estacionId = NEW.estacionId
+          AND estado = 'ocupado'
+    )
+    WHERE id = NEW.estacionId;
+END//
 
-        -- Recalcular para la estacion antigua si ha habido cambio de estación
-        IF OLD.estacionId != NEW.estacionId THEN
-            UPDATE Estaciones
-            SET numeroVehiculos = (
-                SELECT COUNT(*)
-                FROM Enganches
-                WHERE estacionId = OLD.estacionId AND estado = 'ocupado'
-            )
-            WHERE id = OLD.estacionId;
-        END IF;
-
-        -- Recalcular para la estación antigua o si no ha habido cambio de estación
-        UPDATE Estaciones
-        SET numeroVehiculos = (
-            SELECT COUNT(*)
-            FROM Enganches
-            WHERE estacionId = NEW.estacionId AND estado = 'ocupado'
-        )
-        WHERE id = NEW.estacionId;
-
-    END IF;
-END //
 DELIMITER ;
 
 DELIMITER //
@@ -400,9 +387,9 @@ FOR EACH ROW
 BEGIN
     UPDATE Vehiculos
     SET estado = 'en_mantenimiento', 
-    kilometraje=0.0,
-    numeroUsos=0
-    WHERE Vehiculos.id = NEW.vehiculoId;
+        kilometraje = 0,
+        numeroUsos = 0
+    WHERE id = NEW.vehiculoId;
 END //
 
 DELIMITER ;
