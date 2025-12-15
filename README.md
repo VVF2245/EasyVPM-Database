@@ -497,11 +497,6 @@ Como administrador de EasyVPM,<br>
 quiero que solo los usuarios mayores de 12 años puedan utilizar EasyVPM y alquilar un vehiculo,<br>
 para garantizar la seguridad de los menores.
 
-**P.A.04.**
-- Cuando los usuarios se registran por primera vez en EasyVPM, se les pedirá que indiquen su edad.
-- Si el usuario tiene más de 12 años, la creación de la cuenta será un éxito y se le informará.
-- Si el usuario tiene 12 años o menos, saldrá un mensaje de error donde se indica que no se pudo crear la cuenta porque no se cumple la edad mínima de uso de EasyVPM.
-
 #### R.N.02. No eliminar usuarios que tengan alquiler activo
 Como administrador de EasyVPM, <br>
 quiero que no se pueda eliminar (ni hacer soft delete) la cuenta del cliente mientras esté alquilando un vehículo,<br>
@@ -817,25 +812,6 @@ En ambos casos, la estrategia seleccionada garantiza la integridad referencial m
 
 ### 8. Matriz de trazabilidad MC/SQL (opcional):
 
-- Restricciones sobre el MC / Elementos del modelo tecnológico (SQL) (Triggers, checks, etc.)
-- Incluir Reglas de negocio — Constraints/Triggers en las matrices de trazabilidad para el entregable 3
-
-|       | EntidadX   | AsociaciónX  | RestricciónX  | Entidad2 ...   | 
-|:-------|:-------|:-------|:-------|:-------|
-| TABLA-1 |        |        |        |        |
-| TABLA-2 |        |        |        |        |
-| TABLA-3 |        |        |        |        |
-| TABLA-4 |        |        |        |        |
-| TRIG-1 |        |        |        |        |
-| TRIG-2 | X      | X      |        | X      |
-| TRIG-3 |        | X      |        | X      |
-| TRIG-4 |        |        | X      |        |
-| CONST-1 |        |        |        |        |
-| CONST-2 | X      | X      |        | X      |
-| CONST-3 |        | X      |        | X      |
-| CONST-4 |        |        | X      |        |
-
-Se consideran todo tipo de constraints declarativas (aquellas definidas durante el CREATE TABLE).
 -- fin entregable 3 --
 
 ## Referencias
